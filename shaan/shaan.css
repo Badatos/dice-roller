@@ -1,0 +1,29 @@
+/**
+SHAAN RPG Dice Roller styles
+**/
+
+.des{
+  background-image: url(img/ombre.png);
+  background-size: cover;
+  height: 80px;
+  width: 80px;
+  display: inline-block;
+}
+
+.cache {
+  display: none;
+}
+
+.des>img {
+  border: 4px solid transparent;
+  padding: 4px;
+  border-radius: 20px
+}
+
+.des>.score_9{
+  border-color: var(--bs-success);
+}
+
+.des>.score_0{
+  border-color: var(--bs-danger);
+}

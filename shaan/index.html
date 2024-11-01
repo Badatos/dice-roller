@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="shaan.css" />
+    <title>Shaan RPG dice Roller</title>
+</head>
+
+<body>
+    <div class="container mt-2">
+
+        <div class="row">
+            <a href="javascript:rollDices();" class="btn btn-primary" id="rolldice">Lancer les Dés</a>
+        </div>
+        <div id="des" class="m-4 text-center">
+            <span id="de_esprit" class="des">
+                <img src="img/d10/d10_jaune_0.png" alt="Dé d'esprit">
+                <span class="de_nom" id="de_trihn_1">Esprit</span>
+            </span>
+            <span id="de_ame" class="des">
+                <img src="img/d10/d10_bleu_0.png" alt="Dé d'âme">
+                <span class="de_nom" id="de_trihn_2">Âme</span>
+            </span>
+            <span id="de_corps" class="des">
+                <img src="img/d10/d10_rouge_0.png" alt="Dé de corps">
+                <span class="de_nom" id="de_trihn_3">Corps</span>
+            </span>
+            <span id="de_necrose" class="des">
+                <img src="img/d10/d10_noir_0.png" alt="Dé de nécrose">
+                <span class="de_nom" id="de_trihn_3">Nécrose</span>
+            </span>
+            <span class="cache">
+                <img src="img/d10/d10_jaune_1.png" alt="1">
+                <img src="img/d10/d10_jaune_2.png" alt="2">
+                <img src="img/d10/d10_jaune_3.png" alt="3">
+                <img src="img/d10/d10_jaune_4.png" alt="4">
+                <img src="img/d10/d10_jaune_5.png" alt="5">
+                <img src="img/d10/d10_jaune_6.png" alt="6">
+                <img src="img/d10/d10_jaune_7.png" alt="7">
+                <img src="img/d10/d10_jaune_8.png" alt="8">
+                <img src="img/d10/d10_jaune_9.png" alt="9">
+                <img src="img/d10/d10_bleu_1.png" alt="1">
+                <img src="img/d10/d10_bleu_2.png" alt="2">
+                <img src="img/d10/d10_bleu_3.png" alt="3">
+                <img src="img/d10/d10_bleu_4.png" alt="4">
+                <img src="img/d10/d10_bleu_5.png" alt="5">
+                <img src="img/d10/d10_bleu_6.png" alt="6">
+                <img src="img/d10/d10_bleu_7.png" alt="7">
+                <img src="img/d10/d10_bleu_8.png" alt="8">
+                <img src="img/d10/d10_bleu_9.png" alt="9">
+                <img src="img/d10/d10_rouge_1.png" alt="1">
+                <img src="img/d10/d10_rouge_2.png" alt="2">
+                <img src="img/d10/d10_rouge_3.png" alt="3">
+                <img src="img/d10/d10_rouge_4.png" alt="4">
+                <img src="img/d10/d10_rouge_5.png" alt="5">
+                <img src="img/d10/d10_rouge_6.png" alt="6">
+                <img src="img/d10/d10_rouge_7.png" alt="7">
+                <img src="img/d10/d10_rouge_8.png" alt="8">
+                <img src="img/d10/d10_rouge_9.png" alt="9">
+                <img src="img/d10/d10_noir_1.png" alt="1">
+                <img src="img/d10/d10_noir_2.png" alt="2">
+                <img src="img/d10/d10_noir_3.png" alt="3">
+                <img src="img/d10/d10_noir_4.png" alt="4">
+                <img src="img/d10/d10_noir_5.png" alt="5">
+                <img src="img/d10/d10_noir_6.png" alt="6">
+                <img src="img/d10/d10_noir_7.png" alt="7">
+                <img src="img/d10/d10_noir_8.png" alt="8">
+                <img src="img/d10/d10_noir_9.png" alt="9">
+            </span>
+        </div>
+        <div class="row alert alert-warning d-none" id="perte">
+            <h3>Perte d'énergie</h3>
+            <p>
+                Le dé de nécrose vous fait perdre
+                <strong id="num_perte">0</strong> énergie(s)
+            </p>
+        </div>
+        <div class="row alert alert-danger d-none" id="symbiose-necro">
+            <h3>Symbiose nécrotique !</h3>
+            <p>
+                Vous êtes victime d'un <strong>malus narratif</strong>.
+                Décrivez-le (mise en danger d'un allié, perte de temps significative,
+                évolution négative de l'adversité...).
+                Et <strong>ajoutez 1 acte supplémentaire à l'adversité</strong>.
+            </p>
+        </div>
+        <div class="row alert alert-danger d-none" id="symbiose-necro-trans">
+            <h3>Symbiose nécrotique transcendantale !</h3>
+            <p>
+                Vos 4 énergies sont en à 0.
+                L'adversité en cours est <strong>augmentée de 2 actes</strong>.
+            </p>
+        </div>
+        <div class="row alert alert-success d-none" id="symbiose-trans">
+            <h3>Symbiose transcendantale !</h3>
+            <p>
+                Vos 4 énergies sont en symbiose.
+                L'adversité en cours est <strong>réduite de 2 actes</strong>.
+            </p>
+        </div>
+        <div class="row alert alert-success d-none" id="symbiose">
+            <h3>Symbiose !</h3>
+            <p>
+                Vos 3 énergies sont en symbiose.
+                Vous gagnez un <strong>Bonus narratif</strong>,
+                qui vous permet d'enlever un acte à l'adversité.
+                (S'il n'y avait pas d'autre acte à venir,
+                 l'acte en cours est un succès.)
+            </p>
+        </div>
+        <div class="row alert alert-warning d-none" id="limbes">
+            <h3>0, le chiffre des limbes !</h3>
+            <p>
+                Vous avez obtenu un 0 à l'un de vos dés.
+                Si c'est votre dé d'action, vous échouez.
+                (il est toujours possible de puiser dans une autre énergie)
+            </p>
+        </div>
+        <div class="row alert alert-success d-none" id="bonus">
+            <h3>Bonus possible !</h3>
+            <p>
+                Vous avez obtenu un 9 à l'un de vos dés.
+                Si c'est votre dé d'action,
+                vous gagnez un <strong>Bonus narratif</strong>.
+            </p>
+        </div>
+        <div class="row alert alert-success d-none" id="exp">
+            <h3>Apprentissage</h3>
+            <p>
+                On apprend de ses réussites et de ses échecs.
+                La symbiose vous permet d'augmenter de
+                <strong id="num_perte">+1 le niveau du domaine</strong>
+                utilisé pour réaliser cette action.
+                (1 seule fois / joueur / séance)
+            </p>
+        </div>
+        <h2 class="mt-3">Simulateur de lancer de dés en ligne.</h2>
+        <p>Vous êtes en vacances, vous n’avez pas vos dés à 10 faces pour pouvoir jouer, pas de problème, ce
+            <strong>simulateur de lancer de dés</strong> est fait pour vous&nbsp;!
+        </p>
+    </div>
+    <script type="text/javascript" src="shaan.js"></script>
+</body>
+
+</html>
