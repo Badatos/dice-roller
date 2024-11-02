@@ -15,10 +15,8 @@
 
 <body>
     <div class="container mt-2">
+        <h1 class="mt-3 text-center">Simulateur de lancer de dés</h1>
 
-        <div class="row">
-            <a href="javascript:rollDices();" class="btn btn-primary" id="rolldice">Lancer les Dés</a>
-        </div>
         <div id="des" class="m-4 text-center">
             <span id="de_esprit" class="des">
                 <img src="img/d10/d10_jaune_0.png" alt="Dé d'esprit">
@@ -34,7 +32,7 @@
             </span>
             <span id="de_necrose" class="des">
                 <img src="img/d10/d10_noir_0.png" alt="Dé de nécrose">
-                <span class="de_nom" id="de_trihn_3">Nécrose</span>
+                <span class="de_nom" id="de_trihn_4">Perte</span>
             </span>
             <span class="cache">
                 <img src="img/d10/d10_jaune_1.png" alt="1">
@@ -75,14 +73,24 @@
                 <img src="img/d10/d10_noir_9.png" alt="9">
             </span>
         </div>
-        <div class="row alert alert-warning d-none" id="perte">
+        <div class="row mb-3">
+            <div class="btn-group btn-group-lg" role="group">
+                <a href="javascript:domain_test();" class="btn btn-primary" role="button">
+                    Faire un test de domaine
+                </a>
+                <a href="javascript:necrosis_test();" class="btn btn-dark" role="button">
+                    Faire un test de nécrose
+                </a>
+            </div>
+        </div>
+        <div class="alert alert-warning d-none" id="perte">
             <h2>Perte d'énergie</h2>
             <p>
-                Le dé de nécrose vous fait perdre
+                Le dé de perte vous fait perdre
                 <strong id="num_perte">0</strong> énergie(s)
             </p>
         </div>
-        <div class="row alert alert-danger d-none" id="symbiose-necro">
+        <div class="alert alert-danger d-none" id="symbiose-necro">
             <h2>Symbiose nécrotique !</h2>
             <p>
                 Vous êtes victime d'un <strong>malus narratif</strong>.
@@ -91,21 +99,21 @@
                 Et <strong>ajoutez 1 acte supplémentaire à l'adversité</strong>.
             </p>
         </div>
-        <div class="row alert alert-danger d-none" id="symbiose-necro-trans">
+        <div class="alert alert-danger d-none" id="symbiose-necro-trans">
             <h2>Symbiose nécrotique transcendantale !</h2>
             <p>
                 Vos 4 énergies sont en à 0.
                 L'adversité en cours est <strong>augmentée de 2 actes</strong>.
             </p>
         </div>
-        <div class="row alert alert-success d-none" id="symbiose-trans">
+        <div class="alert alert-success d-none" id="symbiose-trans">
             <h2>Symbiose transcendantale !</h2>
             <p>
                 Vos 4 énergies sont en symbiose.
                 L'adversité en cours est <strong>réduite de 2 actes</strong>.
             </p>
         </div>
-        <div class="row alert alert-success d-none" id="symbiose">
+        <div class="alert alert-success d-none" id="symbiose">
             <h2>Symbiose !</h2>
             <p>
                 Vos 3 énergies sont en symbiose.
@@ -115,7 +123,7 @@
                  l'acte en cours est un succès.)
             </p>
         </div>
-        <div class="row alert alert-warning d-none" id="limbes">
+        <div class="alert alert-warning d-none" id="limbes">
             <h2>0, le chiffre des limbes !</h2>
             <p>
                 Vous avez obtenu un 0 à l'un de vos dés.
@@ -123,7 +131,7 @@
                 (il est toujours possible de puiser dans une autre énergie)
             </p>
         </div>
-        <div class="row alert alert-success d-none" id="bonus">
+        <div class="alert alert-success d-none" id="bonus">
             <h2>Bonus possible !</h2>
             <p>
                 Vous avez obtenu un 9 à l'un de vos dés.
@@ -131,7 +139,7 @@
                 vous gagnez un <strong>Bonus narratif</strong>.
             </p>
         </div>
-        <div class="row alert alert-success d-none" id="exp">
+        <div class="alert alert-success d-none" id="exp">
             <h2>Apprentissage</h2>
             <p>
                 On apprend de ses réussites et de ses échecs.
@@ -141,15 +149,37 @@
                 (1 seule fois / joueur / séance)
             </p>
         </div>
-        <h1 class="mt-3">Simulateur de lancer de dés</h1>
-        <p>Vous êtes en vacances, que vous n’avez pas vos dés à 10 faces pour pouvoir jouer, pas de problème, ce
+
+        <!-- Tests de nécrose -->
+        <div class="alert alert-success d-none" id="critical-necrosis">
+            <h2>Succès critique !</h2>
+            <p>
+                Le 0 obtenu sur le dé noir vous offre
+                un <strong>bonus de +10</strong> au score,
+                ainsi qu'un <strong>bonus narratif</strong> !
+            </p>
+        </div>
+        <div class="alert alert-info" id="necrosis-help">
+            <h2>Relance possible</h2>
+            <p>
+                Si la valeur du dé noir ne vous convient pas,
+                vous pouvez le relancer au prix d'un point d'énergie au choix.
+            </p>
+            <div class="row">
+                <a href="javascript:reroll_black();" class="btn btn-dark" role="button">
+                Relancer le dé noir
+                </a>
+            </div>
+        </div>
+        <hr>
+        <p class="mt-3">Vous êtes en vacances, que vous n’avez pas vos dés à 10 faces pour pouvoir jouer, pas de problème, ce
             <strong>simulateur de lancer de dés</strong> est fait pour vous&nbsp;!
         </p>
     </div>
     <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
         <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
             <a
-        href="https://www.shaan-rpg.com/">https://www.shaan-rpg.com/</a>
+        href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
     et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
         </p>
     </footer>
