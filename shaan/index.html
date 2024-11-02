@@ -2,15 +2,15 @@
 <html lang="fr">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet" crossorigin="anonymous"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
     <link rel="stylesheet" type="text/css" href="shaan.css" />
-    <title>Shaan RPG dice Roller</title>
+    <title>Simulateur de lancer de dés - Shaan</title>
 </head>
 
 <body>
@@ -76,14 +76,14 @@
             </span>
         </div>
         <div class="row alert alert-warning d-none" id="perte">
-            <h3>Perte d'énergie</h3>
+            <h2>Perte d'énergie</h2>
             <p>
                 Le dé de nécrose vous fait perdre
                 <strong id="num_perte">0</strong> énergie(s)
             </p>
         </div>
         <div class="row alert alert-danger d-none" id="symbiose-necro">
-            <h3>Symbiose nécrotique !</h3>
+            <h2>Symbiose nécrotique !</h2>
             <p>
                 Vous êtes victime d'un <strong>malus narratif</strong>.
                 Décrivez-le (mise en danger d'un allié, perte de temps significative,
@@ -92,21 +92,21 @@
             </p>
         </div>
         <div class="row alert alert-danger d-none" id="symbiose-necro-trans">
-            <h3>Symbiose nécrotique transcendantale !</h3>
+            <h2>Symbiose nécrotique transcendantale !</h2>
             <p>
                 Vos 4 énergies sont en à 0.
                 L'adversité en cours est <strong>augmentée de 2 actes</strong>.
             </p>
         </div>
         <div class="row alert alert-success d-none" id="symbiose-trans">
-            <h3>Symbiose transcendantale !</h3>
+            <h2>Symbiose transcendantale !</h2>
             <p>
                 Vos 4 énergies sont en symbiose.
                 L'adversité en cours est <strong>réduite de 2 actes</strong>.
             </p>
         </div>
         <div class="row alert alert-success d-none" id="symbiose">
-            <h3>Symbiose !</h3>
+            <h2>Symbiose !</h2>
             <p>
                 Vos 3 énergies sont en symbiose.
                 Vous gagnez un <strong>Bonus narratif</strong>,
@@ -116,7 +116,7 @@
             </p>
         </div>
         <div class="row alert alert-warning d-none" id="limbes">
-            <h3>0, le chiffre des limbes !</h3>
+            <h2>0, le chiffre des limbes !</h2>
             <p>
                 Vous avez obtenu un 0 à l'un de vos dés.
                 Si c'est votre dé d'action, vous échouez.
@@ -124,7 +124,7 @@
             </p>
         </div>
         <div class="row alert alert-success d-none" id="bonus">
-            <h3>Bonus possible !</h3>
+            <h2>Bonus possible !</h2>
             <p>
                 Vous avez obtenu un 9 à l'un de vos dés.
                 Si c'est votre dé d'action,
@@ -132,7 +132,7 @@
             </p>
         </div>
         <div class="row alert alert-success d-none" id="exp">
-            <h3>Apprentissage</h3>
+            <h2>Apprentissage</h2>
             <p>
                 On apprend de ses réussites et de ses échecs.
                 La symbiose vous permet d'augmenter de
@@ -141,11 +141,18 @@
                 (1 seule fois / joueur / séance)
             </p>
         </div>
-        <h2 class="mt-3">Simulateur de lancer de dés en ligne.</h2>
-        <p>Vous êtes en vacances, vous n’avez pas vos dés à 10 faces pour pouvoir jouer, pas de problème, ce
+        <h1 class="mt-3">Simulateur de lancer de dés</h1>
+        <p>Vous êtes en vacances, que vous n’avez pas vos dés à 10 faces pour pouvoir jouer, pas de problème, ce
             <strong>simulateur de lancer de dés</strong> est fait pour vous&nbsp;!
         </p>
     </div>
+    <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+        <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
+            <a
+        href="https://www.shaan-rpg.com/">https://www.shaan-rpg.com/</a>
+    et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+        </p>
+    </footer>
     <script type="text/javascript" src="shaan.js"></script>
 </body>
 

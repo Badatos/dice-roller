@@ -27,3 +27,11 @@ SHAAN RPG Dice Roller styles
 .des>.score_0{
   border-color: var(--bs-danger);
 }
+
+/** Bootstrap color fix **/
+.text-bg-dark a{
+  color:#AEAEE1;
+}
+.text-bg-dark a:hover{
+  color:white;
+}
