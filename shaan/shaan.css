@@ -1,3 +1,49 @@
+/* Shaan World styles */
+@font-face {
+  font-family: "GodofWar";
+  src: url("./fonts/GodOfWar-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Komikazoom";
+  src: url("./fonts/Komikazoom.ttf") format("truetype");
+}
+
+:root{
+  --shaan-green: #45714F;
+  --shaan-font: "Economica", Arial, Helvetica, sans-serif;
+}
+
+body{
+ --bs-body-font-family: var(--shaan-font);
+ --bs-body-font-size: 14pt
+}
+
+.title {
+  font-family: "GodofWar", serif;
+}
+
+h1 {
+  font-family: "Komikazoom", sans-serif;
+}
+
+.btn{
+  --bs-btn-font-family: var(--shaan-font);
+  --bs-btn-font-size: 14pt;
+}
+
+.btn-primary{
+  --bs-btn-bg: var(--shaan-green);
+  --bs-btn-border-color: #36593E;
+
+  --bs-btn-hover-bg: #36593E;
+  --bs-btn-hover-border-color: var(--shaan-green);
+
+  --bs-btn-active-bg:  #36593E;
+  --bs-btn-active-border-color: var(--shaan-green);
+  --bs-btn-focus-shadow-rgb: "00 00 00"
+}
+
 /**
 SHAAN RPG Dice Roller styles
 **/
@@ -20,6 +66,10 @@ SHAAN RPG Dice Roller styles
   border-radius: 20px
 }
 
+.des>img {
+  transition: border-color 1s ease;
+}
+
 .des>.score_9{
   border-color: var(--bs-success);
 }
@@ -35,3 +85,4 @@ SHAAN RPG Dice Roller styles
 .text-bg-dark a:hover{
   color:white;
 }
+

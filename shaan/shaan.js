@@ -42,7 +42,7 @@ const txt_necrose = document.getElementById("de_trihn_4");
 const num_perte = document.getElementById("num_perte");
 
 /**
- * Lance les dés pour un test de domaine.
+ * Prépare les dés et lance un test de domaine.
  */
 function domain_test() {
     reset_blocs();
@@ -66,7 +66,7 @@ function necrosis_test() {
 }
 
 /**
- * Réinitialise les blocs d'infos, et lance les dés pour un test de domaine.
+ * Réinitialise les blocs d'infos.
  */
 function reset_blocs() {
     symbiose.classList.add("d-none");
@@ -82,7 +82,7 @@ function reset_blocs() {
 }
 
 /**
- * Effectue $roll_count générations aléatoire successives espacées de 100ms
+ * Effectue $roll_count tests de domaine successifs, espacées de 100ms
  * (pour donner un effet visuel aux lancement des dés)
  * Puis affiche les alertes éventuelles.
  */
@@ -138,7 +138,9 @@ function random_domain() {
 }
 
 /**
- * Effectue un test de nécrose
+ * Effectue $roll_count tests de nécrose successifs, espacées de 100ms
+ * (pour donner un effet visuel aux lancement des dés)
+ * Puis affiche les alertes éventuelles.
  */
 function random_necrosis() {
 
@@ -171,18 +173,18 @@ function random_necrosis() {
  * Génére une combinaison aléatoire des 4 dés de Shaan.
  */
 function roll_domain() {
-    esprit = roll_dice(img_esprit, "d10/d10_jaune_");
-    ame = roll_dice(img_ame, "d10/d10_bleu_");
-    corps = roll_dice(img_corps, "d10/d10_rouge_");
-    necrose = roll_dice(img_necrose, "d10/d10_noir_");
+    esprit = roll_dice(img_esprit, "jaune");
+    ame = roll_dice(img_ame, "bleu");
+    corps = roll_dice(img_corps, "rouge");
+    necrose = roll_dice(img_necrose, "noir");
 }
 
 /**
  * Génére une combinaison aléatoire des dés bleu et noir.
  */
 function roll_necrosis() {
-    ame = roll_dice(img_ame, "d10/d10_bleu_");
-    necrose = roll_dice(img_necrose, "d10/d10_noir_");
+    ame = roll_dice(img_ame, "bleu");
+    necrose = roll_dice(img_necrose, "noir");
 }
 
 /**
@@ -190,7 +192,7 @@ function roll_necrosis() {
  */
 function reroll_black() {
     necrosis_help.classList.add("d-none");
-    necrose = roll_dice(img_necrose, "d10/d10_noir_");
+    necrose = roll_dice(img_necrose, "noir");
     roll_count--;
 
     if (roll_count > 0) window.setTimeout(reroll_black, 100);
@@ -207,9 +209,9 @@ function reroll_black() {
  */
 function roll_dice(img, color) {
     value = Math.floor(Math.random() * 10);
-    img.src = img_url + color + value + ".png";
+    img.src = img_url + "d10/d10_" + color + "_" + value + ".png";
     img.className = "score_" + value;
-    img.alt = necrose;
+    img.alt = "" + value + " au dé " + color;
     return value;
 }
 
