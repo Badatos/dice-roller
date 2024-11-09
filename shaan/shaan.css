@@ -39,14 +39,27 @@ h1 {
   --bs-btn-hover-bg: #36593E;
   --bs-btn-hover-border-color: var(--shaan-green);
 
-  --bs-btn-active-bg:  #36593E;
+  --bs-btn-active-bg: #36593E;
   --bs-btn-active-border-color: var(--shaan-green);
-  --bs-btn-focus-shadow-rgb: "00 00 00"
+  --bs-btn-focus-shadow-rgb: "00 00 00";
+
+  --bs-btn-disabled-bg: #607264;
+  --bs-btn-disabled-border-color: #57775f;
 }
 
 /**
 SHAAN RPG Dice Roller styles
 **/
+
+label{
+  cursor: pointer;
+}
+
+.version{
+  position: fixed;
+  bottom: 1px;
+  right: 1px;
+}
 
 .des{
   background-image: url(img/ombre.png);
@@ -54,6 +67,10 @@ SHAAN RPG Dice Roller styles
   height: 80px;
   width: 80px;
   display: inline-block;
+}
+
+.des.disabled{
+  opacity: .65;
 }
 
 .cache {
