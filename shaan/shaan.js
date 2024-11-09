@@ -220,6 +220,7 @@ function roll_domain() {
     if (thrin_values["rouge"] >= 0) {
         roll_dice(de_corps, "rouge");
     }
+    roll_dice(de_necrose, "noir");
 }
 
 /**
