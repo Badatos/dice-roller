@@ -1,48 +1,45 @@
 /* Shaan World styles */
 @font-face {
-  font-family: "GodofWar";
+  font-family: GodofWar;
   src: url("./fonts/GodOfWar-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Komikazoom";
+  font-family: Komikazoom;
   src: url("./fonts/Komikazoom.ttf") format("truetype");
 }
 
-:root{
-  --shaan-green: #45714F;
-  --shaan-font: "Economica", Arial, Helvetica, sans-serif;
+:root {
+  --shaan-green: #45714f;
+  --shaan-font: "Economica", arial, helvetica, sans-serif;
 }
 
-body{
- --bs-body-font-family: var(--shaan-font);
- --bs-body-font-size: 14pt
+body {
+  --bs-body-font-family: var(--shaan-font);
+  --bs-body-font-size: 14pt;
 }
 
 .title {
-  font-family: "GodofWar", serif;
+  font-family: GodofWar, serif;
 }
 
 h1 {
-  font-family: "Komikazoom", sans-serif;
+  font-family: Komikazoom, sans-serif;
 }
 
-.btn{
+.btn {
   --bs-btn-font-family: var(--shaan-font);
   --bs-btn-font-size: 14pt;
 }
 
-.btn-primary{
+.btn-primary {
   --bs-btn-bg: var(--shaan-green);
-  --bs-btn-border-color: #36593E;
-
-  --bs-btn-hover-bg: #36593E;
+  --bs-btn-border-color: #36593e;
+  --bs-btn-hover-bg: #36593e;
   --bs-btn-hover-border-color: var(--shaan-green);
-
   --bs-btn-active-bg: #36593E;
   --bs-btn-active-border-color: var(--shaan-green);
   --bs-btn-focus-shadow-rgb: "00 00 00";
-
   --bs-btn-disabled-bg: #607264;
   --bs-btn-disabled-border-color: #57775f;
 }
@@ -51,25 +48,25 @@ h1 {
 SHAAN RPG Dice Roller styles
 **/
 
-label{
+label {
   cursor: pointer;
 }
 
-.version{
+.version {
   position: fixed;
   bottom: 1px;
   right: 1px;
 }
 
-.des{
-  background-image: url(img/ombre.png);
+.des {
+  background-image: url("img/ombre.png");
   background-size: cover;
   height: 80px;
   width: 80px;
   display: inline-block;
 }
 
-.des.disabled{
+.des.disabled {
   opacity: .65;
 }
 
@@ -80,26 +77,23 @@ label{
 .des>img {
   border: 4px solid transparent;
   padding: 4px;
-  border-radius: 20px
-}
-
-.des>img {
+  border-radius: 20px;
   transition: border-color 1s ease;
 }
 
-.des>.score_9{
+.des>.score-9 {
   border-color: var(--bs-success);
 }
 
-.des>.score_0{
+.des>.score-0 {
   border-color: var(--bs-danger);
 }
 
 /** Bootstrap color fix **/
-.text-bg-dark a{
-  color:#AEAEE1;
-}
-.text-bg-dark a:hover{
-  color:white;
+.text-bg-dark a {
+  color: #aeaee1;
 }
 
+.text-bg-dark a:hover {
+  color: white;
+}

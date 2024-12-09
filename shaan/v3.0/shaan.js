@@ -6,7 +6,7 @@
 var roll_count = 10;
 
 // Dossier des images
-const img_url = "img/";
+const img_url = "../img/";
 
 // Valeurs de thrines obtenues
 var thrin_values = { 'jaune': 0, 'bleu': 0, 'rouge': 0, 'noir': 0 }
@@ -287,8 +287,7 @@ function roll_failure() {
                 title = "Perte de repères";
                 msg = "Vous ne pouvez plus utiliser la vocation principale"+
                 " utilisée à cet acte tant que vous n’utilisez pas un"+
-                " <strong>bonus narratif</strong> pour briser cet échec.";
-                break;
+                " <strong>succès bonus</strong> pour briser cet échec.";                break;
             case 9:
                 title = "Dommage collatéral";
                 msg = "Vous mettez en danger les autres personnages qui perdent"+
@@ -298,7 +297,7 @@ function roll_failure() {
             case 0:
                 title = "Objet mythique endommagé";
                 msg = "L’un de vos objets mythiques a subi des dégâts,"+
-                " il faut y consacrer un <strong>bonus narratif</strong> pour le rendre"+
+                " il faut y consacrer un <strong>succès bonus</strong> pour le rendre"+
                 " à nouveau utilisable.";
                 break;
             default:
@@ -319,7 +318,7 @@ function roll_dice(container, color) {
     let img = container.querySelector("img");
     value = Math.floor(Math.random() * 10);
     img.src = img_url + "d10/d10_" + color + "_" + value + ".png";
-    img.className = "score_" + value;
+    img.className = "score-" + value;
     img.alt = "" + value + " au dé " + color;
     thrin_values[color] = value;
     img.title = "" + thrin_values[color] + " au dé " + color;
