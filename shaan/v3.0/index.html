@@ -58,6 +58,17 @@
         <span class="de_nom">Dé d’échec</span>
         <div class="disabled_txt">&nbsp;</div>
       </span>
+
+      <div id="bloc-action" class="row">
+        <label for="de-action">Mon dé d'action :</span>
+        <select id="de-action" class="form-select" required>
+          <option value="" id="action-none">Choisssez un dé d'action</option>
+          <option value="jaune" class="jaune" id="action-jaune">Esprit</option>
+          <option value="bleu"  class="bleu" id="action-bleu">Ame</option>
+          <option value="rouge" class="rouge" id="action-rouge">Corps</option>
+        </select>
+      </div>
+
       <span class="cache">
         <img src="../img/d10/d10_jaune_1.png" alt="1 au dé jaune">
         <img src="../img/d10/d10_jaune_2.png" alt="2 au dé jaune">
@@ -109,6 +120,11 @@
         </a>
       </div>
     </div>
+    <div class="alert alert-danger d-none" id="crane-perte">
+      <h2>0 sur le dé de perte</h2>
+      <p>Vous perdez <strong>1 succès</strong> sur votre Test.
+      </p>
+    </div>
     <div class="alert alert-warning d-none" id="perte">
       <h2>Perte d’énergie</h2>
       <p>
@@ -154,8 +170,7 @@
       <h2>0, le chiffre des limbes&nbsp;!</h2>
       <p>
         Vous avez obtenu un 0 à l’un de vos dés.
-        Si c’est votre dé d’action, vous échouez.
-        (il est toujours possible de puiser dans une autre énergie)
+        Il est toujours possible de puiser dans une autre énergie.
       </p>
     </div>
     <div class="alert alert-success d-none" id="bonus">
@@ -163,9 +178,9 @@
       <p>
         Vous avez obtenu un 9 à l’un de vos dés.
         Si c’est votre dé d’action,
-        vous gagnez un <strong>Bonus narratif</strong>.
+        vous gagnez un <strong>Succès supplémentaire</strong>.
         (il est possible de puiser dans
-        une autre énergie pour changer de dé d’action)
+        une autre énergie pour obtenir ce succès)
       </p>
     </div>
     <div class="alert alert-success d-none" id="exp">

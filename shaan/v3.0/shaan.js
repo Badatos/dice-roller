@@ -23,6 +23,7 @@ const bonus = document.getElementById("bonus");
 const exp = document.getElementById("exp");
 const limbes = document.getElementById("limbes");
 const perte_bloc = document.getElementById("perte");
+const crane_perte = document.getElementById("crane-perte");
 const critical_necrosis = document.getElementById("critical-necrosis");
 const necrosis_help = document.getElementById("necrosis-help");
 const failure_help = document.getElementById("failure-help");
@@ -30,8 +31,10 @@ const failure_btn = document.getElementById("failure-btn");
 const generic_help = document.getElementById("generic-help");
 const generic_title = document.getElementById("generic-title");
 const generic_desc = document.getElementById("generic-desc");
+const bloc_action = document.getElementById("bloc-action");
 
 // Dés
+const de_action = document.getElementById("de-action");
 const de_esprit = document.getElementById("de-esprit");
 const de_ame = document.getElementById("de-ame");
 const de_corps = document.getElementById("de-corps");
@@ -49,6 +52,7 @@ const num_perte = document.getElementById("num_perte");
  */
 function domain_test() {
     reset_blocs();
+    bloc_action.classList.remove("d-none");
     de_esprit.classList.remove("d-none");
     de_corps.classList.remove("d-none");
     de_ame.classList.remove("d-none");
@@ -61,6 +65,7 @@ function domain_test() {
  */
 function necrosis_test() {
     reset_blocs();
+    bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_corps.classList.add("d-none");
     de_ame.classList.add("d-none");
@@ -74,6 +79,7 @@ function necrosis_test() {
  */
 function random_failure() {
     reset_blocs();
+    bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_ame.classList.add("d-none");
     de_corps.classList.add("d-none");
@@ -103,6 +109,7 @@ function reset_blocs() {
     de_necrose.classList.remove("d-none");
     de_perte.classList.add("d-none");
     de_failure.classList.add("d-none");
+    crane_perte.classList.add("d-none");
 }
 
 /**
@@ -159,13 +166,18 @@ function random_domain() {
                 }
             }
         }
+
         // Calcul des pertes
+        const action_value = thrin_values[de_action.value];
         if (necrose == 0) {
-            perte = 3;
-        } else if (necrose > 5) {
+            crane_perte.classList.remove("d-none");
+        }
+        if (necrose > action_value) {
+            perte = 1;
+        } else if (necrose < action_value) {
             perte = 2;
         } else {
-            perte = 1;
+            perte = 0;
         }
         num_perte.textContent = perte;
         perte_bloc.classList.remove("d-none");
@@ -338,6 +350,10 @@ document.querySelectorAll(".des>input").forEach((input) => {
         }
         parent.classList.toggle("disabled");
         parent.querySelector(".disabled_txt").innerHTML = checked ? "&nbsp;" : "(désactivé)";
+        document.getElementById("action-"+color).disabled = !checked;
+        if (de_action.value === color) {
+            de_action.value = "";
+        }
         // TODO: si aucun dé actif, désactiver le test de domaine.
         if (thrin_values["jaune"] + thrin_values["bleu"] + thrin_values["rouge"] < -2) {
             domain_btn.classList.add("disabled");
