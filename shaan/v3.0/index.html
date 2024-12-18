@@ -60,9 +60,9 @@
       </span>
 
       <div id="bloc-action" class="row">
-        <label for="de-action">Mon dé d'action :</span>
+        <label for="de-action">Mon dé d’action :</span>
         <select id="de-action" class="form-select" required>
-          <option value="" id="action-none">Choisssez un dé d'action</option>
+          <option value="" id="action-none">Choisssez un dé d’action</option>
           <option value="jaune" class="jaune" id="action-jaune">Esprit</option>
           <option value="bleu"  class="bleu" id="action-bleu">Ame</option>
           <option value="rouge" class="rouge" id="action-rouge">Corps</option>
@@ -129,41 +129,42 @@
       <h2>Perte d’énergie</h2>
       <p>
         Le dé de perte vous fait perdre
-        <strong id="num_perte">0</strong> énergie(s) au choix (sauf aléa).
+        <strong id="num-perte">0</strong> énergie(s) au choix (sauf aléa).
       </p>
       <p>(+1 pour chaque personnage qui ne participe pas à cet acte.)</p>
     </div>
     <div class="alert alert-danger d-none" id="symbiose-necro">
       <h2>Symbiose nécrotique&nbsp;!</h2>
       <p>
-        Vous êtes victime d’un <strong>malus narratif</strong>.
-        Décrivez-le (mise en danger d’un allié, perte de temps significative,
-        évolution négative de l’adversité...).
-        Et <strong>ajoutez 1 acte supplémentaire à l’adversité</strong>.
+        Vous êtes victime d’un <strong>échec personnel</strong>.
+        Et <strong>un autre personnage devra
+          obtenir 1 succès supplémentaire pendant cet acte.</strong>.
       </p>
+      <p><strong>En mode solo</strong>, vous devrez obtenir un succès
+        supplémentaire au prochain acte. S’il s’agissait du
+        dernier acte, l’adversité gagne 1 acte.</p>
     </div>
     <div class="alert alert-danger d-none" id="symbiose-necro-trans">
       <h2>Symbiose nécrotique transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont à 0.
-        L’adversité en cours est <strong>augmentée de 2 actes</strong>.
+        L’adversité en cours est <strong>augmentée d’ 1 acte</strong>.
       </p>
     </div>
     <div class="alert alert-success d-none" id="symbiose-trans">
       <h2>Symbiose transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont en symbiose.
-        L’adversité en cours est <strong>réduite de 2 actes</strong>.
+        L’adversité en cours est <strong>réduite d’ 1 acte</strong>.
       </p>
     </div>
     <div class="alert alert-success d-none" id="symbiose">
       <h2>Symbiose&nbsp;!</h2>
       <p>
         Vos 3 énergies sont en symbiose.
-        Vous gagnez un <strong>Bonus narratif</strong>,
-        qui vous permet d’enlever un acte à l’adversité.
-        (S’il n’y avait pas d’autre acte à venir,
-         l’acte en cours est un succès.)
+        <strong>Vous ignorez le dé de perte.</strong>
+        Et vous <strong>réussissez cet acte avec
+        <strong id="num-succes">5</strong> succès</strong>.
       </p>
     </div>
     <div class="alert alert-warning d-none" id="limbes">
@@ -188,7 +189,7 @@
       <p>
         On apprend de ses réussites et de ses échecs.
         La symbiose vous permet d’augmenter de
-        <strong id="num_perte">+1 le niveau du domaine</strong>
+        <strong>+1 le niveau du domaine</strong>
         utilisé pour réaliser cette action.
         (1 seule fois / joueur / séance)
       </p>

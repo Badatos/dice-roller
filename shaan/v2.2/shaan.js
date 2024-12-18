@@ -319,7 +319,7 @@ function roll_dice(container, color) {
     let img = container.querySelector("img");
     value = Math.floor(Math.random() * 10);
     img.src = img_url + "d10/d10_" + color + "_" + value + ".png";
-    img.className = "score_" + value;
+    img.className = "score-" + value;
     img.alt = "" + value + " au dé " + color;
     thrin_values[color] = value;
     img.title = "" + thrin_values[color] + " au dé " + color;

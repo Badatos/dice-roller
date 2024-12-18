@@ -45,7 +45,8 @@ const de_failure = document.getElementById("de-failure");
 const txt_necrose = document.getElementById("de_trihn_4");
 
 // Perte
-const num_perte = document.getElementById("num_perte");
+const num_perte = document.getElementById("num-perte");
+const num_succes = document.getElementById("num-succes");
 
 /**
  * Prépare les dés et lance un test de domaine.
@@ -149,8 +150,13 @@ function random_domain() {
                     exp.classList.remove("d-none");
                 } else {
                     // Symbiose
-                    if (esprit == ame && ame == corps) {
+                    if (esprit === ame && ame === corps) {
                         symbiose.classList.remove("d-none");
+                        if(esprit === 9) {
+                            num_succes.textContent = 6;
+                        } else {
+                            num_succes.textContent = 5;
+                        }
                         exp.classList.remove("d-none");
                     } else {
                         // Succès critique
@@ -168,19 +174,21 @@ function random_domain() {
         }
 
         // Calcul des pertes
-        const action_value = thrin_values[de_action.value];
         if (necrose == 0) {
             crane_perte.classList.remove("d-none");
         }
-        if (necrose > action_value) {
-            perte = 1;
-        } else if (necrose < action_value) {
-            perte = 2;
-        } else {
-            perte = 0;
+        if(de_action.value !== ""){
+            const action_value = thrin_values[de_action.value];
+            if (necrose > action_value) {
+                perte = 1;
+            } else if (necrose < action_value) {
+                perte = 2;
+            } else {
+                perte = 0;
+            }
+            num_perte.textContent = perte;
+            perte_bloc.classList.remove("d-none");
         }
-        num_perte.textContent = perte;
-        perte_bloc.classList.remove("d-none");
     }
 }
 
