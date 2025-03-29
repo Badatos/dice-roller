@@ -12,6 +12,8 @@
 :root {
   --shaan-green: #45714f;
   --shaan-font: "Economica", arial, helvetica, sans-serif;
+  --bs-primary-text-emphasis: #45714f;
+  --bs-primary-bg-subtle: #DFF0D8;
 }
 
 body {
