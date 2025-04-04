@@ -30,6 +30,11 @@
       </ol>
     </nav>
 
+    <p>Dans le jeu de rôle Shaan Renaissance, il est possible de se créer
+      des Acquis personnalisés.
+      Afin de vous faciliter les différents calculs, ce générateur vous calcule
+      les différentes valeurs, à partir de la catégorie de l’acquis et de sa classe.
+    </p>
     <form class="row mb-3">
       <div class="col">
         <label for="cat" class="form-label">Catégorie</label>
@@ -115,44 +120,116 @@
       switch(cat.value) {
         case "Outil":
           acq_value.textContent = cl_value*cl_value*100;
+          acq_prestige.textContent = cl_value-1;
+          acq_ress.textContent = cl_value*2;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = cl_value;
           break;
         case "Manuscrit":
           acq_value.textContent = cl_value*cl_value*200;
+          acq_prestige.textContent = cl_value;
+          acq_ress.innerHTML = ""+cl_value + " livre vierge <br>";
+          acq_ress.innerHTML += "Sauf cartes : "+Number(cl_value*4);
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = cl_value;
           break;
         case "Richesse":
           acq_value.textContent = cl_value*cl_value*1000;
+          acq_prestige.textContent = cl_value+1;
+          acq_ress.textContent = cl_value*5;
+          acq_diff.textContent = cl_value*45;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = cl_value;
           break;
         case "Relation":
           acq_value.textContent = "Services Payants";
+          acq_prestige.textContent = cl_value;
+          acq_ress.textContent = cl_value;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = "Points de prestige";
+          acq_bonus.textContent = cl_value;
           break;
         case "Protection":
           acq_value.textContent = cl_value*cl_value*300;
+          acq_prestige.textContent = cl_value-1;
+          acq_ress.textContent = cl_value*3;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = "-";
           break;
         case "Artefact":
           acq_value.textContent = cl_value*cl_value*500;
+          acq_prestige.textContent = cl_value+1;
+          acq_ress.textContent = cl_value*2;
+          acq_diff.textContent = cl_value*45;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = cl_value;
           break;
         case "Artefact (grigri)":
           acq_value.textContent = cl_value*cl_value*100;
+          acq_prestige.textContent = cl_value+1;
+          acq_ress.textContent = cl_value*2;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = cl_value-1;
           break;
         case "Armimal":
           acq_value.textContent = cl_value*cl_value*1000;
+          acq_prestige.textContent = cl_value;
+          acq_ress.textContent = "Animal sauvage +"+ cl_value*4;
+          acq_diff.textContent = cl_value*45;
+          acq_entr.textContent = cl_value + " ressource(s) par Jour";
+          acq_bonus.textContent = cl_value;
           break;
         case "Transport":
           acq_value.textContent = cl_value*cl_value*1000;
+          acq_prestige.textContent = cl_value+1;
+          acq_ress.textContent = cl_value*20;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = cl_value*10 + " Crédos pour 100km";
+          acq_bonus.textContent = cl_value;
           break;
         case "Armement":
           acq_value.textContent = cl_value*cl_value*200;
+          acq_prestige.textContent = cl_value-1;
+          acq_ress.textContent = cl_value*3;
+          acq_diff.textContent = cl_value*30;
+          acq_entr.textContent = 0;
+          acq_bonus.textContent = Number(cl_value+1) + "- [Rang du pouvoir ajouté+1]";
           break;
         case "Technologie":
           acq_value.textContent = cl_value*cl_value*1000;
+          acq_prestige.textContent = cl_value;
+          acq_ress.textContent = cl_value*10;
+          acq_diff.textContent = cl_value*45;
+          // TODO Correct from source
+          acq_entr.textContent = "?? 2*10 Crédos par mois ??";
+          acq_bonus.innerHTML = "<ul><li>"+cl_value+"</li>";
+          acq_bonus.innerHTML += "<li>"+Number(cl_value+3)+" -[Rang du pouvoir ajouté+1] (armes)</li>";
+          acq_bonus.innerHTML += "<li>3 (drogues)</li>";
+          acq_bonus.innerHTML += "<li>1 (focaliseur rang 1)</li>";
+          acq_bonus.innerHTML += "<li>2 (focaliseur rang 3)</li>";
+          acq_bonus.innerHTML += "<li>3 (focaliseur rang 5)</li>";
+          acq_bonus.innerHTML += "</ul>";
           break;
         case "Batiment":
           acq_value.textContent = cl_value*cl_value*10000;
+          acq_prestige.textContent = cl_value*5;
+          acq_ress.textContent = cl_value*100;
+          acq_diff.textContent = cl_value*100;
+          acq_entr.textContent = cl_value*100 + " Crédos par mois";
+          acq_bonus.textContent = cl_value;
           break;
         case "Module Biomorphique":
           acq_value.textContent = "Acquis implanté"
+          acq_prestige.textContent = "***";
+          acq_ress.textContent = "Acquis Technologie, Outils, Protection, Armement 3x[prix en crédos de l’acquis de base]";
+          acq_diff.textContent = "NÉCROSE + Biomorphie / Difficulté : ***";
+          acq_entr.textContent = "+ " + cl_value + " Xs à l'implantation et à chaque anniversaire de l'implantation.";
+          acq_bonus.textContent = "Acquis implanté";
           break;
-        default:
       }
     }
   </script>
