@@ -110,7 +110,7 @@
     </div>
     <div class="row mb-3 mt-0">
       <div class="btn-group btn-group-lg" role="group">
-        <a href="javascript:domain_test();" class="btn btn-primary"
+        <a href="javascript:domain_test();" class="btn btn-primary disabled"
            role="button" id="domain-btn" title="Faire un test de domaine en lançant tous les dés.">
           Faire un test de domaine
         </a>
@@ -120,12 +120,39 @@
         </a>
       </div>
     </div>
-    <div class="alert alert-danger d-none" id="crane-perte">
+
+    <table class="table table-bordered table-striped text-center mt-3 caption-top">
+      <caption>Calcul du score</caption>
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Dé d'action</th>
+          <th scope="col">Niveau du Domaine</th>
+          <th scope="col">Bonus de vocations<br>(2 max)</th>
+          <th scope="col">Score</th>
+          <th scope="col">Succès</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong id="action-result">-</strong></td>
+          <td><input type="number" id="domain-level" class="text-center" value="0"></td>
+          <td><input type="number" id="vocation-bonus" class="text-center" value="0"></td>
+          <td id="total-score">-</td>
+          <td id="total-succes">-</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Vous devez obtenir un nombre de succès égal à la
+      difficulté de l'acte pour le réussir et éviter l'échec
+      personnel.</p>
+
+    <div class="alert alert-danger d-none" id="crane-perte" role="alert">
       <h2>0 sur le dé de perte</h2>
       <p>Vous perdez <strong>1 succès</strong> sur votre Test.
       </p>
     </div>
-    <div class="alert alert-warning d-none" id="perte">
+
+    <div class="alert alert-warning d-none" id="perte" role="alert">
       <h2>Perte d’énergie</h2>
       <p>
         Le dé de perte vous fait perdre
@@ -133,7 +160,8 @@
       </p>
       <p>(+1 pour chaque personnage qui ne participe pas à cet acte.)</p>
     </div>
-    <div class="alert alert-danger d-none" id="symbiose-necro">
+
+    <div class="alert alert-danger d-none" id="symbiose-necro" role="alert">
       <h2>Symbiose nécrotique&nbsp;!</h2>
       <p>
         Vous êtes victime d’un <strong>échec personnel</strong>.
@@ -144,21 +172,24 @@
         supplémentaire au prochain acte. S’il s’agissait du
         dernier acte, l’adversité gagne 1 acte.</p>
     </div>
-    <div class="alert alert-danger d-none" id="symbiose-necro-trans">
+
+    <div class="alert alert-danger d-none" id="symbiose-necro-trans" role="alert">
       <h2>Symbiose nécrotique transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont à 0.
         L’adversité en cours est <strong>augmentée d’ 1 acte</strong>.
       </p>
     </div>
-    <div class="alert alert-success d-none" id="symbiose-trans">
+
+    <div class="alert alert-success d-none" id="symbiose-trans" role="alert">
       <h2>Symbiose transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont en symbiose.
         L’adversité en cours est <strong>réduite d’ 1 acte</strong>.
       </p>
     </div>
-    <div class="alert alert-success d-none" id="symbiose">
+
+    <div class="alert alert-success d-none" id="symbiose" role="alert">
       <h2>Symbiose&nbsp;!</h2>
       <p>
         Vos 3 énergies sont en symbiose.
@@ -167,13 +198,15 @@
         <strong id="num-succes">5</strong> succès</strong>.
       </p>
     </div>
-    <div class="alert alert-warning d-none" id="limbes">
+
+    <div class="alert alert-warning d-none" id="limbes" role="alert">
       <h2>0, le chiffre des limbes&nbsp;!</h2>
       <p>
         Vous avez obtenu un 0 à l’un de vos dés.
         Il est toujours possible de puiser dans une autre énergie.
       </p>
     </div>
+
     <div class="alert alert-success d-none" id="bonus">
       <h2>Bonus possible&nbsp;!</h2>
       <p>
@@ -184,6 +217,7 @@
         une autre énergie pour obtenir ce succès)
       </p>
     </div>
+
     <div class="alert alert-success d-none" id="exp">
       <h2>Apprentissage</h2>
       <p>
@@ -243,6 +277,7 @@
       est fait pour vous&nbsp;!
     </p>
   </div>
+
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
     <p>Vous jouez à <strong>Shaan</strong> à distance avec des amis ?<br>
       Il existe également un <a
@@ -255,6 +290,7 @@
   et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
     </p>
   </footer>
+
   <script type="text/javascript" src="shaan.js"></script>
 </body>
 

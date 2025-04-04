@@ -44,6 +44,13 @@ const de_necrose = document.getElementById("de-necrose");
 const de_failure = document.getElementById("de-failure");
 const txt_necrose = document.getElementById("de_trihn_4");
 
+// Résultats
+const action_result = document.getElementById("action-result");
+const domain_level = document.getElementById("domain-level");
+const vocation_bonus = document.getElementById("vocation-bonus");
+const total_score = document.getElementById("total-score");
+const total_succes = document.getElementById("total-succes");
+
 // Perte
 const num_perte = document.getElementById("num-perte");
 const num_succes = document.getElementById("num-succes");
@@ -121,7 +128,7 @@ function reset_blocs() {
 function random_domain() {
 
     roll_domain();
-
+    let has_lost = true;
     roll_count--;
 
     if (roll_count > 0) window.setTimeout(random_domain, 100);
@@ -158,6 +165,7 @@ function random_domain() {
                             num_succes.textContent = 5;
                         }
                         exp.classList.remove("d-none");
+                        has_lost = false;
                     } else {
                         // Succès critique
                         if (esprit == 9 || ame == 9 || corps == 9) {
@@ -177,7 +185,7 @@ function random_domain() {
         if (necrose == 0) {
             crane_perte.classList.remove("d-none");
         }
-        if(de_action.value !== ""){
+        if(has_lost === true && de_action.value !== ""){
             const action_value = thrin_values[de_action.value];
             if (necrose > action_value) {
                 perte = 1;
@@ -189,7 +197,36 @@ function random_domain() {
             num_perte.textContent = perte;
             perte_bloc.classList.remove("d-none");
         }
+        calcul_score();
     }
+}
+
+function calcul_score() {
+    let action_val = Number(thrin_values[de_action.value]);
+
+    action_result.innerText = action_val;
+    action_result.classList = [de_action.value];
+
+    let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
+    console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
+    total_score.innerText = score;
+    // Calcul du nombre de succès.
+    if (score > 39) {
+        succes = 6;
+    } else if (score > 34) {
+        succes = 5;
+    } else if (score > 29) {
+        succes = 4;
+    } else if (score > 24) {
+        succes = 3;
+    } else if (score > 19) {
+        succes = 2;
+    } else if (score > 14) {
+        succes = 1;
+    } else {
+        succes = 0;
+    }
+    total_succes.innerText = succes;
 }
 
 /**
@@ -371,6 +408,17 @@ document.querySelectorAll(".des>input").forEach((input) => {
             domain_btn.title = "Faire un test de domaine en lancant tous les dés.";
         }
     });
+});
+
+// Désactive le bouton domain-btn si le de d'action n'a pas de valeur
+de_action.addEventListener("change", () => {
+    if (de_action.value === "") {
+        domain_btn.classList.add("disabled");
+        domain_btn.title = "Veuillez sélectionner une énergie pour effectuer un test de domaine.";
+    } else {
+        domain_btn.classList.remove("disabled");
+        domain_btn.title = "Faire un test de domaine en lançant tous les dés.";
+    }
 });
 
 // TODO : retirer un dé. ==> seule la symbiose nécro reste possible
