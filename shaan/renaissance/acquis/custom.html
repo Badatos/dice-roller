@@ -115,7 +115,7 @@
     const acq_bonus = document.getElementById("acq-bonus");
 
     function calcul_stats(){
-      cl_value = classe.value;
+      cl_value = Number(classe.value);
       acq_cat.textContent = cat.value;
       switch(cat.value) {
         case "Outil":
@@ -129,7 +129,7 @@
         case "Manuscrit":
           acq_value.textContent = cl_value*cl_value*200;
           acq_prestige.textContent = cl_value;
-          acq_ress.innerHTML = ""+cl_value + " livre vierge <br>";
+          acq_ress.innerHTML = "" + cl_value + " livre vierge <br>";
           acq_ress.innerHTML += "Sauf cartes : "+Number(cl_value*4);
           acq_diff.textContent = cl_value*30;
           acq_entr.textContent = 0;
