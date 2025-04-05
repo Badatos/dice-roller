@@ -1,0 +1,45 @@
+
+<div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+  <div class="card fiche_acquis">
+    <div class="card-header"></div>
+    <div class="card-body">
+      <h2 class="float-star">{{Acquis}}</h2>
+      <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
+      <p>
+        Acquis de <strong>{{Domaine}}</strong>
+        de Classe {{Rang}}
+      </p>
+      <ul class="h3">
+        <li><strong>Catégorie :</strong> <span id="a_cat">{{Catégorie}}</span></li>
+        {{#Spécialisation}}
+          <li>
+            <strong>Spécialisation :</strong>
+            <span id="a_spe">{{Spécialisation}}</span>
+          </li>
+        {{/Spécialisation}}
+        {{#Attributs}}
+          <li>{{Attributs}}</li>
+        {{/Attributs}}
+      </ul>
+      <p class="description">{{Détails}}</p>
+      <ul>
+        <li><strong>Valeur :</strong> <span id="a_val">{{Valeur}}</span></li>
+        {{#Prestige}}
+          <li>
+            <strong>Prestige :</strong>
+            <span id="a_pres">{{Prestige}} point</span>
+          </li>
+        {{/Prestige}}
+        {{#Ressources}}
+          <li>
+            <strong>Ressources :</strong>
+            <span id="a_res">{{Ressources}}</span>
+          </li>
+        {{/Ressources}}
+        <li><strong>Fabrication :</strong> <span id="a_fab">{{Fabrication}}</span></li>
+      </ul>
+      <p class="source text-end">{{Source}}</p>
+    </div>
+
+  </div>
+</div>
