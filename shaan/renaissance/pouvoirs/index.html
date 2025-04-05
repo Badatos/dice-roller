@@ -97,6 +97,7 @@
 <body>
   <div class="container">
     <h1>Liste des pouvoirs - Shaan</h1>
+    <p class="text-end"><strong id="total"></strong> pouvoirs trouvés.</p>
     <div class="row" id="liste-elements"></div>
     <pre id="code"></pre>
   </div>
@@ -121,11 +122,13 @@
     );
     const precode = document.getElementById("code");
     const bloc_pouvoirs = document.getElementById("liste-elements");
+    const bloc_total = document.getElementById("total");
 
     let liste_pouvoirs = [];
 
     parser.parse().then(data => {
       liste_pouvoirs = data;
+      bloc_total.textContent = data.length;
       fetch('../../templates/pouvoir.mustache')
       .then((response) => response.text())
       .then((template) => {

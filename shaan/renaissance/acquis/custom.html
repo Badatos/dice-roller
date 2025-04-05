@@ -35,60 +35,90 @@
       Afin de vous faciliter les différents calculs, ce générateur vous calcule
       les différentes valeurs, à partir de la catégorie de l’acquis et de sa classe.
     </p>
-    <form class="row mb-3">
-      <div class="col">
-        <label for="cat" class="form-label">Catégorie</label>
-        <select id="cat" class="form-select">
-          <option value="Outil">Outil</option>
-          <option value="Manuscrit">Manuscrit</option>
-          <option value="Richesse">Richesse</option>
-          <option value="Relation">Relation</option>
-          <option value="Protection">Protection</option>
-          <option value="Artefact">Artefact</option>
-          <option value="Artefact (grigri)">Artefact (grigri)</option>
-          <option value="Armimal">Armimal</option>
-          <option value="Transport">Transport</option>
-          <option value="Armement">Armement</option>
-          <option value="Technologie">Technologie</option>
-          <option value="Batiment">Batiment</option>
-          <option value="Module Biomorphique">Module Biomorphique</option>
-        </select>
-      </div>
-
-      <div class="col">
-        <label for="classe" class="form-label">Classe</label>
-        <input type="number" class="form-control" id="classe" value="1" max="5" min="0">
-      </div>
-
-      <div id="result" class="row mt-3">
-        <div class="table-responsive">
-          <table class="table table-striped caption-top">
-            <caption>Votre Acquis</caption>
-            <thead>
-              <tr>
-                <th scope="col">Catégorie</th>
-                <th scope="col">Valeur</th>
-                <th scope="col">Prestige</th>
-                <th scope="col">Ressources</th>
-                <th scope="col">Difficultés cumulées</th>
-                <th scope="col">Entretien</th>
-                <th scope="col">Nb de bonus</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="acq-cat"></td>
-                <td id="acq-value"></td>
-                <td id="acq-prestige"></td>
-                <td id="acq-ress"></td>
-                <td id="acq-diff"></td>
-                <td id="acq-entr"></td>
-                <td id="acq-bonus"></td>
-              </tr>
-            </tbody>
-          </table>
+    <form class="row mb-3 d-print-none">
+      <div class="row mb-3">
+        <div class="col">
+          <label for="name" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="name" aria-describedby="name-help">
+          <div id="name-help" class="form-text">Donne un nom à ton nouvel acquis.</div>
+        </div>
+        <div class="col">
+          <label for="image" class="form-label">Image</label>
+          <input type="text" class="form-control" id="image" aria-describedby="image-help"
+           value="https://www.shaan-rpg.com/class-shaan/img/equipement/outils-couture.png">
+          <div id="image-help" class="form-text">URL d'une image pour ton acquis.</div>
+        </div>
+        <div class="col">
+          <label for="domain" class="form-label">Domaine</label>
+          <input type="text" class="form-control" id="domain" aria-describedby="domain-help" value="Novateur">
+          <div id="domain-help" class="form-text">Le domaine de ton acquis.</div>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label for="cat" class="form-label">Catégorie</label>
+          <select id="cat" class="form-select">
+            <option value="Outil">Outil</option>
+            <option value="Manuscrit">Manuscrit</option>
+            <option value="Richesse">Richesse</option>
+            <option value="Relation">Relation</option>
+            <option value="Protection">Protection</option>
+            <option value="Artefact">Artefact</option>
+            <option value="Artefact (grigri)">Artefact (grigri)</option>
+            <option value="Armimal">Armimal</option>
+            <option value="Transport">Transport</option>
+            <option value="Armement">Armement</option>
+            <option value="Technologie">Technologie</option>
+            <option value="Batiment">Batiment</option>
+            <option value="Module Biomorphique">Module Biomorphique</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="classe" class="form-label">Classe</label>
+          <input type="number" class="form-control" id="classe" value="1" max="5" min="0">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label for="desc" class="form-label">Domaine</label>
+          <textarea class="form-control" id="desc" aria-describedby="desc-help" value="Novateur"></textarea>
+          <div id="desc-help" class="form-text">Décris brièvement ton acquis.</div>
+        </div>
+      </div>
+    </form>
+
+    <div id="result" class="row mt-3">
+      <div class="table-responsive">
+        <table class="table table-striped caption-top">
+          <caption>Votre Acquis</caption>
+          <thead>
+            <tr>
+              <th scope="col">Catégorie</th>
+              <th scope="col">Valeur</th>
+              <th scope="col">Prestige</th>
+              <th scope="col">Ressources</th>
+              <th scope="col">Difficultés cumulées</th>
+              <th scope="col">Entretien</th>
+              <th scope="col">Nb de bonus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="acq-cat"></td>
+              <td id="acq-value"></td>
+              <td id="acq-prestige"></td>
+              <td id="acq-ress"></td>
+              <td id="acq-diff"></td>
+              <td id="acq-entr"></td>
+              <td id="acq-bonus"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="carte-acquis"></div>
+
+    </div>
   </div>
 
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
@@ -98,6 +128,8 @@
   et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
     </p>
   </footer>
+  <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
+  <script src="https://unpkg.com/mustache@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
   <script>
     const cat = document.getElementById("cat");
@@ -105,6 +137,10 @@
 
     cat.addEventListener("change", calcul_stats);
     classe.addEventListener("change", calcul_stats);
+
+    const name = document.getElementById("name");
+    const image = document.getElementById("image");
+    const desc = document.getElementById("desc");
 
     const acq_cat = document.getElementById("acq-cat");
     const acq_value = document.getElementById("acq-value");
@@ -114,123 +150,149 @@
     const acq_entr = document.getElementById("acq-entr");
     const acq_bonus = document.getElementById("acq-bonus");
 
-    function calcul_stats(){
+    const carte_acquis = document.getElementById("carte-acquis");
+
+    function calcul_stats() {
+      let data = {};
+
+      data["Catégorie"] = cat.value;
+      data["Acquis"] = name.value;
+      data["Image"] = image.value;
+      data["Domaine"] = domain.value;
+      data["Rang"] = classe.value;
+      data["Spécialisation"] = "??";
+      data["Détails"] = desc.value;
+      data["Source"] = "Acquis personnalisé";
       cl_value = Number(classe.value);
       acq_cat.textContent = cat.value;
       switch(cat.value) {
         case "Outil":
-          acq_value.textContent = cl_value*cl_value*100;
-          acq_prestige.textContent = cl_value-1;
-          acq_ress.textContent = cl_value*2;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*100;
+          data["Prestige"] = cl_value-1;
+          data["Ressources"] = cl_value*2;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Manuscrit":
-          acq_value.textContent = cl_value*cl_value*200;
-          acq_prestige.textContent = cl_value;
-          acq_ress.innerHTML = "" + cl_value + " livre vierge <br>";
-          acq_ress.innerHTML += "Sauf cartes : "+Number(cl_value*4);
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*200;
+          data["Prestige"] = cl_value;
+          data["Ressources"] = "" + cl_value + " livre vierge <br>";
+          data["Ressources"] += "Sauf cartes : "+Number(cl_value*4);
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Richesse":
-          acq_value.textContent = cl_value*cl_value*1000;
-          acq_prestige.textContent = cl_value+1;
-          acq_ress.textContent = cl_value*5;
-          acq_diff.textContent = cl_value*45;
+          data["Valeur"] = cl_value*cl_value*1000;
+          data["Prestige"] = cl_value+1;
+          data["Ressources"] = cl_value*5;
+          data["Fabrication"] = cl_value*45;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Relation":
-          acq_value.textContent = "Services Payants";
-          acq_prestige.textContent = cl_value;
-          acq_ress.textContent = cl_value;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = "Services Payants";
+          data["Prestige"] = cl_value;
+          data["Ressources"] = cl_value;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = "Points de prestige";
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Protection":
-          acq_value.textContent = cl_value*cl_value*300;
-          acq_prestige.textContent = cl_value-1;
-          acq_ress.textContent = cl_value*3;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*300;
+          data["Prestige"] = cl_value-1;
+          data["Ressources"] = cl_value*3;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = "-";
+          data["Spécialisation"] = "-";
           break;
         case "Artefact":
-          acq_value.textContent = cl_value*cl_value*500;
-          acq_prestige.textContent = cl_value+1;
-          acq_ress.textContent = cl_value*2;
-          acq_diff.textContent = cl_value*45;
+          data["Valeur"] = cl_value*cl_value*500;
+          data["Prestige"] = cl_value+1;
+          data["Ressources"] = cl_value*2;
+          data["Fabrication"] = cl_value*45;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Artefact (grigri)":
-          acq_value.textContent = cl_value*cl_value*100;
-          acq_prestige.textContent = cl_value+1;
-          acq_ress.textContent = cl_value*2;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*100;
+          data["Prestige"] = cl_value+1;
+          data["Ressources"] = cl_value*2;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = cl_value-1;
+          data["Spécialisation"] = cl_value-1;
           break;
         case "Armimal":
-          acq_value.textContent = cl_value*cl_value*1000;
-          acq_prestige.textContent = cl_value;
-          acq_ress.textContent = "Animal sauvage +"+ cl_value*4;
-          acq_diff.textContent = cl_value*45;
+          data["Valeur"] = cl_value*cl_value*1000;
+          data["Prestige"] = cl_value;
+          data["Ressources"] = "Animal sauvage +"+ cl_value*4;
+          data["Fabrication"] = cl_value*45;
           acq_entr.textContent = cl_value + " ressource(s) par Jour";
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Transport":
-          acq_value.textContent = cl_value*cl_value*1000;
-          acq_prestige.textContent = cl_value+1;
-          acq_ress.textContent = cl_value*20;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*1000;
+          data["Prestige"] = cl_value+1;
+          data["Ressources"] = cl_value*20;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = cl_value*10 + " Crédos pour 100km";
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Armement":
-          acq_value.textContent = cl_value*cl_value*200;
-          acq_prestige.textContent = cl_value-1;
-          acq_ress.textContent = cl_value*3;
-          acq_diff.textContent = cl_value*30;
+          data["Valeur"] = cl_value*cl_value*200;
+          data["Prestige"] = cl_value-1;
+          data["Ressources"] = cl_value*3;
+          data["Fabrication"] = cl_value*30;
           acq_entr.textContent = 0;
-          acq_bonus.textContent = Number(cl_value+1) + "- [Rang du pouvoir ajouté+1]";
+          data["Spécialisation"] = Number(cl_value+1) + "- [Rang du pouvoir ajouté+1]";
           break;
         case "Technologie":
-          acq_value.textContent = cl_value*cl_value*1000;
-          acq_prestige.textContent = cl_value;
-          acq_ress.textContent = cl_value*10;
-          acq_diff.textContent = cl_value*45;
+          data["Valeur"] = cl_value*cl_value*1000;
+          data["Prestige"] = cl_value;
+          data["Ressources"] = cl_value*10;
+          data["Fabrication"] = cl_value*45;
           // TODO Correct from source
           acq_entr.textContent = "?? 2*10 Crédos par mois ??";
-          acq_bonus.innerHTML = "<ul><li>"+cl_value+"</li>";
-          acq_bonus.innerHTML += "<li>"+Number(cl_value+3)+" -[Rang du pouvoir ajouté+1] (armes)</li>";
-          acq_bonus.innerHTML += "<li>3 (drogues)</li>";
-          acq_bonus.innerHTML += "<li>1 (focaliseur rang 1)</li>";
-          acq_bonus.innerHTML += "<li>2 (focaliseur rang 3)</li>";
-          acq_bonus.innerHTML += "<li>3 (focaliseur rang 5)</li>";
-          acq_bonus.innerHTML += "</ul>";
+          data["Spécialisation"] = "<ul><li>"+cl_value+"</li>";
+          data["Spécialisation"] += "<li>"+Number(cl_value+3)+" -[Rang du pouvoir ajouté+1] (armes)</li>";
+          data["Spécialisation"] += "<li>3 (drogues)</li>";
+          data["Spécialisation"] += "<li>1 (focaliseur rang 1)</li>";
+          data["Spécialisation"] += "<li>2 (focaliseur rang 3)</li>";
+          data["Spécialisation"] += "<li>3 (focaliseur rang 5)</li>";
+          data["Spécialisation"] += "</ul>";
           break;
         case "Batiment":
-          acq_value.textContent = cl_value*cl_value*10000;
-          acq_prestige.textContent = cl_value*5;
-          acq_ress.textContent = cl_value*100;
-          acq_diff.textContent = cl_value*100;
+          data["Valeur"] = cl_value*cl_value*10000;
+          data["Prestige"] = cl_value*5;
+          data["Ressources"] = cl_value*100;
+          data["Fabrication"] = cl_value*100;
           acq_entr.textContent = cl_value*100 + " Crédos par mois";
-          acq_bonus.textContent = cl_value;
+          data["Spécialisation"] = cl_value;
           break;
         case "Module Biomorphique":
-          acq_value.textContent = "Acquis implanté"
-          acq_prestige.textContent = "***";
-          acq_ress.textContent = "Acquis Technologie, Outils, Protection, Armement 3x[prix en crédos de l’acquis de base]";
-          acq_diff.textContent = "NÉCROSE + Biomorphie / Difficulté : ***";
+          data["Valeur"] = "Acquis implanté"
+          data["Prestige"] = "Dépend de l'acquis";
+          data["Ressources"] = "Acquis Technologie, Outils, Protection, Armement 3x[prix en crédos de l’acquis de base]";
+          data["Fabrication"] = "NÉCROSE + Biomorphie";
           acq_entr.textContent = "+ " + cl_value + " Xs à l'implantation et à chaque anniversaire de l'implantation.";
-          acq_bonus.textContent = "Acquis implanté";
+          data["Spécialisation"] = "Acquis implanté";
           break;
       }
+
+      acq_value.textContent = data["Valeur"];
+      acq_ress.textContent = data["Ressources"];
+      acq_prestige.textContent = data["Prestige"];
+      acq_diff.textContent = data["Fabrication"];
+      acq_bonus.textContent = data["Spécialisation"];
+      data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir."
+      data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
+      data["Valeur"] = data["Valeur"] + " crédos";
+      fetch('../../templates/acquis.mustache')
+      .then((response) => response.text())
+      .then((template) => {
+        carte_acquis.innerHTML = Mustache.render(template, data);
+      });
     }
   </script>
 </body>
