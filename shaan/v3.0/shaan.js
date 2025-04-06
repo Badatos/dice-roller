@@ -384,7 +384,7 @@ function roll_dice(container, color) {
 
 /** Listen for toggle event on each colored dice */
 document.querySelectorAll(".des>input").forEach((input) => {
-    input.addEventListener('change', (event) => {
+    input.addEventListener("change", (event) => {
         let parent = event.target.parentNode;
         let color = parent.dataset.color;
         let checked = event.target.checked;

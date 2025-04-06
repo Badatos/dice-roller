@@ -22,8 +22,6 @@
   <style>
     .source {
       text-align: right;
-      font-size: .7em;
-      font-style: italic;
       color: #666;
       padding-bottom: 0;
     }
@@ -118,7 +116,7 @@
     parser.parse().then(data => {
       liste_pouvoirs = data;
       bloc_total.textContent = data.length;
-      fetch('../../templates/acquis.mustache')
+      fetch("../../templates/acquis.mustache")
       .then((response) => response.text())
       .then((template) => {
         let renderedHTML = '';

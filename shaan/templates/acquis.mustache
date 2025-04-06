@@ -1,15 +1,22 @@
 
-<div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+<div
+  {{#width}}
+    class="{{width}}"
+  {{/width}}
+  {{^width}}
+    class="col-sm-12 col-md-6 col-lg-4 mb-2"
+  {{/width}}
+  >
   <div class="card fiche_acquis">
     <div class="card-header"></div>
     <div class="card-body">
-      <h2 class="float-star">{{Acquis}}</h2>
+      <h2 class="mt-0 pt-0">{{Acquis}}</h2>
       <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
-      <p>
+      <p class="jaune">
         Acquis de <strong>{{Domaine}}</strong>
         de Classe {{Rang}}
       </p>
-      <ul class="h3">
+      <ul class="h3 list-unstyled">
         <li><strong>Catégorie :</strong> <span id="a_cat">{{Catégorie}}</span></li>
         {{#Spécialisation}}
           <li>
@@ -21,8 +28,11 @@
           <li>{{Attributs}}</li>
         {{/Attributs}}
       </ul>
-      <p class="description">{{Détails}}</p>
-      <ul>
+      {{#Résumé}}
+        <p class="jaune">Résumé : {{Résumé}}</p>
+      {{/Résumé}}
+      <p class="description mt-3">{{Détails}}</p>
+      <ul class="lh-sm jaune">
         <li><strong>Valeur :</strong> <span id="a_val">{{Valeur}}</span></li>
         {{#Prestige}}
           <li>

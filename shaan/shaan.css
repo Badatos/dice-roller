@@ -112,6 +112,13 @@ label {
   border-color: var(--bs-danger);
 }
 
+/** Aides e jeu Shaan **/
+
+.source {
+  font-style: italic;
+  font-size: 0.75em;
+}
+
 /** Bootstrap color fix **/
 .text-bg-dark a {
   color: #aeaee1;

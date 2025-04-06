@@ -16,6 +16,31 @@
   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
   <title>Générateur d’acquis personnalisé - Shaan Renaissance</title>
+  <style>
+    .source {
+      text-align: right;
+      color: #666;
+      padding-bottom: 0;
+    }
+
+    h2 {
+      border-bottom: 1px dotted var(--esprit-color);
+      color: var(--esprit-color);
+      margin: 10px 0 2px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 150%;
+    }
+
+    h3, .h3 {
+      color: #438270;
+      line-height: 25px;
+      font-size: 20px;
+      margin: 5px 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,37 +50,32 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/dice-roller">Aides de Jeu</a></li>
-        <li class="breadcrumb-item"><a href="/dice-roller/shaan">Shaan</a></li>
+        <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
         <li class="breadcrumb-item active" aria-current="page">Acquis personnalisé</li>
       </ol>
     </nav>
 
-    <p>Dans le jeu de rôle Shaan Renaissance, il est possible de se créer
-      des Acquis personnalisés.
-      Afin de vous faciliter les différents calculs, ce générateur vous calcule
-      les différentes valeurs, à partir de la catégorie de l’acquis et de sa classe.
+    <p class="alert alert-info d-print-none">
+      Dans le jeu de rôle Shaan Renaissance,
+      il est possible de se créer des Acquis personnalisés.
+      Afin de vous faciliter le travail, ce générateur vous calcule
+      les différentes valeurs, à partir de la catégorie de l’acquis et de sa classe,
+      et propose une fiche de l’acquis personnalisé.
     </p>
-    <form class="row mb-3 d-print-none">
+    <form class="row mb-3 d-print-none" id="acq-generator">
       <div class="row mb-3">
-        <div class="col">
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="name" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="name" aria-describedby="name-help">
+          <input type="text" class="form-control" id="name" aria-describedby="name-help" value="Mon acquis">
           <div id="name-help" class="form-text">Donne un nom à ton nouvel acquis.</div>
         </div>
-        <div class="col">
-          <label for="image" class="form-label">Image</label>
-          <input type="text" class="form-control" id="image" aria-describedby="image-help"
-           value="https://www.shaan-rpg.com/class-shaan/img/equipement/outils-couture.png">
-          <div id="image-help" class="form-text">URL d'une image pour ton acquis.</div>
-        </div>
-        <div class="col">
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="domain" class="form-label">Domaine</label>
           <input type="text" class="form-control" id="domain" aria-describedby="domain-help" value="Novateur">
           <div id="domain-help" class="form-text">Le domaine de ton acquis.</div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="cat" class="form-label">Catégorie</label>
           <select id="cat" class="form-select">
             <option value="Outil">Outil</option>
@@ -74,24 +94,40 @@
           </select>
         </div>
 
-        <div class="col">
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="classe" class="form-label">Classe</label>
-          <input type="number" class="form-control" id="classe" value="1" max="5" min="0">
+          <input type="number" class="form-control" id="classe" value="1" max="5" min="0" aria-describedby="classe-help">
+          <div id="classe-help" class="form-text">Son nivau de puissance.</div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label for="desc" class="form-label">Domaine</label>
-          <textarea class="form-control" id="desc" aria-describedby="desc-help" value="Novateur"></textarea>
-          <div id="desc-help" class="form-text">Décris brièvement ton acquis.</div>
+
+        <!--div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="summary" class="form-label">Résumé</label>
+          <input class="form-control" id="summary" aria-describedby="summary-help" value="">
+          <div id="summary-help" class="form-text">Décris ton acquis en une ligne.</div>
+        </div-->
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea class="form-control" id="desc" aria-describedby="desc-help"></textarea>
+          <div id="desc-help" class="form-text">Décris ton acquis.</div>
+        </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="text" class="form-control" id="image" aria-describedby="image-help"
+           value="https://www.shaan-rpg.com/wp-content/themes/renaissance/images/logo-shaan.png">
+          <div id="image-help" class="form-text">URL d’une image d’illustration.</div>
         </div>
       </div>
     </form>
 
     <div id="result" class="row mt-3">
-      <div class="table-responsive">
-        <table class="table table-striped caption-top">
-          <caption>Votre Acquis</caption>
+
+      <div id="carte-acquis" class="col-xl-6"></div>
+
+      <div class="table-responsive col-xl-6">
+        <table class="table table-striped caption-top d-print-none">
+          <caption>Propriétés calculées du nouvel Acquis</caption>
           <thead>
             <tr>
               <th scope="col">Catégorie</th>
@@ -116,39 +152,38 @@
           </tbody>
         </table>
       </div>
-      <div id="carte-acquis"></div>
 
     </div>
   </div>
 
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
-    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
+    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan Renaissance</strong>, rendez-vous sur
       <a
-    href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
-  et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+    href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>.
     </p>
   </footer>
   <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
   <script src="https://unpkg.com/mustache@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
   <script>
+    const acq_generator = document.getElementById("acq-generator");
+    acq_generator.addEventListener("change", calcul_stats);
+
+
+    const acq_name = document.getElementById("name");
+    const domain = document.getElementById("domain");
     const cat = document.getElementById("cat");
     const classe = document.getElementById("classe");
-
-    cat.addEventListener("change", calcul_stats);
-    classe.addEventListener("change", calcul_stats);
-
-    const name = document.getElementById("name");
     const image = document.getElementById("image");
     const desc = document.getElementById("desc");
 
-    const acq_cat = document.getElementById("acq-cat");
-    const acq_value = document.getElementById("acq-value");
-    const acq_prestige = document.getElementById("acq-prestige");
-    const acq_ress = document.getElementById("acq-ress");
-    const acq_diff = document.getElementById("acq-diff");
+    const calc_cat = document.getElementById("acq-cat");
+    const calc_value = document.getElementById("acq-value");
+    const calc_prestige = document.getElementById("acq-prestige");
+    const calc_ress = document.getElementById("acq-ress");
+    const calc_diff = document.getElementById("acq-diff");
     const acq_entr = document.getElementById("acq-entr");
-    const acq_bonus = document.getElementById("acq-bonus");
+    const calc_bonus = document.getElementById("acq-bonus");
 
     const carte_acquis = document.getElementById("carte-acquis");
 
@@ -156,15 +191,16 @@
       let data = {};
 
       data["Catégorie"] = cat.value;
-      data["Acquis"] = name.value;
+      data["Acquis"] = acq_name.value;
       data["Image"] = image.value;
       data["Domaine"] = domain.value;
       data["Rang"] = classe.value;
       data["Spécialisation"] = "??";
       data["Détails"] = desc.value;
       data["Source"] = "Acquis personnalisé";
+      data["width"] = "m-auto";
       cl_value = Number(classe.value);
-      acq_cat.textContent = cat.value;
+      calc_cat.textContent = cat.value;
       switch(cat.value) {
         case "Outil":
           data["Valeur"] = cl_value*cl_value*100;
@@ -272,28 +308,30 @@
           break;
         case "Module Biomorphique":
           data["Valeur"] = "Acquis implanté"
-          data["Prestige"] = "Dépend de l'acquis";
+          data["Prestige"] = "Dépend de l’acquis";
           data["Ressources"] = "Acquis Technologie, Outils, Protection, Armement 3x[prix en crédos de l’acquis de base]";
           data["Fabrication"] = "NÉCROSE + Biomorphie";
-          acq_entr.textContent = "+ " + cl_value + " Xs à l'implantation et à chaque anniversaire de l'implantation.";
+          acq_entr.textContent = "+ " + cl_value + " Xs à l’implantation et à chaque anniversaire de l’implantation.";
           data["Spécialisation"] = "Acquis implanté";
           break;
       }
 
-      acq_value.textContent = data["Valeur"];
-      acq_ress.textContent = data["Ressources"];
-      acq_prestige.textContent = data["Prestige"];
-      acq_diff.textContent = data["Fabrication"];
-      acq_bonus.textContent = data["Spécialisation"];
+      calc_value.textContent = data["Valeur"];
+      calc_ress.textContent = data["Ressources"];
+      calc_prestige.textContent = data["Prestige"];
+      calc_diff.textContent = data["Fabrication"];
+      calc_bonus.textContent = data["Spécialisation"];
       data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir."
       data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
       data["Valeur"] = data["Valeur"] + " crédos";
-      fetch('../../templates/acquis.mustache')
+      fetch("../../templates/acquis.mustache")
       .then((response) => response.text())
       .then((template) => {
         carte_acquis.innerHTML = Mustache.render(template, data);
       });
     }
+
+    calcul_stats();
   </script>
 </body>
 </html>

@@ -22,7 +22,6 @@
   <style>
     .source {
       text-align: right;
-      font-size: .7em;
       color: #666;
       padding-bottom: 0;
     }
@@ -48,10 +47,6 @@
       line-height: 25px;
       font-size: 20px;
       margin: 5px 0;
-    }
-
-    .source {
-      font-style: italic;
     }
 
     .tright {
@@ -129,7 +124,7 @@
     parser.parse().then(data => {
       liste_pouvoirs = data;
       bloc_total.textContent = data.length;
-      fetch('../../templates/pouvoir.mustache')
+      fetch("../../templates/pouvoir.mustache")
       .then((response) => response.text())
       .then((template) => {
         let renderedHTML = '';
