@@ -78,18 +78,62 @@
         <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="cat" class="form-label">Catégorie</label>
           <select id="cat" class="form-select">
-            <option value="Outil">Outil</option>
-            <option value="Manuscrit">Manuscrit</option>
-            <option value="Richesse">Richesse</option>
-            <option value="Relation">Relation</option>
-            <option value="Protection">Protection</option>
-            <option value="Artefact">Artefact</option>
-            <option value="Artefact (grigri)">Artefact (grigri)</option>
-            <option value="Armimal">Armimal</option>
-            <option value="Transport">Transport</option>
-            <option value="Armement">Armement</option>
-            <option value="Technologie">Technologie</option>
-            <option value="Batiment">Batiment</option>
+            <option value="Armement"
+                    title="Armes qui donnent des Bonus en Combat.">
+              Armement
+            </option>
+            <optgroup label="Armimales"
+              title="Armimales dressées, montures, bêtes de somme ou de trait, etc.">
+              <option value="Armimal">Armimal non monté</option>
+              <option value="Armimal (Monture)">Monture</option>
+            </optgroup>
+            <optgroup label="Artefacts"
+              title="Objets magiques, potions, focaliseurs, grigris élémentaires, trihnite, etc.">
+              <option value="Artefact">Artefact générique</option>
+              <option value="Artefact (grigri)">Artefact (grigri)</option>
+            </optgroup>
+            <optgroup label="Manuscrits"
+              title=", , etc.">
+              <option value="Manuscrit" title="Livres renfermant des connaissances">
+                Manuscrit
+              </option>
+              <option value="Manuscrit (Carte)"
+                title="Cartes de régions ou de stèles d'Embiose, etc.">
+                Carte / plan
+              </option>
+            </optgroup>
+
+            <option value="Outil"
+              title="Équipements qui fournissent un Bonus dans une Action particulière.">
+              Outil
+            </option>
+            <option value="Protection"
+              title="Armures ou talismans qui augmentent la Défense des Trihns de Corps, d'Âme et d'Esprit.">
+              Protection
+            </option>
+            <option value="Relation"
+              title="Contacts, fournisseurs, amis, suivants, alliés politiques, etc.">
+              Relation
+            </option>
+            <option value="Richesse"
+              title="Argent, bijoux, œuvres d'art, etc.">
+              Richesse
+            </option>
+            <optgroup label="Technologies"
+              title="Objets technologiques comme les armes humaines, les consoles Arpège, les morphes, les capteurs, etc.">
+              <option value="Technologie générique">Technologie générique</option>
+              <option value="Technologie (Arme)">Arme</option>
+              <option value="Technologie (Drogue)">Drogue</option>
+              <option value="Technologie (focaliseur rang 1)">Focaliseur technologique de rang 1</option>
+              <option value="Technologie (focaliseur rang 3)">Focaliseur technologique de rang 3</option>
+              <option value="Technologie (focaliseur rang 5)">Focaliseur technologique de rang 5</option>
+            </optgroup>
+            <option value="Transport"
+              title="Véhicules terrestre, marin ou aérien, etc.">
+              Transport
+            </option>
+
+            <option value="Bâtiment">Bâtiment</option>
             <option value="Module Biomorphique">Module Biomorphique</option>
           </select>
         </div>
@@ -97,7 +141,13 @@
         <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="classe" class="form-label">Classe</label>
           <input type="number" class="form-control" id="classe" value="1" max="5" min="0" aria-describedby="classe-help">
-          <div id="classe-help" class="form-text">Son nivau de puissance.</div>
+          <div id="classe-help" class="form-text">La Classe d'un Acquis définit sa rareté, son prix, sa qualité, etc.</div>
+        </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="pow-rank" class="form-label">Rang du pouvoir ajouté (armes et armements)</label>
+          <input type="number" class="form-control" id="pow-rank" value="1" max="5" min="1" aria-describedby="pow-rank-help">
+          <div id="pow-rank-help" class="form-text">Pour les armes, le bonus dépend du rang du pouvoir.</div>
         </div>
 
         <!--div class="col-sm-12 col-md-6  col-lg-4 mb-3">
@@ -125,15 +175,15 @@
 
       <div id="carte-acquis" class="col-xl-6"></div>
 
-      <div class="table-responsive col-xl-6">
-        <table class="table table-striped caption-top d-print-none">
-          <caption>Propriétés calculées du nouvel Acquis</caption>
+      <div class="table-responsive col-xl-6 d-print-none">
+        <table class="table table-striped caption-top">
+          <caption>Détails des calculs</caption>
           <thead>
             <tr>
               <th scope="col">Catégorie</th>
-              <th scope="col">Valeur</th>
-              <th scope="col">Prestige</th>
-              <th scope="col">Ressources</th>
+              <th scope="col">Prix en Crédos</th>
+              <th scope="col">Points de Prestige</th>
+              <th scope="col">Nb de Ressources</th>
               <th scope="col">Difficultés cumulées</th>
               <th scope="col">Entretien</th>
               <th scope="col">Nb de bonus</th>
@@ -176,6 +226,7 @@
     const classe = document.getElementById("classe");
     const image = document.getElementById("image");
     const desc = document.getElementById("desc");
+    const pow_rank = document.getElementById("pow-rank");
 
     const calc_cat = document.getElementById("acq-cat");
     const calc_value = document.getElementById("acq-value");
@@ -197,131 +248,219 @@
       data["Rang"] = classe.value;
       data["Spécialisation"] = "??";
       data["Détails"] = desc.value;
-      data["Source"] = "Acquis personnalisé";
+      data["Source"] = "Acquis personnalisé (Manuel d'itinérance, p. 245)";
       data["width"] = "m-auto";
+      data["Entretien"] = 0;
+      acq_entr.textContent = 0;
       cl_value = Number(classe.value);
       calc_cat.textContent = cat.value;
-      switch(cat.value) {
+      if (cat.value.startsWith("Technologie")) {
+        calc_cat.textContent = "Technologie";
+      }
+      if (cat.value.startsWith("Armimal")) {
+        calc_cat.textContent = "Armimal";
+      }
+      if (cat.value.startsWith("Manuscrit")) {
+        calc_cat.textContent = "Manuscrit";
+      }
+      switch(calc_cat.textContent) {
         case "Outil":
+          calc_value.textContent = "[Classe]² x 100";
           data["Valeur"] = cl_value*cl_value*100;
+          calc_prestige.textContent = "[Classe] - 1";
           data["Prestige"] = cl_value-1;
+          calc_ress.textContent = "[Classe] x 2";
           data["Ressources"] = cl_value*2;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = cl_value;
           break;
         case "Manuscrit":
+          calc_value.textContent = "[Classe]² x 200";
           data["Valeur"] = cl_value*cl_value*200;
+          calc_prestige.textContent = "[Classe]";
           data["Prestige"] = cl_value;
-          data["Ressources"] = "" + cl_value + " livre vierge <br>";
-          data["Ressources"] += "Sauf cartes : "+Number(cl_value*4);
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = cl_value;
+          switch (cat.value) {
+            case "Manuscrit":
+              calc_ress.textContent = "[Classe] x Livre Vierge";
+              data["Ressources"] = cl_value + " livre(s) vierge(s)";
+              break;
+            default:
+              calc_ress.textContent = "[Classe] x 4";
+              data["Ressources"] = cl_value*4;
+              break;
+          }
           break;
         case "Richesse":
+          calc_value.textContent = "[Classe]² x 1 000";
           data["Valeur"] = cl_value*cl_value*1000;
+          calc_prestige.textContent = "[Classe] + 1";
           data["Prestige"] = cl_value+1;
+          calc_ress.textContent = "[Classe] x 5";
           data["Ressources"] = cl_value*5;
+          calc_diff.textContent = "[Classe] x 45";
           data["Fabrication"] = cl_value*45;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = cl_value;
           break;
         case "Relation":
-          data["Valeur"] = "Services Payants";
+          calc_value.textContent = "Services Payants";
+          data["Valeur"] = calc_value.textContent;
+          calc_prestige.textContent = "[Classe]";
           data["Prestige"] = cl_value;
+          calc_ress.textContent = "[Classe]";
           data["Ressources"] = cl_value;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = "Points de prestige";
+          data["Entretien"] = "Points de prestige";
+          acq_entr.textContent = data["Entretien"];
           data["Spécialisation"] = cl_value;
           break;
         case "Protection":
+          calc_value.textContent = "[Classe]² x 300";
           data["Valeur"] = cl_value*cl_value*300;
+          calc_prestige.textContent = "[Classe] - 1";
           data["Prestige"] = cl_value-1;
+          calc_ress.textContent = "[Classe] x 3";
           data["Ressources"] = cl_value*3;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = "-";
           break;
         case "Artefact":
+          calc_value.textContent = "[Classe]² x 500";
           data["Valeur"] = cl_value*cl_value*500;
+          calc_prestige.textContent = "[Classe] + 1";
           data["Prestige"] = cl_value+1;
+          calc_ress.textContent = "[Classe] x 2";
           data["Ressources"] = cl_value*2;
+          calc_diff.textContent = "[Classe] x 45";
           data["Fabrication"] = cl_value*45;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = cl_value;
           break;
         case "Artefact (grigri)":
+          calc_value.textContent = "[Classe]² x 100";
           data["Valeur"] = cl_value*cl_value*100;
+          calc_prestige.textContent = "[Classe] + 1";
           data["Prestige"] = cl_value+1;
+          calc_ress.textContent = "[Classe] x 2";
           data["Ressources"] = cl_value*2;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = 0;
           data["Spécialisation"] = cl_value-1;
           break;
         case "Armimal":
+          calc_value.textContent = "[Classe]² x 1 000";
           data["Valeur"] = cl_value*cl_value*1000;
+          calc_prestige.textContent = "[Classe]";
           data["Prestige"] = cl_value;
-          data["Ressources"] = "Animal sauvage +"+ cl_value*4;
+          calc_diff.textContent = "[Classe] x 45";
           data["Fabrication"] = cl_value*45;
-          acq_entr.textContent = cl_value + " ressource(s) par Jour";
+          acq_entr.textContent = "[Classe] Ressource(s) par Jour";
+          data["Entretien"] = cl_value + " ressource(s) par Jour";
           data["Spécialisation"] = cl_value;
+          switch (cat.value) {
+            case "Armimal":
+              data["Ressources"] = "Animal sauvage";
+              calc_ress.textContent = data["Ressources"];
+              break;
+            default:
+              calc_ress.textContent = "[Classe] x 4";
+              data["Ressources"] = cl_value*4;
+              break;
+          }
           break;
         case "Transport":
+          calc_value.textContent = "[Classe]² x 1 000";
           data["Valeur"] = cl_value*cl_value*1000;
+          calc_prestige.textContent = "[Classe] + 1";
           data["Prestige"] = cl_value+1;
+          calc_ress.textContent = "[Classe] x 20";
           data["Ressources"] = cl_value*20;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = cl_value*10 + " Crédos pour 100km";
+          acq_entr.textContent = "[Classe] x 10 Crédos pour 100km";
+          data["Entretien"] = cl_value*10 + " Crédos pour 100km";
           data["Spécialisation"] = cl_value;
           break;
         case "Armement":
+          calc_value.textContent = "[Classe]² x 200";
           data["Valeur"] = cl_value*cl_value*200;
+          calc_prestige.textContent = "[Classe] - 1";
           data["Prestige"] = cl_value-1;
+          calc_ress.textContent = "[Classe] x 3";
           data["Ressources"] = cl_value*3;
+          calc_diff.textContent = "[Classe] x 30";
           data["Fabrication"] = cl_value*30;
-          acq_entr.textContent = 0;
-          data["Spécialisation"] = Number(cl_value+1) + "- [Rang du pouvoir ajouté+1]";
+
+          data["Spécialisation"] = Number(cl_value) + 1 - (Number(pow_rank.value)+1);
           break;
         case "Technologie":
+          calc_value.textContent = "[Classe]² x 1 000";
           data["Valeur"] = cl_value*cl_value*1000;
+          calc_prestige.textContent = "[Classe]";
           data["Prestige"] = cl_value;
+          calc_ress.textContent = "[Classe] x 10";
           data["Ressources"] = cl_value*10;
+          calc_diff.textContent = "[Classe] x 45";
           data["Fabrication"] = cl_value*45;
-          // TODO Correct from source
-          acq_entr.textContent = "?? 2*10 Crédos par mois ??";
-          data["Spécialisation"] = "<ul><li>"+cl_value+"</li>";
-          data["Spécialisation"] += "<li>"+Number(cl_value+3)+" -[Rang du pouvoir ajouté+1] (armes)</li>";
-          data["Spécialisation"] += "<li>3 (drogues)</li>";
-          data["Spécialisation"] += "<li>1 (focaliseur rang 1)</li>";
-          data["Spécialisation"] += "<li>2 (focaliseur rang 3)</li>";
-          data["Spécialisation"] += "<li>3 (focaliseur rang 5)</li>";
-          data["Spécialisation"] += "</ul>";
+          acq_entr.textContent = "[Classe]² x 10 Crédos par mois";
+          data["Entretien"] = cl_value*cl_value*10 + " Crédos par mois";
+
+          switch (cat.value) {
+            case "Technologie (Arme)":
+              data["Spécialisation"] = Number(cl_value) + 3 - (Number(pow_rank.value)+1);
+              break;
+            case "Technologie (Drogue)":
+              data["Spécialisation"] = 3;
+              break;
+            case "Technologie (focaliseur rang 1)":
+              data["Spécialisation"] = 1;
+              break;
+            case "Technologie (focaliseur rang 3)":
+              data["Spécialisation"] = 2;
+              break;
+            case "Technologie (focaliseur rang 5)":
+              data["Spécialisation"] = 3;
+              break;
+            default:
+              data["Spécialisation"] = cl_value;
+          }
           break;
-        case "Batiment":
+        case "Bâtiment":
+          calc_value.textContent = "[Classe]² x 10 000";
           data["Valeur"] = cl_value*cl_value*10000;
+          calc_prestige.textContent = "[Classe] x 5";
           data["Prestige"] = cl_value*5;
+          calc_ress.textContent = "[Classe] x 100";
           data["Ressources"] = cl_value*100;
+          calc_diff.textContent = "[Classe] x 100";
           data["Fabrication"] = cl_value*100;
-          acq_entr.textContent = cl_value*100 + " Crédos par mois";
+          acq_entr.textContent = "[Classe] x 100 Crédos par Jour";
+          data["Entretien"] = cl_value*100 + " Crédos par Jour ("+cl_value*100*30+" c/mois)";
           data["Spécialisation"] = cl_value;
           break;
         case "Module Biomorphique":
-          data["Valeur"] = "Acquis implanté"
+          // TODO: Check source
+          calc_value.textContent = "Acquis implanté";
+          data["Valeur"] = calc_value.textContent;
           data["Prestige"] = "Dépend de l’acquis";
+          calc_prestige.textContent = data["Prestige"];
           data["Ressources"] = "Acquis Technologie, Outils, Protection, Armement 3x[prix en crédos de l’acquis de base]";
+          calc_ress.textContent = data["Ressources"];
           data["Fabrication"] = "NÉCROSE + Biomorphie";
-          acq_entr.textContent = "+ " + cl_value + " Xs à l’implantation et à chaque anniversaire de l’implantation.";
+          calc_diff.textContent = data["Fabrication"];
+          data["Entretien"] = "+ " + cl_value + " Xs à l’implantation et à chaque anniversaire de l’implantation.";
+          acq_entr.textContent = data["Entretien"];
           data["Spécialisation"] = "Acquis implanté";
           break;
       }
 
-      calc_value.textContent = data["Valeur"];
-      calc_ress.textContent = data["Ressources"];
-      calc_prestige.textContent = data["Prestige"];
-      calc_diff.textContent = data["Fabrication"];
       calc_bonus.textContent = data["Spécialisation"];
-      data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir."
+
+      data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
       data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
       data["Valeur"] = data["Valeur"] + " crédos";
       fetch("../../templates/acquis.mustache")
