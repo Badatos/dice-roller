@@ -16,9 +16,6 @@
     crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
 
-  <!--GsheetParser-->
-  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
-
   <style>
     .source {
       text-align: right;
@@ -32,11 +29,9 @@
       line-height: 21px;
     }
 
-    h2 {
+    .card h2 {
       border-bottom: 1px dotted var(--esprit-color);
-      margin: 10px 0 2px;
       padding-bottom: 10px;
-      padding-top: 10px;
       text-transform: uppercase;
       font-weight: bold;
       font-size: 150%;
@@ -85,6 +80,52 @@
     .p_orig {
       font-style: italic;
     }
+
+    .TECHNIQUE {
+      background-image: url("../../img/domaines/technique_small.webp");
+    }
+
+    .SAVOIR {
+      background-image: url("../../img/domaines/savoir_small.webp");
+    }
+
+    .SOCIAL {
+      background-image: url("../../img/domaines/social_small.webp");
+    }
+
+    .ARTS {
+      background-image: url("../../img/domaines/arts_small.webp");
+    }
+
+    .SHAAN {
+      background-image: url("../../img/domaines/shaan_small.webp");
+    }
+
+    .MAGIE {
+      background-image: url("../../img/domaines/magie_small.webp");
+    }
+
+    .RITUELS {
+      background-image: url("../../img/domaines/rituels_small.webp");
+    }
+
+    .SURVIE {
+      background-image: url("../../img/domaines/survie_small.webp");
+    }
+
+    .COMBAT {
+      background-image: url("../../img/domaines/combat_small.webp");
+    }
+
+    .NÉCROSE {
+      background-image: url("../../img/domaines/necrose_small.webp");
+    }
+
+    .card-body {
+      background-repeat: no-repeat;
+      background-position: 99% 1%;
+      background-size: 1.5em;
+    }
   </style>
   <title>Liste des pouvoirs - Shaan</title>
 </head>
@@ -109,6 +150,8 @@
   GsheetParser
   See doc at https://github.com/fureweb-com/public-google-sheets-parser#readme
   -->
+  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
+
   <script>
     const options = { sheetName: 'Pouvoirs', useFormat: false }
     const parser = new PublicGoogleSheetsParser(
@@ -133,8 +176,35 @@
             case "TECHNIQUE":
               row["dom_type"] = "Astuce";
               break;
+            case "SAVOIR":
+              row["dom_type"] = "Secret";
+              break;
+            case "SOCIAL":
+              row["dom_type"] = "Privilège";
+              break;
+            case "ARTS":
+              row["dom_type"] = "Création";
+              break;
+            case "SHAAN":
+              row["dom_type"] = "Symbiose";
+              break;
+            case "MAGIE":
+              row["dom_type"] = "Sort";
+              break;
+            case "RITUELS":
+              row["dom_type"] = "Transe";
+              break;
+            case "SURVIE":
+              row["dom_type"] = "Exploit";
+              break;
+            case "COMBAT":
+              row["dom_type"] = "Tactique";
+              break;
+            case "Nécrose":
+              row["dom_type"] = "Tourment";
+              break;
             default:
-              row["dom_type"] = "??";
+              row["dom_type"] = "Pouvoir";
           }
           renderedHTML += Mustache.render(template, row);
           //precode.textContent += JSON.stringify(row, null, 2) + '\n';
