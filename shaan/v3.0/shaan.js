@@ -125,6 +125,7 @@ function reset_blocs() {
     symbiose_necro_trans.classList.add("d-none");
     symbiose_trans.classList.add("d-none");
     bonus.classList.add("d-none");
+    pending_bonus.classList.add("d-none");
     exp.classList.add("d-none");
     limbes.classList.add("d-none");
     critical_necrosis.classList.add("d-none");
@@ -221,7 +222,7 @@ function puiser() {
 
 function calcul_score(de_bonus = 0) {
     if(de_action.value !== "") {
-        let action_val = Number(thrin_values[de_action.value]);
+        let action_val = thrin_values[de_action.value];
 
         // Echec
         if (action_val === 0 ) {
@@ -233,7 +234,7 @@ function calcul_score(de_bonus = 0) {
 
         let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
         // console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
-        total_score.innerText = score;
+
         if(de_bonus > 0) {
             total_score.innerText = score + "+ " + de_bonus + " = " + Number(score + de_bonus);
             score = score + de_bonus;
