@@ -9,9 +9,9 @@ var roll_count = 10;
 const img_url = "../img/";
 
 // Valeurs de thrines obtenues
-var thrin_values = { 'jaune': 0, 'bleu': 0, 'rouge': 0, 'noir': 0 }
+var thrin_values = { "jaune": 0, "bleu": 0, "rouge": 0, "noir": 0 }
 
-// Boutons d'action
+// Boutons d’action
 const domain_btn = document.getElementById("domain-btn");
 
 // Blocs d’alertes
@@ -76,7 +76,7 @@ const draw_dice = document.getElementById("draw-dice");
  */
 function domain_test() {
     reset_blocs();
-    table_score.classList = ["table-success"];
+    table_score.className = "table-success";
     bloc_action.classList.remove("d-none");
     de_esprit.classList.remove("d-none");
     de_corps.classList.remove("d-none");
@@ -91,7 +91,7 @@ function domain_test() {
  */
 function necrosis_test() {
     reset_blocs();
-    table_score.classList = ["table-dark"];
+    table_score.className = "table-dark";
     bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_corps.classList.add("d-none");
@@ -140,7 +140,7 @@ function reset_blocs() {
     de_perte.classList.add("d-none");
     de_failure.classList.add("d-none");
     crane_perte.classList.add("d-none");
-    total_succes.classList = [];
+    total_succes.className = "";
 }
 
 /**
@@ -229,7 +229,7 @@ function calcul_score(de_bonus = 0) {
         }
 
         action_result.innerText = action_val;
-        action_result.classList = [de_action.value];
+        action_result.className = de_action.value;
 
         let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
         // console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
@@ -262,29 +262,27 @@ function calcul_score(de_bonus = 0) {
         } else {
             total_succes.innerText = succes;
         }
-        if (succes > 0){
-            total_succes.classList = "text-success";
-        } else {
-            total_succes.classList = "text-danger";
-        }
 
         // Succès critique
         if (action_val === 9 || de_bonus === 9) {
             bonus.classList.remove("d-none");
             total_succes.innerText = succes + "+1 = " + Number(succes + 1);
+            succes++;
         }
 
         if(succes >= difficulte.value) {
+            total_succes.className = "bg-success text-white";
             success_help.classList.remove("d-none");
             pending_failure.classList.add("d-none");
         } else {
+            total_succes.className = "bg-warning";
             success_help.classList.add("d-none");
             pending_failure.classList.remove("d-none");
             if (de_bonus == 0) {
                 let nb_disabled = 0;
                 for (const color in thrin_values) {
                     if (color !== "noir") {
-                        draws[color].classList = "";
+                        draws[color].className = "";
                         if (color==de_action.value || thrin_values[color] < 1) {
                             draws[color].disabled = true;
                             draws[color].classList.add("d-none");
@@ -293,7 +291,7 @@ function calcul_score(de_bonus = 0) {
                             // Succes possible
                             if (thrin_values[color] == 9) {
                                 pending_bonus.classList.remove("d-none");
-                                draws[color].classList = "bg-success text-white";
+                                draws[color].className = "bg-success text-white";
                             }
                             draws[color].disabled = false;
                             draws[color].classList.remove("d-none");
@@ -496,7 +494,7 @@ document.querySelectorAll(".des>input").forEach((input) => {
     });
 });
 
-// Désactive le bouton domain-btn si le de d'action n'a pas de valeur
+// Désactive le bouton domain-btn si le de d’action n’a pas de valeur
 de_action.addEventListener("change", () => {
     if (de_action.value === "") {
         domain_btn.classList.add("disabled");
