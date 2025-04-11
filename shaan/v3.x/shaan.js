@@ -28,6 +28,7 @@ const crane_perte = document.getElementById("crane-perte");
 const critical_necrosis = document.getElementById("critical-necrosis");
 const necrosis_help = document.getElementById("necrosis-help");
 const success_help = document.getElementById("success-help");
+const succes_plus = document.getElementById("succes-plus");
 const failure_help = document.getElementById("failure-help");
 const pending_failure = document.getElementById("pending-failure");
 const failure_btn = document.getElementById("failure-btn");
@@ -77,7 +78,6 @@ const draw_dice = document.getElementById("draw-dice");
 function domain_test() {
     reset_blocs();
     table_score.querySelector("thead").className = "table-success";
-    bloc_action.classList.remove("d-none");
     de_esprit.classList.remove("d-none");
     de_corps.classList.remove("d-none");
     de_ame.classList.remove("d-none");
@@ -92,7 +92,6 @@ function domain_test() {
 function necrosis_test() {
     reset_blocs();
     table_score.querySelector("thead").className = "table-dark";
-    bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_corps.classList.add("d-none");
     de_ame.classList.add("d-none");
@@ -106,7 +105,6 @@ function necrosis_test() {
  */
 function random_failure() {
     reset_blocs();
-    bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_ame.classList.add("d-none");
     de_corps.classList.add("d-none");
@@ -131,6 +129,7 @@ function reset_blocs() {
     critical_necrosis.classList.add("d-none");
     necrosis_help.classList.add("d-none");
     success_help.classList.add("d-none");
+    succes_plus.classList.add("d-none");
     failure_help.classList.add("d-none");
     results_title.classList.add("d-none");
     pending_failure.classList.add("d-none");
@@ -157,9 +156,12 @@ function random_domain() {
 
     if (roll_count > 0) window.setTimeout(random_domain, 100);
     else {
+        // thrin_values["jaune"] = 9;
         let esprit = thrin_values["jaune"];
         let ame = thrin_values["bleu"];
         let corps = thrin_values["rouge"];
+        // esprit = ame = corps = 9;
+
         let necrose = thrin_values["noir"];
         roll_count = 10;
         // Symbiose nécrotique transcendantale
@@ -191,7 +193,7 @@ function random_domain() {
                         exp.classList.remove("d-none");
                         has_lost = false;
                     } else {
-                        calcul_score();
+                        calcul_score(de_action.value);
                     }
                 }
             }
@@ -217,20 +219,26 @@ function random_domain() {
 }
 
 function puiser() {
-    calcul_score(thrin_values[draw_dice.value]);
+    calcul_score(de_action.value, thrin_values[draw_dice.value]);
 }
 
-function calcul_score(de_bonus = 0) {
-    if(de_action.value !== "") {
-        let action_val = thrin_values[de_action.value];
+function luck() {
+    necrosis_help.classList.add("d-none");
+    calcul_score("noir", thrin_values["bleu"]);
+}
 
+function calcul_score(action_color, de_bonus = 0) {
+
+    if(action_color !== "") {
+        let action_val = thrin_values[action_color];
+        console.log(action_val);
         // Echec
         if (action_val === 0 ) {
             limbes.classList.remove("d-none");
         }
 
         action_result.innerText = action_val;
-        action_result.className = de_action.value;
+        action_result.className = action_color;
 
         let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
         // console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
@@ -275,16 +283,26 @@ function calcul_score(de_bonus = 0) {
             total_succes.className = "bg-success text-white";
             success_help.classList.remove("d-none");
             pending_failure.classList.add("d-none");
+            failure_help.classList.add("d-none");
+            if(succes > difficulte.value) {
+                succes_plus.querySelector("h2>span").innerText = Number(succes - difficulte.value);
+                succes_plus.classList.remove("d-none");
+            }
         } else {
             total_succes.className = "bg-warning";
-            success_help.classList.add("d-none");
-            pending_failure.classList.remove("d-none");
+            if(de_bonus == 0 && action_color == "noir") {
+                necrosis_help.classList.remove("d-none");
+            } else {
+                pending_failure.classList.remove("d-none");
+            }
+            failure_help.classList.remove("d-none");
+
             if (de_bonus == 0) {
                 let nb_disabled = 0;
                 for (const color in thrin_values) {
                     if (color !== "noir") {
                         draws[color].className = "";
-                        if (color==de_action.value || thrin_values[color] < 1) {
+                        if (color==action_color || thrin_values[color] < 1) {
                             draws[color].disabled = true;
                             draws[color].classList.add("d-none");
                             nb_disabled++;
@@ -307,6 +325,7 @@ function calcul_score(de_bonus = 0) {
                     draw_block.classList.remove("d-none");
                 }
             } else {
+                // Déja puisé
                 no_draw.classList.remove("d-none");
                 draw_block.classList.add("d-none");
             }
@@ -332,21 +351,19 @@ function random_necrosis() {
         roll_count = 10;
         if (necrose == 0) {
             critical_necrosis.classList.remove("d-none");
-        } else {
-            necrosis_help.classList.remove("d-none");
-            failure_help.classList.remove("d-none");
         }
 
         // Calcul des pertes
         if (bleu == 0) {
             perte = 3;
-        } else if (ame > 5) {
+        } else if (bleu > 5) {
             perte = 2;
         } else {
             perte = 1;
         }
         num_perte.textContent = perte;
         perte_bloc.classList.remove("d-none");
+        calcul_score("noir");
     }
 }
 
@@ -364,24 +381,6 @@ function roll_domain() {
         roll_dice(de_corps, "rouge");
     }
     roll_dice(de_necrose, "noir");
-}
-
-/**
- * Relance le dé noir
- */
-function reroll_black() {
-    necrosis_help.classList.add("d-none");
-    necrose = roll_dice(de_necrose, "noir");
-    roll_count--;
-
-    if (roll_count > 0) window.setTimeout(reroll_black, 100);
-    else {
-        roll_count = 10;
-        if (necrose == 0) {
-            critical_necrosis.classList.remove("d-none");
-            failure_help.classList.add("d-none");
-        }
-    }
 }
 
 /**

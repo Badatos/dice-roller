@@ -18,14 +18,14 @@
   <link rel="stylesheet" type="text/css" href="../shaan.css" />
   <title>Simulateur de lancer de dés - Shaan</title>
   <style>
-    #total-succes{
-      display: block;
+    #total-succes {
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
-  <div class="version small text-bg-light p-1 pt-0">v 0.6-3.0</div>
+  <div class="version small text-bg-light p-1 pt-0">v 0.7-3.1</div>
   <div class="container">
     <h1 class="mt-2 text-center">Simulateur de lancer de dés</h1>
 
@@ -88,14 +88,14 @@
           <i class="bi bi-info-circle"
              title="Indiquez ici le niveau du domaine que vous utilisez"></i>
           <input type="number" id="domain-level"
-               class="text-center form-control" value="2" min="0"></td>
+               class="text-center form-control" value="2" min="0" max="20"></td>
         </div>
         <div class="col">
           <label for="vocation-bonus">Bonus de vocations</label>
           <i class="bi bi-info-circle ms-1"
              title="Indiquez ici la somme de vos bonus"></i>
              <input type="number" id="vocation-bonus"
-               class="text-center form-control" value="2" min="0">
+               class="text-center form-control" value="2" min="0" max="20">
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@
         <tr>
           <td class="bg-icon"><strong id="action-result">-</strong></td>
           <td id="total-score">-</td>
-          <td><strong id="total-succes">-</strong></td>
+          <td id="total-succes">-</td>
         </tr>
       </tbody>
     </table>
@@ -180,7 +180,7 @@
       <h2>Symbiose nécrotique transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont à 0.
-        L’adversité en cours est <strong>augmentée d’ 1 acte</strong>.
+        L’adversité en cours est <strong>augmentée d’1 acte</strong>.
       </p>
     </div>
 
@@ -188,7 +188,7 @@
       <h2>Symbiose transcendantale&nbsp;!</h2>
       <p>
         Vos 4 énergies sont en symbiose.
-        L’adversité en cours est <strong>réduite d’ 1 acte</strong>.
+        L’adversité en cours est <strong>réduite d’1 acte</strong>.
       </p>
     </div>
 
@@ -221,10 +221,38 @@
     </div>
 
     <div class="alert alert-success d-none" id="bonus">
-      <h2>Succès bonus&nbsp;!</h2>
+      <h2>Succès supplémentaire&nbsp;!</h2>
       <p>
         Vous avez obtenu un 9 à votre dé d’action,
         vous gagnez un <strong>Succès supplémentaire</strong> !
+      </p>
+    </div>
+
+    <div class="alert alert-success d-none" id="succes-plus">
+      <h2><span>X</span> succès excédentaire(s)&nbsp;!</h2>
+      <p>
+        Vous avez obtenu plus de succès que la <strong>difficulté</strong>
+        du test. Tous les succès excédentaires sont des
+        <strong>succès bonus</strong>.
+        Votre action est alors une réussite particulière :
+        pour chaque succès bonus, vous
+        pouvez ajouter un élément avantageux pour vous
+        et vos alliés dans la situation.
+      </p><p>
+        Voici des exemples d’avantages que vous pouvez
+        obtenir en jeu avec les succès bonus :</p>
+      <ul>
+        <li>Donner un succès à un autre personnage</li>
+        <li>Regagner un point d’énergie</li>
+        <li>Donner un point de Loyauté à un allié (cf p. 38)</li>
+        <li>Créer un objet mythique (cf p. xx)</li>
+        <li>Obtenir une information liée au scénario</li>
+      </ul>
+      <p>
+        L’effet des succès bonus est décrit par le joueur et
+        doit rester cohérent avec la situation : occuper une
+        position avantageuse, protéger un personnage,
+        mettre un auditoire dans sa poche, etc.
       </p>
     </div>
 
@@ -249,14 +277,15 @@
       </p>
     </div>
     <div class="alert alert-info d-none" id="necrosis-help">
-      <h2>Relance possible</h2>
+      <h2>Tenter la chance</h2>
       <p>
-        Si la valeur du dé noir ne vous convient pas,
-        vous pouvez le relancer au prix d’un point d’énergie au choix.
+        Si votre score est insuffisant, vous pouvez y ajouter la
+        valeur du dé bleu au prix d’un point d'Âme.
       </p>
       <div class="row">
-        <a href="javascript:reroll_black();" class="btn btn-dark" role="button">
-          Relancer le dé noir (-1 point d’énergie au choix)
+        <a href="javascript:luck();" class="btn btn-primary btn-block"
+            role="button" id="luck-btn">
+            Puiser
         </a>
       </div>
     </div>
