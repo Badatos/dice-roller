@@ -76,7 +76,7 @@ const draw_dice = document.getElementById("draw-dice");
  */
 function domain_test() {
     reset_blocs();
-    table_score.className = "table-success";
+    table_score.querySelector("thead").className = "table-success";
     bloc_action.classList.remove("d-none");
     de_esprit.classList.remove("d-none");
     de_corps.classList.remove("d-none");
@@ -91,7 +91,7 @@ function domain_test() {
  */
 function necrosis_test() {
     reset_blocs();
-    table_score.className = "table-dark";
+    table_score.querySelector("thead").className = "table-dark";
     bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_corps.classList.add("d-none");
@@ -311,6 +311,7 @@ function calcul_score(de_bonus = 0) {
                 draw_block.classList.add("d-none");
             }
         }
+        table_score.scrollIntoView();
     }
 }
 
