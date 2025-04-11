@@ -29,12 +29,34 @@
   color: var(--ame-color) !important;
 }
 
+.bg-icon > strong {
+  background-size: 1.5em;
+  background-repeat: no-repeat;
+  padding-left: 2em;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+.bg-icon >.bleu{
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Ame.webp");
+}
+.bg-icon >.rouge{
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Corps.webp");
+}
+.bg-icon >.jaune{
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Esprit.webp");
+}
+
 .rouge {
   color: var(--corps-color) !important;
 }
 
 .jaune {
   color: var(--esprit-color) !important;
+}
+
+.bi-info-circle {
+  cursor: help;
 }
 
 body {

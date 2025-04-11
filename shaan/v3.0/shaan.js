@@ -20,13 +20,16 @@ const symbiose_necro = document.getElementById("symbiose-necro");
 const symbiose_necro_trans = document.getElementById("symbiose-necro-trans");
 const symbiose_trans = document.getElementById("symbiose-trans");
 const bonus = document.getElementById("bonus");
+const pending_bonus = document.getElementById("pending-bonus");
 const exp = document.getElementById("exp");
 const limbes = document.getElementById("limbes");
 const perte_bloc = document.getElementById("perte");
 const crane_perte = document.getElementById("crane-perte");
 const critical_necrosis = document.getElementById("critical-necrosis");
 const necrosis_help = document.getElementById("necrosis-help");
+const success_help = document.getElementById("success-help");
 const failure_help = document.getElementById("failure-help");
+const pending_failure = document.getElementById("pending-failure");
 const failure_btn = document.getElementById("failure-btn");
 const generic_help = document.getElementById("generic-help");
 const generic_title = document.getElementById("generic-title");
@@ -45,27 +48,42 @@ const de_failure = document.getElementById("de-failure");
 const txt_necrose = document.getElementById("de_trihn_4");
 
 // Résultats
+const results_title = document.getElementById("results-title");
+const table_score = document.getElementById("table-score");
 const action_result = document.getElementById("action-result");
 const domain_level = document.getElementById("domain-level");
 const vocation_bonus = document.getElementById("vocation-bonus");
 const total_score = document.getElementById("total-score");
 const total_succes = document.getElementById("total-succes");
+const difficulte = document.getElementById("difficulte");
 
 // Perte
 const num_perte = document.getElementById("num-perte");
 const num_succes = document.getElementById("num-succes");
+
+// Puiser
+const draws = {
+    "jaune": document.getElementById("draw-jaune"),
+    "bleu": document.getElementById("draw-bleu"),
+    "rouge": document.getElementById("draw-rouge")
+};
+const draw_block = document.getElementById("draw-block");
+const no_draw = document.getElementById("no-draw");
+const draw_dice = document.getElementById("draw-dice");
 
 /**
  * Prépare les dés et lance un test de domaine.
  */
 function domain_test() {
     reset_blocs();
+    table_score.classList = ["table-success"];
     bloc_action.classList.remove("d-none");
     de_esprit.classList.remove("d-none");
     de_corps.classList.remove("d-none");
     de_ame.classList.remove("d-none");
     txt_necrose.textContent = "Perte";
     random_domain();
+    results_title.classList.remove("d-none");
 }
 
 /**
@@ -73,6 +91,7 @@ function domain_test() {
  */
 function necrosis_test() {
     reset_blocs();
+    table_score.classList = ["table-dark"];
     bloc_action.classList.add("d-none");
     de_esprit.classList.add("d-none");
     de_corps.classList.add("d-none");
@@ -110,7 +129,10 @@ function reset_blocs() {
     limbes.classList.add("d-none");
     critical_necrosis.classList.add("d-none");
     necrosis_help.classList.add("d-none");
+    success_help.classList.add("d-none");
     failure_help.classList.add("d-none");
+    results_title.classList.add("d-none");
+    pending_failure.classList.add("d-none");
     failure_btn.classList.remove("d-none");
     generic_help.classList.add("d-none");
     de_ame.classList.remove("d-none");
@@ -118,6 +140,7 @@ function reset_blocs() {
     de_perte.classList.add("d-none");
     de_failure.classList.add("d-none");
     crane_perte.classList.add("d-none");
+    total_succes.classList = [];
 }
 
 /**
@@ -167,15 +190,7 @@ function random_domain() {
                         exp.classList.remove("d-none");
                         has_lost = false;
                     } else {
-                        // Succès critique
-                        if (esprit == 9 || ame == 9 || corps == 9) {
-                            bonus.classList.remove("d-none");
-                        }
-                        // Echec critique
-                        if (esprit == 0 || ame == 0 || corps == 0) {
-                            limbes.classList.remove("d-none");
-                        }
-                        failure_help.classList.remove("d-none");
+                        calcul_score();
                     }
                 }
             }
@@ -197,36 +212,107 @@ function random_domain() {
             num_perte.textContent = perte;
             perte_bloc.classList.remove("d-none");
         }
-        calcul_score();
     }
 }
 
-function calcul_score() {
-    let action_val = Number(thrin_values[de_action.value]);
+function puiser() {
+    calcul_score(thrin_values[draw_dice.value]);
+}
 
-    action_result.innerText = action_val;
-    action_result.classList = [de_action.value];
+function calcul_score(de_bonus = 0) {
+    if(de_action.value !== "") {
+        let action_val = Number(thrin_values[de_action.value]);
 
-    let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
-    console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
-    total_score.innerText = score;
-    // Calcul du nombre de succès.
-    if (score > 39) {
-        succes = 6;
-    } else if (score > 34) {
-        succes = 5;
-    } else if (score > 29) {
-        succes = 4;
-    } else if (score > 24) {
-        succes = 3;
-    } else if (score > 19) {
-        succes = 2;
-    } else if (score > 14) {
-        succes = 1;
-    } else {
-        succes = 0;
+        // Echec
+        if (action_val === 0 ) {
+            limbes.classList.remove("d-none");
+        }
+
+        action_result.innerText = action_val;
+        action_result.classList = [de_action.value];
+
+        let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
+        // console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
+        total_score.innerText = score;
+        if(de_bonus > 0) {
+            total_score.innerText = score + "+ " + de_bonus + " = " + Number(score + de_bonus);
+            score = score + de_bonus;
+        } else {
+            total_score.innerText = score;
+        }
+        // Calcul du nombre de succès.
+        if (score > 39) {
+            succes = 6;
+        } else if (score > 34) {
+            succes = 5;
+        } else if (score > 29) {
+            succes = 4;
+        } else if (score > 24) {
+            succes = 3;
+        } else if (score > 19) {
+            succes = 2;
+        } else if (score > 14) {
+            succes = 1;
+        } else {
+            succes = 0;
+        }
+        if (succes > 0 && thrin_values["noir"] === 0) {
+            total_succes.innerText = succes + "-1 = " + Number(succes - 1);
+            succes = succes -1;
+        } else {
+            total_succes.innerText = succes;
+        }
+        if (succes > 0){
+            total_succes.classList = "text-success";
+        } else {
+            total_succes.classList = "text-danger";
+        }
+
+        // Succès critique
+        if (action_val === 9 || de_bonus === 9) {
+            bonus.classList.remove("d-none");
+            total_succes.innerText = succes + "+1 = " + Number(succes + 1);
+        }
+
+        if(succes >= difficulte.value) {
+            success_help.classList.remove("d-none");
+            pending_failure.classList.add("d-none");
+        } else {
+            success_help.classList.add("d-none");
+            pending_failure.classList.remove("d-none");
+            if (de_bonus == 0) {
+                let nb_disabled = 0;
+                for (const color in thrin_values) {
+                    if (color !== "noir") {
+                        draws[color].classList = "";
+                        if (color==de_action.value || thrin_values[color] < 1) {
+                            draws[color].disabled = true;
+                            draws[color].classList.add("d-none");
+                            nb_disabled++;
+                        } else {
+                            // Succes possible
+                            if (thrin_values[color] == 9) {
+                                pending_bonus.classList.remove("d-none");
+                                draws[color].classList = "bg-success text-white";
+                            }
+                            draws[color].disabled = false;
+                            draws[color].classList.remove("d-none");
+                        }
+                    }
+                }
+                if (nb_disabled > 2) {
+                    no_draw.classList.remove("d-none");
+                    draw_block.classList.add("d-none");
+                } else {
+                    no_draw.classList.add("d-none");
+                    draw_block.classList.remove("d-none");
+                }
+            } else {
+                no_draw.classList.remove("d-none");
+                draw_block.classList.add("d-none");
+            }
+        }
     }
-    total_succes.innerText = succes;
 }
 
 /**
@@ -420,6 +506,16 @@ de_action.addEventListener("change", () => {
         domain_btn.title = "Faire un test de domaine en lançant tous les dés.";
     }
 });
+
+/*domain_level.addEventListener("change", () => {
+    calcul_score();
+});
+vocation_bonus.addEventListener("change", () => {
+    calcul_score();
+});
+de_action.addEventListener("change", () => {
+    calcul_score();
+});*/
 
 // TODO : retirer un dé. ==> seule la symbiose nécro reste possible
 // retirer 2 dés : plus de symbiose
