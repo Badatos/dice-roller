@@ -1,0 +1,169 @@
+
+<div class="col-sm-12 col-lg-6 mb-2">
+  <div class="card fiche_pouvoir">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body {{Domaine}}">
+      <h2>{{Lignée}}</h2>
+      <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
+
+      {{#Domaine}}
+      <p class="p_orig">
+        Domaine : <span>{{Domaine}}</span>
+      </p>
+      {{/Domaine}}
+      <ul class="h3">
+      {{#Spécialisations}}
+        <li><strong>Spécialisations :</strong> <span>{{Spécialisations}}</span></li>
+      {{/Spécialisations}}
+      {{#Pouvoir}}
+        <li><strong>Pouvoir :</strong> <span>{{Pouvoir}}</span></li>
+      {{/Pouvoir}}
+          <!--li>
+            <strong>Peuple d'origine :</strong>
+            <span>{{Peuple d'origine}}</span>
+          </li>
+          <li>
+            <strong>Caste de prédilection :</strong>
+            <span>{{Caste de prédilection}}</span>
+          </li-->
+          {{#Mots clés}}
+          <li>
+            <strong>Mots clés :</strong>
+            <span>{{Mots clés}}</span>
+          </li>
+          {{/Mots clés}}
+          <li>
+            <strong>Taille :</strong>
+            <span>{{Taille}}</span>
+          </li>
+        <li>
+          <strong>Poids :</strong>
+          <span>{{Poids}}</span>
+        </li>
+        {{#Langues}}
+        <li>
+          <strong>Langues :</strong>
+          <span>{{Langues}}</span>
+        </li>
+        {{/Langues}}
+        <!--<li>
+          <strong>Physiologie :</strong>
+          <span>{{Physiologie}}</span>
+        </li>
+        <li>
+          <strong>Système de reproduction :</strong>
+          <span>{{Système de reproduction}}</span>
+        </li>
+        <li>
+          <strong>Nutrition :</strong>
+          <span>{{Nutrition}}</span>
+        </li>
+        <li>
+          <strong>Sommeil :</strong>
+          <span>{{Sommeil}}</span>
+        </li>
+        <li>
+          <strong>Culture :</strong>
+          <span>{{Culture}}</span>
+        </li>
+        <li>
+          <strong>Art de la séduction :</strong>
+          <span>{{Art de la séduction}}</span>
+        </li>
+        <li>
+          <strong>Hygiène :</strong>
+          <span>{{Hygiène}}</span>
+        </li>
+        <li>
+          <strong>Éducation :</strong>
+          <span>{{Éducation}}</span>
+        </li>
+        <li>
+          <strong>Habitat :</strong>
+          <span>{{Habitat}}</span>
+        </li>
+        <li>
+          <strong>Mort :</strong>
+          <span>{{Mort}}</span>
+        </li>
+        <li>
+          <strong>Loisirs :</strong>
+          <span>{{Loisirs}}</span>
+        </li>
+        <li>
+          <strong>Architecture :</strong>
+          <span>{{Architecture}}</span>
+        </li>
+        <li>
+          <strong>Religion :</strong>
+          <span>{{Religion}}</span>
+        </li>
+        <li>
+          <strong>Écriture :</strong>
+          <span>{{Écriture}}</span>
+        </li>
+        <li>
+          <strong>Langage :</strong>
+          <span>{{Langage}}</span>
+        </li>
+        <li>
+          <strong>Mobilier :</strong>
+          <span>{{Mobilier}}</span>
+        </li>
+        <li>
+          <strong>Habillement :</strong>
+          <span>{{Habillement}}</span>
+        </li>
+        <li>
+          <strong>Arts :</strong>
+          <span>{{Arts}}</span>
+        </li>
+        <li>
+          <strong>Artisanat :</strong>
+          <span>{{Artisanat}}</span>
+        </li>
+        <li>
+          <strong>Doctrine :</strong>
+          <span>{{Doctrine}}</span>
+        </li>
+        <li>
+          <strong>Magie :</strong>
+          <span>{{Magie}}</span>
+        </li>
+        <li>
+          <strong>Rituels d'Embiose :</strong>
+          <span>{{Rituels d'Embiose}}</span>
+        </li>
+        <li>
+          <strong>Noms :</strong>
+          <span>{{Noms}}</span>
+        </li>
+        <li>
+          <strong>Motivations :</strong>
+          <span>{{Motivations}}</span>
+        </li>
+        {{#Réputation}}
+        <li>
+          <strong>Réputation :</strong>
+          <span>{{Réputation}}</span>
+        </li>
+        {{/Réputation}}
+        <li>
+          <strong>Affinités :</strong>
+          <span>{{Affinités}}</span>
+        </li>-->
+      </ul>
+      {{#Étymologie}}<p>Étymologie : <em>{{Étymologie}}</em></p>{{/Étymologie}}
+      <div class="vert" id="p_desc">
+        {{Origine}}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="text-end">
+        <span class="source">{{Source}}</span>
+      </div>
+    </div>
+  </div>
+</div>

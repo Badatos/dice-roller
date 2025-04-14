@@ -1,0 +1,67 @@
+
+<div class="col-sm-12 col-lg-6 mb-2">
+  <div class="card fiche_pouvoir">
+    <div class="card-header"></div>
+    <div class="card-body {{Domaine}}">
+      <h2>{{Peuple}}</h2>
+      <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
+      <div class="cright tright">
+        <span class="source">{{source}}</span>
+      </div>
+      <p class="p_orig">
+        Domaine : <span>{{Domaine}}</span>
+      </p>
+      <ul class="h3">
+        <li><strong>Spécialisations :</strong> <span>{{Spécialisations }}</span></li>
+        <!--
+          <li>
+            <strong>Faune :</strong>
+            <span>{{Faune}}</span>
+          </li>
+          <li>
+            <strong>Flore :</strong>
+            <span>{{Flore}}</span>
+          </li>
+          <li>
+            <strong>Locomotion :</strong>
+            <span>{{Locomotion}}</span>
+          </li>
+          <li>
+            <strong>Mœurs :</strong>
+            <span>{{Mœurs}}</span>
+          </li>
+        -->
+        {{#Régions héossiennes}}
+          <li>
+            <strong>Régions héossiennes :</strong>
+            <span>{{Régions héossiennes}}</span>
+          </li>
+        {{/Régions héossiennes}}
+        {{#Élément totem}}
+          <li>
+            <strong>Élément totem :</strong>
+            <span>{{Élément totem}}</span>
+          </li>
+        {{/Élément totem}}
+        {{#Amis}}
+          <li>
+            <strong>Amis :</strong>
+            <span>{{Amis}}</span>
+          </li>
+        {{/Amis}}
+        {{#Méfiance}}
+          <li>
+            <strong>Méfiance :</strong>
+            <span>{{Méfiance}}</span>
+          </li>
+        {{/Méfiance}}
+      </ul>
+      <p><strong>Armes culturelles :</strong> <em>{{Armes culturelles}}</em></p>
+      {{#Paysage}}
+        <div class="vert" id="p_desc">
+          {{Paysage}}
+        </div>
+      {{/Paysage}}
+    </div>
+  </div>
+</div>

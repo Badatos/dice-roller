@@ -76,14 +76,26 @@ const draw_dice = document.getElementById("draw-dice");
  * Prépare les dés et lance un test de domaine.
  */
 function domain_test() {
-    reset_blocs();
-    table_score.querySelector("thead").className = "table-success";
-    de_esprit.classList.remove("d-none");
-    de_corps.classList.remove("d-none");
-    de_ame.classList.remove("d-none");
-    txt_necrose.textContent = "Perte";
-    random_domain();
-    results_title.classList.remove("d-none");
+
+
+    if (de_action.value === "") {
+        const modal_block = document.getElementById('my-modal');
+        modal_block.querySelector(".modal-body").innerText = "Veuillez sélectionner votre dé d'action pour effectuer un test de domaine.";
+        const myModal = new bootstrap.Modal(modal_block, {
+            keyboard: false
+          });
+        myModal.show();
+
+    } else {
+        reset_blocs();
+        table_score.querySelector("thead").className = "table-success";
+        de_esprit.classList.remove("d-none");
+        de_corps.classList.remove("d-none");
+        de_ame.classList.remove("d-none");
+        txt_necrose.textContent = "Perte";
+        random_domain();
+        results_title.classList.remove("d-none");
+    }
 }
 
 /**
@@ -493,17 +505,6 @@ document.querySelectorAll(".des>input").forEach((input) => {
             domain_btn.title = "Faire un test de domaine en lancant tous les dés.";
         }
     });
-});
-
-// Désactive le bouton domain-btn si le de d’action n’a pas de valeur
-de_action.addEventListener("change", () => {
-    if (de_action.value === "") {
-        domain_btn.classList.add("disabled");
-        domain_btn.title = "Veuillez sélectionner une énergie pour effectuer un test de domaine.";
-    } else {
-        domain_btn.classList.remove("disabled");
-        domain_btn.title = "Faire un test de domaine en lançant tous les dés.";
-    }
 });
 
 /*domain_level.addEventListener("change", () => {
