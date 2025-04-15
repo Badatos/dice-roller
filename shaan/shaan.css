@@ -10,6 +10,8 @@
 }
 
 :root {
+  --shaan-blue: #4766a1;
+  --shaan-red: #994e34;
   --shaan-green: #45714f;
   --shaan-font: "Economica", arial, helvetica, sans-serif;
   --bs-primary-text-emphasis: #45714f;
@@ -40,9 +42,11 @@
 .bg-icon >.bleu{
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Ame.webp");
 }
+
 .bg-icon >.rouge{
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Corps.webp");
 }
+
 .bg-icon >.jaune{
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Esprit.webp");
 }
@@ -154,4 +158,50 @@ label {
   footer, nav {
     display: none;
   }
+}
+
+/** Shaan Titles **/
+
+.shaan-title {
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: var(--journal-title);
+  transition: 0.4s;
+}
+
+.shaan-title.small {
+  height: 100px;
+}
+
+.shaan-title h1 {
+  border: none;
+  position: relative;
+  top: 38px;
+  left: 80px;
+  font-size: 30px;
+  transition: 0.4s;
+  max-width: 310px;
+  text-align: center;
+}
+
+.shaan-title.small h1 {
+  top: 19px;
+  left: 40px;
+  font-size: 15px;
+}
+
+.shaan-title.blue {
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_bleu.png");
+  color: var(--shaan-blue);
+}
+
+.shaan-title.green {
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_vert.png");
+  color: var(--shaan-green);
+}
+
+.shaan-title.red {
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_rouge.png");
+  color: var(--shaan-red);
 }
