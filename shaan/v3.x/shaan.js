@@ -77,10 +77,10 @@ const draw_dice = document.getElementById("draw-dice");
  */
 function domain_test() {
 
-
     if (de_action.value === "") {
         const modal_block = document.getElementById('my-modal');
         modal_block.querySelector(".modal-body").innerText = "Veuillez sélectionner votre dé d'action pour effectuer un test de domaine.";
+        modal_block.querySelector(".modal-header").innerText = "Test impossible.";
         const myModal = new bootstrap.Modal(modal_block, {
             keyboard: false
           });

@@ -168,10 +168,17 @@ label {
   background-repeat: no-repeat;
   font-family: var(--journal-title);
   transition: 0.4s;
+  z-index: 10;
+}
+
+.container {
+  position: relative;
+  z-index: 20;
 }
 
 .shaan-title.small {
   height: 100px;
+  z-index: 1000;
 }
 
 .shaan-title h1 {
@@ -204,4 +211,8 @@ label {
 .shaan-title.red {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_rouge.png");
   color: var(--shaan-red);
+}
+
+.breadcrumb {
+  background-color: #FFF;
 }
