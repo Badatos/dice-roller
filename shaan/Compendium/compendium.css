@@ -1,0 +1,106 @@
+/* Shaan Compendium styles */
+
+.source {
+  text-align: right;
+  color: #666;
+  padding-bottom: 0;
+}
+
+.fiche_pouvoir {
+  color: var(--esprit-color);
+  font-size: 19px;
+  line-height: 21px;
+}
+
+.card h2 {
+  border-bottom: 1px dotted var(--esprit-color);
+  /* margin: 10px 0 2px; */
+  padding-bottom: 10px;
+  /* padding-top: 10px; */
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+h3, .h3 {
+  color: #438270;
+  line-height: 25px;
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+fieldset.selectpouvoirgroup,
+fieldset.selectuserpouvoirsgroup {
+  margin-top: 5px;
+}
+
+fieldset.selectpouvoirgroup .ui-button.ui-widget,
+fieldset.selectuserpouvoirsgroup .ui-button.ui-widget {
+  font-size: 0.8em;
+}
+
+fieldset.selectpouvoirgroup .ui-button,
+fieldset.selectuserpouvoirsgroup .ui-button {
+  padding: 0.2em 0.4em;
+}
+
+fieldset.selectpouvoirgroup .ui-button.ui-state-active,
+fieldset.selectuserpouvoirsgroup .ui-button.ui-state-focus,
+fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
+  color: #45714f;
+}
+
+.vert,
+.Terre {
+  color: #0a2c22;
+}
+
+.p_orig {
+  font-style: italic;
+}
+
+.TECHNIQUE {
+  background-image: url("../../img/domaines/technique_small.webp");
+}
+
+.SAVOIR {
+  background-image: url("../../img/domaines/savoir_small.webp");
+}
+
+.SOCIAL {
+  background-image: url("../../img/domaines/social_small.webp");
+}
+
+.ARTS {
+  background-image: url("../../img/domaines/arts_small.webp");
+}
+
+.SHAAN {
+  background-image: url("../../img/domaines/shaan_small.webp");
+}
+
+.MAGIE {
+  background-image: url("../../img/domaines/magie_small.webp");
+}
+
+.RITUELS {
+  background-image: url("../../img/domaines/rituels_small.webp");
+}
+
+.SURVIE {
+  background-image: url("../../img/domaines/survie_small.webp");
+}
+
+.COMBAT {
+  background-image: url("../../img/domaines/combat_small.webp");
+}
+
+.NÉCROSE {
+  background-image: url("../../img/domaines/necrose_small.webp");
+}
+
+.card-body {
+  background-repeat: no-repeat;
+  background-position: 99% 1%;
+  background-size: 1.5em;
+}
