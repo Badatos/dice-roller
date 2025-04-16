@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="fr">
-
+<!-- TODO
+* gerer les resources a choisir
+* encart a remplir pour les pouvoir et pour les spé
+-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +52,7 @@
   </div>
   <div class="container mt-5 pt-5">
 
-    <nav aria-label="Fil d’ariane" class="ms-3">
+    <nav aria-label="Fil d’ariane" class="ms-3 pt-4">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/dice-roller">Aides de Jeu</a></li>
         <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
@@ -257,7 +260,7 @@
   </footer>
   <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
   <script src="https://unpkg.com/mustache@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script>
     const acq_generator = document.getElementById("acq-generator");
     acq_generator.addEventListener("change", calcul_stats);

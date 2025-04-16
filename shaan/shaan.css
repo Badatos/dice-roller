@@ -163,7 +163,6 @@ label {
 /** Shaan Titles **/
 
 .shaan-title {
-  height: 200px;
   background-size: contain;
   background-repeat: no-repeat;
   font-family: var(--journal-title);
@@ -176,11 +175,6 @@ label {
   z-index: 20;
 }
 
-.shaan-title.small {
-  height: 100px;
-  z-index: 1000;
-}
-
 .shaan-title h1 {
   border: none;
   position: relative;
@@ -188,14 +182,11 @@ label {
   left: 80px;
   font-size: 30px;
   transition: 0.4s;
-  max-width: 310px;
   text-align: center;
 }
 
-.shaan-title.small h1 {
-  top: 19px;
-  left: 40px;
-  font-size: 15px;
+.shaan-title.small {
+  z-index: 1000;
 }
 
 .shaan-title.blue {
@@ -216,3 +207,42 @@ label {
 .breadcrumb {
   background-color: #FFF;
 }
+
+/** Small devices **/
+.shaan-title {
+  height: 150px;
+}
+
+.shaan-title.small {
+  height: 100px;
+  z-index: 1000;
+}
+
+.shaan-title h1 {
+  top: 29px;
+  left: 55px;
+  font-size: 22px;
+  max-width: 242px;
+}
+
+.shaan-title.small h1 {
+  top: 19px;
+  left: 36px;
+  font-size: 15px;
+  max-width: 163px;
+}
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .shaan-title {
+    height: 200px;
+  }
+  .shaan-title h1 {
+    top: 38px;
+    left: 80px;
+    font-size: 30px;
+    max-width: 310px;
+  }
+}
+
