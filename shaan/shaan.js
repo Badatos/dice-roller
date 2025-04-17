@@ -8,7 +8,7 @@ window.onscroll = function() {scrollFunction()};
  * based on the vertical scroll position of the page.
  */
 function scrollFunction() {
-  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
     document.getElementById("header").classList.add("small");
   } else {
     document.getElementById("header").classList.remove("small");

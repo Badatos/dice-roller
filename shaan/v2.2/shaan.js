@@ -338,7 +338,7 @@ document.querySelectorAll(".des>input").forEach((input) => {
             thrin_values[color] = 0;
         }
         parent.classList.toggle("disabled");
-        parent.querySelector(".disabled_txt").innerHTML = checked ? "&nbsp;" : "(désactivé)";
+        parent.querySelector(".disabled_txt").innerHTML = checked ? "&nbsp;": "(désactivé)";
         // TODO: si aucun dé actif, désactiver le test de domaine.
         if (thrin_values["jaune"] + thrin_values["bleu"] + thrin_values["rouge"] < -2) {
             domain_btn.classList.add("disabled");
@@ -350,5 +350,5 @@ document.querySelectorAll(".des>input").forEach((input) => {
     });
 });
 
-// TODO : retirer un dé. ==> seule la symbiose nécro reste possible
-// retirer 2 dés : plus de symbiose
+// TODO : retirer un dé. ==> seule la symbiose nécro reste possible
+// retirer 2 dés : plus de symbiose

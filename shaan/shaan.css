@@ -165,12 +165,15 @@ label {
 .shaan-title {
   background-size: contain;
   background-repeat: no-repeat;
-  font-family: var(--journal-title);
   transition: 0.4s;
+  position: fixed;
   z-index: 10;
+  max-width: 70%;
+  margin-left: 0;
+  padding-left: 0;
 }
 
-.container {
+main {
   position: relative;
   z-index: 20;
 }
@@ -178,11 +181,12 @@ label {
 .shaan-title h1 {
   border: none;
   position: relative;
-  top: 38px;
-  left: 80px;
-  font-size: 30px;
   transition: 0.4s;
   text-align: center;
+  background-color: #fffac2;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 0 .5em;
 }
 
 .shaan-title.small {
@@ -204,10 +208,6 @@ label {
   color: var(--shaan-red);
 }
 
-.breadcrumb {
-  background-color: #FFF;
-}
-
 /** Small devices **/
 .shaan-title {
   height: 150px;
@@ -216,22 +216,21 @@ label {
 .shaan-title.small {
   height: 100px;
   z-index: 1000;
+  max-width: 40%;
 }
 
 .shaan-title h1 {
-  top: 29px;
-  left: 55px;
-  font-size: 22px;
-  max-width: 242px;
+  top: 25px;
+  left: 50px;
+  font-size: 24px;
 }
 
 .shaan-title.small h1 {
-  top: 19px;
-  left: 36px;
-  font-size: 15px;
-  max-width: 163px;
+  top: 16px;
+  left: 32px;
+  font-size: 16px;
+  border-radius: 5px;
 }
-
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -239,10 +238,9 @@ label {
     height: 200px;
   }
   .shaan-title h1 {
-    top: 38px;
-    left: 80px;
-    font-size: 30px;
-    max-width: 310px;
+    top: 32px;
+    left: 65px;
+    font-size: 36px;
   }
 }
 

@@ -47,10 +47,10 @@
 </head>
 
 <body>
-  <div class="shaan-title blue fixed-top" id="header">
-    <h1><small>Générateur d’acquis personnalisé</small></h1>
+  <div class="container shaan-title blue fixed-top" id="header">
+    <h1>Générateur d’acquis personnalisé</h1>
   </div>
-  <div class="container mt-5 pt-5">
+  <main class="container mt-5 pt-5">
 
     <nav aria-label="Fil d’ariane" class="ms-3 pt-4">
       <ol class="breadcrumb">
@@ -250,7 +250,7 @@
       </div>
 
     </div>
-  </div>
+  </main>
 
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
     <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan Renaissance</strong>, rendez-vous sur
@@ -507,7 +507,7 @@
       calc_bonus.textContent = data["Spécialisation"];
 
       data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
-      data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
+      data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
       data["Valeur"] = data["Valeur"] + " crédos";
       fetch("../../templates/acquis.mustache")
       .then((response) => response.text())
@@ -518,9 +518,11 @@
 
     calcul_stats();
   </script>
+
+  <div class="version small text-bg-light p-1 pt-0">v 0.2</div>
+
   <!-- Shaan template JS -->
   <script src="../../shaan.js"></script>
 
-  <div class="version small text-bg-light p-1 pt-0">v 0.2</div>
 </body>
 </html>

@@ -82,12 +82,22 @@
 </head>
 
 <body>
-  <div class="container">
+
+  <div class="container shaan-title red fixed-top" id="header">
     <h1>Liste des acquis - Shaan Renaissance</h1>
+  </div>
+  <main class="container mt-5 pt-5">
+    <nav aria-label="Fil d’ariane" class="ms-3 pt-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Acquis</li>
+      </ol>
+    </nav>
     <p class="text-end"><strong id="total"></strong> acquis trouvés.</p>
     <div class="row" id="liste-elements"></div>
     <pre id="code"></pre>
-  </div>
+  </main>
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
     <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
       <a
@@ -138,6 +148,9 @@
     });
 
   </script>
+
+  <!-- Shaan template JS -->
+  <script src="../../shaan.js"></script>
 </body>
 
 </html>

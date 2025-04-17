@@ -491,7 +491,7 @@ document.querySelectorAll(".des>input").forEach((input) => {
             thrin_values[color] = 0;
         }
         parent.classList.toggle("disabled");
-        parent.querySelector(".disabled_txt").innerHTML = checked ? "&nbsp;" : "(désactivé)";
+        parent.querySelector(".disabled_txt").innerHTML = checked ? "&nbsp;": "(désactivé)";
         document.getElementById("action-"+color).disabled = !checked;
         if (de_action.value === color) {
             de_action.value = "";
@@ -517,5 +517,5 @@ de_action.addEventListener("change", () => {
     calcul_score();
 });*/
 
-// TODO : retirer un dé. ==> seule la symbiose nécro reste possible
-// retirer 2 dés : plus de symbiose
+// TODO : retirer un dé. ==> seule la symbiose nécro reste possible
+// retirer 2 dés : plus de symbiose
