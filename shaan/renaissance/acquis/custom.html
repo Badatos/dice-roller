@@ -1,9 +1,5 @@
 <!doctype html>
 <html lang="fr">
-<!-- TODO
-* gerer les resources a choisir
-* encart a remplir pour les pouvoir et pour les spé
--->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -214,6 +210,20 @@
            value="https://www.shaan-rpg.com/wp-content/themes/renaissance/images/logo-shaan.png">
           <div id="image-help" class="form-text">URL d’une image d’illustration.</div>
         </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="image" class="form-label">Ressources</label>
+          <input type="text" class="form-control" id="ressources" aria-describedby="ressources-help"
+           value="">
+          <div id="ressources-help" class="form-text">Décrivez les ressources nécessaires.</div>
+        </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="specialisations" class="form-label">Bonus de spécialisation(s)</label>
+          <input type="text" class="form-control" id="specialisations" aria-describedby="ressources-help"
+           value="">
+          <div id="specialisations-help" class="form-text">Décrivez les bonus de spécialisations le cas échéant.</div>
+        </div>
       </div>
     </form>
 
@@ -273,6 +283,9 @@
     const image = document.getElementById("image");
     const desc = document.getElementById("desc");
     const pow_rank = document.getElementById("pow-rank");
+
+    const ressources = document.getElementById("ressources");
+    const specialisations = document.getElementById("specialisations");
 
     const calc_cat = document.getElementById("acq-cat");
     const calc_value = document.getElementById("acq-value");
@@ -503,10 +516,20 @@
           data["Spécialisation"] = "Acquis implanté";
           break;
       }
+      if(ressources.value) {
+        data["Ressources"]+= " : " + ressources.value;
+      }
 
       calc_bonus.textContent = data["Spécialisation"];
-
-      data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
+      if(data["Spécialisation"] > 0) {
+        if(specialisations.value) {
+          data["Spécialisation"] = data["Spécialisation"] + " : " + specialisations.value;
+        } else {
+          data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
+        }
+      } else {
+        data["Spécialisation"] = "";
+      }
       data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
       data["Valeur"] = data["Valeur"] + " crédos";
       fetch("../../templates/acquis.mustache")
