@@ -104,3 +104,33 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
   background-position: 99% 1%;
   background-size: 1.5em;
 }
+
+body {
+  background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/sheet/template_shaan_background1.jpg");
+  background-size: contain;
+  /*
+  background-repeat: no-repeat;
+  */
+}
+
+@media print {
+  body {
+    background-image: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    break-inside: avoid;
+  }
+
+  .col-sm-12{
+    width: 50%;
+  }
+
+}

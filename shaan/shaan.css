@@ -1,4 +1,5 @@
 /* Shaan World styles */
+
 @font-face {
   font-family: GodofWar;
   src: url("./fonts/GodOfWar-Regular.ttf") format("truetype");
@@ -17,10 +18,12 @@
   --bs-primary-text-emphasis: #45714f;
   --bs-primary-bg-subtle: #DFF0D8;
 
-  /* --esprit-color: #948562; */
+  /* Thrines */
 
   --ame-color: #547a9e;
   --corps-color: #c86e5a;
+
+  /* --esprit-color: #948562; */
 
   /** Couleur accessible **/
   --esprit-color: #847558;
@@ -29,6 +32,14 @@
 
 .bleu {
   color: var(--ame-color) !important;
+}
+
+.rouge {
+  color: var(--corps-color) !important;
+}
+
+.jaune {
+  color: var(--esprit-color) !important;
 }
 
 .bg-icon > strong {
@@ -49,14 +60,6 @@
 
 .bg-icon >.jaune{
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Esprit.webp");
-}
-
-.rouge {
-  color: var(--corps-color) !important;
-}
-
-.jaune {
-  color: var(--esprit-color) !important;
 }
 
 .bi-info-circle {
@@ -168,9 +171,11 @@ label {
   transition: 0.4s;
   position: fixed;
   z-index: 10;
-  max-width: 70%;
   margin-left: 0;
   padding-left: 0;
+
+  /** X-Small devices **/
+  height: 150px;
 }
 
 main {
@@ -179,7 +184,6 @@ main {
 }
 
 .shaan-title h1 {
-  border: none;
   position: relative;
   transition: 0.4s;
   text-align: center;
@@ -187,10 +191,39 @@ main {
   border: 2px solid;
   border-radius: 10px;
   padding: 0 .5em;
+  width: calc(100% - var(--shaan-title-left-pos) - .5rem);
+  max-width: 700px;
+  left: var(--shaan-title-left-pos);
+  top: calc(var(--shaan-title-left-pos) / 2);
+
+  /* Extra-Small screens (default) */
+  --shaan-title-left-pos: 50px;
+
+  font-size: 24px;
 }
+
+.shaan-title h1::after {
+  width: 2.5rem;
+  margin-left: 2em;
+  background-image: url("img/arc_169x260.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 2em;
+  position: absolute;
+  content: "";
+  filter: drop-shadow(5px 3px 4px #222);
+  transition: 0.2s;
+
+  /* xs & small devices */
+  opacity: 0;
+}
+
 
 .shaan-title.small {
   z-index: 1000;
+
+  /* X-Small screens */
+  height: 100px;
 }
 
 .shaan-title.blue {
@@ -208,39 +241,57 @@ main {
   color: var(--shaan-red);
 }
 
-/** Small devices **/
-.shaan-title {
-  height: 150px;
-}
-
-.shaan-title.small {
-  height: 100px;
-  z-index: 1000;
-  max-width: 40%;
-}
-
-.shaan-title h1 {
-  top: 25px;
-  left: 50px;
-  font-size: 24px;
-}
-
+/* Smaal devices */
 .shaan-title.small h1 {
-  top: 16px;
-  left: 32px;
+  --shaan-title-left-pos: 32px;
+
   font-size: 16px;
   border-radius: 5px;
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .shaan-title {
-    height: 200px;
-  }
+
+
+/*
+  X-Small devices (portrait phones, less than 576px)
+  No media query for `xs`
+  since this is the default in Bootstrap
+*/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (width >= 576px) {
   .shaan-title h1 {
-    top: 32px;
-    left: 65px;
-    font-size: 36px;
+    --shaan-title-left-pos: 50px;
+
+    font-size: 26px;
   }
 }
 
+/* Medium devices (tablets, 768px and up) */
+@media (width >= 768px) {
+  .shaan-title {
+    height: 200px;
+  }
+
+  .shaan-title h1 {
+    --shaan-title-left-pos: 65px;
+
+    font-size: 36px;
+  }
+
+  .shaan-title h1::after {
+    right: -2%;
+    top: -15%;
+    opacity:1;
+  }
+
+  .shaan-title.small h1::after {
+    right: -4%;
+    top: -25%;
+  }
+}
+
+/* Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+}
+*/
