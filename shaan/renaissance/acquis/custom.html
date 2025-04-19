@@ -14,30 +14,11 @@
     rel="stylesheet" crossorigin="anonymous"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
+  <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
   <title>Générateur d’acquis personnalisé - Shaan Renaissance</title>
   <style>
-    .source {
-      text-align: right;
-      color: #666;
-      padding-bottom: 0;
-    }
-
-    h2 {
-      border-bottom: 1px dotted var(--esprit-color);
-      color: var(--esprit-color);
-      margin: 10px 0 2px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 150%;
-    }
-
-    h3, .h3 {
-      color: #438270;
-      line-height: 25px;
-      font-size: 20px;
-      margin: 5px 0;
+    body {
+      background-image: none;
     }
   </style>
 </head>
@@ -198,11 +179,6 @@
           <div id="summary-help" class="form-text">Décris ton acquis en une ligne.</div>
         </div-->
 
-        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
-          <label for="desc" class="form-label">Description</label>
-          <textarea class="form-control" id="desc" aria-describedby="desc-help"></textarea>
-          <div id="desc-help" class="form-text">Décris ton acquis.</div>
-        </div>
 
         <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="image" class="form-label">Image</label>
@@ -223,6 +199,27 @@
           <input type="text" class="form-control" id="specialisations" aria-describedby="ressources-help"
            value="">
           <div id="specialisations-help" class="form-text">Décrivez les bonus de spécialisations le cas échéant.</div>
+        </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="fabrication" class="form-label">Compétences de fabrication / dressage</label>
+          <input type="text" class="form-control" id="fabrication" aria-describedby="fabrication-help"
+           value="">
+          <div id="fabrication-help" class="form-text">Décrivez les compétences requises pour obtenir cet acquis.</div>
+        </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea class="form-control" id="desc" aria-describedby="desc-help" rows="6">
+Cet acquis est *super*.
+
+### Capacités
+
+* **Protection** : Défense de Corps +1
+          </textarea>
+          <div id="desc-help" class="form-text">
+            Décris ton acquis et ses éventuelles capacités
+            (<a href="https://docs.framasoft.org/fr/grav/markdown.html" target="_blank">format Markdown</a>).</div>
         </div>
       </div>
     </form>
@@ -271,6 +268,9 @@
   <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
   <script src="https://unpkg.com/mustache@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <script>
     const acq_generator = document.getElementById("acq-generator");
     acq_generator.addEventListener("change", calcul_stats);
@@ -322,6 +322,45 @@
       if (cat.value.startsWith("Manuscrit")) {
         calc_cat.textContent = "Manuscrit";
       }
+      console.log(domain.options[domain.selectedIndex].text.toUpperCase());
+      switch(domain.options[domain.selectedIndex].text.toUpperCase()) {
+        case "NOVATEUR":
+          data["dom_type"] = "technique";
+          break;
+        case "ÉRUDIT":
+          data["dom_type"] = "savoir";
+          break;
+        case "NÉGOCIANT":
+          data["dom_type"] = "social";
+          break;
+        case "ARTISTE":
+          data["dom_type"] = "arts";
+          break;
+        case "SHAANISTE":
+          data["dom_type"] = "shaan";
+          break;
+        case "MAGICIEN":
+          data["dom_type"] = "magie";
+          break;
+        case "ÉLÉMENTALISTE":
+          data["dom_type"] = "rituels";
+          break;
+        case "VOYAGEUR":
+          data["dom_type"] = "survie";
+          break;
+        case "COMBATTANT":
+          data["dom_type"] = "combat";
+          break;
+        case "OMBRE":
+          data["dom_type"] = "nécrose";
+          break;
+        case "SAREN":
+          data["dom_type"] = "saren";
+          break;
+        default:
+          data["dom_type"] = data.Domaine;
+      }
+
       switch(calc_cat.textContent) {
         case "Outil":
           calc_value.textContent = "[Classe]² x 100";
@@ -416,7 +455,7 @@
           calc_prestige.textContent = "[Classe]";
           data["Prestige"] = cl_value;
           calc_diff.textContent = "[Classe] x 45";
-          data["Fabrication"] = cl_value*45;
+          data["Dressage"] = cl_value*45;
           acq_entr.textContent = "[Classe] Ressource(s) par Jour";
           data["Entretien"] = cl_value + " ressource(s) par Jour";
           data["Spécialisation"] = cl_value;
@@ -530,19 +569,32 @@
       } else {
         data["Spécialisation"] = "";
       }
-      data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
+      if(data["Fabrication"]) {
+        data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
+        if(fabrication.value) {
+          data["Fabrication"] = data["Fabrication"] + " (" + fabrication.value + ")";
+        }
+      } else {
+        data["Dressage"] = "Difficultés cumulées : " + data["Dressage"];
+        if(fabrication.value) {
+          data["Dressage"] = data["Dressage"] + " (" + fabrication.value + ")";
+        }
+      }
       data["Valeur"] = data["Valeur"] + " crédos";
       fetch("../../templates/acquis.mustache")
       .then((response) => response.text())
       .then((template) => {
         carte_acquis.innerHTML = Mustache.render(template, data);
+        const details = document.getElementById('details')
+        details.innerHTML =
+          marked.parse(details.innerHTML);
       });
     }
 
     calcul_stats();
   </script>
 
-  <div class="version small text-bg-light p-1 pt-0">v 0.2</div>
+  <div class="version small text-bg-light p-1 pt-0">v 0.3</div>
 
   <!-- Shaan template JS -->
   <script src="../../shaan.js"></script>

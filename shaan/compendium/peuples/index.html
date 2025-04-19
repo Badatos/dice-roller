@@ -71,39 +71,8 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
-          switch(row["Domaine"]) {
-            case "TECHNIQUE":
-              row["dom_type"] = "Astuce";
-              break;
-            case "SAVOIR":
-              row["dom_type"] = "Secret";
-              break;
-            case "SOCIAL":
-              row["dom_type"] = "Privilège";
-              break;
-            case "ARTS":
-              row["dom_type"] = "Création";
-              break;
-            case "SHAAN":
-              row["dom_type"] = "Symbiose";
-              break;
-            case "MAGIE":
-              row["dom_type"] = "Sort";
-              break;
-            case "RITUELS":
-              row["dom_type"] = "Transe";
-              break;
-            case "SURVIE":
-              row["dom_type"] = "Exploit";
-              break;
-            case "COMBAT":
-              row["dom_type"] = "Tactique";
-              break;
-            case "Nécrose":
-              row["dom_type"] = "Tourment";
-              break;
-            default:
-              row["dom_type"] = "Pouvoir";
+          if(row["Domaine"]) {
+            row["Domaine"] = row["Domaine"].toLowerCase();
           }
           renderedHTML += Mustache.render(template, row);
           //precode.textContent += JSON.stringify(row, null, 2) + '\n';

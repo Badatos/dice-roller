@@ -71,35 +71,36 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
+          row.Domaine = row.Domaine.toLowerCase();
           switch(row.Domaine) {
-            case "TECHNIQUE":
+            case "technique":
               row["dom_type"] = "Astuce";
               break;
-            case "SAVOIR":
+            case "savoir":
               row["dom_type"] = "Secret";
               break;
-            case "SOCIAL":
+            case "social":
               row["dom_type"] = "Privilège";
               break;
-            case "ARTS":
+            case "arts":
               row["dom_type"] = "Création";
               break;
-            case "SHAAN":
+            case "shaan":
               row["dom_type"] = "Symbiose";
               break;
-            case "MAGIE":
+            case "magie":
               row["dom_type"] = "Sort";
               break;
-            case "RITUELS":
+            case "rituels":
               row["dom_type"] = "Transe";
               break;
-            case "SURVIE":
+            case "survie":
               row["dom_type"] = "Exploit";
               break;
-            case "COMBAT":
+            case "combat":
               row["dom_type"] = "Tactique";
               break;
-            case "Nécrose":
+            case "nécrose":
               row["dom_type"] = "Tourment";
               break;
             default:

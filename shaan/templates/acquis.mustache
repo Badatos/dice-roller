@@ -9,7 +9,7 @@
   >
   <div class="card fiche_acquis">
     <div class="card-header"></div>
-    <div class="card-body">
+    <div class="card-body {{dom_type}}">
       <h2 class="mt-0 pt-0">{{Acquis}}</h2>
       <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
       <p class="jaune">
@@ -31,7 +31,6 @@
       {{#Résumé}}
         <p class="jaune">Résumé : {{Résumé}}</p>
       {{/Résumé}}
-      <p class="description mt-3">{{Détails}}</p>
       <ul class="lh-sm jaune">
         <li><strong>Valeur :</strong> <span id="a_val">{{Valeur}}</span></li>
         {{#Prestige}}
@@ -46,7 +45,18 @@
             <span id="a_res">{{{Ressources}}}</span>
           </li>
         {{/Ressources}}
-        <li><strong>Fabrication :</strong> <span id="a_fab">{{Fabrication}}</span></li>
+        {{#Fabrication}}
+          <li>
+            <strong>Fabrication :</strong>
+            <span id="a_fab">{{Fabrication}}</span>
+          </li>
+        {{/Fabrication}}
+        {{#Dressage}}
+          <li>
+            <strong>Dressage :</strong>
+            <span id="a_dress">{{Dressage}}</span>
+          </li>
+        {{/Dressage}}
         {{#Entretien}}
           <li>
             <strong>Entretien :</strong>
@@ -54,6 +64,7 @@
           </li>
         {{/Entretien}}
       </ul>
+      <div class="description mt-3" id="details">{{Détails}}</div>
       <p class="source text-end">{{Source}}</p>
     </div>
 

@@ -16,68 +16,12 @@
     crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
 
+  <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
+
   <!--GsheetParser-->
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
 
-  <style>
-    .source {
-      text-align: right;
-      color: #666;
-      padding-bottom: 0;
-    }
 
-    .fiche_pouvoir {
-      color: var(--esprit-color);
-      font-size: 19px;
-      line-height: 21px;
-    }
-
-    .card h2 {
-      border-bottom: 1px dotted var(--esprit-color);
-      margin: 10px 0 2px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 150%;
-    }
-
-    h3, .h3 {
-      color: #438270;
-      line-height: 25px;
-      font-size: 20px;
-      margin: 5px 0;
-    }
-
-    fieldset.selectpouvoirgroup,
-    fieldset.selectuserpouvoirsgroup {
-      margin-top: 5px;
-    }
-
-    fieldset.selectpouvoirgroup .ui-button.ui-widget,
-    fieldset.selectuserpouvoirsgroup .ui-button.ui-widget {
-      font-size: 0.8em;
-    }
-
-    fieldset.selectpouvoirgroup .ui-button,
-    fieldset.selectuserpouvoirsgroup .ui-button {
-      padding: 0.2em 0.4em;
-    }
-
-    fieldset.selectpouvoirgroup .ui-button.ui-state-active,
-    fieldset.selectuserpouvoirsgroup .ui-button.ui-state-focus,
-    fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
-      color: #45714f;
-    }
-
-    .vert,
-    .Terre {
-      color: #0a2c22;
-    }
-    .p_orig {
-      font-style: italic;
-    }
-  </style>
   <title>Liste des acquis - Shaan Renaissance</title>
 </head>
 
@@ -131,6 +75,43 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
+          switch(row.Domaine) {
+            case "NOVATEUR":
+              row["dom_type"] = "technique";
+              break;
+            case "ÉRUDIT":
+              row["dom_type"] = "savoir";
+              break;
+            case "NÉGOCIANT":
+              row["dom_type"] = "social";
+              break;
+            case "ARTISTE":
+              row["dom_type"] = "arts";
+              break;
+            case "SHAANISTE":
+              row["dom_type"] = "shaan";
+              break;
+            case "MAGICIEN":
+              row["dom_type"] = "magie";
+              break;
+            case "ÉLÉMENTALISTE":
+              row["dom_type"] = "rituels";
+              break;
+            case "VOYAGEUR":
+              row["dom_type"] = "survie";
+              break;
+            case "COMBATTANT":
+              row["dom_type"] = "combat";
+              break;
+            case "OMBRE":
+              row["dom_type"] = "nécrose";
+              break;
+            case "SAREN":
+              row["dom_type"] = "saren";
+              break;
+            default:
+              row["dom_type"] = row.Domaine;
+          }
           if (
             row["Catégorie"] && (
               row["Catégorie"] == "Protection" ||

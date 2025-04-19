@@ -13,7 +13,8 @@
 }
 
 .card h2 {
-  border-bottom: 1px dotted var(--esprit-color);
+  color: var(--esprit-color);
+  border-bottom: 1px dotted;
   /* margin: 10px 0 2px; */
   padding-bottom: 10px;
   /* padding-top: 10px; */
@@ -59,44 +60,44 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
   font-style: italic;
 }
 
-.TECHNIQUE {
-  background-image: url("../../img/domaines/technique_small.webp");
+.technique {
+  background-image: url("../img/domaines/technique_small.webp");
 }
 
-.SAVOIR {
-  background-image: url("../../img/domaines/savoir_small.webp");
+.savoir {
+  background-image: url("../img/domaines/savoir_small.webp");
 }
 
-.SOCIAL {
-  background-image: url("../../img/domaines/social_small.webp");
+.social {
+  background-image: url("../img/domaines/social_small.webp");
 }
 
-.ARTS {
-  background-image: url("../../img/domaines/arts_small.webp");
+.arts {
+  background-image: url("../img/domaines/arts_small.webp");
 }
 
-.SHAAN {
-  background-image: url("../../img/domaines/shaan_small.webp");
+.shaan {
+  background-image: url("../img/domaines/shaan_small.webp");
 }
 
-.MAGIE {
-  background-image: url("../../img/domaines/magie_small.webp");
+.magie {
+  background-image: url("../img/domaines/magie_small.webp");
 }
 
-.RITUELS {
-  background-image: url("../../img/domaines/rituels_small.webp");
+.rituels {
+  background-image: url("../img/domaines/rituels_small.webp");
 }
 
-.SURVIE {
-  background-image: url("../../img/domaines/survie_small.webp");
+.survie {
+  background-image: url("../img/domaines/survie_small.webp");
 }
 
-.COMBAT {
-  background-image: url("../../img/domaines/combat_small.webp");
+.combat {
+  background-image: url("../img/domaines/combat_small.webp");
 }
 
-.NÉCROSE {
-  background-image: url("../../img/domaines/necrose_small.webp");
+.nécrose {
+  background-image: url("../img/domaines/necrose_small.webp");
 }
 
 .card-body {

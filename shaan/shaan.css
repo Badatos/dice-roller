@@ -13,6 +13,8 @@
 :root {
   --shaan-blue: #4766a1;
   --shaan-red: #994e34;
+
+  /** #438270 */
   --shaan-green: #45714f;
   --shaan-font: "Economica", arial, helvetica, sans-serif;
   --bs-primary-text-emphasis: #45714f;
@@ -102,6 +104,10 @@ SHAAN RPG Dice Roller styles
 
 label {
   cursor: pointer;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .version {

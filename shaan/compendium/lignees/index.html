@@ -70,7 +70,9 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
-
+          if(row["Domaine"]) {
+            row["Domaine"] = row["Domaine"].toLowerCase();
+          }
           renderedHTML += Mustache.render(template, row);
           // precode.textContent += JSON.stringify(row, null, 2) + '\n';
         });
