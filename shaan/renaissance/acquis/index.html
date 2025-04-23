@@ -14,13 +14,15 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- W3.org ARIA CheckboxMixed -->
+  <link rel="stylesheet" type="text/css" href="../../../css/CheckboxMixed.css" />
+
+  <!-- Search box w. icon-->
+  <link rel="stylesheet" type="text/css" href="../../../css/search-input.css" />
+
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
-
   <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
-
-  <!--GsheetParser-->
-  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
-
 
   <title>Liste des acquis - Shaan Renaissance</title>
 </head>
@@ -31,30 +33,204 @@
     <h1>Liste des acquis - Shaan Renaissance</h1>
   </div>
   <main class="container mt-5 pt-5">
-    <nav aria-label="Fil d’ariane" class="ms-3 pt-4">
+    <nav aria-label="Fil d’ariane" class="ms-5">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="/dice-roller">Aides de Jeu</a></li>
         <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
         <li class="breadcrumb-item active" aria-current="page">Acquis</li>
       </ol>
     </nav>
+    <div class="accordion d-print-none" id="accordionFilters">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            Filtres
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <form name="filtres">
+              <div class="row">
+                <fieldset class="col checkbox-mixed">
+                  <legend>Caste</legend>
+                  <label class="form-check-label" for="selectAllDomains">
+                    <input type="checkbox" id="selectAllDomains" checked="checked" class="form-check-input">
+                    Toutes les castes
+                  </label>
+                  <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
+
+                  <select id="domain" class="form-select"
+                    aria-describedby="domain-help"
+                    multiple>
+                    <option value="Novateur"
+                            selected="selected"
+                            title="Ceux qui travaillent cuir, métal, pierre, bois, verre, tissu, ainsi que la technologie humaine">
+                            Novateur
+                    </option>
+                    <option value="Érudit"
+                            selected="selected"
+                            title="L'élite intellectuelle de la population héossienne">
+                            Érudit
+                    </option>
+                    <option value="Négociant"
+                            selected="selected"
+                            title="Ceux qui tissent des liens sociaux, que ce soit à but lucratif ou par intérêt politique">
+                            Négociant
+                    </option>
+                    <option value="Artiste"
+                            selected="selected"
+                            title="Ceux dont le but est de divertir la population">
+                            Artiste
+                    </option>
+                    <option value="Shaaniste"
+                            selected="selected"
+                            title="Les porteurs de lumière">
+                            Shaaniste
+                    </option>
+                    <option value="Magicien"
+                            selected="selected"
+                            title="Ils utilisent les Trihns qui voyagent sur Héos comme combustible pour leurs pouvoirs">
+                            Magicien
+                    </option>
+                    <option value="Élémentaliste"
+                            selected="selected"
+                            title="Ils vouent un culte aux Éléments">
+                            Élémentaliste
+                    </option>
+                    <option value="Voyageur"
+                            selected="selected"
+                            title="Ceux chargés de transporter quelque chose ou quelqu'un d'un point à un autre">
+                            Voyageur
+                    </option>
+                    <option value="Combattant"
+                            selected="selected"
+                            title="Ceux qui ne vivent que par la guerre et le respect de l'ordre">
+                            Combattant
+                    </option>
+                    <option value="Ombre"
+                            selected="selected"
+                            title="Ceux qui imposent leur autorité par La peur">
+                            Ombres
+                    </option>
+                  </select>
+
+
+                </fieldset>
+                <fieldset class="col">
+                  <legend>Classe</legend>
+                  <label for="nivMin" class="form-label">Classe Minimum</label>
+                  <select name="nivMin" id="nivMin" class="form-select">
+                    <option value="1" selected="selected">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <label for="nivMax" class="form-label">Classe Maximum</label>
+                  <select name="nivMax" id="nivMax" class="form-select">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected="selected">5</option>
+                  </select>
+                </fieldset>
+
+                <!--fieldset class="col checkbox-mixed">
+                  <legend>Affichage</legend>
+                  <label for="allC">
+                    <input type="checkbox" id="allC" class="form-check-input check-all"
+                      aria-controls="cond1 cond2 cond3 cond4">
+                    Toutes les propriétés
+                  </label>
+                  <ul class="checkboxes">
+                    <li>
+                      <label class="form-check-label">
+                        <input type="checkbox" id="cond2" checked="" class="form-check-input">
+                        Tomato
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" id="cond3" class="form-check-input">
+                        Mustard
+                      </label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="checkbox" id="cond4" class="form-check-input">
+                        Sprouts
+                      </label>
+                    </li>
+                  </ul>
+                </fieldset-->
+              </div>
+              <div class="intro">
+                Cet outil en ligne permet de lister et de filtrer tous les acquis
+                de Shaan Renaissance grâce à plusieurs options.
+                <!-- TODO -->
+                <!--Vous pouvez trier la liste comme vous le souhaitez.-->
+                <!--Vous pouvez également sélectionner certains résultats
+                pour générer votre propre liste d'acquis.-->
+              </div>
+
+              <div class="row mt-2">
+                <input type="submit" name="filtrer"
+                  class="btn btn-primary btn-block"
+                  value="Filtrer">
+                <div class="col-sm-4 col-md-2">
+                  <!--a href="#pied" title="PIED" class="btn btn-link">
+                    <i class="bi bi-arrow-down-circle" title="Bottom"></i>
+                  </a-->
+                  <!--a onclick="reset()" class="btn-link btn">
+                    <i class="bi bi-arrow-repeat" title="Reset"></i>
+                  </a-->
+                </div>
+                <!--div class="col">
+                  <div class="search-container">
+                    <input type="text" class="form-control search-input"
+                     placeholder="Rechercher...">
+                    <i class="bi bi-search search-icon"></i>
+                  </div>
+                  <a onclick="clearFilter()" class="btn-link btn">
+                    <i class="bi bi-x"></i>
+                  </a>
+                </div-->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <p class="text-end"><strong id="total"></strong> acquis trouvés.</p>
     <div class="row" id="liste-elements"></div>
     <pre id="code"></pre>
   </main>
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+    <p>Vous avez trouvé un bug ou une erreur ? <a href="https://github.com/Badatos/dice-roller/issues">Signaler un
+        bug</a></p>
     <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
-      <a
-    href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
-  et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+      <a href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
+      et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
     </p>
   </footer>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js "></script>
+
+  <!-- W3.org ARIA CheckboxMixed -->
+  <script src="../../../js/indeterminate_checkboxes.js"></script>
+
   <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
   <script src="https://unpkg.com/mustache@latest"></script>
+
   <!--
   GsheetParser
   See doc at https://github.com/fureweb-com/public-google-sheets-parser#readme
   -->
+  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
   <script>
     const options = { sheetName: 'Acquis', useFormat: false }
     const parser = new PublicGoogleSheetsParser(
@@ -69,64 +245,73 @@
 
     parser.parse().then(data => {
       liste_pouvoirs = data;
+      display_pouvoirs(data);
+    });
+
+    function display_pouvoirs(data) {
       bloc_total.textContent = data.length;
       fetch("../../templates/acquis.mustache")
-      .then((response) => response.text())
-      .then((template) => {
-        let renderedHTML = '';
-        data.forEach(row => {
-          switch(row.Domaine) {
-            case "NOVATEUR":
-              row["dom_type"] = "technique";
-              break;
-            case "ÉRUDIT":
-              row["dom_type"] = "savoir";
-              break;
-            case "NÉGOCIANT":
-              row["dom_type"] = "social";
-              break;
-            case "ARTISTE":
-              row["dom_type"] = "arts";
-              break;
-            case "SHAANISTE":
-              row["dom_type"] = "shaan";
-              break;
-            case "MAGICIEN":
-              row["dom_type"] = "magie";
-              break;
-            case "ÉLÉMENTALISTE":
-              row["dom_type"] = "rituels";
-              break;
-            case "VOYAGEUR":
-              row["dom_type"] = "survie";
-              break;
-            case "COMBATTANT":
-              row["dom_type"] = "combat";
-              break;
-            case "OMBRE":
-              row["dom_type"] = "nécrose";
-              break;
-            case "SAREN":
-              row["dom_type"] = "saren";
-              break;
-            default:
-              row["dom_type"] = row.Domaine;
-          }
-          if (
-            row["Catégorie"] && (
-              row["Catégorie"] == "Protection" ||
-              row["Catégorie"].startsWith("Transport")
-            )
-          ) {
-            row["Attributs"] = row["Spécialisation"];
-            row["Spécialisation"] = "";
-          }
-          renderedHTML += Mustache.render(template, row);
-          //precode.textContent += JSON.stringify(row, null, 2) + '\n';
+        .then((response) => response.text())
+        .then((template) => {
+          let renderedHTML = '';
+          data.forEach(row => {
+            if (
+              row["Catégorie"] && (
+                row["Catégorie"] == "Protection" ||
+                row["Catégorie"].startsWith("Transport")
+              )
+            ) {
+              row["Attributs"] = row["Spécialisation"];
+              row["Spécialisation"] = "";
+            }
+            renderedHTML += Mustache.render(template, row);
+            //precode.textContent += JSON.stringify(row, null, 2) + '\n';
+          });
+          bloc_pouvoirs.innerHTML = renderedHTML;
         });
-        bloc_pouvoirs.innerHTML = renderedHTML;
-      });
+    }
+
+  </script>
+
+  <script>
+  document.forms["filtres"].addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const form = event.target;
+    const selectedDomains = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
+    const minClass = parseInt(form.nivMin.value, 10);
+    const maxClass = parseInt(form.nivMax.value, 10);
+
+    console.log("selectedDomains="+selectedDomains);
+
+    const filteredData = liste_pouvoirs.filter(item => {
+      const itemClass = parseInt(romanNumber(item["Rang"]), 10);
+      let itemDomain = item["Domaine"];
+      if (itemDomain) {
+        itemDomain = itemDomain.toLowerCase();
+      }
+      console.log(itemDomain);
+      //console.log(selectedDomains.length === 0 || selectedDomains.includes(item["Domaine"]));
+      return (
+        (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
+        (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass)
+      );
     });
+
+    display_pouvoirs(filteredData);
+  });
+
+  function romanNumber(romanString) {
+    const romanHash = {
+      I: 1,
+      II: 2,
+      III: 3,
+      IV: 4,
+      V: 5,
+    };
+    return romanHash[romanString];
+
+  }
 
   </script>
 
