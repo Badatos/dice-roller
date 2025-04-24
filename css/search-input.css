@@ -1,0 +1,19 @@
+/**
+  Search input bow with icon inside.
+*/
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 2.5rem;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: .5em;
+  transform: translateY(-50%);
+  color: #888;
+}
