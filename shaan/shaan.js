@@ -14,3 +14,30 @@ function scrollFunction() {
     document.getElementById("header").classList.remove("small");
   }
 }
+
+function romanNumber(romanString) {
+  const romanHash = {
+    I: 1,
+    II: 2,
+    III: 3,
+    IV: 4,
+    V: 5,
+  };
+  return romanHash[romanString];
+}
+
+/**
+ * Masque les éléments qui ne correspondent pas à la recherche.
+ */
+function search_filter() {
+	let string = document.getElementById("search").value.toLowerCase();
+  if (string.length > 2) {
+    document.querySelectorAll('.item').forEach(function(elem) {
+      let item = elem.innerText.toLowerCase();
+      if (!(item.includes(string)))
+        elem.classList.add("d-none");
+      else
+        elem.classList.remove("d-none");
+    });
+  }
+}

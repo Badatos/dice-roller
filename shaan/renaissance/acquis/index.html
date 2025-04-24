@@ -48,11 +48,19 @@
             Filtres
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div id="collapseOne" class="accordion-collapse collapse show">
           <div class="accordion-body">
+            <div class="intro mb-2">
+              Cet outil en ligne permet de lister et de filtrer tous les acquis
+              de Shaan Renaissance grâce à plusieurs options.
+              <!-- TODO -->
+              <!--Vous pouvez trier la liste comme vous le souhaitez.-->
+              <!--Vous pouvez également sélectionner certains résultats
+              pour générer votre propre liste d'acquis.-->
+            </div>
             <form name="filtres">
               <div class="row">
-                <fieldset class="col checkbox-mixed">
+                <fieldset class="col-md-6 mb-3 checkbox-mixed">
                   <legend>Caste</legend>
                   <label class="form-check-label" for="selectAllDomains">
                     <input type="checkbox" id="selectAllDomains" checked="checked" class="form-check-input">
@@ -114,10 +122,9 @@
                             Ombres
                     </option>
                   </select>
-
-
                 </fieldset>
-                <fieldset class="col">
+
+                <fieldset class="col-md-6 mb-3">
                   <legend>Classe</legend>
                   <label for="nivMin" class="form-label">Classe Minimum</label>
                   <select name="nivMin" id="nivMin" class="form-select">
@@ -129,7 +136,6 @@
                   </select>
                   <label for="nivMax" class="form-label">Classe Maximum</label>
                   <select name="nivMax" id="nivMax" class="form-select">
-                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -167,14 +173,6 @@
                   </ul>
                 </fieldset-->
               </div>
-              <div class="intro">
-                Cet outil en ligne permet de lister et de filtrer tous les acquis
-                de Shaan Renaissance grâce à plusieurs options.
-                <!-- TODO -->
-                <!--Vous pouvez trier la liste comme vous le souhaitez.-->
-                <!--Vous pouvez également sélectionner certains résultats
-                pour générer votre propre liste d'acquis.-->
-              </div>
 
               <div class="row mt-2">
                 <input type="submit" name="filtrer"
@@ -203,8 +201,30 @@
           </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2"
+            aria-expanded="true" aria-controls="collapse2">
+            Recherche
+          </button>
+        </h2>
+        <div id="collapse2" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            <div class="col">
+              <div class="search-container">
+                <input id="search" type="text" class="form-control search-input"
+                aria-describedby="search-help"
+                  placeholder="Rechercher...">
+                <!--i class="bi bi-search search-icon"></i-->
+              </div>
+              <div id="search-help" class="form-text">Tapez au moins 3 caractères pour chercher un acquis dans les résultats ci-dessous.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="text-end"><strong id="total"></strong> acquis trouvés.</p>
+    <p class="text-end"><strong id="total"></strong> <span id="text-found">acquis trouvés.</span></p>
     <div class="row" id="liste-elements"></div>
     <pre id="code"></pre>
   </main>
@@ -240,16 +260,17 @@
     const precode = document.getElementById("code");
     const bloc_pouvoirs = document.getElementById("liste-elements");
     const bloc_total = document.getElementById("total");
+    const text_found = document.getElementById("text-found");
 
     let liste_pouvoirs = [];
 
     parser.parse().then(data => {
       liste_pouvoirs = data;
       display_pouvoirs(data);
+      bloc_total.textContent = data.length;
     });
 
     function display_pouvoirs(data) {
-      bloc_total.textContent = data.length;
       fetch("../../templates/acquis.mustache")
         .then((response) => response.text())
         .then((template) => {
@@ -268,12 +289,20 @@
             //precode.textContent += JSON.stringify(row, null, 2) + '\n';
           });
           bloc_pouvoirs.innerHTML = renderedHTML;
+          search_filter();
         });
     }
 
   </script>
 
   <script>
+
+  var filteredData = [];
+
+  document.getElementById("search").addEventListener("keyup", function (event) {
+    search_filter();
+  });
+
   document.forms["filtres"].addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
@@ -282,36 +311,30 @@
     const minClass = parseInt(form.nivMin.value, 10);
     const maxClass = parseInt(form.nivMax.value, 10);
 
-    console.log("selectedDomains="+selectedDomains);
-
-    const filteredData = liste_pouvoirs.filter(item => {
+    filteredData = liste_pouvoirs.filter(item => {
       const itemClass = parseInt(romanNumber(item["Rang"]), 10);
       let itemDomain = item["Domaine"];
       if (itemDomain) {
         itemDomain = itemDomain.toLowerCase();
       }
-      console.log(itemDomain);
-      //console.log(selectedDomains.length === 0 || selectedDomains.includes(item["Domaine"]));
       return (
         (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
         (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass)
       );
     });
+    if (selectedDomains.length > 9) {
+      selectedDomains = "toutes castes";
+    }
+    bloc_total.textContent = filteredData.length;
+    text_found.textContent = "acquis de " + selectedDomains +
+      " de classe " + minClass;
+    if (maxClass != minClass) {
+      text_found.textContent += " à " + maxClass;
+    }
 
+    text_found.textContent += " trouvé(s).";
     display_pouvoirs(filteredData);
   });
-
-  function romanNumber(romanString) {
-    const romanHash = {
-      I: 1,
-      II: 2,
-      III: 3,
-      IV: 4,
-      V: 5,
-    };
-    return romanHash[romanString];
-
-  }
 
   </script>
 
