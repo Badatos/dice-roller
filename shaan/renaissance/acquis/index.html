@@ -35,7 +35,7 @@
   <main class="container mt-5 pt-5">
     <nav aria-label="Fil d’ariane" class="ms-5">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/dice-roller">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
         <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
         <li class="breadcrumb-item active" aria-current="page">Acquis</li>
       </ol>
@@ -121,6 +121,11 @@
                             title="Ceux qui imposent leur autorité par La peur">
                             Ombres
                     </option>
+                    <option value="Saren"
+                            selected="selected"
+                            title="La race disparue">
+                            Saren
+                    </option>
                   </select>
                 </fieldset>
 
@@ -128,7 +133,8 @@
                   <legend>Classe</legend>
                   <label for="nivMin" class="form-label">Classe Minimum</label>
                   <select name="nivMin" id="nivMin" class="form-select">
-                    <option value="1" selected="selected">1</option>
+                    <option value="0" selected="selected">0</option>
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -136,6 +142,7 @@
                   </select>
                   <label for="nivMax" class="form-label">Classe Maximum</label>
                   <select name="nivMax" id="nivMax" class="form-select">
+                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -300,7 +307,7 @@
     event.preventDefault(); // Prevent the default form submission behavior
 
     const form = event.target;
-    const selectedDomains = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
+    let selectedDomains = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
     const minClass = parseInt(form.nivMin.value, 10);
     const maxClass = parseInt(form.nivMax.value, 10);
 
