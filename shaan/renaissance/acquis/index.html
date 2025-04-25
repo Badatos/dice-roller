@@ -69,7 +69,6 @@
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
                   <select id="domain" class="form-select"
-                    aria-describedby="domain-help"
                     multiple>
                     <option value="Novateur"
                             selected="selected"
@@ -148,6 +147,44 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5" selected="selected">5</option>
+                  </select>
+                </fieldset>
+
+                <fieldset class="col-md-6 mb-3 checkbox-mixed">
+                  <legend>Catégorie</legend>
+                  <label class="form-check-label" for="selectAllCats">
+                    <input type="checkbox" id="selectAllCats" checked="checked" class="form-check-input">
+                    Toutes les catégories
+                  </label>
+                  <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
+
+                  <select id="categorie" class="form-select"
+                    multiple>
+                    <option value="Bâtiment" selected="selected">Bâtiment</option>
+                    <option value="Technologie" selected="selected">Technologie</option>
+                    <option value="Manuscrit" selected="selected">Manusccrit</option>
+                    <option value="Armement" selected="selected">Armemement</option>
+                    <option value="Outil" selected="selected">Outil</option>
+                    <option value="Relation" selected="selected">Relation</option>
+                    <option value="Artefact" selected="selected">Artefact</option>
+                    <option value="Transport" selected="selected">Transport</option>
+                    <option value="Armimale" selected="selected">Armimale</option>
+                    <option value="Richesse" selected="selected">Richesse</option>
+                    <option value="Protection" selected="selected">Protection</option>
+                  </select>
+                </fieldset>
+
+                <fieldset class="col-md-6 mb-3 checkbox-mixed">
+                  <legend>Source</legend>
+                  <label class="form-check-label" for="selectAllSrc">
+                    <input type="checkbox" id="selectAllSrc" checked="checked" class="form-check-input">
+                    Toutes les sources
+                  </label>
+                  <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
+
+                  <select id="source" class="form-select" multiple>
+                    <option value="itinérance" selected="selected">Manuel d'itinérance</option>
+                    <option value="erreur est humaine" selected="selected">L'erreur est humaine</option>
                   </select>
                 </fieldset>
 
@@ -308,6 +345,8 @@
 
     const form = event.target;
     let selectedDomains = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
+    let selectedCategories = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
+    let selectedSources = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
     const minClass = parseInt(form.nivMin.value, 10);
     const maxClass = parseInt(form.nivMax.value, 10);
 
@@ -317,17 +356,31 @@
       if (itemDomain) {
         itemDomain = itemDomain.toLowerCase();
       }
+      let itemCategorie = item["Catégorie"];
+      if (itemCategorie) {
+        itemCategorie = itemCategorie.toLowerCase();
+      }
+      let itemSource = item["Source"];
+      if (itemSource) {
+        itemSource = itemSource.toLowerCase();
+      }
       return (
         (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
-        (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass)
+        (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass) &&
+        (selectedCategories.length === 0 || selectedCategories.includes(itemCategorie)) &&
+        (selectedSources.length === 0 || selectedSources.includes(itemSource))
       );
     });
-    if (selectedDomains.length > 9) {
-      selectedDomains = "toutes castes";
-    }
     bloc_total.textContent = filteredData.length;
-    text_found.textContent = "acquis de " + selectedDomains +
-      " de classe " + minClass;
+    text_found.textContent = "acquis"
+    if (selectedDomains.length < 10) {
+      text_found.textContent += " de " + selectedDomains;
+    }
+    if (selectedCategories.length < 11) {
+      text_found.textContent += " de type " + selectedCategories;
+    }
+
+    text_found.textContent +=  " de classe " + minClass;
     if (maxClass != minClass) {
       text_found.textContent += " à " + maxClass;
     }
