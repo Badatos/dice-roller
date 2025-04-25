@@ -15,6 +15,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <!-- W3.org ARIA CheckboxMixed -->
   <link rel="stylesheet" type="text/css" href="../../../css/CheckboxMixed.css" />
 
@@ -40,6 +41,7 @@
         <li class="breadcrumb-item active" aria-current="page">Acquis</li>
       </ol>
     </nav>
+
     <div class="accordion d-print-none" id="accordionFilters">
       <div class="accordion-item">
         <h2 class="accordion-header">
@@ -183,8 +185,8 @@
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
                   <select id="source" class="form-select" multiple>
-                    <option value="itinérance" selected="selected">Manuel d'itinérance</option>
-                    <option value="erreur est humaine" selected="selected">L'erreur est humaine</option>
+                    <option value="Manuel d’itinérance" selected="selected">Manuel d'itinérance</option>
+                    <option value="L’erreur est humaine" selected="selected">L'erreur est humaine</option>
                   </select>
                 </fieldset>
 
@@ -249,7 +251,7 @@
               <div class="search-container">
                 <input id="search" type="text" class="form-control search-input"
                 aria-describedby="search-help"
-                  placeholder="Rechercher...">
+                  placeholder="Rechercher…">
                 <i class="bi bi-search search-icon"></i>
               </div>
               <!--a onclick="clearFilter()" class="btn-link btn">
@@ -261,7 +263,17 @@
         </div>
       </div>
     </div>
-    <p class="text-end"><strong id="total"></strong> <span id="text-found">acquis trouvés.</span></p>
+
+    <div class="text-center" id="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Chargement…</span>
+      </div>
+    </div>
+
+    <p class="text-end">
+      <strong id="total">0</strong>
+      <span id="text-found">acquis trouvés.</span>
+    </p>
     <div class="row" id="liste-elements"></div>
     <pre id="code"></pre>
   </main>
@@ -295,19 +307,20 @@
       options
     );
     const precode = document.getElementById("code");
-    const bloc_pouvoirs = document.getElementById("liste-elements");
+    const liste_elements = document.getElementById("liste-elements");
     const bloc_total = document.getElementById("total");
     const text_found = document.getElementById("text-found");
+    const loader = document.getElementById("loader");
 
     let liste_pouvoirs = [];
 
     parser.parse().then(data => {
       liste_pouvoirs = data;
-      display_pouvoirs(data);
+      display_acquis(data);
       bloc_total.textContent = data.length;
     });
 
-    function display_pouvoirs(data) {
+    function display_acquis(data) {
       fetch("../../templates/acquis.mustache")
         .then((response) => response.text())
         .then((template) => {
@@ -325,9 +338,10 @@
             renderedHTML += Mustache.render(template, row);
             //precode.textContent += JSON.stringify(row, null, 2) + '\n';
           });
-          bloc_pouvoirs.innerHTML = renderedHTML;
+          liste_elements.innerHTML = renderedHTML;
           search_filter();
         });
+
     }
 
   </script>
@@ -337,47 +351,55 @@
   var filteredData = [];
 
   document.getElementById("search").addEventListener("keyup", function (event) {
+    loader.classList.remove("d-none");
+    liste_elements.classList.add("d-none");
     search_filter();
   });
 
   document.forms["filtres"].addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
+    loader.classList.remove("d-none");
+    liste_elements.classList.add("d-none");
     const form = event.target;
-    let selectedDomains = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
-    let selectedCategories = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
-    let selectedSources = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
+    const selectedDomain = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
+    const selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
+    const selectedSource = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
     const minClass = parseInt(form.nivMin.value, 10);
     const maxClass = parseInt(form.nivMax.value, 10);
 
+    const ignoreDomain = selectedDomain.length === 0 || selectedDomain.length === form.domain.options.length;
+    const ignoreCat = selectedCat.length === 0 || selectedCat.length === form.categorie.options.length;
+    const ignoreSource = selectedSource.length === 0 || selectedSource.length === form.source.options.length;
+
     filteredData = liste_pouvoirs.filter(item => {
-      const itemClass = parseInt(romanNumber(item["Rang"]), 10);
-      let itemDomain = item["Domaine"];
-      if (itemDomain) {
-        itemDomain = itemDomain.toLowerCase();
-      }
-      let itemCategorie = item["Catégorie"];
-      if (itemCategorie) {
-        itemCategorie = itemCategorie.toLowerCase();
-      }
+      const itemClass = romanNumber(item["Rang"]);
+      let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
+
+      let itemCategorie = item["Catégorie"]?item["Catégorie"].toLowerCase():"";
+      // console.log(itemCategorie);
+
       let itemSource = item["Source"];
       if (itemSource) {
-        itemSource = itemSource.toLowerCase();
+        itemSource = itemSource.toLowerCase().split(",")[0].split("'")
+        itemSource = itemSource[itemSource.length - 1];
+        // console.log(itemSource);
       }
+
       return (
-        (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
+        (ignoreDomain || selectedDomain.includes(itemDomain)) &&
         (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass) &&
-        (selectedCategories.length === 0 || selectedCategories.includes(itemCategorie)) &&
-        (selectedSources.length === 0 || selectedSources.includes(itemSource))
+        (ignoreCat || selectedCat.includes(itemCategorie)) &&
+        (ignoreSource || selectedSource.includes(itemSource))
       );
     });
     bloc_total.textContent = filteredData.length;
     text_found.textContent = "acquis"
-    if (selectedDomains.length < 10) {
-      text_found.textContent += " de " + selectedDomains;
+    if (!ignoreDomain) {
+      text_found.textContent += " de " + selectedDomain;
     }
-    if (selectedCategories.length < 11) {
-      text_found.textContent += " de type " + selectedCategories;
+    if (!ignoreCat) {
+      text_found.textContent += " de type " + selectedCat;
     }
 
     text_found.textContent +=  " de classe " + minClass;
@@ -385,8 +407,12 @@
       text_found.textContent += " à " + maxClass;
     }
 
-    text_found.textContent += " trouvé(s).";
-    display_pouvoirs(filteredData);
+    text_found.textContent += " trouvé(s)";
+    if (!ignoreSource) {
+      text_found.textContent += " dans " + selectedSource;
+    }
+    text_found.textContent += ".";
+    display_acquis(filteredData);
   });
 
   </script>

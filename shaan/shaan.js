@@ -16,28 +16,34 @@ function scrollFunction() {
 }
 
 function romanNumber(romanString) {
-  const romanHash = {
-    I: 1,
-    II: 2,
-    III: 3,
-    IV: 4,
-    V: 5,
-  };
-  return romanHash[romanString];
+  let toInt = parseInt(romanString, 10)
+  if (toInt) {
+    return toInt;
+  } else {
+    const romanHash = {
+      I: 1,
+      II: 2,
+      III: 3,
+      IV: 4,
+      V: 5,
+    };
+    return romanHash[romanString];
+  }
 }
 
 /**
  * Masque les éléments qui ne correspondent pas à la recherche.
  */
-function search_filter() {
+async function search_filter() {
 	let string = document.getElementById("search").value.toLowerCase();
-  if (string.length > 2) {
-    document.querySelectorAll('.item').forEach(function(elem) {
-      let item = elem.innerText.toLowerCase();
-      if (!(item.includes(string)))
-        elem.classList.add("d-none");
-      else
-        elem.classList.remove("d-none");
-    });
-  }
+  document.querySelectorAll('.item').forEach(function(elem) {
+    let item = elem.innerText.toLowerCase();
+    if (string.length > 2 && !(item.includes(string)))
+      elem.classList.add("d-none");
+    else
+      elem.classList.remove("d-none");
+  });
+  await new Promise(r => setTimeout(r, 200));
+  loader.classList.add("d-none");
+  liste_elements.classList.remove("d-none");
 }
