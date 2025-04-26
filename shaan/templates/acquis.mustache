@@ -14,7 +14,9 @@
       <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
       <p class="jaune">
         Acquis <strong>{{Domaine}}</strong>
-        de Classe {{Rang}}
+        {{#Rang}}
+          de Classe {{Rang}}
+        {{/Rang}}
       </p>
       <ul class="h3 list-unstyled">
         <li><strong>Catégorie :</strong> <span id="a_cat">{{Catégorie}}</span></li>
@@ -32,7 +34,11 @@
         <p class="jaune">Résumé : {{Résumé}}</p>
       {{/Résumé}}
       <ul class="lh-sm jaune">
-        <li><strong>Valeur :</strong> <span id="a_val">{{Valeur}}</span></li>
+        {{#Valeur}}
+          <li>
+            <strong>Valeur :</strong> <span id="a_val">{{Valeur}}</span>
+          </li>
+        {{/Valeur}}
         {{#Prestige}}
           <li>
             <strong>Prestige :</strong>

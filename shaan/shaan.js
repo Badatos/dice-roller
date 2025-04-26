@@ -16,7 +16,10 @@ function scrollFunction() {
 }
 
 function romanNumber(romanString) {
-  let toInt = parseInt(romanString, 10)
+  if(romanString === "0") {
+    return 0;
+  }
+  let toInt = parseInt(romanString, 10);
   if (toInt) {
     return toInt;
   } else {

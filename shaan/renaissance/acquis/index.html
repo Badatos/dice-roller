@@ -173,6 +173,11 @@
                     <option value="Armimale" selected="selected">Armimale</option>
                     <option value="Richesse" selected="selected">Richesse</option>
                     <option value="Protection" selected="selected">Protection</option>
+                    <option value="Altération" selected="selected">Altération</option>
+                    <option value="Attaque" selected="selected">Attaque</option>
+                    <option value="Communication" selected="selected">Communication</option>
+                    <option value="Contrôle" selected="selected">Contrôle</option>
+                    <option value="Morphe" selected="selected">Morphe</option>
                   </select>
                 </fieldset>
 
@@ -377,6 +382,7 @@
       let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
 
       let itemCategorie = item["Catégorie"]?item["Catégorie"].toLowerCase():"";
+      itemCategorie = itemCategorie.split(" ")[0];
       // console.log(itemCategorie);
 
       let itemSource = item["Source"];
