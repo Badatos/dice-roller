@@ -18,6 +18,9 @@
   --shaan-green: #45714f;
   --shaan-font: "Economica", arial, helvetica, sans-serif;
   --bs-primary-text-emphasis: #45714f;
+  --bs-link-color: var(--shaan-green);
+  --bs-link-hover-color: #29422f;
+  /*--bs-link-hover-color-rgb: rgb(41, 66, 47);*/
   --bs-primary-bg-subtle: #DFF0D8;
 
   /* Thrines */
@@ -30,6 +33,10 @@
   /** Couleur accessible **/
   --esprit-color: #847558;
 
+}
+
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--shaan-green);
 }
 
 .bleu {

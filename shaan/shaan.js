@@ -50,3 +50,28 @@ async function search_filter() {
   loader.classList.add("d-none");
   liste_elements.classList.remove("d-none");
 }
+
+
+/**
+ * Genere une liste d'éléments au format "carte"
+ * @param {*} elem  élément cliqué
+ * @param {*} event évenement déclenché
+ */
+async function generate(elem, event) {
+  if (!card_tab.classList.contains("active")) {
+    loader.classList.remove("d-none");
+    if (filteredData[0] == "VIDE") {
+      filteredData = liste_origine;
+    }
+    display_acquis(filteredData, card_elements, "acquis");
+    card_tab.classList.add("active");
+    card_tab.setAttribute('aria-current', "page");
+    table_elements.classList.add("d-none");
+    card_tab.scrollIntoView();
+    table_tab.classList.remove("active");
+    table_tab.removeAttribute('aria-current');
+    await new Promise(r => setTimeout(r, 200));
+    loader.classList.add("d-none");
+    card_elements.classList.remove("d-none");
+  }
+}
