@@ -266,7 +266,7 @@
       </div>
     </div>
 
-    <a href="#pied" title="Bas de page" class="btn btn-link">
+    <a href="#pied" title="Bas de page" class="btn btn-link d-print-none">
       <i class="bi bi-arrow-down-circle" aria-hidden="true"></i>
     </a>
 
@@ -364,7 +364,7 @@
   </footer>
 
   <div class="modal" tabindex="-1" id="item-modal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Aperçu</h5>
@@ -374,7 +374,7 @@
           <p>Modal body text goes here.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         </div>
       </div>
     </div>
@@ -427,6 +427,7 @@
     function modal_acquis(item, event) {
       event.preventDefault();
       const selectedDatas = liste_origine.filter((o) => o.Acquis === item.dataset["name"]);
+      selectedDatas[0].width = "col-sm-12";
       display_acquis(selectedDatas, items_list, "acquis");
       itemModal.show();
     }
