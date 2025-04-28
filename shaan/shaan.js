@@ -58,18 +58,20 @@ async function search_filter() {
  * @param {*} event évenement déclenché
  */
 async function generate(elem, event) {
+  //Ne s'active que si l'onglet "cartes" n'est pas déja sélectionné
   if (!card_tab.classList.contains("active")) {
+    //console.log(select_item);
     loader.classList.remove("d-none");
+    table_elements.classList.add("d-none");
+    card_tab.classList.add("active");
+    card_tab.setAttribute('aria-current', "page");
+    table_tab.classList.remove("active");
+    table_tab.removeAttribute('aria-current');
+    card_tab.scrollIntoView();
     if (filteredData[0] == "VIDE") {
       filteredData = liste_origine;
     }
     display_acquis(filteredData, card_elements, "acquis");
-    card_tab.classList.add("active");
-    card_tab.setAttribute('aria-current', "page");
-    table_elements.classList.add("d-none");
-    card_tab.scrollIntoView();
-    table_tab.classList.remove("active");
-    table_tab.removeAttribute('aria-current');
     await new Promise(r => setTimeout(r, 200));
     loader.classList.add("d-none");
     card_elements.classList.remove("d-none");

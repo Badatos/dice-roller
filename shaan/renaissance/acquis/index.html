@@ -266,7 +266,8 @@
       </div>
     </div>
 
-    <a href="#pied" title="Bas de page" class="btn btn-link d-print-none">
+    <a href="#pied" title="Bas de page"
+       id="up" class="btn btn-link d-print-none">
       <i class="bi bi-arrow-down-circle" aria-hidden="true"></i>
     </a>
 
@@ -276,42 +277,49 @@
       </div>
     </div>
 
-    <div class="table-responsive d-print-none">
-      <table class="table table-striped caption-top sortable" id="table-elements">
-        <caption>
-          <strong id="total">0</strong>
-          <span id="text-found">acquis trouvés.</span>
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col"><span class="visually-hidden">Sélection</span></th>
-            <th scope="col">Acquis</th>
-            <th scope="col">Caste</th>
-            <th scope="col">Rang</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Spécialisation</th>
-            <!--th scope="col">Attributs</th>
-            <th scope="col">Résumé</th>
-            <th scope="col">Valeur</th>
-            <th scope="col">Prestige</th>
-            <th scope="col">Ressources</th>
-            <th scope="col">Fabrication</th>
-            <th scope="col">Dressage</th>
-            <th scope="col">Entretien</th>
-            <th scope="col">Détails</th-->
-            <th scope="col">Source</th>
-          </tr>
-        </thead>
-        <tbody id="liste-elements"> </tbody>
-      </table>
-    </div>
+    <form name="selecteur" class="d-print-none" id="table-elements">
+      <fieldset class="table-responsive checkbox-mixed">
+        <table class="table table-striped caption-top sortable mb-0">
+          <caption>
+            <strong id="total">0</strong>
+            <span id="text-found">acquis trouvés.</span>
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden">Sélection</span></th>
+              <th scope="col">Acquis</th>
+              <th scope="col">Caste</th>
+              <th scope="col">Rang</th>
+              <th scope="col">Catégorie</th>
+              <th scope="col">Spécialisation</th>
+              <!--th scope="col">Attributs</th>
+              <th scope="col">Résumé</th>
+              <th scope="col">Valeur</th>
+              <th scope="col">Prestige</th>
+              <th scope="col">Ressources</th>
+              <th scope="col">Fabrication</th>
+              <th scope="col">Dressage</th>
+              <th scope="col">Entretien</th>
+              <th scope="col">Détails</th-->
+              <th scope="col">Source</th>
+            </tr>
+          </thead>
+          <tbody id="liste-elements" class="checkboxes"> </tbody>
+        </table>
+        <!--div class="col">
+          <label for="selectAll">
+            <input type="checkbox" class="form-check-input check-all"
+              id="selectAll" onclick="selectBox()">
+            Tout sélectionner
+          </label>
+        </div-->
+      </fieldset>
+    </form>
+
+    <div id="card-elements" class="row d-none mt-1"> </div>
 
     <div id="foot_actions" class="mt-2 d-print-none">
       <div class="row">
-        <!--div class="col">
-          <input type="checkbox" class="form-check-input" id="selectAll" onclick="selectBox()">
-          <label for="selectAll">Tout sélectionner</label>
-        </div-->
         <!--fieldset class="col">
           <legend><i class="bi bi-printer" aria-hidden="true"></i> Format</legend>
           <input type="radio" class="form-check-input" name="type" value="C" id="type-C" checked="checked">
@@ -320,7 +328,7 @@
       </div>
       <div class="row" id="pied">
         <div class="col-sm-12">
-          <a href="#table-elements" title="Haut de page" class="btn btn-link">
+          <a href="#up" title="Haut de page" class="btn btn-link">
             <i class="bi bi-arrow-up-circle" aria-hidden="true"></i>
           </a>
           <!--
@@ -352,7 +360,7 @@
         </a>
       </li>
     </ul>
-    <div id="card-elements" class="row d-none mt-1"> </div>
+
   </main>
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
     <p>Vous avez trouvé un bug ou une erreur ? <a href="https://github.com/Badatos/dice-roller/issues">Signaler un
