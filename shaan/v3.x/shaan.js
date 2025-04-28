@@ -19,13 +19,12 @@ const symbiose = document.getElementById("symbiose");
 const symbiose_necro = document.getElementById("symbiose-necro");
 const symbiose_necro_trans = document.getElementById("symbiose-necro-trans");
 const symbiose_trans = document.getElementById("symbiose-trans");
-const bonus = document.getElementById("bonus");
+const bloc_bonus = document.getElementById("bonus");
 const pending_bonus = document.getElementById("pending-bonus");
 const exp = document.getElementById("exp");
 const limbes = document.getElementById("limbes");
 const perte_bloc = document.getElementById("perte");
 const crane_perte = document.getElementById("crane-perte");
-const critical_necrosis = document.getElementById("critical-necrosis");
 const necrosis_help = document.getElementById("necrosis-help");
 const success_help = document.getElementById("success-help");
 const succes_plus = document.getElementById("succes-plus");
@@ -134,11 +133,10 @@ function reset_blocs() {
     symbiose_necro.classList.add("d-none");
     symbiose_necro_trans.classList.add("d-none");
     symbiose_trans.classList.add("d-none");
-    bonus.classList.add("d-none");
+    bloc_bonus.classList.add("d-none");
     pending_bonus.classList.add("d-none");
     exp.classList.add("d-none");
     limbes.classList.add("d-none");
-    critical_necrosis.classList.add("d-none");
     necrosis_help.classList.add("d-none");
     success_help.classList.add("d-none");
     succes_plus.classList.add("d-none");
@@ -286,7 +284,7 @@ function calcul_score(action_color, de_bonus = 0) {
 
         // Succès critique
         if (action_val === 9 || de_bonus === 9) {
-            bonus.classList.remove("d-none");
+            bloc_bonus.classList.remove("d-none");
             total_succes.innerText = succes + "+1 = " + Number(succes + 1);
             succes++;
         }
@@ -361,10 +359,6 @@ function random_necrosis() {
     if (roll_count > 0) window.setTimeout(random_necrosis, 100);
     else {
         roll_count = 10;
-        if (necrose == 9) {
-            critical_necrosis.classList.remove("d-none");
-        }
-
         // Calcul des pertes
         if (bleu == 0) {
             perte = 3;
@@ -441,7 +435,8 @@ function roll_failure() {
                 title = "Perte de repères";
                 msg = "Vous ne pouvez plus utiliser la vocation principale"+
                 " utilisée à cet acte tant que vous n’utilisez pas un"+
-                " <strong>succès bonus</strong> pour briser cet échec.";                break;
+                " <strong>succès bonus</strong> pour briser cet échec.";
+                break;
             case 9:
                 title = "Dommage collatéral";
                 msg = "Vous mettez en danger les autres personnages qui perdent"+
