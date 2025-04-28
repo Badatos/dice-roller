@@ -361,7 +361,7 @@ function random_necrosis() {
     if (roll_count > 0) window.setTimeout(random_necrosis, 100);
     else {
         roll_count = 10;
-        if (necrose == 0) {
+        if (necrose == 9) {
             critical_necrosis.classList.remove("d-none");
         }
 
