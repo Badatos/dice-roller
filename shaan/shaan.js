@@ -37,9 +37,9 @@ function romanNumber(romanString) {
 /**
  * Masque les éléments qui ne correspondent pas à la recherche.
  */
-async function search_filter() {
+async function search_filter(target="liste-elements") {
 	let string = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll('.item').forEach(function(elem) {
+  document.querySelectorAll('tr.item').forEach(function(elem) {
     let item = elem.innerText.toLowerCase();
     if (string.length > 2 && !(item.includes(string)))
       elem.classList.add("d-none");
@@ -48,7 +48,7 @@ async function search_filter() {
   });
   await new Promise(r => setTimeout(r, 200));
   loader.classList.add("d-none");
-  liste_elements.classList.remove("d-none");
+  document.getElementById(target).classList.remove("d-none");
 }
 
 
@@ -60,7 +60,6 @@ async function search_filter() {
 async function generate(elem, event) {
   //Ne s'active que si l'onglet "cartes" n'est pas déja sélectionné
   if (!card_tab.classList.contains("active")) {
-    //console.log(select_item);
     loader.classList.remove("d-none");
     table_elements.classList.add("d-none");
     card_tab.classList.add("active");
@@ -75,5 +74,17 @@ async function generate(elem, event) {
     await new Promise(r => setTimeout(r, 200));
     loader.classList.add("d-none");
     card_elements.classList.remove("d-none");
+  }
+}
+
+/**
+ * Remove aria-sort status on all table headings
+ */
+function reset_sort_status() {
+  const tr = document.getElementById("table-head");
+  const nodes = tr.cells
+  // Reset thead cells
+  for (let i = 0; i < nodes.length; i++) {
+    nodes[i].removeAttribute('aria-sort')
   }
 }

@@ -278,18 +278,19 @@
     </div>
 
     <form name="selecteur" class="d-print-none" id="table-elements">
-      <fieldset class="table-responsive checkbox-mixed">
+      <fieldset class="table-responsive checkbox-mixed"
+      style="max-height:30em">
         <table class="table table-striped caption-top sortable mb-0">
           <caption>
             <strong id="total">0</strong>
             <span id="text-found">acquis trouvés.</span>
           </caption>
-          <thead>
-            <tr>
+          <thead class="sticky-top">
+            <tr id="table-head">
               <th scope="col"><span class="visually-hidden">Sélection</span></th>
               <th scope="col">Acquis</th>
               <th scope="col">Caste</th>
-              <th scope="col">Rang</th>
+              <th scope="col">Classe</th>
               <th scope="col">Catégorie</th>
               <th scope="col">Spécialisation</th>
               <!--th scope="col">Attributs</th>
@@ -418,7 +419,7 @@
       '1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc',
       options
     );
-    const liste_elements = document.getElementById("liste-elements");
+
     const bloc_total = document.getElementById("total");
     const text_found = document.getElementById("text-found");
     const loader = document.getElementById("loader");
@@ -454,11 +455,14 @@
       }
     }
 
-    function display_acquis(data, target=liste_elements, template="acquis_row") {
-      fetch("../../templates/"+template+".mustache")
+    function display_acquis(data, target="liste-elements", modele="acquis_row") {
+
+      const liste_elements = document.getElementById(target);
+      fetch("../../templates/"+modele+".mustache")
         .then((response) => response.text())
         .then((template) => {
           let renderedHTML = '';
+          liste_elements.innerHTML = "";
           data.forEach(row => {
             if (
               row["Catégorie"] && (
@@ -474,7 +478,7 @@
             }
             renderedHTML += Mustache.render(template, row);
           });
-          target.innerHTML = renderedHTML;
+          liste_elements.innerHTML = renderedHTML;
           search_filter();
         });
 
@@ -483,7 +487,7 @@
 
   document.getElementById("search").addEventListener("keyup", function (event) {
     loader.classList.remove("d-none");
-    liste_elements.classList.add("d-none");
+    document.getElementById("liste-elements").classList.add("d-none");
     search_filter();
   });
 
@@ -491,7 +495,7 @@
     event.preventDefault(); // Prevent the default form submission behavior
 
     loader.classList.remove("d-none");
-    liste_elements.classList.add("d-none");
+    document.getElementById("liste-elements").classList.add("d-none");
     const form = event.target;
     const selectedDomain = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
     const selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
@@ -509,13 +513,11 @@
 
       let itemCategorie = item["Catégorie"]?item["Catégorie"].toLowerCase():"";
       itemCategorie = itemCategorie.split(" ")[0];
-      // console.log(itemCategorie);
 
       let itemSource = item["Source"];
       if (itemSource) {
         itemSource = itemSource.toLowerCase().split(",")[0].split("'")
         itemSource = itemSource[itemSource.length - 1];
-        // console.log(itemSource);
       }
 
       return (
@@ -544,6 +546,7 @@
       text_found.textContent += " dans " + selectedSource;
     }
     text_found.textContent += ".";
+    reset_sort_status();
     display_acquis(filteredData);
     table_switch(null, null);
   });
@@ -553,6 +556,7 @@
   <!-- https://github.com/tofsjonas/sortable -->
   <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.js"></script>
+  <!--script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.a11y.min.js"></script-->
 
   <!-- Shaan template JS -->
   <script src="../../shaan.js"></script>
