@@ -70,7 +70,7 @@ async function generate(elem, event) {
     if (filteredData[0] == "VIDE") {
       filteredData = liste_origine;
     }
-    display_acquis(filteredData, card_elements, "acquis");
+    display_acquis(filteredData, "card-elements", "acquis");
     await new Promise(r => setTimeout(r, 200));
     loader.classList.add("d-none");
     card_elements.classList.remove("d-none");

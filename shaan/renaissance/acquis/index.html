@@ -192,6 +192,7 @@
                   <select id="source" class="form-select" multiple>
                     <option value="Manuel d’itinérance" selected="selected">Manuel d'itinérance</option>
                     <option value="L’erreur est humaine" selected="selected">L'erreur est humaine</option>
+                    <option value="Le feu intérieur" selected="selected">Le feu intérieur</option>
                   </select>
                 </fieldset>
 
@@ -406,7 +407,6 @@
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
   <script>
 
-    const items_list = document.getElementById("items-list");
     const itemModal = new bootstrap.Modal(document.getElementById('item-modal'));
     const card_elements = document.getElementById("card-elements");
     const table_elements = document.getElementById("table-elements");
@@ -437,7 +437,7 @@
       event.preventDefault();
       const selectedDatas = liste_origine.filter((o) => o.Acquis === item.dataset["name"]);
       selectedDatas[0].width = "col-sm-12";
-      display_acquis(selectedDatas, items_list, "acquis");
+      display_acquis(selectedDatas, "items-list", "acquis");
       itemModal.show();
     }
 
