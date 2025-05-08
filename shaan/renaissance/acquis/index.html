@@ -25,7 +25,7 @@
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
   <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
 
-  <title>Liste des acquis - Shaan Renaissance</title>
+  <title>Acquis - Shaan Renaissance</title>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
               <!--Vous pouvez également sélectionner certains résultats
               pour générer votre propre liste d’acquis.-->
             </div>
-            <form name="filtres">
+            <form name="filtres" data-itemtype="acquis">
               <div class="row">
                 <fieldset class="col-md-6 mb-3 checkbox-mixed">
                   <legend>Caste</legend>
@@ -194,6 +194,8 @@
                     <option value="L’erreur est humaine" selected="selected">L’erreur est humaine</option>
                     <option value="Le feu intérieur" selected="selected">Le feu intérieur</option>
                     <option value="L’arbre qui cache la forêt" selected="selected">L’arbre qui cache la forêt</option>
+                    <option value="L’ombre blanche" selected="selected">L’ombre blanche</option>
+                    <option value="Carnets de Voyages tome 1" selected="selected">Carnets de Voyages tome 1</option>
                   </select>
                 </fieldset>
 
@@ -279,43 +281,45 @@
       </div>
     </div>
 
-    <form name="selecteur" class="d-print-none" id="table-elements">
-      <fieldset class="table-responsive checkbox-mixed"
-      style="max-height:30em">
-        <table class="table table-striped caption-top sortable mb-0">
-          <caption>
-            <strong id="total">0</strong>
-            <span id="text-found">acquis trouvés.</span>
-          </caption>
-          <thead class="sticky-top">
-            <tr id="table-head">
-              <th scope="col"><span class="visually-hidden">Sélection</span></th>
-              <th scope="col">Acquis</th>
-              <th scope="col">Caste</th>
-              <th scope="col">Classe</th>
-              <th scope="col">Catégorie</th>
-              <th scope="col">Spécialisation</th>
-              <!--th scope="col">Attributs</th>
-              <th scope="col">Résumé</th>
-              <th scope="col">Valeur</th>
-              <th scope="col">Prestige</th>
-              <th scope="col">Ressources</th>
-              <th scope="col">Fabrication</th>
-              <th scope="col">Dressage</th>
-              <th scope="col">Entretien</th>
-              <th scope="col">Détails</th-->
-              <th scope="col">Source</th>
-            </tr>
-          </thead>
-          <tbody id="liste-elements" class="checkboxes"> </tbody>
-        </table>
-        <!--div class="col">
+    <form name="selecteur" class="d-print-none" id="table-elements"
+          data-itemType="acquis">
+      <fieldset class="checkbox-mixed">
+        <div class="table-responsive" style="max-height:30em">
+          <table class="table table-striped caption-top sortable mb-0">
+            <caption>
+              <strong id="total">0</strong>
+              <span id="text-found">acquis trouvés.</span>
+            </caption>
+            <thead class="sticky-top">
+              <tr id="table-head">
+                <th scope="col"><span class="visually-hidden">Sélection</span></th>
+                <th scope="col">Acquis</th>
+                <th scope="col">Caste</th>
+                <th scope="col">Classe</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Spécialisation</th>
+                <!--th scope="col">Attributs</th>
+                <th scope="col">Résumé</th>
+                <th scope="col">Valeur</th>
+                <th scope="col">Prestige</th>
+                <th scope="col">Ressources</th>
+                <th scope="col">Fabrication</th>
+                <th scope="col">Dressage</th>
+                <th scope="col">Entretien</th>
+                <th scope="col">Détails</th-->
+                <th scope="col">Source</th>
+              </tr>
+            </thead>
+            <tbody id="liste-elements" class="checkboxes"> </tbody>
+          </table>
+        </div>
+        <div class="col">
           <label for="selectAll">
             <input type="checkbox" class="form-check-input check-all"
-              id="selectAll" onclick="selectBox()">
+              id="selectAll" onclick="selectAllItems()">
             Tout sélectionner
           </label>
-        </div-->
+        </div>
       </fieldset>
     </form>
 
@@ -358,7 +362,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#card-elements" id="card-tab"
-           onclick="generate(this, event)">
+           onclick="generate(this, event, 'acquis')">
           <i class="bi bi-postcard"></i> Cartes
         </a>
       </li>
@@ -406,57 +410,12 @@
   See doc at https://github.com/fureweb-com/public-google-sheets-parser#readme
   -->
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
+
   <script>
 
-    const itemModal = new bootstrap.Modal(document.getElementById("item-modal"));
-    const card_elements = document.getElementById("card-elements");
-    const table_elements = document.getElementById("table-elements");
-
-    const card_tab = document.getElementById("card-tab");
-    const table_tab = document.getElementById("table-tab");
-
     const options = { sheetName: "Acquis", useFormat: false }
-    const parser = new PublicGoogleSheetsParser(
-      "1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc",
-      options
-    );
 
-    const bloc_total = document.getElementById("total");
-    const text_found = document.getElementById("text-found");
-    const loader = document.getElementById("loader");
-
-    let liste_origine = [];
-    var filteredData = ["VIDE"];
-
-    parser.parse().then(data => {
-      liste_origine = data;
-      display_acquis(data);
-      bloc_total.textContent = data.length;
-    });
-
-    function modal_acquis(item, event) {
-      event.preventDefault();
-      const selectedDatas = liste_origine.filter((o) => o.Acquis === item.dataset["name"]);
-      selectedDatas[0].width = "col-sm-12";
-      display_acquis(selectedDatas, "items-list", "acquis");
-      itemModal.show();
-    }
-
-    function table_switch(elem, event) {
-      if(event) {
-        event.preventDefault();
-      }
-      if (!table_tab.classList.contains("active")) {
-        card_elements.classList.add("d-none");
-        card_tab.classList.remove("active");
-        card_tab.removeAttribute("aria-current");
-        table_elements.classList.remove("d-none");
-        table_tab.classList.add("active");
-        table_tab.setAttribute("aria-current", "page");
-      }
-    }
-
-    function display_acquis(data, target="liste-elements", modele="acquis_row") {
+    function display_items(data, target="liste-elements", modele="acquis_row") {
 
       const liste_elements = document.getElementById(target);
       fetch("../../templates/"+modele+".mustache")
@@ -485,79 +444,9 @@
 
     }
 
-
-  document.getElementById("search").addEventListener("keyup", function (event) {
-    loader.classList.remove("d-none");
-    document.getElementById("liste-elements").classList.add("d-none");
-    search_filter();
-  });
-
-  document.forms["filtres"].addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    loader.classList.remove("d-none");
-    document.getElementById("liste-elements").classList.add("d-none");
-    const form = event.target;
-    const selectedDomain = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
-    const selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
-    const selectedSource = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
-    const minClass = parseInt(form.nivMin.value, 10);
-    const maxClass = parseInt(form.nivMax.value, 10);
-
-    const ignoreDomain = selectedDomain.length === 0 || selectedDomain.length === form.domain.options.length;
-    const ignoreCat = selectedCat.length === 0 || selectedCat.length === form.categorie.options.length;
-    const ignoreSource = selectedSource.length === 0 || selectedSource.length === form.source.options.length;
-
-    filteredData = liste_origine.filter(item => {
-      const itemClass = romanNumber(item["Rang"]);
-      let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
-
-      let itemCategorie = item["Catégorie"]?item["Catégorie"].toLowerCase():"";
-      itemCategorie = itemCategorie.split(" ")[0];
-
-      let itemSource = item["Source"];
-
-      if (itemSource) {
-        // Corrige les apostrophes typographiques
-        itemSource = itemSource.replace("'", "’").toLowerCase();
-        // Ne prend que la source sans la page
-        itemSource = itemSource.split(",")[0];
-        // Prend le dernier élément
-        //itemSource = itemSource[itemSource.length - 1];
-      }
-
-      return (
-        (ignoreDomain || selectedDomain.includes(itemDomain)) &&
-        (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass) &&
-        (ignoreCat || selectedCat.includes(itemCategorie)) &&
-        (ignoreSource || selectedSource.includes(itemSource))
-      );
-    });
-    bloc_total.textContent = filteredData.length;
-    text_found.textContent = "acquis"
-    if (!ignoreDomain) {
-      text_found.textContent += " de " + selectedDomain;
-    }
-    if (!ignoreCat) {
-      text_found.textContent += " de type " + selectedCat;
-    }
-
-    text_found.textContent +=  " de classe " + minClass;
-    if (maxClass != minClass) {
-      text_found.textContent += " à " + maxClass;
-    }
-
-    text_found.textContent += " trouvé(s)";
-    if (!ignoreSource) {
-      text_found.textContent += " dans " + selectedSource;
-    }
-    text_found.textContent += ".";
-    reset_sort_status();
-    display_acquis(filteredData);
-    table_switch(null, null);
-  });
-
   </script>
+
+  <script src="../../compendium/compendium.js"></script>
 
   <!-- https://github.com/tofsjonas/sortable -->
   <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />

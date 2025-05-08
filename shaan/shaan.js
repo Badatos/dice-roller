@@ -57,7 +57,7 @@ async function search_filter(target="liste-elements") {
  * @param {*} elem  élément cliqué
  * @param {*} event évenement déclenché
  */
-async function generate(elem, event) {
+async function generate(elem, event, item_type="acquis") {
   //Ne s'active que si l'onglet "cartes" n'est pas déja sélectionné
   if (!card_tab.classList.contains("active")) {
     loader.classList.remove("d-none");
@@ -83,11 +83,11 @@ async function generate(elem, event) {
     if (selectedItems.length > 0) {
       // On ne prend que les éléments sélectionnés
       filteredData = filteredData.filter(item => {
-        return selectedItems.includes(item["Acquis"]);
+        return selectedItems.includes(item["Nom"]);
       });
     }
 
-    display_acquis(filteredData, "card-elements", "acquis");
+    display_items(filteredData, "card-elements", item_type);
     await new Promise(r => setTimeout(r, 200));
     loader.classList.add("d-none");
     card_elements.classList.remove("d-none");
@@ -103,5 +103,19 @@ function reset_sort_status() {
   // Reset thead cells
   for (let i = 0; i < nodes.length; i++) {
     nodes[i].removeAttribute('aria-sort')
+  }
+}
+
+function table_switch(elem, event) {
+  if(event) {
+    event.preventDefault();
+  }
+  if (!table_tab.classList.contains("active")) {
+    card_elements.classList.add("d-none");
+    card_tab.classList.remove("active");
+    card_tab.removeAttribute("aria-current");
+    table_elements.classList.remove("d-none");
+    table_tab.classList.add("active");
+    table_tab.setAttribute("aria-current", "page");
   }
 }
