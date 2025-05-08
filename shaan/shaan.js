@@ -67,9 +67,26 @@ async function generate(elem, event) {
     table_tab.classList.remove("active");
     table_tab.removeAttribute('aria-current');
     card_tab.scrollIntoView();
+
     if (filteredData[0] == "VIDE") {
+      // Si aucun filtre, on prend la liste complète.
       filteredData = liste_origine;
     }
+
+    const selectedItems = [];
+    document.getElementsByName('select_item').forEach(function(chk){
+      if(chk.checked){
+        selectedItems.push(chk.value);
+      }
+    });
+
+    if (selectedItems.length > 0) {
+      // On ne prend que les éléments sélectionnés
+      filteredData = filteredData.filter(item => {
+        return selectedItems.includes(item["Acquis"]);
+      });
+    }
+
     display_acquis(filteredData, "card-elements", "acquis");
     await new Promise(r => setTimeout(r, 200));
     loader.classList.add("d-none");

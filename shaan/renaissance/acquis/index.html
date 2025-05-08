@@ -58,7 +58,7 @@
               <!-- TODO -->
               <!--Vous pouvez trier la liste comme vous le souhaitez.-->
               <!--Vous pouvez également sélectionner certains résultats
-              pour générer votre propre liste d'acquis.-->
+              pour générer votre propre liste d’acquis.-->
             </div>
             <form name="filtres">
               <div class="row">
@@ -79,7 +79,7 @@
                     </option>
                     <option value="Érudit"
                             selected="selected"
-                            title="L'élite intellectuelle de la population héossienne">
+                            title="L’élite intellectuelle de la population héossienne">
                             Érudit
                     </option>
                     <option value="Négociant"
@@ -109,12 +109,12 @@
                     </option>
                     <option value="Voyageur"
                             selected="selected"
-                            title="Ceux chargés de transporter quelque chose ou quelqu'un d'un point à un autre">
+                            title="Ceux chargés de transporter quelque chose ou quelqu’un d’un point à un autre">
                             Voyageur
                     </option>
                     <option value="Combattant"
                             selected="selected"
-                            title="Ceux qui ne vivent que par la guerre et le respect de l'ordre">
+                            title="Ceux qui ne vivent que par la guerre et le respect de l’ordre">
                             Combattant
                     </option>
                     <option value="Ombre"
@@ -190,9 +190,10 @@
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
                   <select id="source" class="form-select" multiple>
-                    <option value="Manuel d’itinérance" selected="selected">Manuel d'itinérance</option>
-                    <option value="L’erreur est humaine" selected="selected">L'erreur est humaine</option>
+                    <option value="Manuel d’itinérance" selected="selected">Manuel d’itinérance</option>
+                    <option value="L’erreur est humaine" selected="selected">L’erreur est humaine</option>
                     <option value="Le feu intérieur" selected="selected">Le feu intérieur</option>
+                    <option value="L’arbre qui cache la forêt" selected="selected">L’arbre qui cache la forêt</option>
                   </select>
                 </fieldset>
 
@@ -407,16 +408,16 @@
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
   <script>
 
-    const itemModal = new bootstrap.Modal(document.getElementById('item-modal'));
+    const itemModal = new bootstrap.Modal(document.getElementById("item-modal"));
     const card_elements = document.getElementById("card-elements");
     const table_elements = document.getElementById("table-elements");
 
     const card_tab = document.getElementById("card-tab");
     const table_tab = document.getElementById("table-tab");
 
-    const options = { sheetName: 'Acquis', useFormat: false }
+    const options = { sheetName: "Acquis", useFormat: false }
     const parser = new PublicGoogleSheetsParser(
-      '1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc',
+      "1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc",
       options
     );
 
@@ -448,10 +449,10 @@
       if (!table_tab.classList.contains("active")) {
         card_elements.classList.add("d-none");
         card_tab.classList.remove("active");
-        card_tab.removeAttribute('aria-current');
+        card_tab.removeAttribute("aria-current");
         table_elements.classList.remove("d-none");
         table_tab.classList.add("active");
-        table_tab.setAttribute('aria-current', "page");
+        table_tab.setAttribute("aria-current", "page");
       }
     }
 
@@ -461,7 +462,7 @@
       fetch("../../templates/"+modele+".mustache")
         .then((response) => response.text())
         .then((template) => {
-          let renderedHTML = '';
+          let renderedHTML = "";
           liste_elements.innerHTML = "";
           data.forEach(row => {
             if (
@@ -515,9 +516,14 @@
       itemCategorie = itemCategorie.split(" ")[0];
 
       let itemSource = item["Source"];
+
       if (itemSource) {
-        itemSource = itemSource.toLowerCase().split(",")[0].split("'")
-        itemSource = itemSource[itemSource.length - 1];
+        // Corrige les apostrophes typographiques
+        itemSource = itemSource.replace("'", "’").toLowerCase();
+        // Ne prend que la source sans la page
+        itemSource = itemSource.split(",")[0];
+        // Prend le dernier élément
+        //itemSource = itemSource[itemSource.length - 1];
       }
 
       return (
