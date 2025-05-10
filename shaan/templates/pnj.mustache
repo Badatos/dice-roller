@@ -7,9 +7,9 @@
     class="item col-sm-12 col-md-6 col-lg-4 mb-2"
   {{/width}}
   >
-  <div class="card fiche_metier">
+  <div class="card fiche_pnj">
     <div class="card-header {{dom_type}}">
-      <h2 class="mt-0 pt-0">{{Nom}}</h2>
+      <h2 class="mt-0 pt-0">{{Nom}}, {{Métier}} {{Lignée}}</h2>
     </div>
     <div class="card-body">
       {{#Image}}
@@ -32,14 +32,16 @@
         {{#Spécialisations}}
           <li>
             <strong>Spécialisations :</strong>
-            <span class="m-spe">{{Spécialisations}}</span>
+            <span>{{Spécialisations}}</span>
           </li>
         {{/Spécialisations}}
       </ul>
 
       <div class="description mt-3">{{Description}}</div>
       <p class="source text-end">{{Source}}</p>
-    </div>
+      <div class="text-center d-print-none">
+        <a href="#" class="btn btn-primary" onclick="modal_item(this, event, 'protagoniste')">Générer un protagoniste</a>
+      </div>
 
   </div>
 </div>
