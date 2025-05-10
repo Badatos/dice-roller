@@ -49,17 +49,23 @@
     .sortable thead th {
       text-transform: none;
     }
+
     td,
     th {
       vertical-align: middle;
     }
+
     @media print {
       body {
         font-size: 12pt;
       }
-      .shaan-title{
-        background-image: none;
+      p {
+        margin-bottom: .5rem;
+      }
+      .shaan-title {
+        background-image: none !important;
         position: relative;
+        height: 3rem !important;
       }
       main.container {
         margin-top: 0 !important;
@@ -69,8 +75,12 @@
         width: calc(100% - 1rem);
         margin: 0 auto;
       }
-      td {
+      .table > :not(caption) > * > td {
         padding: 2px;
+      }
+      .table > :not(caption) > * > th,
+      .bg-icon > th {
+        padding: 0 0 0 2em;
       }
       /** Mode A4 (3 cartes / ligne) */
       .item {
