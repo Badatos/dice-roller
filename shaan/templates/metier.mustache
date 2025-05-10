@@ -1,0 +1,45 @@
+
+<div
+  {{#width}}
+    class="item {{width}}"
+  {{/width}}
+  {{^width}}
+    class="item col-sm-12 col-md-6 col-lg-4 mb-2"
+  {{/width}}
+  >
+  <div class="card fiche_metier">
+    <div class="card-header {{dom_type}}">
+      <h2 class="mt-0 pt-0">{{Nom}}</h2>
+    </div>
+    <div class="card-body">
+      {{#Image}}
+        <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
+      {{/Image}}
+
+      <ul class="h3 list-unstyled">
+        {{#Castes}}
+          <li>
+            <strong>Castes :</strong>
+            <span>{{Castes}}</span>
+          </li>
+        {{/Castes}}
+        {{#Domaines à 8}}
+          <li>
+            <strong>Domaines de prédilection :</strong>
+            <span>{{Domaines à 8}}</span>
+          </li>
+        {{/Domaines à 8}}
+        {{#Spécialisations}}
+          <li>
+            <strong>Spécialisations :</strong>
+            <span>{{Spécialisations}}</span>
+          </li>
+        {{/Spécialisations}}
+      </ul>
+
+      <div class="description mt-3">{{Description}}</div>
+      <p class="source text-end">{{Source}}</p>
+    </div>
+
+  </div>
+</div>

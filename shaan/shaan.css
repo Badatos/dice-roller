@@ -26,13 +26,28 @@
   /* Thrines */
 
   --ame-color: #547a9e;
-  --corps-color: #c86e5a;
+  --ame-color-light: hsl(from var(--ame-color) h s calc(l + 40));
+
+  /*--corps-color: #c86e5a;*/
 
   /* --esprit-color: #948562; */
 
   /** Couleur accessible **/
-  --esprit-color: #847558;
 
+  --corps-color: #B75C52;
+  --corps-color-light: hsl(from var(--corps-color) h s calc(l + 40));
+
+  --esprit-color: #847558;
+  --esprit-color-light: hsl(from var(--esprit-color) h s calc(l + 40));
+
+  --necrose-color: #797676;
+  --necrose-color-light: #CCC;
+
+}
+
+/* More accessible Th color for sortable tables */
+.sortable {
+  --th-bg: #797676;
 }
 
 .nav-pills {
@@ -42,32 +57,94 @@
 .bleu {
   color: var(--ame-color) !important;
 }
+.bg-bleu {
+  background-color: var(--ame-color) !important;
+}
+.bg-bleu-light {
+  background-color: var(--ame-color-light) !important;
+}
 
 .rouge {
   color: var(--corps-color) !important;
 }
+.bg-rouge {
+  background-color: var(--corps-color) !important;
+}
+.bg-rouge-light {
+  background-color: var(--corps-color-light) !important;
+}
+
 
 .jaune {
   color: var(--esprit-color) !important;
 }
+.bg-jaune {
+  background-color: var(--esprit-color) !important;
+}
+.bg-jaune-light {
+  background-color: var(--esprit-color-light) !important;
+}
 
-.bg-icon > strong {
+/* bi-color backgrounds */
+/* bleu-rouge */
+.bg-blouge {
+  background: linear-gradient(70deg, var(--ame-color) 50%, var(--corps-color) 50%);
+}
+.bg-blouge-light {
+  background: linear-gradient(70deg, var(--ame-color-light) 50%, var(--corps-color-light) 50%);
+}
+/* bleu-jaune */
+.bg-blaune-light {
+  background: linear-gradient(70deg, var(--ame-color-light) 50%, var(--esprit-color-light) 50%);
+}
+/* rouge-jaune */
+.bg-raune-light {
+  background: linear-gradient(70deg, var(--corps-color-light) 50%, var(--esprit-color-light) 50%);
+}
+/* gris-rouge */
+.bg-grouge {
+  background: linear-gradient(70deg, var(--corps-color) 50%, var(--necrose-color) 50%);
+}
+.bg-grouge-light {
+  background: linear-gradient(70deg, var(--corps-color-light) 50%, var(--necrose-color-light) 50%);
+}
+/* gris-bleu */
+.bg-grleu {
+  background: linear-gradient(70deg, var(--ame-color) 50%, var(--necrose-color) 50%);
+}
+.bg-grleu-light {
+  background: linear-gradient(70deg, var(--ame-color-light) 50%, var(--necrose-color-light) 50%);
+}
+/* gris-jaune */
+.bg-graune {
+  background: linear-gradient(70deg, var(--esprit-color) 50%, var(--necrose-color) 50%);
+}
+.bg-graune-light {
+  background: linear-gradient(70deg, var(--esprit-color-light) 50%, var(--necrose-color-light) 50%);
+}
+
+
+.bg-icon > strong,
+.bg-icon > th {
   background-size: 1.5em;
   background-repeat: no-repeat;
   padding-left: 2em;
   padding-bottom: 3px;
   padding-top: 3px;
 }
+.bg-icon > th{
+  background-position: 4px 50%;
+}
 
-.bg-icon >.bleu{
+.bg-icon > .bleu {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Ame.webp");
 }
 
-.bg-icon >.rouge{
+.bg-icon > .rouge {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Corps.webp");
 }
 
-.bg-icon >.jaune{
+.bg-icon > .jaune{
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/icons/trihns/Esprit.webp");
 }
 
@@ -171,8 +248,19 @@ label {
 }
 
 @media print {
-  footer, nav {
+  footer,
+  nav,
+  .shaan-title h1::after {
     display: none;
+  }
+  .shaan-title h1 {
+    --shaan-title-left-pos: 32px !important;
+
+    font-size: 16px !important;
+    border-radius: 5px !important;
+  }
+  .shaan-title {
+    height: 100px !important;
   }
 }
 

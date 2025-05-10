@@ -60,43 +60,53 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
   font-style: italic;
 }
 
-.technique {
+.technique,
+.sortable .technique {
   background-image: url("../img/domaines/technique_small.webp");
 }
 
-.savoir {
+.savoir,
+.sortable .savoir {
   background-image: url("../img/domaines/savoir_small.webp");
 }
 
-.social {
+.social,
+.sortable .social {
   background-image: url("../img/domaines/social_small.webp");
 }
 
-.arts {
+.arts,
+.sortable .arts {
   background-image: url("../img/domaines/arts_small.webp");
 }
 
-.shaan {
+.shaan,
+.sortable .shaan {
   background-image: url("../img/domaines/shaan_small.webp");
 }
 
-.magie {
+.magie,
+.sortable .magie {
   background-image: url("../img/domaines/magie_small.webp");
 }
 
-.rituels {
+.rituels,
+.sortable .rituels {
   background-image: url("../img/domaines/rituels_small.webp");
 }
 
-.survie {
+.survie,
+.sortable .survie {
   background-image: url("../img/domaines/survie_small.webp");
 }
 
-.combat {
+.combat,
+.sortable .combat {
   background-image: url("../img/domaines/combat_small.webp");
 }
 
-.nécrose {
+.nécrose,
+.sortable .nécrose {
   background-image: url("../img/domaines/necrose_small.webp");
 }
 
