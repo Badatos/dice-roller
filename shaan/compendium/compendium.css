@@ -124,6 +124,23 @@ body {
     background-image: none;
   }
 
+  .modal {
+    --bs-modal-border-color: transparent;
+  }
+  .modal-backdrop{
+    background-color: white;
+    --bs-backdrop-opacity: 1;
+  }
+  .modal-header,
+  .modal-footer {
+    display: none;
+  }
+
+  .modal .item{
+    max-width: 100%;
+    width: 100%;
+  }
+
   .container {
     width: 100%;
     max-width: 100%;
