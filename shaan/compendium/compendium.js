@@ -42,6 +42,13 @@ const itemModal = new bootstrap.Modal(document.getElementById("item-modal"));
 let liste_origine = [];
 var filteredData = ["VIDE"];
 
+let cercle_tpl;
+fetch("../../templates/cercle.mustache")
+.then((response) => response.text())
+.then((template) => {
+  cercle_tpl = template;
+});
+
 document.getElementById("search").addEventListener("keyup", function (event) {
   loader.classList.remove("d-none");
   document.getElementById("liste-elements").classList.add("d-none");
@@ -171,18 +178,48 @@ function modal_show(selectedDatas, item_type) {
  * @param {*} event
  * @param {*} data
  */
-async function createPNJfromJob(event, data) {
+async function createPNJfromJob(target, event, data) {
   event.preventDefault();
   const jobData = liste_origine.filter((o) => o.Nom === data["Métier"]);
   data["Spécialisations"] = jobData[0]["Spécialisations"];
   data["Lignée"] = randomLignee();
   data["Nom"] = await random_PNJ_name(data["Lignée"]);
   data["Domaines"] = {};
-  let niveau = 4;
+  let lvl_min = 4;
+  let dom_list = target.dataset["dom_list"];
+  let lvl_max = target.dataset["lvl"];
+  console.log(dom_list);
   CORRESPONDANCES["Domaines"].forEach(domaine => {
-    data["Domaines"][domaine] = niveau;
+    if(dom_list.includes(domaine.toLowerCase())) {
+      data["Domaines"][domaine] = lvl_max;
+    } else {
+      data["Domaines"][domaine] = lvl_min;
+    }
   });
+  calc_trihns(data["Domaines"]);
   modal_show([data], "pnj");
+}
+
+/** Remplit les 3 valeurs de Trihns à partir des valeurs de domaines. */
+function calc_trihns(domains) {
+  let values = [
+    domains["Technique"],
+    domains["Savoir"],
+    domains["Social"]
+  ]
+  domains["Esprit"] = Math.min(...values) + Math.max(...values);
+  values = [
+    domains["Arts"],
+    domains["Shaan"],
+    domains["Magie"]
+  ]
+  domains["Ame"] = Math.min(...values) + Math.max(...values);
+  values = [
+    domains["Rituels"],
+    domains["Survie"],
+    domains["Combat"]
+  ]
+  domains["Corps"] = Math.min(...values) + Math.max(...values);
 }
 
 

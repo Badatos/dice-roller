@@ -370,12 +370,6 @@
       liste_pouvoirs = data;
       bloc_total.textContent = data.length;
       const liste_elements = document.getElementById(target);
-      let cercle_tpl;
-      await fetch("../../templates/cercle.mustache")
-      .then((response) => response.text())
-      .then((template) => {
-        cercle_tpl = template;
-      });
 
       fetch("../../templates/"+modele+".mustache")
       .then((response) => response.text())
@@ -383,6 +377,13 @@
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
+          if(modele==="metier") {
+            row["dom_list"] = row["Domaines"].replace("\
+", "").replace("\r", "").replace("\n", "").toLowerCase();
+            row["dom_list"] = row["dom_list"].replace(" ", "").split("+");
+            // Un métier de prestige implique au moins 2 domaines à 8.
+            row["lvl"] = 8;
+          }
           renderedHTML += Mustache.render(template, row, {
             cercle: cercle_tpl
           });
