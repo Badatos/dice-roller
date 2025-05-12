@@ -174,7 +174,7 @@ function modal_show(selectedDatas, item_type) {
 }
 
 /**
- * G2nere un PNJ basé sur le métier indiqué
+ * Génere un PNJ basé sur le métier indiqué
  * @param {*} event
  * @param {*} data
  */
@@ -182,7 +182,9 @@ async function createPNJfromJob(target, event, data) {
   event.preventDefault();
   const jobData = liste_origine.filter((o) => o.Nom === data["Métier"]);
   data["Spécialisations"] = jobData[0]["Spécialisations"];
-  data["Lignée"] = randomLignee();
+  let lignee = randomLignee();
+  data["Lignée"] = lignee.name;
+  let dom_lignee = CORRESPONDANCES["Domaines"][lignee.id];
   data["Nom"] = await random_PNJ_name(data["Lignée"]);
   data["Domaines"] = {};
   let lvl_min = 4;
@@ -190,10 +192,14 @@ async function createPNJfromJob(target, event, data) {
   let lvl_max = target.dataset["lvl"];
   console.log(dom_list);
   CORRESPONDANCES["Domaines"].forEach(domaine => {
-    if(dom_list.includes(domaine.toLowerCase())) {
+    if (dom_list.includes(domaine.toLowerCase())) {
       data["Domaines"][domaine] = lvl_max;
     } else {
-      data["Domaines"][domaine] = lvl_min;
+      if (domaine == dom_lignee) {
+        data["Domaines"][domaine] = 5;
+      } else {
+        data["Domaines"][domaine] = lvl_min;
+      }
     }
   });
   calc_trihns(data["Domaines"]);
@@ -274,7 +280,11 @@ function randomLignee(bonus = false) {
   if (bonus) {
     lignees += ["Morphes", "Nécrosien", "Indar"]
   }
-  return lignees[Math.floor(Math.random() * lignees.length)];
+  let randid = Math.floor(Math.random() * lignees.length);
+  return {
+    "name": lignees[randid],
+    "id": randid
+  }
 }
 
 /* Fournit un nom de personnage aléatoire lié à sa lignée */
