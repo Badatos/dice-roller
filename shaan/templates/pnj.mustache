@@ -11,24 +11,21 @@
     <div class="card-header {{dom_type}}">
       <h2 class="mt-0 pt-0">{{Nom}}, {{Métier}} {{Lignée}}</h2>
     </div>
-    <div class="card-body">
+    {{#Domaines}}
+      {{> cercle}}
+    {{/Domaines}}
+    <div class="card-body pt-0">
       {{#Image}}
         <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
       {{/Image}}
 
       <ul class="h3 list-unstyled">
-        {{#Castes}}
+        {{#Trihns}}
           <li>
-            <strong>Castes :</strong>
-            <span>{{Castes}}</span>
+            <strong>Trihns :</strong>
+            <span>{{Trihns}}</span>
           </li>
-        {{/Castes}}
-        {{#Domaines}}
-          <li>
-            <strong>Domaines de prédilection :</strong>
-            <span>{{Domaines}}</span>
-          </li>
-        {{/Domaines}}
+        {{/Trihns}}
         {{#Spécialisations}}
           <li>
             <strong>Spécialisations :</strong>
@@ -39,9 +36,5 @@
 
       <div class="description mt-3">{{Description}}</div>
       <p class="source text-end">{{Source}}</p>
-      <div class="text-center d-print-none">
-        <a href="#" class="btn btn-primary" onclick="modal_item(this, event, 'protagoniste')">Générer un protagoniste</a>
-      </div>
-
   </div>
 </div>

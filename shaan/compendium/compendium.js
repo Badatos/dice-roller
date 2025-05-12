@@ -1,8 +1,30 @@
 
+const CORRESPONDANCES = {
+  "Chiffres": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "Elements": ["Limbes", "Objet", "Végétal", "Air", "Autre", "Terre", "Moi", "Animal", "Eau", "Feu"],
+  "Domaines": ["Nécrose", "Technique", "Savoir", "Social", "Arts", "Shaan", "Magie", "Rituels", "Survie", "Combat"],
+  "Peuples": ["Cités", "Terres Brûlées", "Marais", "Montagnes", "Hautes Herbes", "Grands Arbres", "Glaces", "Forêts Blanches", "Rivages", "Sables"],
+  "Caste": ["Ombre", "Novateur", "Erudit", "Négociant", "Artiste", "Shaaniste", "Magicien", "Elémentaliste", "Voyageur", "Combattant"],
+  "Action": ["Altération", "Amélioration", "Défense", "Communication", "Contrôle", "Récupération", "Perception", "Invocation", "Déplacement", "Attaque"],
+  "Pouvoir": ["Tourment", "Astuce", "Secret", "Privilège", "Création", "Symbiose", "Sort", "Transe", "Exploit", "Tactique"],
+  "Acquis": ["Technologie", "Outil", "Manuscrit", "Richesse", "Relation", "Protection", "Artefact", "Armimale", "Transport", "Armement"],
+  "Interaction": ["Nécrosien", "Objet", "Connaissance", "Richesse", "Réputation", "Nature", "Anthéen", "Surnaturel", "Expérience", "Action"],
+  "Ville": ["Corruption", "Technologie", "Education", "Commerce", "Arts", "Nature", "Magie", "Religion", "Sciences", "Guerre"],
+  "Caractère": ["destructeur", "révolutionnaire", "réfléchi", "sociable", "séducteur", "mystique", "secret", "autoritaire", "utopiste", "impulsif"],
+  "Couleur": ["noir", "orange", "vert", "bleu ciel", "violet", "blanc", "argent", "jaune d'or", "bleu marine", "rouge"],
+  "Corps": ["ventre", "mains", "tête", "thorax", "pieds", "coeur", "plexus", "jambes", "bras", "bas ventre"],
+  "Maison": ["sanitaires", "mobilier", "plantes", "fenêtres", "salon", "sol et murs", "chambre", "animal de cie", "salle d'eau", "cuisine"],
+  "Cardinal": ["nord ouest", "sud est", "nord est", "est", "centre", "ouest", "sud ouest", "zénith", "nord", "sud"],
+  "Energie": ["hydrocarbures", "électrique", "végétale", "éolienne", "magnétique", "minérale", "trihnique", "animale", "hydrolique", "thermique"],
+  "Lignées": ["Humain", "Kelwin", "Ygwan", "Delhion", "Mélodien", "Feling", "Nomoï", "Woon", "Boréal", "Darken"],
+};
+
 const loader = document.getElementById("loader");
 
+let gSheetId = "1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc";
+
 const parser = new PublicGoogleSheetsParser(
-  "1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc",
+  gSheetId,
   options
 );
 
@@ -21,9 +43,9 @@ let liste_origine = [];
 var filteredData = ["VIDE"];
 
 document.getElementById("search").addEventListener("keyup", function (event) {
-    loader.classList.remove("d-none");
-    document.getElementById("liste-elements").classList.add("d-none");
-    search_filter();
+  loader.classList.remove("d-none");
+  document.getElementById("liste-elements").classList.add("d-none");
+  search_filter();
 });
 
 document.forms["filtres"].addEventListener("submit", function (event) {
@@ -76,7 +98,7 @@ document.forms["filtres"].addEventListener("submit", function (event) {
     text_found.textContent += " de type " + selectedCat;
   }
 
-  text_found.textContent +=  " de classe " + minClass;
+  text_found.textContent += " de classe " + minClass;
   if (maxClass != minClass) {
     text_found.textContent += " à " + maxClass;
   }
@@ -99,10 +121,145 @@ parser.parse().then(data => {
   bloc_total.textContent = data.length;
 });
 
-function modal_item(item, event, item_type="acquis") {
+/**
+ * Affiche un item d'un objet indiqué dans une modale
+ * @param {*} item
+ * @param {*} event
+ * @param {*} item_type
+ */
+function modal_getitem(item, event, item_type = "pouvoir", sheet = "Pouvoirs") {
+  event.preventDefault();
+
+  const tempParser = new PublicGoogleSheetsParser(
+    gSheetId,
+    { sheetName: sheet, useFormat: false }
+  );
+  let temp_liste = [];
+  tempParser.parse().then(data => {
+    temp_liste = data;
+  });
+  const selectedData = temp_liste.filter((o) => o.Nom === item.dataset["name"]);
+  selectedData[0].width = "col-sm-12";
+  modal_show(selectedData, item_type);
+}
+
+/**
+ * Affiche un item de l'objet courant dans une modale
+ * @param {*} item
+ * @param {*} event
+ * @param {*} item_type
+ */
+function modal_item(item, event, item_type = "acquis") {
   event.preventDefault();
   const selectedDatas = liste_origine.filter((o) => o.Nom === item.dataset["name"]);
+  modal_show(selectedDatas, item_type);
+}
+
+/**
+ *
+ * @param {*} selectedDatas
+ * @param {*} item_type
+ */
+function modal_show(selectedDatas, item_type) {
   selectedDatas[0].width = "col-sm-12";
   display_items(selectedDatas, "items-list", item_type);
   itemModal.show();
+}
+
+/**
+ * G2nere un PNJ basé sur le métier indiqué
+ * @param {*} event
+ * @param {*} data
+ */
+async function createPNJfromJob(event, data) {
+  event.preventDefault();
+  const jobData = liste_origine.filter((o) => o.Nom === data["Métier"]);
+  data["Spécialisations"] = jobData[0]["Spécialisations"];
+  data["Lignée"] = randomLignee();
+  data["Nom"] = await random_PNJ_name(data["Lignée"]);
+  data["Domaines"] = {};
+  let niveau = 4;
+  CORRESPONDANCES["Domaines"].forEach(domaine => {
+    data["Domaines"][domaine] = niveau;
+  });
+  modal_show([data], "pnj");
+}
+
+
+/**
+ * Takes a domain as input and returns a corresponding power type string based on predefined cases,
+ * defaulting to "Pouvoir" if no match is found.
+ * @param {*} domaine le domaine associé
+ * @returns le type de pouvoir associé au domaine
+ */
+function getPouvoirType(domaine) {
+  let ret = "";
+  switch (domaine.toLowerCase()) {
+    case "technique":
+      ret = "Astuce";
+      break;
+    case "savoir":
+      ret = "Secret";
+      break;
+    case "social":
+      ret = "Privilège";
+      break;
+    case "arts":
+      ret = "Création";
+      break;
+    case "shaan":
+      ret = "Symbiose";
+      break;
+    case "magie":
+      ret = "Sort";
+      break;
+    case "rituels":
+      ret = "Transe";
+      break;
+    case "survie":
+      ret = "Exploit";
+      break;
+    case "combat":
+      ret = "Tactique";
+      break;
+    case "nécrose":
+      ret = "Tourment";
+      break;
+    default:
+      ret = "Pouvoir";
+  }
+  return ret;
+}
+
+/* Fournit un nom de lignée aléatoire */
+function randomLignee(bonus = false) {
+  lignees = CORRESPONDANCES["Lignées"];
+  if (bonus) {
+    lignees += ["Morphes", "Nécrosien", "Indar"]
+  }
+  return lignees[Math.floor(Math.random() * lignees.length)];
+}
+
+/* Fournit un nom de personnage aléatoire lié à sa lignée */
+async function random_PNJ_name(lignee, gender = "both") {
+  // Charge le tableau des lignées
+  const tempParser = new PublicGoogleSheetsParser(
+    gSheetId,
+    { sheetName: "Lignées", useFormat: false }
+  );
+  let temp_liste = [];
+  await tempParser.parse().then(data => {
+    temp_liste = data;
+  });
+  // Prend la lignée indiquée
+  temp_liste = temp_liste.filter((o) => o.Lignée === lignee);
+  let name = "NONAME";
+  if(temp_liste[0]){
+    let names = temp_liste[0]["Exemples de noms"].split(",");
+    // Pioche un nom au hasard
+    name = names[Math.floor(Math.random() * names.length)];
+  }
+  // élimine une éventuelle précision de genre avant le nom
+  name = name.split(":");
+  return name[name.length - 1];
 }

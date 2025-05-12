@@ -28,6 +28,9 @@
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
   <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
 
+  <link rel="stylesheet" type="text/css" href="../../styles/cercle.css">
+
+
   <title>Métiers de prestige - Shaan Renaissance</title>
   <style>
     td.heading {
@@ -362,18 +365,27 @@
 
     let liste_pouvoirs = [];
 
-    function display_items(data, target="card-elements", modele="metier") {
+    async function display_items(data, target="card-elements", modele="metier") {
 
       liste_pouvoirs = data;
       bloc_total.textContent = data.length;
       const liste_elements = document.getElementById(target);
+      let cercle_tpl;
+      await fetch("../../templates/cercle.mustache")
+      .then((response) => response.text())
+      .then((template) => {
+        cercle_tpl = template;
+      });
+
       fetch("../../templates/"+modele+".mustache")
       .then((response) => response.text())
       .then((template) => {
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
-          renderedHTML += Mustache.render(template, row);
+          renderedHTML += Mustache.render(template, row, {
+            cercle: cercle_tpl
+          });
           loader.classList.add("d-none");
         });
         liste_elements.innerHTML = renderedHTML;

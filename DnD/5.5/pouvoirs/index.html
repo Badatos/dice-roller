@@ -42,8 +42,10 @@
 
   <script>
     const options = { sheetName: 'sorts', useFormat: false }
+    let gSheetId = "1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc";
+
     const parser = new PublicGoogleSheetsParser(
-      '1tC10OMJe0BOzZauCmqLxL7-D9KlWT13vswGDBJWySLc',
+      gSheetId,
       options
     );
     const precode = document.getElementById("code");
@@ -60,40 +62,7 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
-          switch(row["Domaine"]) {
-            case "TECHNIQUE":
-              row["dom_type"] = "Astuce";
-              break;
-            case "SAVOIR":
-              row["dom_type"] = "Secret";
-              break;
-            case "SOCIAL":
-              row["dom_type"] = "Privilège";
-              break;
-            case "ARTS":
-              row["dom_type"] = "Création";
-              break;
-            case "SHAAN":
-              row["dom_type"] = "Symbiose";
-              break;
-            case "MAGIE":
-              row["dom_type"] = "Sort";
-              break;
-            case "RITUELS":
-              row["dom_type"] = "Transe";
-              break;
-            case "SURVIE":
-              row["dom_type"] = "Exploit";
-              break;
-            case "COMBAT":
-              row["dom_type"] = "Tactique";
-              break;
-            case "Nécrose":
-              row["dom_type"] = "Tourment";
-              break;
-            default:
-              row["dom_type"] = "Pouvoir";
-          }
+          row["dom_type"] = getPouvoirType(row["Domaine"]);
           renderedHTML += Mustache.render(template, row);
           //precode.textContent += JSON.stringify(row, null, 2) + '\n';
         });

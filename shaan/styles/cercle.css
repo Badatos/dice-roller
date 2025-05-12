@@ -1,0 +1,509 @@
+/* Shaan Thrin circle */
+
+#cercle.sw {
+  position: relative;
+  left: 0;
+  transform: none;
+}
+
+@media screen and (max-width: 575px) {
+  #cercle.sw {
+    transform: scale(80%);
+  }
+}
+
+@media screen and (max-width: 1520px) {
+  #cercle.sw {
+    transform: none;
+  }
+}
+
+@media screen and (max-width: 516px) {
+  #cercle.sw {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 430px) {
+  #cercle.sw {
+    transform: scale(0.7);
+    margin-top: -100px;
+    margin-bottom: -75px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #cercle.sw {
+    transform: scale(0.65);
+    margin-top: -100px;
+    margin-bottom: -75px;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  #cercle.sw {
+    transform: scale(0.6);
+  }
+}
+
+
+/* Couleurs */
+
+.jaune,
+.jaune a,
+.jaune a:hover,
+.jaune a:active,
+table.jaune td,
+.jaune table td,
+#dom1,
+#dom2,
+#dom3,
+#esprit,
+#esprit_actu {
+  color: #948562 !important;
+}
+
+.bleu,
+.bleu a,
+.bleu a:hover,
+.bleu a:active,
+table.bleu td,
+.bleu table td,
+#dom4,
+#dom5,
+#dom6,
+#ame,
+#ame_actu {
+  color: #547a9e !important;
+}
+
+.rouge,
+.rouge a,
+.rouge a:hover,
+.rouge a:active,
+table.rouge td,
+.rouge table td,
+#dom7,
+#dom8,
+#dom9,
+#corps,
+#corps_actu {
+  color: #c86e5a !important;
+}
+
+.noir,
+.noir a,
+.noir a:hover,
+.noir a:active,
+table.noir td,
+.noir table td,
+#dom0 {
+  color: #6e6e6e !important;
+}
+
+/* Créateur de Perso */
+
+#cercle {
+  display: block;
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background-image: url(../img/cercle.png);
+  margin: 0;
+  font-family: Georgia, "Bitstream Charter", serif;
+  line-height: 24px;
+}
+
+.plusmoins {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+
+#corps {
+  position: absolute;
+  top: 297px;
+  left: 248px;
+  font-size: 24px;
+  width: 30px;
+  text-align: center;
+}
+
+#ame {
+  position: absolute;
+  top: 202px;
+  left: 210px;
+  font-size: 24px;
+  width: 30px;
+  text-align: center;
+}
+
+#esprit {
+  position: absolute;
+  top: 271px;
+  left: 153px;
+  font-size: 24px;
+  width: 30px;
+  text-align: center;
+}
+
+#corps_actu {
+  position: absolute;
+  top: 253px;
+  left: 255px;
+  font-size: 50px;
+  width: 80px;
+  text-align: center;
+}
+
+#ame_actu {
+  position: absolute;
+  top: 155px;
+  left: 210px;
+  font-size: 50px;
+  width: 80px;
+  text-align: center;
+}
+
+#esprit_actu {
+  position: absolute;
+  top: 230px;
+  left: 155px;
+  font-size: 50px;
+  width: 80px;
+  text-align: center;
+}
+
+.dom {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#dom0 {
+  top: 417px;
+  left: 226px;
+}
+
+#dom1 {
+  top: 367px;
+  left: 85px;
+}
+
+#dom2 {
+  top: 270px;
+  left: 29px;
+}
+
+#dom3 {
+  top: 152px;
+  left: 28px;
+}
+
+#dom4 {
+  top: 42px;
+  left: 119px;
+}
+
+#dom5 {
+  top: 10px;
+  left: 229px;
+}
+
+#cercle.sw #dom5 {
+  top: 10px;
+  left: 229px;
+}
+
+#dom6 {
+  top: 45px;
+  left: 334px;
+}
+
+#dom7 {
+  top: 157px;
+  left: 420px;
+}
+
+#dom8 {
+  top: 274px;
+  left: 422px;
+}
+
+#dom9 {
+  top: 364px;
+  left: 363px;
+}
+
+#dom0p {
+  top: 435px;
+  left: 285px;
+}
+
+#dom0m {
+  top: 435px;
+  left: 185px;
+}
+
+#dom1p {
+  top: 350px;
+  left: 65px;
+}
+
+#dom1m {
+  top: 412px;
+  left: 127px;
+}
+
+#dom2p {
+  top: 244px;
+  left: 27px;
+}
+
+#dom2m {
+  top: 325px;
+  left: 50px;
+}
+
+#dom3p {
+  top: 128px;
+  left: 55px;
+}
+
+#dom3m {
+  top: 210px;
+  left: 25px;
+}
+
+#dom4p {
+  top: 35px;
+  left: 161px;
+}
+
+#dom4m {
+  top: 82px;
+  left: 92px;
+}
+
+#dom5p {
+  top: 25px;
+  left: 279px;
+}
+
+#dom5m {
+  top: 25px;
+  left: 195px;
+}
+
+#cercle.sw #dom5m {
+  top: 25px;
+  left: 198px;
+}
+
+#dom6p {
+  top: 80px;
+  left: 380px;
+}
+
+#dom6m {
+  top: 35px;
+  left: 307px;
+}
+
+#dom7p {
+  top: 128px;
+  left: 415px;
+}
+
+#dom7m {
+  top: 212px;
+  left: 439px;
+}
+
+#dom8p {
+  top: 247px;
+  left: 442px;
+}
+
+#dom8m {
+  top: 326px;
+  left: 414px;
+}
+
+#dom9p {
+  top: 350px;
+  left: 402px;
+}
+
+#dom9m {
+  top: 406px;
+  left: 339px;
+}
+
+.trihnup {
+  position: absolute;
+  height: 23px;
+  width: 23px;
+}
+
+.trihnup img {
+  padding: 0;
+  margin: 0;
+}
+
+#amep {
+  top: 157px;
+  left: 284px;
+}
+
+#amem {
+  top: 180px;
+  left: 284px;
+}
+
+#espritp {
+  top: 220px;
+  left: 140px;
+}
+
+#espritm {
+  top: 243px;
+  left: 140px;
+}
+
+#corpsp {
+  top: 243px;
+  left: 325px;
+}
+
+#corpsm {
+  top: 266px;
+  left: 325px;
+}
+
+.race {
+  display: inline-block;
+  width: 105px;
+  white-space: nowrap;
+}
+
+.race img {
+  vertical-align: middle;
+}
+
+/* Infovert */
+
+.infovert,
+.login .message,
+.message,
+.login p.message {
+  background-color: #398c73;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 11px;
+  box-shadow: 2px 2px 7px #333333;
+}
+
+.infovert.blanc {
+  background-color: #ffffff;
+  color: #398c73;
+}
+
+.infovert a,
+.infovert a:visited {
+  color: #0a2c22;
+}
+
+.infovert a:hover {
+  color: #fff200;
+}
+
+.infovert h2,
+.box.blanche .infovert h2,
+.box.blanche .infovert h3 {
+  color: #fff;
+}
+
+.infovert a,
+.infovert a:visited {
+  color: #0a2c22;
+}
+
+.infovert a:hover {
+  color: #fff200;
+}
+
+.infovert h2,
+.box.blanche .infovert h2,
+.box.blanche .infovert h3 {
+  color: #fff;
+}
+
+/* .box .stitre.presstitre, .presstitre { -moz-border-radius: 0 15px 0 0; -webkit-border-radius: 0 15px 0 0; border-radius: 0 15px 0 0;} */
+
+/* DOM popup */
+#DOMWindow {
+  box-shadow: 5px 5px 15px #666;
+  border-radius: 20px;
+  color: #45714f;
+  font-size: 19px;
+  line-height: 21px;
+  z-index: 200001 !important;
+  font-family: "Economica", Arial, Helvetica, sans-serif;
+  width: 650px !important;
+}
+
+/* Tablet DOM popup */
+@media screen and (max-width: 676px) {
+  #DOMWindow {
+    width: 500px !important;
+  }
+
+  #DOMWindow .pop-img {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 523px) {
+  #DOMWindow {
+    width: 400px !important;
+  }
+
+  #DOMWindow .pop-img {
+    width: 30%;
+  }
+}
+
+/* Phone */
+@media screen and (max-width: 410px) {
+  #DOMWindow {
+    width: 300px !important;
+  }
+
+  #DOMWindow .pop-img {
+    width: 30%;
+  }
+}
+
+.plusmoins {
+  display: none;
+}
+
+
+.modal-lg #cercle.sw {
+  transform: scale(75%);
+  transform-origin: left top;
+  position: relative;
+  margin-bottom: -100px;
+  margin-left: 10%;
+}

@@ -369,6 +369,7 @@
         });
         liste_elements.innerHTML = renderedHTML;
         // search_filter(target);
+        switchCards();
       });
     }
 
@@ -385,6 +386,7 @@
         table_tab.removeAttribute("aria-current");
       }
     }
+
     function switchTable(elem, event) {
       if(event) {
         event.preventDefault();

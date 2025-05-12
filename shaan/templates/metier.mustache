@@ -35,6 +35,19 @@
             <span class="m-spe">{{Spécialisations}}</span>
           </li>
         {{/Spécialisations}}
+        {{#Nom du pouvoir}}
+          <li>
+            <strong>Pouvoir :</strong>
+            <span class="m-pow">
+              <a href="#{{Nom du pouvoir}}"
+                 data-name="{{Nom du pouvoir}}"
+                 class="btn btn-link"
+                 onclick="modal_getitem(this, event, 'pouvoir')">
+                {{Nom du pouvoir}}
+              </a>
+            </span>
+          </li>
+        {{/Nom du pouvoir}}
       </ul>
 
       <div class="description mt-3">{{Description}}</div>
