@@ -22,22 +22,22 @@
   <!-- Search box w. icon-->
   <link rel="stylesheet" type="text/css" href="../../../css/search-input.css" />
 
-  <link rel="stylesheet" type="text/css" href="../../shaan.css" />
-  <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
+  <link rel="stylesheet" type="text/css" href="../../dnd.css" />
+  <!--link rel="stylesheet" type="text/css" href="../../../shaan/compendium/compendium.css" /-->
 
-  <title>Pouvoirs - Shaan</title>
+  <title>Sorts - DD5.5</title>
 </head>
 
 <body>
-  <div class="shaan-title blue fixed-top" id="header">
-    <h1>Liste des pouvoirs - Shaan</h1>
-  </div>
-  <main class="container mt-5 pt-5">
+  <head>
+    <h1 class="p-2">Liste des sorts - DD5.5</h1>
+  </head>
+  <main class="container">
     <nav aria-label="Fil d’ariane" class="ms-3">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
-        <li class="breadcrumb-item"><a href="../../">Shaan</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Pouvoirs</li>
+        <li class="breadcrumb-item"><a href="../../">DnD</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sorts</li>
       </ol>
     </nav>
 
@@ -59,13 +59,13 @@
               <!--Vous pouvez également sélectionner certains résultats
               pour générer votre propre liste.-->
             </div>
-            <form name="filtres" data-itemtype="pouvoir">
+            <form name="filtres">
               <div class="row">
                 <fieldset class="col-md-6 mb-3 checkbox-mixed">
-                  <legend>Caste</legend>
+                  <legend>École</legend>
                   <label class="form-check-label" for="selectAllDomains">
                     <input type="checkbox" id="selectAllDomains" checked="checked" class="form-check-input">
-                    Toutes les castes
+                    Toutes les écoles
                   </label>
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
@@ -81,57 +81,12 @@
                             title="L’élite intellectuelle de la population héossienne">
                             Érudit
                     </option>
-                    <option value="Social"
-                            selected="selected"
-                            title="Ceux qui tissent des liens sociaux, que ce soit à but lucratif ou par intérêt politique">
-                            Négociant
-                    </option>
-                    <option value="Arts"
-                            selected="selected"
-                            title="Ceux dont le but est de divertir la population">
-                            Artiste
-                    </option>
-                    <option value="Shaan"
-                            selected="selected"
-                            title="Les porteurs de lumière">
-                            Shaaniste
-                    </option>
-                    <option value="Magie"
-                            selected="selected"
-                            title="Ils utilisent les Trihns qui voyagent sur Héos comme combustible pour leurs pouvoirs">
-                            Magicien
-                    </option>
-                    <option value="Rituels"
-                            selected="selected"
-                            title="Ils vouent un culte aux Éléments">
-                            Élémentaliste
-                    </option>
-                    <option value="Survie"
-                            selected="selected"
-                            title="Ceux chargés de transporter quelque chose ou quelqu’un d’un point à un autre">
-                            Voyageur
-                    </option>
-                    <option value="Combat"
-                            selected="selected"
-                            title="Ceux qui ne vivent que par la guerre et le respect de l’ordre">
-                            Combattant
-                    </option>
-                    <option value="Nécrose"
-                            selected="selected"
-                            title="Ceux qui imposent leur autorité par La peur">
-                            Ombres
-                    </option>
-                    <option value="Métier de prestige"
-                            selected="selected"
-                            title="??">
-                            Métier de prestiges
-                    </option>
                   </select>
                 </fieldset>
 
                 <fieldset class="col-md-6 mb-3">
-                  <legend>Rang</legend>
-                  <label for="nivMin" class="form-label">Rang Minimum</label>
+                  <legend>Niveau</legend>
+                  <label for="nivMin" class="form-label">Niveau Minimum</label>
                   <select name="nivMin" id="nivMin" class="form-select">
                     <option value="0" selected="selected">0</option>
                     <option value="1">1</option>
@@ -139,37 +94,23 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
                   </select>
-                  <label for="nivMax" class="form-label">Rang Maximum</label>
+                  <label for="nivMax" class="form-label">Niveau Maximum</label>
                   <select name="nivMax" id="nivMax" class="form-select">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
-                    <option value="5" selected="selected">5</option>
-                  </select>
-                </fieldset>
-
-                <fieldset class="col-md-6 mb-3 checkbox-mixed">
-                  <legend>Type</legend>
-                  <label class="form-check-label" for="selectAllCats">
-                    <input type="checkbox" id="selectAllCats" checked="checked" class="form-check-input">
-                    Tous les types
-                  </label>
-                  <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
-
-                  <select id="categorie" class="form-select"
-                    multiple>
-                    <option value="Adaptation culturelle" selected="selected">Adaptation culturelle</option>
-                    <option value="Altération" selected="selected">Altération</option>
-                    <option value="Amélioration" selected="selected">Amélioration</option>
-                    <option value="Attaque" selected="selected">Attaque</option>
-                    <option value="Communication" selected="selected">Communication</option>
-                    <option value="Invocation" selected="selected">Invocation</option>
-                    <option value="Inception" selected="selected">Inception</option>
-                    <option value="Malchance" selected="selected">Malchance</option>
-                    <option value="Perception" selected="selected">Perception</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9" selected="selected">8</option>
                   </select>
                 </fieldset>
 
@@ -184,10 +125,6 @@
                   <select id="source" class="form-select" multiple>
                     <option value="Manuel d’itinérance" selected="selected">Manuel d’itinérance</option>
                     <option value="L’erreur est humaine" selected="selected">L’erreur est humaine</option>
-                    <option value="Le feu intérieur" selected="selected">Le feu intérieur</option>
-                    <option value="L’arbre qui cache la forêt" selected="selected">L’arbre qui cache la forêt</option>
-                    <option value="L’ombre blanche" selected="selected">L’ombre blanche</option>
-                    <option value="Carnets de Voyages tome 1" selected="selected">Carnets de Voyages tome 1</option>
                   </select>
                 </fieldset>
 
@@ -255,7 +192,7 @@
               <!--a onclick="clearFilter()" class="btn-link btn">
                 <i class="bi bi-x"></i>
               </a-->
-              <div id="search-help" class="form-text">Tapez au moins 3 caractères pour chercher un pouvoir dans les résultats ci-dessous.</div>
+              <div id="search-help" class="form-text">Tapez au moins 3 caractères pour chercher un sort dans les résultats ci-dessous.</div>
             </div>
           </div>
         </div>
@@ -279,15 +216,15 @@
           <table class="table table-striped caption-top sortable mb-0">
             <caption>
               <strong id="total">0</strong>
-              <span id="text-found">pouvoirs trouvés.</span>
+              <span id="text-found">sorts trouvés.</span>
             </caption>
             <thead class="sticky-top">
               <tr id="table-head">
                 <th scope="col"><span class="visually-hidden">Sélection</span></th>
                 <th scope="col">Nom</th>
-                <th scope="col">Domaine</th>
-                <th scope="col">Rang</th>
-                <th scope="col">Type</th>
+                <th scope="col">École</th>
+                <th scope="col">Niveau</th>
+                <th scope="col">Temps d’incantation</th>
                 <th scope="col">Source</th>
               </tr>
             </thead>
@@ -352,10 +289,8 @@
 
   </main>
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
-    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
-      <a
-    href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
-  et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+    <p>Pour en savoir plus sur le jeu de rôle <strong>DnD</strong>, rendez-vous sur<br>
+
     </p>
   </footer>
 
@@ -393,13 +328,13 @@
 
   <script>
 
-    const options = { sheetName: 'Pouvoirs', useFormat: false }
+    const options = { sheetName: 'Sorts', useFormat: false }
 
     const precode = document.getElementById("code");
 
     let liste_pouvoirs = [];
 
-    function display_items(data, target="liste-elements", modele="pouvoir_row") {
+    function display_items(data, target="liste-elements", modele="spell_row") {
 
       liste_pouvoirs = data;
       bloc_total.textContent = data.length;
@@ -410,8 +345,10 @@
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
-          row["dom_type"] = getPouvoirType(row.Domaine);
-          row["css_class"] = row.Domaine.toLowerCase();
+          row["css_class"] = row.School.toLowerCase();
+          if(row["Nom"] == "") {
+            row["Nom"] = row["VO"];
+          }
           renderedHTML += Mustache.render(template, row);
           loader.classList.add("d-none");
           //precode.textContent += JSON.stringify(row, null, 2) + '\n';
@@ -423,7 +360,7 @@
 
   </script>
   <script src="../../../js/utils.js"></script>
-  <script src="../../compendium/compendium.js"></script>
+  <script src="../compendium.js"></script>
 
   <!-- https://github.com/tofsjonas/sortable -->
   <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />
@@ -432,7 +369,52 @@
 
 
   <!-- Shaan template JS -->
-  <script src="../../shaan.js"></script>
+  <!--script src="../../shaan.js"></script-->
+
+  <script>
+
+    var filteredData = [];
+
+    document.getElementById("search").addEventListener("keyup", function (event) {
+      search_filter();
+    });
+
+    document.forms["filtres"].addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      const form = event.target;
+      const selectedDomains = Array.from(
+        form.domain.selectedOptions).map(
+          option => option.value.toLowerCase());
+      const minClass = parseInt(form.nivMin.value, 10);
+      const maxClass = parseInt(form.nivMax.value, 10);
+
+      filteredData = liste_pouvoirs.filter(item => {
+        const itemClass = romanNumber(item["Niveau"]);
+        let itemDomain = item["School"];
+        if (itemDomain) {
+          itemDomain = itemDomain.toLowerCase();
+        }
+        return (
+          (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
+          (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass)
+        );
+      });
+      if (selectedDomains.length > 9) {
+        selectedDomains = "tous domaines";
+      }
+      bloc_total.textContent = filteredData.length;
+      text_found.textContent = "sorts de " + selectedDomains +
+        " de rang " + minClass;
+      if (maxClass != minClass) {
+        text_found.textContent += " à " + maxClass;
+      }
+
+      text_found.textContent += " trouvé(s).";
+      display_pouvoirs(filteredData);
+    });
+
+    </script>
 </body>
 
 </html>
