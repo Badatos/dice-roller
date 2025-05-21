@@ -12,6 +12,8 @@
   font-display: block;
 }
 
+/** Magical School Icons **/
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -21,88 +23,81 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  vertical-align: bottom;
+  vertical-align: middle;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-abjur::before {
-  content: "\e901";
-}
-
-.icon-encha::before {
-  content: "\e902";
-}
-
-.icon-divin::before {
-  content: "\e903";
-}
-
-.icon-evoc::before {
-  content: "\e904";
-}
-
-.icon-necro::before {
-  content: "\e905";
-}
-
-.icon-transmut::before {
-  content: "\e906";
-}
-
-.icon-illus::before {
-  content: "\e907";
-}
-
-.icon-invoc::before {
-  content: "\e900";
-}
-
-
-/** Magical School Icons **/
-
-[class^="icon-"], [class*=" icon-"] {
-  /* font-weight: bold; */
-}
-
-.icon-Invocation {
-  /* Orange / Green */
-  color: rgb(174 97 3);
-}
-
-.icon-Abjuration {
+.icon-abjuration {
   /* Yellow / Blue */
   color: blue;
 }
 
-.icon-divin {
-  /* Divination: Silver / Pink */
-  color: grey;
+.icon-abjuration::before {
+  content: "\e901";
 }
 
-.icon-Enchantement {
+.icon-enchantement {
   /* Enchantment: Blue */
   color: palevioletred;
 }
 
-.icon-evoc {
+.icon-enchantement::before {
+  content: "\e902";
+}
+
+.icon-divination {
+  /* Divination: Silver / Pink */
+  color: grey;
+}
+
+.icon-divination::before {
+  content: "\e903";
+}
+
+.icon-evocation {
   /* Evocation: Red */
   color: red;
 }
 
-.icon-illus {
-  /* Illusion: Green / Cyan */
-  color: #4e8fa3;
+.icon-evocation::before {
+  content: "\e904";
 }
 
-.icon-necro {
+.icon-necromancie {
   /* Necromancy: purple */
   color: purple;
 }
 
-.icon-transmut {
+.icon-necromancie::before {
+  content: "\e905";
+}
+
+.icon-transmutation {
   /* Transmutation: gold / Orange */
   color: goldenrod;
+}
+
+.icon-transmutation::before {
+  content: "\e906";
+}
+
+.icon-illusion {
+  /* Illusion: Green / Cyan */
+  color: #4e8fa3;
+}
+
+.icon-illusion::before {
+  content: "\e907";
+}
+
+.icon-invocation {
+  /* Orange / Green */
+  color: rgb(174 97 3);
+}
+
+.icon-invocation::before {
+  content: "\e900";
 }

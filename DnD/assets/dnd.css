@@ -1,34 +1,58 @@
 @import url("icomoon.css");
 
 
+
 :root {
-  --dnd-primary: #BC0F0F;
-  --dnd-primary-rgb: "188,15,15";
-  --dnd-primary-light: #eb1313;
+  --dd-primary: #BC0F0F;
+  --dd-primary-rgb: 188,15,15;
+  --dd-primary-light: #eb1313;
+  --dd-primary-light-rgb: 235,19,19;
   --bs-primary-bg-subtle: #e2e2e2;
-  --bs-link-color: var(--dnd-primary);
-  --bs-link-color-rgb: var(--dnd-primary-rgb);
-  --bs-link-hover-color: var(--dnd-primary-light);
+  --bs-primary-text-emphasis: #570a0a;
+  --bs-link-color: var(--dd-primary);
+  --bs-link-color-rgb: var(--dd-primary-rgb);
+  --bs-link-hover-color: var(--dd-primary-light);
+  --bs-link-hover-color-rgb: var(--dd-primary-light-rgb);
+  --bs-dark-rgb: 0,0,0;
+
+  font-size: 12px;
+}
+
+.text-bg-dark{
+  --bs-link-color-rgb: 233,6,19;
+  --bs-link-hover-color-rgb: var(--dd-primary-rgb);
 }
 
 .btn-primary {
-  --bs-btn-bg: var(--dnd-primary);
-  --bs-btn-border-color: var(--dnd-primary);
-  --bs-btn-hover-bg: var(--dnd-primary-light);
+  --bs-btn-bg: var(--dd-primary);
+  --bs-btn-border-color: var(--dd-primary);
+  --bs-btn-hover-bg: var(--dd-primary-light);
   --bs-btn-hover-border-color: #0a58ca;
   --bs-btn-active-bg: #0a58ca;
   --bs-btn-active-border-color: #0a53be;
-  --bs-btn-disabled-bg: var(--dnd-primary);
-  --bs-btn-disabled-border-color: var(--dnd-primary);
+  --bs-btn-disabled-bg: var(--dd-primary);
+  --bs-btn-disabled-border-color: var(--dd-primary);
 }
 
 .nav-pills {
-  --bs-nav-pills-link-active-bg: var(--dnd-primary);
+  --bs-nav-pills-link-active-bg: var(--dd-primary);
+}
+
+.sortable {
+  --th-bg: #797676;
 }
 
 .meta {
-  font-size: 1.0rem;
+  font-size: 0.9rem;
   line-height: 1.1;
+}
+
+.meta>div {
+  min-width: 40%;
+}
+
+.meta>div:nth-child(even) {
+  text-align: right;
 }
 
 div.classe {
@@ -74,27 +98,30 @@ div.classe {
   color:orangered;
 }
 
-/** blocCarte **/
+/** fiche-sort **/
 
-.blocCarte table,
-.blocCarte td,
-.blocCarte th {
+.fiche-sort table,
+.fiche-sort td,
+.fiche-sort th {
   border: 1px solid #922610;
   padding: 2px;
 }
 
-.blocCarte tr:nth-child(even),
+.fiche-sort tr:nth-child(even),
 .bloc table tr:nth-child(even) {
   background-color: #e0e0ff
 }
 
-.blocCarte {
-  /*width: 6.3cm;*/
-  /*height: 9.4cm;*/
+.fiche-sort {
+  --bs-heading-color: white;
+
+  /*
+    width: 6.3cm;
+    height: 9.4cm;
+  */
   font-family: Georgia, "Times New Roman", serif;
   line-height: 1.3;
   text-align: left;
-  --bs-heading-color: white;
 }
 
 .fiche-sort>.card-header{
@@ -106,39 +133,46 @@ div.classe {
 }
 
 
-.blocCarte .ecole {
+.fiche-sort .ecole {
   padding: 2px 0 4px
 }
 
 
-.blocCarte .carac {
+.fiche-sort .carac {
   padding-left: 1px
 }
 
-.blocCarte .description {
+.fiche-sort .description {
   padding: 2px
 }
 
-.blocCarteP {
+.fiche-sort-p {
   font-size: 1.1rem;
   line-height: 1.2
 }
 
-.blocCarteTP {
+.fiche-sort-tp {
   font-size: 1.0rem;
   line-height: 1.1
 }
 
-.blocCarteTTP {
+.fiche-sort-ttp {
   font-size: 0.9rem;
   line-height: 1.0
+}
+
+.source, .col-source {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.col-school {
+  text-align: center;
 }
 
 .fiche-sort .source {
   float: left;
   font-family: arial, sans-serif;
-  font-size: 0.9rem;
-  font-style: italic;
 }
 
 div.carte-dos {
@@ -161,4 +195,3 @@ img.portrait {
 img.landscape {
   max-height: 100%;
 }
-

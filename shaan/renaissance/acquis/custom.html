@@ -301,7 +301,7 @@ Cet acquis est *super*.
       let data = {};
 
       data["Catégorie"] = cat.value;
-      data["Acquis"] = acq_name.value;
+      data["Nom"] = acq_name.value;
       data["Image"] = image.value;
       data["Domaine"] = domain.value;
       data["Rang"] = classe.value;
@@ -322,7 +322,7 @@ Cet acquis est *super*.
       if (cat.value.startsWith("Manuscrit")) {
         calc_cat.textContent = "Manuscrit";
       }
-      console.log(domain.options[domain.selectedIndex].text.toUpperCase());
+      // console.log(domain.options[domain.selectedIndex].text.toUpperCase());
       switch(domain.options[domain.selectedIndex].text.toUpperCase()) {
         case "NOVATEUR":
           data["dom_type"] = "technique";

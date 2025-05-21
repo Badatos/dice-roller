@@ -22,6 +22,9 @@
   <!-- Search box w. icon-->
   <link rel="stylesheet" type="text/css" href="../../../css/search-input.css" />
 
+  <!-- Sortable table -->
+  <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />
+
   <link rel="stylesheet" type="text/css" href="../../assets/dnd.css" />
   <!--link rel="stylesheet" type="text/css" href="../../../shaan/compendium/compendium.css" /-->
 
@@ -69,17 +72,46 @@
                   </label>
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
-                  <select id="domain" class="form-select"
-                    multiple>
-                    <option value="Technique"
-                            selected="selected"
-                            title="Ceux qui travaillent cuir, métal, pierre, bois, verre, tissu, ainsi que la technologie humaine">
-                            Novateur
+                  <select id="domain" class="form-select" multiple>
+                    <option value="abjuration"
+                      selected="selected"
+                      title="Protéger les autres">
+                        Abjuration
                     </option>
-                    <option value="Savoir"
-                            selected="selected"
-                            title="L’élite intellectuelle de la population héossienne">
-                            Érudit
+                    <option value="Divination"
+                      selected="selected"
+                      title="Comprendre le passé, le présent et le futur">
+                        Divination
+                    </option>
+                    <option value="enchantement"
+                      selected="selected"
+                      title="Séduire magiquement d’autres personnes et monstres">
+                        Enchantement
+                    </option>
+                    <option value="evocation"
+                      selected="selected"
+                      title="L’art de la destruction par les arcanes">
+                        Évocation
+                    </option>
+                    <option value="illusion"
+                      selected="selected"
+                      title="Éblouit les sens, embrouille l’esprit et trompe même les plus sages">
+                        Illusion
+                    </option>
+                    <option value="invocation"
+                      selected="selected"
+                      title="Produire des objets et des créatures">
+                        Invocation
+                    </option>
+                    <option value="necromancie"
+                      selected="selected"
+                      title="Les forces cosmiques de la vie et de la mort">
+                        Nécromancie
+                    </option>
+                    <option value="transmutation"
+                      selected="selected"
+                      title="Modifier l’énergie et la matière">
+                        Transmutation
                     </option>
                   </select>
                 </fieldset>
@@ -110,7 +142,7 @@
                     <option value="6">6</option>
                     <option value="7">7</option>
                     <option value="8">8</option>
-                    <option value="9" selected="selected">8</option>
+                    <option value="9" selected="selected">9</option>
                   </select>
                 </fieldset>
 
@@ -123,8 +155,9 @@
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
                   <select id="source" class="form-select" multiple>
-                    <option value="Manuel d’itinérance" selected="selected">Manuel d’itinérance</option>
-                    <option value="L’erreur est humaine" selected="selected">L’erreur est humaine</option>
+                    <option value="PHB ’24" selected="selected">PHB ’24 (VO)</option>
+                    <option value="PHB ’24 (BR)" selected="selected">PHB ’24 (BR)</option>
+                    <option value="PHB ’24 (FR)" selected="selected">PHB ’24 (FR)</option>
                   </select>
                 </fieldset>
 
@@ -289,8 +322,10 @@
 
   </main>
   <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
-    <p>Pour en savoir plus sur le jeu de rôle <strong>DnD</strong>, rendez-vous sur<br>
-
+    <p>
+      Pour en savoir plus sur le jeu de rôle <strong>DnD</strong>,
+      rendez-vous sur<br>
+      <a href="https://www.dndbeyond.com/">www.dndbeyond.com</a>
     </p>
   </footer>
 
@@ -337,7 +372,9 @@
     function display_items(data, target="liste-elements", modele="spell_row") {
 
       liste_pouvoirs = data;
-      bloc_total.textContent = data.length;
+      if(target=="liste-elements") {
+        bloc_total.textContent = data.length;
+      }
       const liste_elements = document.getElementById(target);
       fetch("../../templates/"+modele+".mustache")
       .then((response) => response.text())
@@ -346,6 +383,7 @@
         liste_elements.innerHTML = "";
         data.forEach(row => {
           row["css_class"] = row.School.toLowerCase();
+          row["css_class"] = row["css_class"].replace("é", "e");
           if(!row["Nom"]) {
             row["Nom"] = row["VO"] + " (VO)";
           }
@@ -387,13 +425,8 @@
   <script src="../compendium.js"></script>
 
   <!-- https://github.com/tofsjonas/sortable -->
-  <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.js"></script>
   <!--script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.a11y.min.js"></script-->
-
-
-  <!-- Shaan template JS -->
-  <!--script src="../../shaan.js"></script-->
 
   <script>
 
@@ -410,32 +443,37 @@
       const selectedDomains = Array.from(
         form.domain.selectedOptions).map(
           option => option.value.toLowerCase());
-      const minClass = parseInt(form.nivMin.value, 10);
-      const maxClass = parseInt(form.nivMax.value, 10);
+      const minLvl = parseInt(form.nivMin.value, 10);
+      const maxLvl = parseInt(form.nivMax.value, 10);
 
       filteredData = liste_pouvoirs.filter(item => {
-        const itemClass = romanNumber(item["Niveau"]);
+        const itemLvl = item["Niveau"];
         let itemDomain = item["School"];
         if (itemDomain) {
           itemDomain = itemDomain.toLowerCase();
         }
         return (
           (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
-          (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass)
+          (!isNaN(itemLvl) && itemLvl >= minLvl && itemLvl <= maxLvl)
         );
       });
-      if (selectedDomains.length > 9) {
-        selectedDomains = "tous domaines";
-      }
+
       bloc_total.textContent = filteredData.length;
-      text_found.textContent = "sorts de " + selectedDomains +
-        " de rang " + minClass;
-      if (maxClass != minClass) {
-        text_found.textContent += " à " + maxClass;
+      text_found.textContent = "sorts ";
+      if (selectedDomains.length === 1) {
+        text_found.textContent += "de l’école " + selectedDomains
+      } else if (selectedDomains.length === form.domain.options.length) {
+        text_found.textContent += "de toutes écoles";
+      } else {
+        text_found.textContent += "des écoles " + selectedDomains;
+      }
+      text_found.textContent += " de niveau " + minLvl;
+      if (maxLvl != minLvl) {
+        text_found.textContent += " à " + maxLvl;
       }
 
       text_found.textContent += " trouvé(s).";
-      display_pouvoirs(filteredData);
+      display_items(filteredData);
     });
 
     </script>

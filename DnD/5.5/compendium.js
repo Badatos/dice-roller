@@ -35,22 +35,17 @@ document.forms["filtres"].addEventListener("submit", function (event) {
   loader.classList.remove("d-none");
   document.getElementById("liste-elements").classList.add("d-none");
   const form = event.target;
-  const selectedDomain = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
-  const selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
+  const selectedSchool = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
   const selectedSource = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
-  const minClass = parseInt(form.nivMin.value, 10);
-  const maxClass = parseInt(form.nivMax.value, 10);
+  const minLvl = parseInt(form.nivMin.value, 10);
+  const maxLvl = parseInt(form.nivMax.value, 10);
 
-  const ignoreDomain = selectedDomain.length === 0 || selectedDomain.length === form.domain.options.length;
-  const ignoreCat = selectedCat.length === 0 || selectedCat.length === form.categorie.options.length;
+  const ignoreSchool = selectedSchool.length === 0 || selectedSchool.length === form.domain.options.length;
   const ignoreSource = selectedSource.length === 0 || selectedSource.length === form.source.options.length;
 
   filteredData = liste_origine.filter(item => {
-    const itemClass = romanNumber(item["Rang"]);
-    let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
-
-    let itemCategorie = item["Catégorie"]?item["Catégorie"].toLowerCase():"";
-    itemCategorie = itemCategorie.split(" ")[0];
+    const itemLvl = item["Niveau"];
+    let itemSchool = item["School"]?item["School"].toLowerCase():"";
 
     let itemSource = item["Source"];
 
@@ -64,24 +59,21 @@ document.forms["filtres"].addEventListener("submit", function (event) {
     }
 
     return (
-      (ignoreDomain || selectedDomain.includes(itemDomain)) &&
-      (!isNaN(itemClass) && itemClass >= minClass && itemClass <= maxClass) &&
-      (ignoreCat || selectedCat.includes(itemCategorie)) &&
+      (ignoreSchool || selectedSchool.includes(itemSchool)) &&
+      (!isNaN(itemLvl) && itemLvl >= minLvl && itemLvl <= maxLvl) &&
       (ignoreSource || selectedSource.includes(itemSource))
     );
   });
-  bloc_total.textContent = filteredData.length;
+  /*bloc_total.textContent = filteredData.length;
   text_found.textContent = form.dataset["itemtype"] + "(s)";
-  if (!ignoreDomain) {
-    text_found.textContent += " de " + selectedDomain;
-  }
-  if (!ignoreCat) {
-    text_found.textContent += " de type " + selectedCat;
+  if (!ignoreSchool) {
+    console.log(ignoreSchool);
+    text_found.textContent += " des écoles " + selectedSchool;
   }
 
-  text_found.textContent += " de classe " + minClass;
-  if (maxClass != minClass) {
-    text_found.textContent += " à " + maxClass;
+  text_found.textContent += " de niveau " + minLvl;
+  if (maxLvl != minLvl) {
+    text_found.textContent += " à " + maxLvl;
   }
 
   text_found.textContent += " trouvé(s)";
@@ -89,6 +81,7 @@ document.forms["filtres"].addEventListener("submit", function (event) {
     text_found.textContent += " dans " + selectedSource;
   }
   text_found.textContent += ".";
+  */
 
   reset_sort_status();
   display_items(filteredData);
