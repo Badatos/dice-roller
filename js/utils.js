@@ -23,3 +23,59 @@ async function search_filter(target="liste-elements") {
   loader.classList.add("d-none");
   document.getElementById(target).classList.remove("d-none");
 }
+
+/**
+ * Genere une liste d'éléments au format "carte"
+ * @param {*} elem  élément cliqué
+ * @param {*} event évenement déclenché
+ */
+async function generate(elem, event, item_type="acquis") {
+  //Ne s'active que si l'onglet "cartes" n'est pas déja sélectionné
+  if (!card_tab.classList.contains("active")) {
+    loader.classList.remove("d-none");
+    table_elements.classList.add("d-none");
+    card_tab.classList.add("active");
+    card_tab.setAttribute('aria-current', "page");
+    table_tab.classList.remove("active");
+    table_tab.removeAttribute('aria-current');
+    card_tab.scrollIntoView();
+
+    if (filteredData[0] == "VIDE") {
+      // Si aucun filtre, on prend la liste complète.
+      filteredData = liste_origine;
+    }
+
+    const selectedItems = [];
+    document.getElementsByName('select_item').forEach(function(chk){
+      if(chk.checked){
+        selectedItems.push(chk.value);
+      }
+    });
+
+    if (selectedItems.length > 0) {
+      // On ne prend que les éléments sélectionnés
+      filteredData = filteredData.filter(item => {
+        return selectedItems.includes(item["Nom"]);
+      });
+    }
+
+    display_items(filteredData, "card-elements", item_type);
+    await new Promise(r => setTimeout(r, 200));
+    loader.classList.add("d-none");
+    card_elements.classList.remove("d-none");
+  }
+}
+
+function table_switch(elem, event) {
+  if(event) {
+    event.preventDefault();
+  }
+  if (!table_tab.classList.contains("active")) {
+    card_elements.classList.add("d-none");
+    card_tab.classList.remove("active");
+    card_tab.removeAttribute("aria-current");
+    table_elements.classList.remove("d-none");
+    table_tab.classList.add("active");
+    table_tab.setAttribute("aria-current", "page");
+  }
+}

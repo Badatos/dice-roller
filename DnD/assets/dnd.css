@@ -1,0 +1,164 @@
+@import url("icomoon.css");
+
+
+:root {
+  --dnd-primary: #BC0F0F;
+  --dnd-primary-rgb: "188,15,15";
+  --dnd-primary-light: #eb1313;
+  --bs-primary-bg-subtle: #e2e2e2;
+  --bs-link-color: var(--dnd-primary);
+  --bs-link-color-rgb: var(--dnd-primary-rgb);
+  --bs-link-hover-color: var(--dnd-primary-light);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--dnd-primary);
+  --bs-btn-border-color: var(--dnd-primary);
+  --bs-btn-hover-bg: var(--dnd-primary-light);
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-active-bg: #0a58ca;
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-disabled-bg: var(--dnd-primary);
+  --bs-btn-disabled-border-color: var(--dnd-primary);
+}
+
+.nav-pills {
+  --bs-nav-pills-link-active-bg: var(--dnd-primary);
+}
+
+.meta {
+  font-size: 1.0rem;
+  line-height: 1.1;
+}
+
+div.classe {
+  float: right;
+  margin: 1px 1px 0;
+  padding: 0 3px;
+  background-color: #6D0000;
+  color: white;
+  font-family: arial, sans-serif;
+  font-size: .9rem;
+}
+
+.rituel {
+  padding: 1px;
+  background-color: #006D00;
+  color: white;
+  float: right;
+}
+
+.concentration{
+  color: #B80000;
+}
+
+.degats,
+.pv {
+  color: #6D0000;
+}
+
+.jds {
+  color: #00006D;
+}
+
+.status {
+  color: #006D00;
+}
+
+.description {
+  padding: 4px 0 6px;
+  text-align: justify
+}
+
+.source.xgte {
+  color:orangered;
+}
+
+/** blocCarte **/
+
+.blocCarte table,
+.blocCarte td,
+.blocCarte th {
+  border: 1px solid #922610;
+  padding: 2px;
+}
+
+.blocCarte tr:nth-child(even),
+.bloc table tr:nth-child(even) {
+  background-color: #e0e0ff
+}
+
+.blocCarte {
+  /*width: 6.3cm;*/
+  /*height: 9.4cm;*/
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.3;
+  text-align: left;
+  --bs-heading-color: white;
+}
+
+.fiche-sort>.card-header{
+  --bs-card-cap-bg: #6D0000;
+}
+
+.fiche-sort h2 {
+  font-size: 1.2rem;
+}
+
+
+.blocCarte .ecole {
+  padding: 2px 0 4px
+}
+
+
+.blocCarte .carac {
+  padding-left: 1px
+}
+
+.blocCarte .description {
+  padding: 2px
+}
+
+.blocCarteP {
+  font-size: 1.1rem;
+  line-height: 1.2
+}
+
+.blocCarteTP {
+  font-size: 1.0rem;
+  line-height: 1.1
+}
+
+.blocCarteTTP {
+  font-size: 0.9rem;
+  line-height: 1.0
+}
+
+.fiche-sort .source {
+  float: left;
+  font-family: arial, sans-serif;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+div.carte-dos {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-image: none;
+}
+
+.carte-dos>img {
+  max-width: 100%;
+}
+
+img.portrait {
+  transform: rotate(90deg);
+  height: 70%;
+  max-width: none;
+}
+
+img.landscape {
+  max-height: 100%;
+}
+

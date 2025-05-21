@@ -22,7 +22,7 @@
   <!-- Search box w. icon-->
   <link rel="stylesheet" type="text/css" href="../../../css/search-input.css" />
 
-  <link rel="stylesheet" type="text/css" href="../../dnd.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/dnd.css" />
   <!--link rel="stylesheet" type="text/css" href="../../../shaan/compendium/compendium.css" /-->
 
   <title>Sorts - DD5.5</title>
@@ -281,7 +281,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#card-elements" id="card-tab"
-           onclick="generate(this, event, 'pouvoir')">
+           onclick="generate(this, event, 'spell')">
           <i class="bi bi-postcard"></i> Cartes
         </a>
       </li>
@@ -346,8 +346,32 @@
         liste_elements.innerHTML = "";
         data.forEach(row => {
           row["css_class"] = row.School.toLowerCase();
-          if(row["Nom"] == "") {
-            row["Nom"] = row["VO"];
+          if(!row["Nom"]) {
+            row["Nom"] = row["VO"] + " (VO)";
+          }
+          if(!row["Description"]) {
+            row["Description"] = row["Desc_EN"];
+          }
+          if(!row["Matériel"]) {
+            row["Matériel"] = row["Material_EN"];
+          }
+          if(row["Classes"] && typeof(row["Classes"]) == "string") {
+            row["Classes"] = row["Classes"].split(",");
+          }
+          if(row["Classes"] && row["Classes"].length == 1) {
+            row["Classes"] = row["Classes"][0].split("\n");
+          }
+          if(modele == "spell") {
+            switch(row["Niveau"]) {
+              case 0:
+                row["Niveau"] = "mineur";
+                break;
+              case 1:
+                row["Niveau"] = "du " + row["Niveau"] + "<sup>er</sup> niveau";
+                break;
+              default:
+                row["Niveau"] = "du " + row["Niveau"] + "<sup>e</sup> niveau";
+            }
           }
           renderedHTML += Mustache.render(template, row);
           loader.classList.add("d-none");

@@ -7,53 +7,49 @@
     class="item col-sm-12 col-md-6 col-lg-4 mb-2"
   {{/width}}
   >
-  <div class="card fiche-pouvoir">
-    <div class="card-header"></div>
+  <div class="card fiche-sort blocCarte">
+    <div class="card-header">
+      <h2 class="mb-0">{{Nom}}</h2>
+    </div>
     <div class="card-body {{css_class}}">
-      <h2>{{Nom}}</h2>
-      <div class="float-end text-right">
-        <span class="source">{{source}}</span>
+      <div class="meta">
+        <div class="ecole">
+          <i class="icon-{{School}}" aria-hidden="true"></i> {{School}}
+          {{{Niveau}}}
+          {{#Rituel}}-  <strong class="rituel">(rituel)</strong>{{/Rituel}}
+        </div>
+        <div class="row">
+          <div class="col t">
+            <strong>Temps d’incantation</strong> :
+            {{Temps d’incantation}}
+          </div>
+          <div class="col r">
+            <strong>Portée</strong> :
+            {{Portée}}
+          </div>
+          <div class="col c">
+            <strong>Composantes</strong> :
+            {{Composantes}} {{Matériel}}
+          </div>
+          <div class="col d">
+            <strong>Durée</strong> :
+            {{Durée}}
+          </div>
+        </div>
       </div>
-      <p class="p-orig">
-        <span>{{dom_type}} de <span class="uppercase">{{Domaine}}</span></span>
-        de <strong>Rang <span id="p_rank">{{Rang}}</span></strong>
-      </p>
-      <ul class="h3">
-        <li><strong>Type :</strong> <span id="p_type">{{Type}}</span></li>
-        <li><strong>Fréquence :</strong> <span id="p_freq">{{Fréquence}}</span></li>
-        {{#Activation}}
-          <li>
-            <strong>Activation :</strong>
-            <span id="p_activ">{{Activation}}</span>
-          </li>
-        {{/Activation}}
-        {{#Score}}
-          <li>
-            <strong>Score :</strong>
-            <span id="p_scor">{{Score}}</span>
-          </li>
-        {{/Score}}
-        {{#Portée}}
-          <li>
-            <strong>Portée :</strong>
-            <span id="p_port">{{Portée}}</span>
-          </li>
-        {{/Portée}}
-        {{#Nombre de cibles}}
-          <li>
-            <strong>Nombre de cibles :</strong>
-            <span id="p_targets">{{Nombre de cibles}}</span>
-          </li>
-        {{/Nombre de cibles}}
-        <li>
-          <strong>Durée :</strong>
-          <span id="p_dura">{{Durée}}</span>
-        </li>
-      </ul>
-      <p>Résumé : <em id="p_summary">{{Résumé}}</em></p>
-      <div class="vert" id="p_desc">
-        {{Effet}}
+      <div class="description">
+        {{{Description}}}
+        {{#Niveau supérieur}}
+        <p><strong><em>Emplacement de niveau supérieur</em></strong>.<br>
+         {{Niveau supérieur}}</p>
+        {{/Niveau supérieur}}
       </div>
+    </div>
+    <div class="card-footer">
+      {{#Classes}}
+        <div class="classe">{{.}}</div>
+      {{/Classes}}
+      <div class="source">({{Source}})</div>
     </div>
   </div>
 </div>
