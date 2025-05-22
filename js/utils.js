@@ -112,3 +112,9 @@ function reset_sort_status() {
     nodes[i].removeAttribute('aria-sort')
   }
 }
+
+// Function to test: at least one item of selected is included in itemlist
+function hasAnySelectedList(selected, itemlist) {
+  if (!Array.isArray(selected) || !Array.isArray(itemlist)) return false;
+  return selected.some(cls => itemlist.includes(cls.toLowerCase()));
+}

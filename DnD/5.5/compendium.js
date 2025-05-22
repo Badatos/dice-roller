@@ -29,6 +29,7 @@ document.getElementById("search").addEventListener("keyup", function (event) {
   search_filter();
 });
 
+/*
 document.forms["filtres"].addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent the default form submission behavior
 
@@ -81,12 +82,13 @@ document.forms["filtres"].addEventListener("submit", function (event) {
     text_found.textContent += " dans " + selectedSource;
   }
   text_found.textContent += ".";
-  */
+
 
   reset_sort_status();
   display_items(filteredData);
   table_switch(null, null);
 });
+*/
 
 // Chargement et affichage des données
 parser.parse().then(data => {

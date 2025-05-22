@@ -147,6 +147,34 @@
                 </fieldset>
 
                 <fieldset class="col-md-6 mb-3 checkbox-mixed">
+                  <legend>Classe</legend>
+                  <label class="form-check-label" for="selectAllClass">
+                    <input type="checkbox" id="selectAllClass" checked="checked" class="form-check-input">
+                    Toutes les classes
+                  </label>
+                  <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
+
+                  <select id="classe" class="form-select" multiple>
+                    <option value="Barde" selected="selected"
+                      title="Musicien, danseur et mage exaltant">Barde</option>
+                    <option value="Clerc" selected="selected"
+                      title="Prêtre tirant des miracles du pouvoir divin">Clerc</option>
+                    <option value="Druide" selected="selected"
+                      title="Prêtre de la nature primitive">Druide</option>
+                    <option value="Ensorceleur" selected="selected"
+                      title="Mage éblouissant, débordant de sorcellerie innée">Ensorceleur</option>
+                    <option value="Magicien" selected="selected"
+                      title="Mage érudit aux pouvoirs arcaniques">Magicien</option>
+                    <option value="Occultiste" selected="selected"
+                      title="Hermétiste galvanisé par un pacte d'outre-monde">Occultiste</option>
+                    <option value="Paladin" selected="selected"
+                      title="Combattant vertueux sous serment sacré">Paladin</option>
+                    <option value="Rôdeur" selected="selected"
+                      title="Combattant itinérant, imprégné de magie primale">Rôdeur</option>
+                  </select>
+                </fieldset>
+
+                <fieldset class="col-md-6 mb-3 checkbox-mixed">
                   <legend>Source</legend>
                   <label class="form-check-label" for="selectAllSrc">
                     <input type="checkbox" id="selectAllSrc" checked="checked" class="form-check-input">
@@ -257,7 +285,10 @@
                 <th scope="col">Nom</th>
                 <th scope="col">École</th>
                 <th scope="col">Niveau</th>
-                <th scope="col">Temps d’incantation</th>
+                <th scope="col">Incantation</th>
+                <th scope="col">Matériel</th>
+                <th scope="col">Rituel</th>
+                <th scope="col">Concentration</th>
                 <th scope="col">Source</th>
               </tr>
             </thead>
@@ -367,11 +398,11 @@
 
     const precode = document.getElementById("code");
 
-    let liste_pouvoirs = [];
+    let liste_sorts = [];
 
     function display_items(data, target="liste-elements", modele="spell_row") {
 
-      liste_pouvoirs = data;
+      liste_sorts = data;
       if(target=="liste-elements") {
         bloc_total.textContent = data.length;
       }
@@ -440,32 +471,53 @@
       event.preventDefault(); // Prevent the default form submission behavior
 
       const form = event.target;
-      const selectedDomains = Array.from(
+      const selectedSchool = Array.from(
         form.domain.selectedOptions).map(
           option => option.value.toLowerCase());
+      const selectedClasses = Array.from(
+        form.classe.selectedOptions).map(
+          option => option.value.toLowerCase());
+      const selectedSource = Array.from(
+        form.source.selectedOptions).map(
+          option => option.value.toLowerCase());
+
       const minLvl = parseInt(form.nivMin.value, 10);
       const maxLvl = parseInt(form.nivMax.value, 10);
 
-      filteredData = liste_pouvoirs.filter(item => {
+      const ignoreSchool = selectedSchool.length === 0 || selectedSchool.length === form.domain.options.length;
+      const ignoreClasses = selectedClasses.length === 0 || selectedClasses.length === form.classe.options.length;
+      const ignoreSource = selectedSource.length === 0 || selectedSource.length === form.source.options.length;
+
+
+      filteredData = liste_sorts.filter(item => {
         const itemLvl = item["Niveau"];
         let itemDomain = item["School"];
         if (itemDomain) {
           itemDomain = itemDomain.toLowerCase();
         }
+        let itemClasses = item["Classes"];
+        if (itemClasses && !Array.isArray(itemClasses)) {
+          console.log(itemClasses);
+          itemClasses = itemClasses.toLowerCase().split(",");
+        }
+
         return (
-          (selectedDomains.length === 0 || selectedDomains.includes(itemDomain)) &&
+          (ignoreSchool || selectedSchool.includes(itemDomain)) &&
+          (ignoreClasses || hasAnySelectedList(selectedClasses, itemClasses)) &&
           (!isNaN(itemLvl) && itemLvl >= minLvl && itemLvl <= maxLvl)
         );
       });
 
       bloc_total.textContent = filteredData.length;
       text_found.textContent = "sorts ";
-      if (selectedDomains.length === 1) {
-        text_found.textContent += "de l’école " + selectedDomains
-      } else if (selectedDomains.length === form.domain.options.length) {
-        text_found.textContent += "de toutes écoles";
-      } else {
-        text_found.textContent += "des écoles " + selectedDomains;
+      if (!ignoreSchool) {
+        if (selectedSchool.length === 1) {
+          text_found.textContent += "de l’école " + selectedSchool
+        } else if (selectedSchool.length === form.domain.options.length) {
+          text_found.textContent += "de toutes écoles";
+        } else {
+          text_found.textContent += "des écoles " + selectedSchool;
+        }
       }
       text_found.textContent += " de niveau " + minLvl;
       if (maxLvl != minLvl) {
