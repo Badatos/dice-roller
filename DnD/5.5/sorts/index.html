@@ -78,7 +78,7 @@
                       title="Protéger les autres">
                         Abjuration
                     </option>
-                    <option value="Divination"
+                    <option value="divination"
                       selected="selected"
                       title="Comprendre le passé, le présent et le futur">
                         Divination
@@ -88,7 +88,7 @@
                       title="Séduire magiquement d’autres personnes et monstres">
                         Enchantement
                     </option>
-                    <option value="evocation"
+                    <option value="évocation"
                       selected="selected"
                       title="L’art de la destruction par les arcanes">
                         Évocation
@@ -103,7 +103,7 @@
                       title="Produire des objets et des créatures">
                         Invocation
                     </option>
-                    <option value="necromancie"
+                    <option value="nécromancie"
                       selected="selected"
                       title="Les forces cosmiques de la vie et de la mort">
                         Nécromancie
@@ -183,9 +183,18 @@
                   <i class="bi bi-info-circle" title="Ctrl+Clic pour sélectionner plusieurs éléments"></i>
 
                   <select id="source" class="form-select" multiple>
-                    <option value="PHB ’24" selected="selected">PHB ’24 (VO)</option>
-                    <option value="PHB ’24 (BR)" selected="selected">PHB ’24 (BR)</option>
-                    <option value="PHB ’24 (FR)" selected="selected">PHB ’24 (FR)</option>
+                    <option value="PHB ’24" selected="selected"
+                      title="Version originale du Player Hand Book 2024">
+                        PHB ’24 (VO)
+                    </option>
+                    <option value="PHB ’24 (BR)" selected="selected"
+                      title="Version Britanique du Player Hand Book 2024">
+                        PHB ’24 (BR)
+                    </option>
+                    <option value="PHB ’24 (FR)" selected="selected"
+                      title="Version Française du Manuel des Joueurs 2024">
+                        PHB ’24 (FR)
+                    </option>
                   </select>
                 </fieldset>
 
@@ -398,59 +407,38 @@
 
     const precode = document.getElementById("code");
 
-    let liste_sorts = [];
-
-    function display_items(data, target="liste-elements", modele="spell_row") {
-
-      liste_sorts = data;
-      if(target=="liste-elements") {
-        bloc_total.textContent = data.length;
-      }
-      const liste_elements = document.getElementById(target);
-      fetch("../../templates/"+modele+".mustache")
-      .then((response) => response.text())
-      .then((template) => {
-        let renderedHTML = '';
-        liste_elements.innerHTML = "";
-        data.forEach(row => {
-          row["css_class"] = row.School.toLowerCase();
-          row["css_class"] = row["css_class"].replace("é", "e");
-          if(!row["Nom"]) {
-            row["Nom"] = row["VO"] + " (VO)";
-          }
-          if(!row["Description"]) {
-            row["Description"] = row["Desc_EN"];
-          }
-          if(!row["Matériel"]) {
-            row["Matériel"] = row["Material_EN"];
-          }
-          if(row["Classes"] && typeof(row["Classes"]) == "string") {
-            row["Classes"] = row["Classes"].split(",");
-          }
-          if(row["Classes"] && row["Classes"].length == 1) {
-            row["Classes"] = row["Classes"][0].split("\n");
-          }
-          if(modele == "spell") {
-            switch(row["Niveau"]) {
-              case 0:
-                row["Niveau"] = "mineur";
-                break;
-              case 1:
-                row["Niveau"] = "du " + row["Niveau"] + "<sup>er</sup> niveau";
-                break;
-              default:
-                row["Niveau"] = "du " + row["Niveau"] + "<sup>e</sup> niveau";
-            }
-          }
-          renderedHTML += Mustache.render(template, row);
-          loader.classList.add("d-none");
-          //precode.textContent += JSON.stringify(row, null, 2) + '\n';
-        });
-        liste_elements.innerHTML = renderedHTML;
-        search_filter();
+    function correct_initial_data(data){
+      data.forEach(row => {
+        row["css_class"] = row.School.toLowerCase();
+        row["css_class"] = row["css_class"].replace("é", "e");
+        if(!row["Nom"]) {
+          row["Nom"] = row["VO"] + " (VO)";
+        }
+        if(!row["Description"]) {
+          row["Description"] = row["Desc_EN"];
+        }
+        if(!row["Matériel"]) {
+          row["Matériel"] = row["Material_EN"];
+        }
+        if(row["Classes"] && typeof(row["Classes"]) == "string") {
+          row["Classes"] = row["Classes"].split(",");
+        }
+        if(row["Classes"] && row["Classes"].length == 1) {
+          row["Classes"] = row["Classes"][0].split("\n");
+        }
+        switch(row["Niveau"]) {
+          case 0:
+            row["Level"] = "mineur";
+            break;
+          case 1:
+            row["Level"] = "du " + row["Niveau"] + "<sup>er</sup> niveau";
+            break;
+          default:
+            row["Level"] = "du " + row["Niveau"] + "<sup>e</sup> niveau";
+        }
       });
+      return data;
     }
-
   </script>
   <script src="../../../js/utils.js"></script>
   <script src="../compendium.js"></script>
@@ -461,7 +449,7 @@
 
   <script>
 
-    var filteredData = [];
+    var filteredData = ["VIDE"];
 
     document.getElementById("search").addEventListener("keyup", function (event) {
       search_filter();
@@ -489,7 +477,7 @@
       const ignoreSource = selectedSource.length === 0 || selectedSource.length === form.source.options.length;
 
 
-      filteredData = liste_sorts.filter(item => {
+      filteredData = liste_origine.filter(item => {
         const itemLvl = item["Niveau"];
         let itemDomain = item["School"];
         if (itemDomain) {
@@ -522,6 +510,16 @@
       text_found.textContent += " de niveau " + minLvl;
       if (maxLvl != minLvl) {
         text_found.textContent += " à " + maxLvl;
+      }
+
+      if (!ignoreClasses) {
+        if (selectedClasses.length === 1) {
+          text_found.textContent += " pour la classe de " + selectedClasses
+        } else if (selectedClasses.length === form.classe.options.length) {
+          text_found.textContent += " pour toutes les classes";
+        } else {
+          text_found.textContent += " pour les classes de " + selectedClasses;
+        }
       }
 
       text_found.textContent += " trouvé(s).";

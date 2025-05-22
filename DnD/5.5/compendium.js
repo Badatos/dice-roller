@@ -92,7 +92,7 @@ document.forms["filtres"].addEventListener("submit", function (event) {
 
 // Chargement et affichage des données
 parser.parse().then(data => {
-  liste_origine = data;
+  liste_origine = correct_initial_data(data);
   display_items(data);
   bloc_total.textContent = data.length;
 });
@@ -132,7 +132,7 @@ function modal_item(item, event, item_type = "acquis") {
 }
 
 /**
- *
+ * Affiche une fenetre modale contenant les données selectionnées
  * @param {*} selectedDatas
  * @param {*} item_type
  */
@@ -142,79 +142,6 @@ function modal_show(selectedDatas, item_type) {
   itemModal.show();
 }
 
-/**
- * G2nere un PNJ basé sur le métier indiqué
- * @param {*} event
- * @param {*} data
- */
-async function createPNJfromJob(event, data) {
-  event.preventDefault();
-  const jobData = liste_origine.filter((o) => o.Nom === data["Métier"]);
-  data["Spécialisations"] = jobData[0]["Spécialisations"];
-  data["Lignée"] = randomLignee();
-  data["Nom"] = await random_PNJ_name(data["Lignée"]);
-  data["Domaines"] = {};
-  let niveau = 4;
-  CORRESPONDANCES["Domaines"].forEach(domaine => {
-    data["Domaines"][domaine] = niveau;
-  });
-  modal_show([data], "pnj");
-}
-
-
-/**
- * Takes a domain as input and returns a corresponding power type string based on predefined cases,
- * defaulting to "Pouvoir" if no match is found.
- * @param {*} domaine le domaine associé
- * @returns le type de pouvoir associé au domaine
- */
-function getPouvoirType(domaine) {
-  let ret = "";
-  switch (domaine.toLowerCase()) {
-    case "technique":
-      ret = "Astuce";
-      break;
-    case "savoir":
-      ret = "Secret";
-      break;
-    case "social":
-      ret = "Privilège";
-      break;
-    case "arts":
-      ret = "Création";
-      break;
-    case "shaan":
-      ret = "Symbiose";
-      break;
-    case "magie":
-      ret = "Sort";
-      break;
-    case "rituels":
-      ret = "Transe";
-      break;
-    case "survie":
-      ret = "Exploit";
-      break;
-    case "combat":
-      ret = "Tactique";
-      break;
-    case "nécrose":
-      ret = "Tourment";
-      break;
-    default:
-      ret = "Pouvoir";
-  }
-  return ret;
-}
-
-/* Fournit un nom de lignée aléatoire */
-function randomLignee(bonus = false) {
-  lignees = CORRESPONDANCES["Lignées"];
-  if (bonus) {
-    lignees += ["Morphes", "Nécrosien", "Indar"]
-  }
-  return lignees[Math.floor(Math.random() * lignees.length)];
-}
 
 /* Fournit un nom de personnage aléatoire lié à sa lignée */
 async function random_PNJ_name(lignee, gender = "both") {
@@ -238,4 +165,26 @@ async function random_PNJ_name(lignee, gender = "both") {
   // élimine une éventuelle précision de genre avant le nom
   name = name.split(":");
   return name[name.length - 1];
+}
+
+
+function display_items(data, target="liste-elements", modele="spell_row") {
+
+  if(target=="liste-elements") {
+    bloc_total.textContent = data.length;
+  }
+  const liste_elements = document.getElementById(target);
+  fetch("../../templates/"+modele+".mustache")
+  .then((response) => response.text())
+  .then((template) => {
+    let renderedHTML = '';
+    liste_elements.innerHTML = "";
+    data.forEach(row => {
+      renderedHTML += Mustache.render(template, row);
+      loader.classList.add("d-none");
+      //precode.textContent += JSON.stringify(row, null, 2) + '\n';
+    });
+    liste_elements.innerHTML = renderedHTML;
+    search_filter();
+  });
 }
