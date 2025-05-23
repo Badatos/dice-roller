@@ -7,7 +7,7 @@
     class="item col-sm-12 col-md-6 col-lg-4 mb-2"
   {{/width}}
   >
-  <div class="card fiche-sort">
+  <div class="card fiche-sort" {{#Zoom}}style="zoom: {{Zoom}}"{{/Zoom}}>
     <div class="card-header">
       <h2 class="mb-0">{{Nom}}</h2>
     </div>
@@ -15,10 +15,10 @@
       <div>
         <i class="icon-{{css_class}}" aria-hidden="true"></i> {{School}}
         {{{Level}}}
-        {{#Rituel}}-  <strong class="rituel">(rituel)</strong>{{/Rituel}}
+        {{#Rituel}} <strong class="rituel">(rituel)</strong>{{/Rituel}}
       </div>
       <!--div class="meta grid" style="--bs-columns: 2;"-->
-      <div class="meta d-flex justify-content-between flex-wrap">
+      <div class="meta d-flex justify-content-between flex-wrap mt-1">
         <div class="spell-time">
           <strong>Temps d’incantation</strong> :
           {{Temps d’incantation}}
@@ -34,7 +34,7 @@
         </div>
         <div class="spell-duration">
           <strong>Durée</strong> :
-          {{Durée}}
+          {{#Concentration}}<strong class="concentration">Concentration</strong>, jusqu'à {{/Concentration}}{{Durée}}
         </div>
       </div>
       <div class="description mt-1">

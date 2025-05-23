@@ -116,5 +116,6 @@ function reset_sort_status() {
 // Function to test: at least one item of selected is included in itemlist
 function hasAnySelectedList(selected, itemlist) {
   if (!Array.isArray(selected) || !Array.isArray(itemlist)) return false;
+  itemlist = itemlist.map(v => v.toLowerCase());
   return selected.some(cls => itemlist.includes(cls.toLowerCase()));
 }
