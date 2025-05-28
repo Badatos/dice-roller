@@ -410,8 +410,6 @@
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
-          row["dom_type"] = getPouvoirType(row.Domaine);
-          row["css_class"] = row.Domaine.toLowerCase();
           renderedHTML += Mustache.render(template, row);
           loader.classList.add("d-none");
           //precode.textContent += JSON.stringify(row, null, 2) + '\n';
@@ -429,7 +427,6 @@
   <link href="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.js"></script>
   <!--script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.a11y.min.js"></script-->
-
 
   <!-- Shaan template JS -->
   <script src="../../shaan.js"></script>

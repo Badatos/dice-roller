@@ -28,6 +28,8 @@ const parser = new PublicGoogleSheetsParser(
   options
 );
 
+const gSheetCache = [];
+
 const bloc_total = document.getElementById("total");
 const text_found = document.getElementById("text-found");
 
@@ -123,7 +125,10 @@ document.forms["filtres"].addEventListener("submit", function (event) {
 
 // Chargement et affichage des données
 parser.parse().then(data => {
-  liste_origine = data;
+  liste_origine = correct_initial_data(
+    options["sheetName"],
+    data
+  );
   display_items(data);
   bloc_total.textContent = data.length;
 });
@@ -134,20 +139,29 @@ parser.parse().then(data => {
  * @param {*} event
  * @param {*} item_type
  */
-function modal_getitem(item, event, item_type = "pouvoir", sheet = "Pouvoirs") {
+function modal_getitem(item, event, item_type="pouvoir", sheet="Pouvoirs") {
   event.preventDefault();
 
-  const tempParser = new PublicGoogleSheetsParser(
-    gSheetId,
-    { sheetName: sheet, useFormat: false }
-  );
-  let temp_liste = [];
-  tempParser.parse().then(data => {
-    temp_liste = data;
-  });
-  const selectedData = temp_liste.filter((o) => o.Nom === item.dataset["name"]);
-  selectedData[0].width = "col-sm-12";
-  modal_show(selectedData, item_type);
+  const name = item.dataset["name"]?item.dataset["name"]:item.textContent;
+  let selectedData = [];
+
+  if(!gSheetCache[sheet]) {
+    const tempParser = new PublicGoogleSheetsParser(
+      gSheetId,
+      { sheetName: sheet, useFormat: false }
+    );
+
+    tempParser.parse().then(data => {
+      gSheetCache[sheet] = correct_initial_data(sheet, data);
+      selectedData = gSheetCache[sheet].filter((o) => o.Nom === name);
+      selectedData[0].width = "col-sm-12";
+      modal_show(selectedData, item_type);
+    });
+  } else {
+    selectedData = gSheetCache[sheet].filter((o) => o.Nom === name);
+    selectedData[0].width = "col-sm-12";
+    modal_show(selectedData, item_type);
+  }
 }
 
 /**
@@ -156,7 +170,7 @@ function modal_getitem(item, event, item_type = "pouvoir", sheet = "Pouvoirs") {
  * @param {*} event
  * @param {*} item_type
  */
-function modal_item(item, event, item_type = "acquis") {
+function modal_item(item, event, item_type="acquis") {
   event.preventDefault();
   const selectedDatas = liste_origine.filter((o) => o.Nom === item.dataset["name"]);
   modal_show(selectedDatas, item_type);
@@ -309,4 +323,55 @@ async function random_PNJ_name(lignee, gender = "both") {
   // élimine une éventuelle précision de genre avant le nom
   name = name.split(":");
   return name[name.length - 1];
+}
+
+/**
+ * Apply calc on first data load, depending on data type.
+ * @param {*} type Data type
+ * @param {*} data inititial data
+ * @returns Modified data
+ */
+function correct_initial_data(type, data) {
+  switch(type){
+    case "Destinée":
+      data.forEach(row => {
+        row["dom_list"] = row["Domaines"].replace("\
+", "").replace("\r", "").replace("\n", "").toLowerCase();
+        row["dom_list"] = row["dom_list"].replace(" ", "").split("+");
+        // Une destinee epique implique au moins 2 domaines à 10.
+        row["lvl"] = 10;
+      });
+      break;
+    case "Pouvoirs":
+      data.forEach(row => {
+        row["dom_type"] = getPouvoirType(row.Domaine);
+        row["css_class"] = row.Domaine.toLowerCase();
+      });
+      break;
+    case "Acquis":
+      data.forEach(row => {
+        if (
+            row["Catégorie"] && (
+              row["Catégorie"] == "Protection" ||
+              row["Catégorie"].startsWith("Transport")
+            )
+          ) {
+            row["Attributs"] = row["Spécialisation"];
+            row["Spécialisation"] = "";
+        }
+
+        if (row["Rang"] && row["Rang"] === 0){
+          row["Rang"] = "";
+        }
+      });
+      break;
+    case "Peuples":
+      data.forEach(row => {
+        if(row["Domaine"]) {
+          row["Domaine"] = row["Domaine"].toLowerCase();
+        }
+      });
+      break;
+  }
+  return data;
 }

@@ -407,7 +407,7 @@
 
     const precode = document.getElementById("code");
 
-    function correct_initial_data(data){
+    function correct_initial_data(data) {
       data.forEach(row => {
         row["css_class"] = row.School.toLowerCase();
         row["css_class"] = row["css_class"].replace("é", "e");

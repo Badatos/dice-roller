@@ -55,6 +55,7 @@
     td,
     th {
       vertical-align: middle;
+      min-width: 5em;
     }
 
     @media print {
@@ -106,7 +107,7 @@
     </nav>
 
     <div id="intro">
-      <p>
+      <p class="mb-0">
         La destinée épique reflète la dimension légendaire d’un personnage et lui
         confère une aura bien supérieure aux
         <a href="prestige.html">métiers de prestige</a>, qui peut s’étendre
@@ -118,8 +119,8 @@
         Les personnages devront choisir leurs alliés avec soin,
         car refuser l’invitation d’un Notable ou ne pas respecter
         les hiérarchies de présentation, c’est se faire des ennemis à vie... <br>
-        <em>Manuel du Joueur (page 256)</em>
       </p>
+      <p class="text-end"><em>Manuel du Joueur (page 256)</em></p>
       <h2>Comment l’obtenir ?</h2>
       <p>Lorsqu’un personnage atteint le
         <strong>niveau 10 dans deux Domaines</strong>,
@@ -159,7 +160,7 @@
       </div>
     </div>
 
-    <div class="table-responsive d-none" id="table-elements">
+    <div class="table-responsive" id="table-elements">
       <table class="table table-striped mb-0">
         <caption class="text-end">
           <strong id="total">X</strong> Destinée(s) épique(s)
@@ -181,90 +182,89 @@
         <tbody>
           <tr class="bg-icon">
             <th scope="row" class="bg-jaune technique">Technique &rarr;</th>
-            <td class="bg-jaune-light"><a href="#" data-name="ARCHITECTE" onclick="modal_item(this, event, 'metier')">Architecte</a></td>
-            <td class="bg-jaune-light"><a href="#" data-name="COMMANDANT DE BORD" onclick="modal_item(this, event, 'metier')">Commandant de bord</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="SCULPTEUR DE LUMIÈRE" onclick="modal_item(this, event, 'metier')">Sculpteur de Lumière</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="ÂME-PIERRE" onclick="modal_item(this, event, 'metier')">Âme-Pierre</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="FORGE-MAGE" onclick="modal_item(this, event, 'metier')">Forge-Mage</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="COMPAGNON EXALTÉ" onclick="modal_item(this, event, 'metier')">Compagnon Exalté</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="GRAND VEILLEUR" onclick="modal_item(this, event, 'metier')">Grand Veilleur</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="MAÎTRE D’ARMES" onclick="modal_item(this, event, 'metier')">Maître d’Armes</a></td>
-            <td class="bg-graune-light"><a href="#" data-name="SABOTEUR" onclick="modal_item(this, event, 'metier')">Saboteur</a></td>
+            <td class="bg-jaune-light"><a href="#" data-name="GRAND MAÎTRE DES PLANTES" onclick="modal_item(this, event, 'metier')">Grand maître des plantes</a></td>
+            <td class="bg-jaune-light"><a href="#" data-name="MÉCANÉEN" onclick="modal_item(this, event, 'metier')">Mécanéen</a></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blaune-light"><a href="#" data-name="ARCHITECTE DES LUMIÈRES" onclick="modal_item(this, event, 'metier')">Architecte des lumières</a></td>
+            <td class="bg-blaune-light"><a href="#" data-name="Forge-Schèmes" onclick="modal_item(this, event, 'metier')">Forge-Schèmes</a></td>
+            <td class="bg-raune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><a href="#" data-name="SURVIVALISTE" onclick="modal_item(this, event, 'metier')">Survivaliste</a></td>
+            <td class="bg-raune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-graune-light"><a href="#" data-name="Technomancien" onclick="modal_item(this, event, 'metier')">Technomancien</a></td>
           </tr>
           <tr class="bg-icon">
             <td></td>
             <th scope="row" class="bg-jaune savoir">Savoir &rarr;</th>
-            <td class="bg-jaune-light"><a href="#" data-name="CARTOMANCIEN" onclick="modal_item(this, event, 'metier')">Cartomancien</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="THÉRAPEUTE" onclick="modal_item(this, event, 'metier')">Thérapeute</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="MAÎTRE DES FORÊTS" onclick="modal_item(this, event, 'metier')">Maître des Forêts</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="MAÎTRE DES ARCANES" onclick="modal_item(this, event, 'metier')">Maître des Arcanes</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="ZOOMANCIEN" onclick="modal_item(this, event, 'metier')">Zoomancien</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="Ethnologue" onclick="modal_item(this, event, 'metier')">Ethnologue</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="GRAND STRATÈGE" onclick="modal_item(this, event, 'metier')">Grand Stratège</a></td>
-            <td class="bg-graune-light"><a href="#" data-name="MORPHONDEUR" onclick="modal_item(this, event, 'metier')">Morphondeur</a></td>
+            <td class="bg-jaune-light"><a href="#" data-name="GRAND ORATEUR" onclick="modal_item(this, event, 'metier')">Grand orateur</a></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><a href="#" data-name="Maître des Potions élémentaires" onclick="modal_item(this, event, 'metier')">Maître des Potions élémentaires</a></td>
+            <td class="bg-raune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><a href="#" data-name="VÉTÉRAN" onclick="modal_item(this, event, 'metier')">Vétéran</a></td>
+            <td class="bg-graune-light"><span href="#" data-name=""></span></td>
           </tr>
           <tr class="bg-icon">
             <td colspan="2"></td>
             <th scope="row" class="bg-jaune social">Social &rarr;</th>
-            <td class="bg-blaune-light"><a href="#" data-name="SOPRANO" onclick="modal_item(this, event, 'metier')">Soprano</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="MAITRE DES ESPRITS" onclick="modal_item(this, event, 'metier')">Maitre des Esprits</a></td>
-            <td class="bg-blaune-light"><a href="#" data-name="EXORCISTE" onclick="modal_item(this, event, 'metier')">Exorciste</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="PRÉDICATEUR" onclick="modal_item(this, event, 'metier')">Prédicateur</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="AMBASSADEUR" onclick="modal_item(this, event, 'metier')">Ambassadeur</a></td>
-            <td class="bg-raune-light"><a href="#" data-name="COURTISAN" onclick="modal_item(this, event, 'metier')">Courtisan</a></td>
-            <td class="bg-graune-light"><a href="#" data-name="CONTREBANDIER" onclick="modal_item(this, event, 'metier')">Contrebandier</a></td>
+            <td class="bg-blaune-light"><a href="#" data-name="Grand Maître du Négoce" onclick="modal_item(this, event, 'metier')">Grand Maître du Négoce</a></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blaune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><span href="#" data-name=""></span></td>
+            <td class="bg-raune-light"><a href="#" data-name="SEIGNEUR DE GUERRE" onclick="modal_item(this, event, 'metier')">Seigneur de guerre</a></td>
+            <td class="bg-graune-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="3"></td>
             <th scope="row" class="bg-bleu arts">Arts &rarr;</th>
-            <td class="bg-bleu-light"><a href="#" data-name="MAÎTRE DES SAVEURS" onclick="modal_item(this, event, 'metier')">Maître des Saveurs</a></td>
-            <td class="bg-bleu-light"><a href="#" data-name="THAUMATURGE" onclick="modal_item(this, event, 'metier')">Thaumaturge</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAÎTRE CHORÉGRAPHE" onclick="modal_item(this, event, 'metier')">Maître Chorégraphe</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="PEINTRE ACROBATE" onclick="modal_item(this, event, 'metier')">Peintre Acrobate</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="FLAMBOYANT" onclick="modal_item(this, event, 'metier')">Flamboyant</a></td>
-            <td class="bg-grleu-light"><a href="#" data-name="MALFRAT" onclick="modal_item(this, event, 'metier')">Malfrat</a></td>
+            <td class="bg-bleu-light"><a href="#" data-name="HARMONISEUR" onclick="modal_item(this, event, 'metier')">Harmoniseur</a></td>
+            <td class="bg-bleu-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blouge-light"><a href="#" data-name="PERFORMEUR" onclick="modal_item(this, event, 'metier')">Performeur</a></td>
+            <td class="bg-blouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-grleu-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="4"></td>
             <th scope="row" class="bg-bleu shaan">Shaan &rarr;</th>
             <td class="bg-bleu-light">
-              <ul>
-                <li>
-                  <a href="#" data-name="REVITALISEUR" onclick="modal_item(this, event, 'metier')">
-                    Revitaliseur
+              <ul class="list-unstyled">
+                <li class="mb-1">
+                  <a href="#" data-name="GRAND MAÎTRE DES PIERRES" onclick="modal_item(this, event, 'metier')">
+                    Grand Maître des pierres
                   </a>
-                </li>
-                <li>
-                  <a href="#" data-name="MAÎTRE MAANISTE" onclick="modal_item(this, event, 'metier')">
-                    Maître Maaniste
+                </li><li class="mb-1">
+                  <a href="#" data-name="GRAND MAÎTRE MAANISTE" onclick="modal_item(this, event, 'metier')">
+                    Grand Maître maaniste
                   </a>
                 </li>
               </ul>
             </td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAÎTRE DES BÊTES" onclick="modal_item(this, event, 'metier')">Maître des Bêtes</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAÎTRE-GUET" onclick="modal_item(this, event, 'metier')">Maître-Guet</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAÎTRE LUTTEUR" onclick="modal_item(this, event, 'metier')">Maître Lutteur</a></td>
-            <td class="bg-grleu-light"><a href="#" data-name="SONGEUR" onclick="modal_item(this, event, 'metier')">Songeur</a></td>
+            <td class="bg-blouge-light"><a href="#" data-name="Druide" onclick="modal_item(this, event, 'metier')">Druide</a></td>
+            <td class="bg-blouge-light"><a href="#" data-name="Ermite" onclick="modal_item(this, event, 'metier')">Ermite</a></td>
+            <td class="bg-blouge-light"><a href="#" data-name="GARDE-RÊVE" onclick="modal_item(this, event, 'metier')">Garde-rêve</a></td>
+            <td class="bg-grleu-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="5"></td>
             <th scope="row" class="bg-bleu magie">Magie &rarr;</th>
-            <td class="bg-blouge-light"><a href="#" data-name="ÉLÉMANCIEN" onclick="modal_item(this, event, 'metier')">Élémancien</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAGE ITINÉRANT" onclick="modal_item(this, event, 'metier')">Mage Itinérant</a></td>
-            <td class="bg-blouge-light"><a href="#" data-name="MAGEFEU" onclick="modal_item(this, event, 'metier')">Magefeu</a></td>
-            <td class="bg-grleu-light"><a href="#" data-name="NÉCROMAGE" onclick="modal_item(this, event, 'metier')">Nécromage</a></td>
+            <td class="bg-blouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-blouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-grleu-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="6"></td>
             <th scope="row" class="bg-rouge rituels">Rituels &rarr;</th>
-            <td class="bg-rouge-light"><a href="#" data-name="MAÎTRE ATTELEUR" onclick="modal_item(this, event, 'metier')">Maître Atteleur</a></td>
-            <td class="bg-rouge-light"><a href="#" data-name="MAÎTRE DRESSEUR" onclick="modal_item(this, event, 'metier')">Maître Dresseur</a></td>
-            <td class="bg-grouge-light"><a href="#" data-name="NÊCROMENTALISTE" onclick="modal_item(this, event, 'metier')">Nêcromentaliste</a></td>
+            <td class="bg-rouge-light"><a href="#" data-name="GRAND MAÎTRE DES OCÉANS" onclick="modal_item(this, event, 'metier')">Grand Maître des Océans</a></td>
+            <td class="bg-rouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-grouge-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="7"></td>
             <th scope="row" class="bg-rouge survie">Survie &rarr;</th>
-            <td class="bg-rouge-light"><a href="#" data-name="BAROUDEUR" onclick="modal_item(this, event, 'metier')">Baroudeur</a></td>
-            <td class="bg-grouge-light"><a href="#" data-name="AIGREFIN" onclick="modal_item(this, event, 'metier')">Aigrefin</a></td>
+            <td class="bg-rouge-light"><span href="#" data-name=""></span></td>
+            <td class="bg-grouge-light"><span href="#" data-name=""></span></td>
           </tr><tr class="bg-icon">
             <td colspan="8"></td>
             <th scope="row" class="bg-rouge combat">Combat &rarr;</th>
-            <td class="bg-grouge-light"><a href="#" data-name="EXTERMINATEUR" onclick="modal_item(this, event, 'metier')">Exterminateur</a></td>
+            <td class="bg-grouge-light"><a href="#" data-name="Grand Guerrier de l'Ombre" onclick="modal_item(this, event, 'metier')">Grand Guerrier de l'Ombre</a></td>
           </tr>
         </tbody>
       </table>
@@ -353,12 +353,14 @@
 
     const options = { sheetName: 'Destinées épiques', useFormat: false }
 
-    let liste_pouvoirs = [];
+    let list_items = [];
 
     function display_items(data, target="card-elements", modele="metier") {
 
-      liste_pouvoirs = data;
-      bloc_total.textContent = data.length;
+      list_items = data;
+      if(target=="card-elements") {
+        bloc_total.textContent = data.length;
+      }
       const liste_elements = document.getElementById(target);
 
       fetch("../../templates/"+modele+".mustache")
@@ -367,13 +369,6 @@
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
-          if(modele==="metier") {
-            row["dom_list"] = row["Domaines"].replace("\
-", "").replace("\r", "").replace("\n", "").toLowerCase();
-            row["dom_list"] = row["dom_list"].replace(" ", "").split("+");
-            // Une destinee epique implique au moins 2 domaines à 10.
-            row["lvl"] = 10;
-          }
           renderedHTML += Mustache.render(template, row, {
             cercle: cercle_tpl
           });
@@ -381,7 +376,7 @@
         });
         liste_elements.innerHTML = renderedHTML;
         // search_filter(target);
-        switchCards();
+        // switchCards();
       });
     }
 
@@ -416,6 +411,14 @@
   </script>
   <script src="../../compendium/compendium.js"></script>
 
+  <script>
+    // Chargement et affichage des données
+    parser.parse().then(data => {
+      liste_origine = correct_initial_data("Destinée", data);
+      display_items(data);
+      bloc_total.textContent = data.length;
+    });
+  </script>
   <!-- https://github.com/tofsjonas/sortable -->
   <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.min.js"></script>
   <!--script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/dist/sortable.a11y.min.js"></script-->
