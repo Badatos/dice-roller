@@ -555,13 +555,13 @@ Cet acquis est *super*.
           data["Spécialisation"] = "Acquis implanté";
           break;
       }
-      if(ressources.value) {
+      if (ressources.value) {
         data["Ressources"]+= " : " + ressources.value;
       }
 
       calc_bonus.textContent = data["Spécialisation"];
-      if(data["Spécialisation"] > 0) {
-        if(specialisations.value) {
+      if (data["Spécialisation"] > 0) {
+        if (specialisations.value) {
           data["Spécialisation"] = data["Spécialisation"] + " : " + specialisations.value;
         } else {
           data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
@@ -569,14 +569,14 @@ Cet acquis est *super*.
       } else {
         data["Spécialisation"] = "";
       }
-      if(data["Fabrication"]) {
+      if (data["Fabrication"]) {
         data["Fabrication"] = "Difficultés cumulées : " + data["Fabrication"];
-        if(fabrication.value) {
+        if (fabrication.value) {
           data["Fabrication"] = data["Fabrication"] + " (" + fabrication.value + ")";
         }
       } else {
         data["Dressage"] = "Difficultés cumulées : " + data["Dressage"];
-        if(fabrication.value) {
+        if (fabrication.value) {
           data["Dressage"] = data["Dressage"] + " (" + fabrication.value + ")";
         }
       }

@@ -16,10 +16,14 @@
 
   /** #438270 */
   --shaan-green: #45714f;
+
+  --primary-light: hsl(from var(--primary) h s calc(l + 40));
   --shaan-font: "Economica", arial, helvetica, sans-serif;
+  --bs-primary: var(--shaan-green);
+  --bs-primary-rgb: 69, 113, 79;
   --bs-primary-text-emphasis: #45714f;
   --bs-link-color: var(--shaan-green);
-  --bs-link-color-rgb: 69, 113, 79;
+  --bs-link-color-rgb: var(--bs-primary-rgb);
   --bs-link-hover-color: #29422f;
   --bs-link-hover-color-rgb: 41, 66, 47;
 
@@ -43,8 +47,6 @@
   --esprit-color-light: hsl(from var(--esprit-color) h s calc(l + 40));
   --necrose-color: #797676;
   --necrose-color-light: #CCC;
-
-
 }
 
 /* More accessible Th color for sortable tables */

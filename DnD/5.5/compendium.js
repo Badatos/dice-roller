@@ -157,7 +157,7 @@ async function random_PNJ_name(lignee, gender = "both") {
   // Prend la lignée indiquée
   temp_liste = temp_liste.filter((o) => o.Lignée === lignee);
   let name = "NONAME";
-  if(temp_liste[0]){
+  if (temp_liste[0]) {
     let names = temp_liste[0]["Exemples de noms"].split(",");
     // Pioche un nom au hasard
     name = names[Math.floor(Math.random() * names.length)];
@@ -170,7 +170,7 @@ async function random_PNJ_name(lignee, gender = "both") {
 
 function display_items(data, target="liste-elements", modele="spell_row") {
 
-  if(target=="liste-elements") {
+  if (target=="liste-elements") {
     bloc_total.textContent = data.length;
   }
   const liste_elements = document.getElementById(target);

@@ -46,8 +46,8 @@ async function generate(elem, event, item_type="acquis") {
     }
 
     const selectedItems = [];
-    document.getElementsByName('select_item').forEach(function(chk){
-      if(chk.checked){
+    document.getElementsByName('select_item').forEach(function(chk) {
+      if (chk.checked) {
         selectedItems.push(chk.value);
       }
     });
@@ -66,8 +66,14 @@ async function generate(elem, event, item_type="acquis") {
   }
 }
 
+/**
+ * Switch display mode to "table".
+ *
+ * @param {*} elem  clicked element
+ * @param {*} event triggered event
+ */
 function table_switch(elem, event) {
-  if(event) {
+  if (event) {
     event.preventDefault();
   }
   if (!table_tab.classList.contains("active")) {
@@ -83,7 +89,7 @@ function table_switch(elem, event) {
 
 
 function romanNumber(romanString) {
-  if(romanString === "0") {
+  if (romanString === "0") {
     return 0;
   }
   let toInt = parseInt(romanString, 10);

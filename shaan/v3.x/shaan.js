@@ -195,7 +195,7 @@ function random_domain() {
                     // Symbiose
                     if (esprit === ame && ame === corps) {
                         symbiose.classList.remove("d-none");
-                        if(esprit === 9) {
+                        if (esprit === 9) {
                             num_succes.textContent = 6;
                         } else {
                             num_succes.textContent = 5;
@@ -213,7 +213,7 @@ function random_domain() {
         if (necrose == 0) {
             crane_perte.classList.remove("d-none");
         }
-        if(has_lost === true && de_action.value !== ""){
+        if (has_lost === true && de_action.value !== "") {
             const action_value = thrin_values[de_action.value];
             if (necrose > action_value) {
                 perte = 1;
@@ -239,7 +239,7 @@ function luck() {
 
 function calcul_score(action_color, de_bonus = 0) {
 
-    if(action_color !== "") {
+    if (action_color !== "") {
         let action_val = thrin_values[action_color];
         console.log(action_val);
         // Echec
@@ -253,7 +253,7 @@ function calcul_score(action_color, de_bonus = 0) {
         let score = action_val + Number(domain_level.value) + Number(vocation_bonus.value);
         // console.log("score = "+action_val+"+" + domain_level.value + "+" + vocation_bonus.value + "=" + score);
 
-        if(de_bonus > 0) {
+        if (de_bonus > 0) {
             total_score.innerText = score + "+ " + de_bonus + " = " + Number(score + de_bonus);
             score = score + de_bonus;
         } else {
@@ -289,18 +289,18 @@ function calcul_score(action_color, de_bonus = 0) {
             succes++;
         }
 
-        if(succes >= difficulte.value) {
+        if (succes >= difficulte.value) {
             total_succes.className = "bg-success text-white";
             success_help.classList.remove("d-none");
             pending_failure.classList.add("d-none");
             failure_help.classList.add("d-none");
-            if(succes > difficulte.value) {
+            if (succes > difficulte.value) {
                 succes_plus.querySelector("h2>span").innerText = Number(succes - difficulte.value);
                 succes_plus.classList.remove("d-none");
             }
         } else {
             total_succes.className = "bg-warning";
-            if(de_bonus == 0 && action_color == "noir") {
+            if (de_bonus == 0 && action_color == "noir") {
                 necrosis_help.classList.remove("d-none");
             } else {
                 pending_failure.classList.remove("d-none");

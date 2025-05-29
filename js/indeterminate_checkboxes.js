@@ -42,10 +42,10 @@ function updateChildren(el) {
 function updateParents(target) {
 
 	parent = getParent(target);
-	if(parent) {
+	if (parent) {
 		let children = getChildren(parent);
 		let checked = false;
-		if(target.type == 'select-multiple') {
+		if (target.type == 'select-multiple') {
 			checked = [...children].filter(child => child.selected).length;
 		} else {
 			checked = [...children].filter(child => child.checked).length;
@@ -83,11 +83,11 @@ function getParent(el) {
 	// Closest parcours l'element et ses parents.
 	let fieldset = el.closest('fieldset');
 
-	if(el.closest('.checkboxes')) {
+	if (el.closest('.checkboxes')) {
 		return fieldset.querySelector('.check-all');
 	}
 
-	if(el.type == 'select-multiple') {
+	if (el.type == 'select-multiple') {
 		return fieldset.querySelector('input[type="checkbox"]');
 	}
 	return false;

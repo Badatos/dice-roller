@@ -111,13 +111,13 @@
         Lorsqu’un personnage atteint le niveau 8 dans 2 domaines,
         il peut se former à un <strong>métier de prestige</strong>.</p>
       <h2>Avantages</h2>
-      <p>
+      <p class="mb-0">
         Le personnage obtient <strong>10 points de Prestige</strong>
         ainsi qu’un <strong>Bonus de +3 dans 2 Spécialisations</strong>.
         Si le personnage possède déjà une de ces Spécialisations à +3, il peut la passer à +4.
         Ce Bonus de Spécialisation n’est pas limité par le niveau de Domaine.<br>
-        <em>(Le feu interieur p.40 )</em>
       </p>
+      <p class="text-end"><em>(Le feu interieur p.40 )</em></p>
 
       <p>
         Il gagne également le pouvoir <strong>Échange trihnique</strong> pour chaque métier de prestige.
@@ -306,14 +306,14 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page"
            href="#table-elements" id="table-tab"
-           onclick="switchTable(this, event)">
-          <i class="bi bi-table"></i> Tableau
+           onclick="table_switch(this, event)">
+          <i class="bi bi-table" aria-hidden="true"></i> Tableau
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#card-elements" id="card-tab"
            onclick="switchCards(this, event)">
-          <i class="bi bi-postcard"></i> Cartes
+          <i class="bi bi-postcard" aria-hidden="true"></i> Cartes
         </a>
       </li>
     </ul>
@@ -363,12 +363,25 @@
 
     const options = { sheetName: 'Metiers de prestige', useFormat: false }
 
+    function correct_initial_data(data) {
+      data.forEach(row => {
+        row["dom_list"] = row["Domaines"].replace("\
+", "").replace("\r", "").replace("\n", "").toLowerCase();
+        row["dom_list"] = row["dom_list"].replace(" ", "").split("+");
+        // Un métier de prestige implique au moins 2 domaines à 8.
+        row["lvl"] = 8;
+      });
+      return data;
+    }
+
     let liste_pouvoirs = [];
 
     async function display_items(data, target="card-elements", modele="metier") {
 
       liste_pouvoirs = data;
-      bloc_total.textContent = data.length;
+      if (target=="card-elements") {
+        bloc_total.textContent = data.length;
+      }
       const liste_elements = document.getElementById(target);
 
       fetch("../../templates/"+modele+".mustache")
@@ -377,13 +390,6 @@
         let renderedHTML = '';
         liste_elements.innerHTML = "";
         data.forEach(row => {
-          if(modele==="metier") {
-            row["dom_list"] = row["Domaines"].replace("\
-", "").replace("\r", "").replace("\n", "").toLowerCase();
-            row["dom_list"] = row["dom_list"].replace(" ", "").split("+");
-            // Un métier de prestige implique au moins 2 domaines à 8.
-            row["lvl"] = 8;
-          }
           renderedHTML += Mustache.render(template, row, {
             cercle: cercle_tpl
           });
@@ -394,8 +400,8 @@
       });
     }
 
-    function switchCards(){
-      if(event) {
+    function switchCards() {
+      if (event) {
         event.preventDefault();
       }
       if (table_tab.classList.contains("active")) {
@@ -407,21 +413,9 @@
         table_tab.removeAttribute("aria-current");
       }
     }
-    function switchTable(elem, event) {
-      if(event) {
-        event.preventDefault();
-      }
-      if (!table_tab.classList.contains("active")) {
-        card_elements.classList.add("d-none");
-        card_tab.classList.remove("active");
-        card_tab.removeAttribute("aria-current");
-        table_elements.classList.remove("d-none");
-        table_tab.classList.add("active");
-        table_tab.setAttribute("aria-current", "page");
-      }
-    }
 
   </script>
+  <script src="../../../js/utils.js"></script>
   <script src="../../compendium/compendium.js"></script>
 
   <!-- https://github.com/tofsjonas/sortable -->

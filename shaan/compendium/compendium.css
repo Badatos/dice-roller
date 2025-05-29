@@ -116,7 +116,7 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
 
 body {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/assets/sheet/template_shaan_background1.jpg");
-  background-size: contain;
+  background-size: cover;
 }
 
 @media print {

@@ -349,13 +349,13 @@
         <a class="nav-link active" aria-current="page"
            href="#table-elements" id="table-tab"
            onclick="table_switch(this, event)">
-          <i class="bi bi-table"></i> Tableau
+          <i class="bi bi-table" aria-hidden="true"></i> Tableau
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#card-elements" id="card-tab"
            onclick="generate(this, event, 'spell')">
-          <i class="bi bi-postcard"></i> Cartes
+          <i class="bi bi-postcard" aria-hidden="true"></i> Cartes
         </a>
       </li>
     </ul>
@@ -411,19 +411,19 @@
       data.forEach(row => {
         row["css_class"] = row.School.toLowerCase();
         row["css_class"] = row["css_class"].replace("é", "e");
-        if(!row["Nom"]) {
+        if (!row["Nom"]) {
           row["Nom"] = row["VO"] + " (VO)";
         }
-        if(!row["Description"]) {
+        if (!row["Description"]) {
           row["Description"] = row["Desc_EN"];
         }
-        if(!row["Matériel"]) {
+        if (!row["Matériel"]) {
           row["Matériel"] = row["Material_EN"];
         }
-        if(row["Classes"] && typeof(row["Classes"]) == "string") {
+        if (row["Classes"] && typeof(row["Classes"]) == "string") {
           row["Classes"] = row["Classes"].split(",");
         }
-        if(row["Classes"] && row["Classes"].length == 1) {
+        if (row["Classes"] && row["Classes"].length == 1) {
           row["Classes"] = row["Classes"][0].split("\n");
         }
         switch(row["Niveau"]) {

@@ -296,7 +296,7 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page"
            href="#table-elements" id="table-tab"
-           onclick="switchTable(this, event)">
+           onclick="table_switch(this, event)">
           <i class="bi bi-table"></i> Tableau
         </a>
       </li>
@@ -358,7 +358,7 @@
     function display_items(data, target="card-elements", modele="metier") {
 
       list_items = data;
-      if(target=="card-elements") {
+      if (target=="card-elements") {
         bloc_total.textContent = data.length;
       }
       const liste_elements = document.getElementById(target);
@@ -380,8 +380,8 @@
       });
     }
 
-    function switchCards(){
-      if(event) {
+    function switchCards() {
+      if (event) {
         event.preventDefault();
       }
       if (table_tab.classList.contains("active")) {
@@ -394,21 +394,8 @@
       }
     }
 
-    function switchTable(elem, event) {
-      if(event) {
-        event.preventDefault();
-      }
-      if (!table_tab.classList.contains("active")) {
-        card_elements.classList.add("d-none");
-        card_tab.classList.remove("active");
-        card_tab.removeAttribute("aria-current");
-        table_elements.classList.remove("d-none");
-        table_tab.classList.add("active");
-        table_tab.setAttribute("aria-current", "page");
-      }
-    }
-
   </script>
+  <script src="../../../js/utils.js"></script>
   <script src="../../compendium/compendium.js"></script>
 
   <script>

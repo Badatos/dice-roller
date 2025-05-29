@@ -7,6 +7,11 @@
   --dd-primary-rgb: 188,15,15;
   --dd-primary-light: #eb1313;
   --dd-primary-light-rgb: 235,19,19;
+
+  --primary-light: hsl(from var(--bs-primary) h s calc(l + 40));
+
+  --bs-primary: var(--dd-primary);
+  --bs-primary-rgb: var(--dd-primary-rgb);
   --bs-primary-bg-subtle: #e2e2e2;
   --bs-primary-text-emphasis: #570a0a;
   --bs-link-color: var(--dd-primary);

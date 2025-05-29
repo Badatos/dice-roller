@@ -23,6 +23,7 @@
 .checkbox-mixed label {
   margin: 1px;
   padding: 4px;
+  border: 2px solid transparent;
 }
 
 .checkbox-mixed [role="checkbox"] {
@@ -58,9 +59,28 @@
 .checkbox-mixed [role="checkbox"]:hover,
 .checkbox-mixed label.focus,
 .checkbox-mixed label:hover {
-  padding: 2px;
-  border: 2px solid #005a9c;
-  background-color: #def;
+  /*padding: 2px;*/
+  border-color: var(--primary-light);
+  background-color: var(--bs-primary-bg-subtle);
   border-radius: 5px;
   cursor: pointer;
+}
+
+
+/* BS 5 CUSTOM colors */
+.form-check-input:checked,
+.form-check-input[type="checkbox"]:indeterminate {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+::selection {
+  background-color: var(--bs-primary);
+  color: #FFF;
+}
+
+.form-select:focus,
+.form-control:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb),.25);
 }

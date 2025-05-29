@@ -145,7 +145,7 @@ function modal_getitem(item, event, item_type="pouvoir", sheet="Pouvoirs") {
   const name = item.dataset["name"]?item.dataset["name"]:item.textContent;
   let selectedData = [];
 
-  if(!gSheetCache[sheet]) {
+  if (!gSheetCache[sheet]) {
     const tempParser = new PublicGoogleSheetsParser(
       gSheetId,
       { sheetName: sheet, useFormat: false }
@@ -315,7 +315,7 @@ async function random_PNJ_name(lignee, gender = "both") {
   // Prend la lignée indiquée
   temp_liste = temp_liste.filter((o) => o.Lignée === lignee);
   let name = "NONAME";
-  if(temp_liste[0]){
+  if (temp_liste[0]) {
     let names = temp_liste[0]["Exemples de noms"].split(",");
     // Pioche un nom au hasard
     name = names[Math.floor(Math.random() * names.length)];
@@ -332,7 +332,7 @@ async function random_PNJ_name(lignee, gender = "both") {
  * @returns Modified data
  */
 function correct_initial_data(type, data) {
-  switch(type){
+  switch(type) {
     case "Destinée":
       data.forEach(row => {
         row["dom_list"] = row["Domaines"].replace("\
@@ -360,14 +360,14 @@ function correct_initial_data(type, data) {
             row["Spécialisation"] = "";
         }
 
-        if (row["Rang"] && row["Rang"] === 0){
+        if (row["Rang"] && row["Rang"] === 0) {
           row["Rang"] = "";
         }
       });
       break;
     case "Peuples":
       data.forEach(row => {
-        if(row["Domaine"]) {
+        if (row["Domaine"]) {
           row["Domaine"] = row["Domaine"].toLowerCase();
         }
       });
