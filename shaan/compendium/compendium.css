@@ -14,11 +14,14 @@
 
 .card h2 {
   color: var(--esprit-color);
-  border-bottom: 1px dotted;
-  padding-bottom: 10px;
-  text-transform: uppercase;
   font-weight: bold;
   font-size: 150%;
+}
+
+.card-body h2 {
+  border-bottom: 1px dotted;
+  text-transform: uppercase;
+  padding-bottom: 10px;
 }
 
 h3, .h3 {
@@ -108,10 +111,11 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
   background-image: url("../img/domaines/necrose_small.webp");
 }
 
-.card-body {
+.card-body,
+.card-header {
   background-repeat: no-repeat;
-  background-position: 99% 1%;
   background-size: 1.5em;
+  background-position: calc(100% - .5em) .5em;
 }
 
 body {

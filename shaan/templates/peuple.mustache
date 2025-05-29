@@ -1,36 +1,33 @@
 
 <div class="col-sm-12 col-lg-6 mb-2">
   <div class="card fiche-pouvoir">
-    <div class="card-header"></div>
-    <div class="card-body {{Domaine}}">
-      <h2>{{Peuple}}</h2>
+    <div class="card-header {{Domaine}}">
+      <h2 class="title red text-center mb-0">{{Nom}}</h2>
+    </div>
+    {{#Domaines}}
+      <div class="d-flex justify-content-center">
+        {{> cercle}}
+      </div>
+    {{/Domaines}}
+    <div class="card-body">
       <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
       <div class="float-end text-right">
-        <span class="source">{{source}}</span>
+        <span class="source">{{Source}}</span>
       </div>
       <p class="p-orig">
-        Domaine : <span class="uppercase">{{Domaine}}</span>
+        Domaine de prédilection : <span class="uppercase">{{Domaine}}</span>
       </p>
       <ul class="h3">
-        <li><strong>Spécialisations :</strong> <span>{{Spécialisations }}</span></li>
-        <!--
+        <li>
+          <strong>Population :</strong>
+          <span>{{Population}}</span>
+        </li>
+        {{#Localisation}}
           <li>
-            <strong>Faune :</strong>
-            <span>{{Faune}}</span>
+            <strong>Localisation :</strong>
+            <span>{{Localisation}}</span>
           </li>
-          <li>
-            <strong>Flore :</strong>
-            <span>{{Flore}}</span>
-          </li>
-          <li>
-            <strong>Locomotion :</strong>
-            <span>{{Locomotion}}</span>
-          </li>
-          <li>
-            <strong>Mœurs :</strong>
-            <span>{{Mœurs}}</span>
-          </li>
-        -->
+        {{/Localisation}}
         {{#Régions héossiennes}}
           <li>
             <strong>Régions héossiennes :</strong>
@@ -56,12 +53,13 @@
           </li>
         {{/Méfiance}}
       </ul>
-      <p><strong>Armes culturelles :</strong> <em>{{Armes culturelles}}</em></p>
-      {{#Paysage}}
+      {{#Description}}
         <div class="vert" id="p_desc">
-          {{Paysage}}
+          {{Description}}
         </div>
-      {{/Paysage}}
+      {{/Description}}
+    </div>
+    <div class="card-footer">
     </div>
   </div>
 </div>

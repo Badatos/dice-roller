@@ -19,15 +19,18 @@
         {{/Rang}}
       </p>
       <ul class="h3 list-unstyled">
-        <li><strong>Catégorie :</strong> <span id="a_cat">{{Catégorie}}</span></li>
+        <li class="a-cat">
+          <strong>Catégorie :</strong>
+          <span>{{Catégorie}}</span>
+        </li>
         {{#Spécialisation}}
-          <li>
+          <li class="a-spe">
             <strong>Spécialisation :</strong>
-            <span id="a_spe">{{Spécialisation}}</span>
+            <span>{{Spécialisation}}</span>
           </li>
         {{/Spécialisation}}
         {{#Attributs}}
-          <li>{{Attributs}}</li>
+          <li class="a-attr">{{Attributs}}</li>
         {{/Attributs}}
       </ul>
       {{#Résumé}}
@@ -35,38 +38,39 @@
       {{/Résumé}}
       <ul class="lh-sm jaune">
         {{#Valeur}}
-          <li>
-            <strong>Valeur :</strong> <span class="a_val">{{Valeur}}</span>
+          <li class="a-val">
+            <strong>Valeur :</strong>
+            <span>{{Valeur}}</span>
           </li>
         {{/Valeur}}
         {{#Prestige}}
-          <li>
+          <li class="a-pres">
             <strong>Prestige :</strong>
-            <span class="a-pres">{{Prestige}} point</span>
+            <span>{{Prestige}} point</span>
           </li>
         {{/Prestige}}
         {{#Ressources}}
-          <li>
+          <li class="a-res">
             <strong>Ressources :</strong>
-            <span class="a-res">{{{Ressources}}}</span>
+            <span>{{{Ressources}}}</span>
           </li>
         {{/Ressources}}
         {{#Fabrication}}
-          <li>
+          <li class="a-fab">
             <strong>Fabrication :</strong>
-            <span class="a-fab">{{Fabrication}}</span>
+            <span>{{Fabrication}}</span>
           </li>
         {{/Fabrication}}
         {{#Dressage}}
-          <li>
+          <li class="a-dress">
             <strong>Dressage :</strong>
-            <span class="a-dress">{{Dressage}}</span>
+            <span>{{Dressage}}</span>
           </li>
         {{/Dressage}}
         {{#Entretien}}
-          <li>
+          <li class="a-entr">
             <strong>Entretien :</strong>
-            <span class="a-entr">{{{Entretien}}}</span>
+            <span>{{{Entretien}}}</span>
           </li>
         {{/Entretien}}
       </ul>

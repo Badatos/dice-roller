@@ -1,31 +1,31 @@
 /* Shaan Thrin circle */
 
-#cercle.sw {
+.cercle.sw {
   position: relative;
   left: 0;
   transform: none;
 }
 
 @media screen and (width <= 575px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: scale(80%);
   }
 }
 
 @media screen and (width <=520px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: none;
   }
 }
 
 @media screen and (width <= 516px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: scale(0.8);
   }
 }
 
 @media screen and (width <= 430px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: scale(0.7);
     margin-top: -100px;
     margin-bottom: -75px;
@@ -33,7 +33,7 @@
 }
 
 @media screen and (width <= 400px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: scale(0.65);
     margin-top: -100px;
     margin-bottom: -75px;
@@ -41,7 +41,7 @@
 }
 
 @media screen and (width <= 345px) {
-  #cercle.sw {
+  .cercle.sw {
     transform: scale(0.6);
   }
 }
@@ -103,7 +103,7 @@ table.noir td,
 
 /* Créateur de Perso */
 
-#cercle {
+.cercle {
   display: block;
   position: relative;
   width: 500px;
@@ -216,7 +216,7 @@ table.noir td,
   left: 229px;
 }
 
-#cercle.sw #dom5 {
+.cercle.sw #dom5 {
   top: 10px;
   left: 229px;
 }
@@ -301,7 +301,7 @@ table.noir td,
   left: 195px;
 }
 
-#cercle.sw #dom5m {
+.cercle.sw #dom5m {
   top: 25px;
   left: 198px;
 }
@@ -437,7 +437,7 @@ table.noir td,
 
 /* Modal Popup */
 
-.modal-lg #cercle.sw {
+.modal-lg .cercle.sw {
   transform: scale(75%);
   transform-origin: left top;
   position: relative;

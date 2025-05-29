@@ -180,6 +180,7 @@ body {
 
 .title {
   font-family: GodofWar, serif;
+  font-variant-caps: small-caps;
 }
 
 h1 {
@@ -362,7 +363,9 @@ main {
 
 .shaan-title.red {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_rouge.png");
-  color: var(--shaan-red);
+}
+.red {
+  color: var(--shaan-red) !important;
 }
 
 /* Smaal devices */
