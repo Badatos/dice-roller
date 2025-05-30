@@ -2,7 +2,10 @@
 <div class="col-sm-12 col-lg-6 mb-2">
   <div class="card fiche-pouvoir">
     <div class="card-header {{Domaine}}">
-      <h2 class="title red text-center mb-0">{{Nom}}</h2>
+      <h2 class="title red text-center mb-0">
+        {{Nom}}
+        {{#Surnom}}<span class="surnom">{{Surnom}}</span>{{/Surnom}}
+      </h2>
     </div>
     {{#Domaines}}
       <div class="d-flex justify-content-center">
@@ -20,7 +23,10 @@
       <ul class="h3">
         <li>
           <strong>Population :</strong>
-          <span>{{Population}}</span>
+          <span>
+            {{Population}}
+            {{#Lignées}}({{Lignées}}){{/Lignées}}
+          </span>
         </li>
         {{#Localisation}}
           <li>
@@ -28,6 +34,12 @@
             <span>{{Localisation}}</span>
           </li>
         {{/Localisation}}
+        {{#Région}}
+          <li>
+            <strong>Région :</strong>
+            <span>{{Région}}</span>
+          </li>
+        {{/Région}}
         {{#Régions héossiennes}}
           <li>
             <strong>Régions héossiennes :</strong>
