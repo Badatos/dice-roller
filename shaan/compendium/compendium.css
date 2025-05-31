@@ -13,9 +13,14 @@
 }
 
 .card h2 {
-  color: var(--esprit-color);
   font-weight: bold;
   font-size: 150%;
+}
+
+.card h2,
+.card h3,
+.card .h3  {
+  color: var(--shaan-green);
 }
 
 .card-body h2 {
@@ -26,13 +31,12 @@
 
 .surnom {
   display: block;
-  font-size: 60%;
+  font-size: 75%;
   font-weight: normal;
   font-style: italic;
 }
 
 h3, .h3 {
-  color: #438270;
   line-height: 25px;
   font-size: 20px;
   margin: 5px 0;
@@ -113,8 +117,8 @@ fieldset.selectuserpouvoirsgroup .ui-button.ui-state-active {
   background-image: url("../img/domaines/combat_small.webp");
 }
 
-.nécrose,
-.sortable .nécrose {
+.necrose,
+.sortable .necrose {
   background-image: url("../img/domaines/necrose_small.webp");
 }
 

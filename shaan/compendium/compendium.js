@@ -288,6 +288,38 @@ function getPouvoirType(domaine) {
   return ret;
 }
 
+/**
+ * Return the color associated to specified domain.
+ * @param {*} domaine
+ * @returns color
+ */
+function getDomainColor(domaine) {
+  let ret = "";
+  switch (domaine.toLowerCase()) {
+    case "technique":
+    case "savoir":
+    case "social":
+      ret = "jaune";
+      break;
+    case "arts":
+    case "shaan":
+    case "magie":
+      ret = "bleu";
+      break;
+    case "rituels":
+    case "survie":
+    case "combat":
+      ret = "rouge";
+      break;
+    case "necrose":
+      ret = "gris";
+      break;
+    default:
+      ret = "green";
+  }
+  return ret;
+}
+
 /* Fournit un nom de lignée aléatoire */
 function randomLignee(bonus = false) {
   lignees = CORRESPONDANCES["Lignées"];
@@ -342,10 +374,19 @@ function correct_initial_data(type, data) {
         row["lvl"] = 10;
       });
       break;
+    case "Lignées":
+      data.forEach(row => {
+          if (row["Domaine"]) {
+            row["dom_type"] = removeAccents(row["Domaine"].toLowerCase().split("\n")[0]);
+            row["dom_color"] = getDomainColor(row["dom_type"]);
+          }
+        });
+      break;
     case "Pouvoirs":
       data.forEach(row => {
-        row["dom_type"] = getPouvoirType(row.Domaine);
-        row["css_class"] = row.Domaine.toLowerCase();
+        row["pow_type"] = getPouvoirType(row.Domaine);
+        row["dom_type"] = removeAccents(row.Domaine.toLowerCase());
+        row["dom_color"] = getDomainColor(row["dom_type"]);
       });
       break;
     case "Acquis":
@@ -366,9 +407,15 @@ function correct_initial_data(type, data) {
       });
       break;
     case "Peuples":
+    case "Villes":
+      // For group of people and for Cities
       data.forEach(row => {
         if (row["Domaine"]) {
-          row["Domaine"] = row["Domaine"].toLowerCase();
+          row["dom_type"] = removeAccents(row.Domaine.toLowerCase());
+          row["dom_color"] = getDomainColor(row["dom_type"]);
+        }
+        if (row["Population"]) {
+          row["Population"] = row["Population"].toLocaleString('fr');
         }
       });
       break;

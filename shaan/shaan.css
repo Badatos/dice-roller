@@ -16,7 +16,6 @@
 
   /** #438270 */
   --shaan-green: #45714f;
-
   --primary-light: hsl(from var(--primary) h s calc(l + 40));
   --shaan-font: "Economica", arial, helvetica, sans-serif;
   --bs-primary: var(--shaan-green);
@@ -58,7 +57,21 @@
   --bs-nav-pills-link-active-bg: var(--shaan-green);
 }
 
-.bleu {
+.green {
+  color: var(--shaan-green);
+}
+
+.gris,
+.gris h2 {
+  color: var(--necrose-color) !important;
+}
+
+.bg-gris {
+  background-color: var(--necrose-color) !important;
+}
+
+.bleu,
+.bleu h2 {
   color: var(--ame-color) !important;
 }
 
@@ -70,7 +83,8 @@
   background-color: var(--ame-color-light) !important;
 }
 
-.rouge {
+.rouge,
+.rouge h2 {
   color: var(--corps-color) !important;
 }
 
@@ -83,7 +97,8 @@
 }
 
 
-.jaune {
+.jaune,
+.jaune h2 {
   color: var(--esprit-color) !important;
 }
 
@@ -363,9 +378,6 @@ main {
 
 .shaan-title.red {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_rouge.png");
-}
-.red {
-  color: var(--shaan-red) !important;
 }
 
 /* Smaal devices */

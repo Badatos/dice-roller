@@ -1,33 +1,38 @@
 
 <div class="col-sm-12 col-lg-6 mb-2">
-  <div class="card fiche-pouvoir">
-    <div class="card-header {{Domaine}}">
-      <h2 class="title red text-center mb-0">
-        {{Nom}}
-        {{#Surnom}}<span class="surnom">{{Surnom}}</span>{{/Surnom}}
+  <div class="card {{dom_color}}">
+    <div class="card-header {{dom_type}}">
+      <h2 class="text-center mb-0">
+        <span class="title">{{Nom}}</span>
+        {{#Surnom}}
+          <span class="surnom">{{Surnom}}</span>
+        {{/Surnom}}
       </h2>
     </div>
     {{#Domaines}}
-      <div class="d-flex justify-content-center">
-        {{> cercle}}
-      </div>
+      {{> cercle}}
     {{/Domaines}}
     <div class="card-body">
       <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
       <div class="float-end text-right">
         <span class="source">{{Source}}</span>
       </div>
-      <p class="p-orig">
-        Domaine de prédilection : <span class="uppercase">{{Domaine}}</span>
-      </p>
+      {{#Domaine}}
+        <p class="p-orig">
+          Domaine de prédilection :
+          <span class="uppercase">{{Domaine}}</span>
+        </p>
+      {{/Domaine}}
       <ul class="h3">
-        <li>
-          <strong>Population :</strong>
-          <span>
-            {{Population}}
-            {{#Lignées}}({{Lignées}}){{/Lignées}}
-          </span>
-        </li>
+        {{#Population}}
+          <li>
+            <strong>Population :</strong>
+            <span>
+              {{Population}}
+              {{#Lignées}}({{Lignées}}){{/Lignées}}
+            </span>
+          </li>
+        {{/Population}}
         {{#Localisation}}
           <li>
             <strong>Localisation :</strong>

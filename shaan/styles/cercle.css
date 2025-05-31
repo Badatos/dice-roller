@@ -3,49 +3,9 @@
 .cercle.sw {
   position: relative;
   left: 0;
-  transform: none;
+  transform: scale(60%);
+  transform-origin: left top;
 }
-
-@media screen and (width <= 575px) {
-  .cercle.sw {
-    transform: scale(80%);
-  }
-}
-
-@media screen and (width <=520px) {
-  .cercle.sw {
-    transform: none;
-  }
-}
-
-@media screen and (width <= 516px) {
-  .cercle.sw {
-    transform: scale(0.8);
-  }
-}
-
-@media screen and (width <= 430px) {
-  .cercle.sw {
-    transform: scale(0.7);
-    margin-top: -100px;
-    margin-bottom: -75px;
-  }
-}
-
-@media screen and (width <= 400px) {
-  .cercle.sw {
-    transform: scale(0.65);
-    margin-top: -100px;
-    margin-bottom: -75px;
-  }
-}
-
-@media screen and (width <= 345px) {
-  .cercle.sw {
-    transform: scale(0.6);
-  }
-}
-
 
 /* Couleurs */
 
@@ -435,12 +395,111 @@ table.noir td,
   color: #fff;
 }
 
+
 /* Modal Popup */
 
 .modal-lg .cercle.sw {
   transform: scale(75%);
-  transform-origin: left top;
   position: relative;
   margin-bottom: -100px;
-  margin-left: 10%;
+  margin-left: 0;
+}
+
+/** Media Queries */
+
+@media screen and (width > 345px) {
+  .cercle.sw {
+    transform: scale(0.65);
+    margin-bottom: -75px;
+  }
+}
+
+@media screen and (width > 400px) {
+  .cercle.sw {
+    transform: scale(0.7);
+    margin-bottom: -75px;
+  }
+
+  .col-sm-12 .cercle.sw {
+    margin-left: 5%;
+  }
+
+  .modal-lg .cercle.sw {
+    transform: scale(60%);
+    margin-bottom: -200px;
+  }
+}
+
+@media screen and (width > 430px) {
+  .cercle.sw {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (width > 516px) {
+  .cercle.sw {
+    transform: none;
+  }
+}
+
+@media screen and (width > 520px) {
+  .cercle.sw {
+    transform: scale(80%);
+  }
+
+  .col-sm-12 .cercle.sw {
+    margin-left: 12%;
+  }
+}
+
+@media screen and (width > 575px) {
+  .cercle.sw {
+    transform: scale(80%);
+    margin-left: 7%;
+  }
+
+  .col-sm-12 .cercle.sw {
+    margin-left: 12%;
+  }
+}
+
+@media (width >= 768px) {
+  .col-sm-12 .cercle.sw {
+    margin-left: 20%;
+  }
+
+  .modal-lg .cercle.sw {
+    margin-left: 8%;
+  }
+
+  .col-md-6 .cercle.sw {
+    transform: scale(60%);
+    margin-bottom: -70%;
+    margin-left: 6%;
+  }
+}
+
+@media (width >= 992px) {
+  .modal-lg .cercle.sw {
+    margin-left: 20%;
+  }
+
+  .col-lg-4 .cercle.sw {
+    margin-left: 0;
+  }
+
+  .col-lg-6 .cercle.sw {
+    margin-left: 6%;
+  }
+}
+
+@media (width >= 1200px) {
+  .col-lg-4 .cercle.sw {
+    margin-left: 8%;
+    margin-bottom: -200px;
+  }
+
+  .col-lg-6 .cercle.sw {
+    margin-left: 12%;
+  }
 }

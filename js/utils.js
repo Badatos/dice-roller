@@ -125,3 +125,7 @@ function hasAnySelectedList(selected, itemlist) {
   itemlist = itemlist.map(v => v.toLowerCase());
   return selected.some(cls => itemlist.includes(cls.toLowerCase()));
 }
+
+// Remove accents from a JavaScript string
+const removeAccents = str =>
+  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
