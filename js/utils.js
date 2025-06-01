@@ -7,21 +7,38 @@
 
 'use strict';
 
+let pending_search = false;
+
 /**
  * Masque les éléments qui ne correspondent pas à la recherche.
  */
-async function search_filter(target="liste-elements") {
-	let string = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll('tr.item').forEach(function(elem) {
-    let item = elem.innerText.toLowerCase();
-    if (string.length > 2 && !(item.includes(string)))
-      elem.classList.add("d-none");
-    else
-      elem.classList.remove("d-none");
-  });
-  await new Promise(r => setTimeout(r, 200));
-  loader.classList.add("d-none");
-  document.getElementById(target).classList.remove("d-none");
+async function search_filter(target="liste-elements", delay=0) {
+  const search_input = document.getElementById("search");
+  const string = search_input.value.toLowerCase();
+  if (!pending_search && (string.length > 2 || string.length == 0)) {
+    search_input.disabled = true;
+    const target_bloc = document.getElementById(target);
+    loader.classList.remove("d-none");
+    target_bloc.classList.add("d-none");
+    pending_search = true;
+    let tot = 0;
+    bloc_total.innerText = "…";
+    document.querySelectorAll('.item').forEach(function(elem) {
+      let item = elem.innerText.toLowerCase();
+      if (item.includes(string) || string.length == 0) {
+        elem.classList.remove("d-none");
+        tot++;
+      } else {
+        elem.classList.add("d-none");
+      }
+    });
+    await new Promise(r => setTimeout(r, delay));
+    loader.classList.add("d-none");
+    bloc_total.innerText = tot;
+    target_bloc.classList.remove("d-none");
+    search_input.disabled = false;
+    pending_search = false;
+  }
 }
 
 /**

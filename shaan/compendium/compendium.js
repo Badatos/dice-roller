@@ -51,11 +51,31 @@ fetch("../../templates/cercle.mustache")
   cercle_tpl = template;
 });
 
-document.getElementById("search").addEventListener("keyup", function (event) {
-  loader.classList.remove("d-none");
-  document.getElementById("liste-elements").classList.add("d-none");
-  search_filter();
+
+// Ensure user finished typing before search
+
+const search_input = document.getElementById("search");
+
+let typingTimer; //timer identifier
+
+// On keydown, clear the countdown
+search_input.addEventListener("keydown", function (event) {  clearTimeout(typingTimer);
+  clearTimeout(typingTimer);
 });
+
+// On keyup, start the countdown
+search_input.addEventListener("keyup", function (event) {
+  clearTimeout(typingTimer);
+  if (event.key != "Enter") {
+    typingTimer = setTimeout(doneTyping, 1500);
+  } else {
+    doneTyping();
+  }
+});
+
+function doneTyping(){
+  search_filter("liste-elements", delay=1000);
+}
 
 document.forms["filtres"].addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent the default form submission behavior
@@ -410,10 +430,15 @@ function correct_initial_data(type, data) {
     case "Villes":
       // For group of people and for Cities
       data.forEach(row => {
+
         if (row["Domaine"]) {
           row["dom_type"] = removeAccents(row.Domaine.toLowerCase());
           row["dom_color"] = getDomainColor(row["dom_type"]);
         }
+
+        // Cercle des domaines
+        row["Domaines"] = getCircleValues(row);
+
         if (row["Population"]) {
           row["Population"] = row["Population"].toLocaleString('fr');
         }
@@ -421,4 +446,20 @@ function correct_initial_data(type, data) {
       break;
   }
   return data;
+}
+
+function getCircleValues(item) {
+  let c_values = {};
+  CORRESPONDANCES["Domaines"].forEach(domaine => {
+    if (item[domaine]) {
+      c_values[domaine] = item[domaine];
+    } else {
+      c_values[domaine] = 0;
+    }
+  });
+  calc_trihns(c_values);
+  if(c_values["Corps"] === 0){
+    c_values = "";
+  }
+  return c_values;
 }

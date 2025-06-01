@@ -427,12 +427,17 @@ table.noir td,
   .modal-lg .cercle.sw {
     transform: scale(60%);
     margin-bottom: -200px;
+    margin-left: 7%;
   }
 }
 
 @media screen and (width > 430px) {
   .cercle.sw {
     transform: scale(0.8);
+  }
+
+  .modal-lg .cercle.sw {
+    margin-left: 15%;
   }
 }
 
@@ -461,15 +466,15 @@ table.noir td,
   .col-sm-12 .cercle.sw {
     margin-left: 12%;
   }
+
+  .modal-lg .cercle.sw {
+    margin-left: 15%;
+  }
 }
 
 @media (width >= 768px) {
   .col-sm-12 .cercle.sw {
     margin-left: 20%;
-  }
-
-  .modal-lg .cercle.sw {
-    margin-left: 8%;
   }
 
   .col-md-6 .cercle.sw {
@@ -481,7 +486,7 @@ table.noir td,
 
 @media (width >= 992px) {
   .modal-lg .cercle.sw {
-    margin-left: 20%;
+    margin-left: 28%;
   }
 
   .col-lg-4 .cercle.sw {
