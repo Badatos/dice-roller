@@ -11,7 +11,9 @@
     <div class="card-header"></div>
     <div class="card-body {{dom_type}}">
       <h2 class="mt-0 pt-0">{{Nom}}</h2>
-      <img class="float-end p-1" style="max-width:50%" src="{{Image}}">
+      {{#Image}}
+        <img class="float-end p-1" style="max-width:50%" src="{{.}}">
+      {{/Image}}
       <p class="jaune">
         Acquis <strong>{{Domaine}}</strong>
         {{#Rang}}

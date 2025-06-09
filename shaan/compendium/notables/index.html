@@ -129,18 +129,7 @@
       .then((template) => {
         let renderedHTML = '';
         data.forEach(row => {
-          row["Domaines"] = {};
-          CORRESPONDANCES["Domaines"].forEach(domaine => {
-            if (row[domaine]) {
-              row["Domaines"][domaine] = row[domaine];
-            } else {
-              row["Domaines"][domaine] = 0;
-            }
-          });
-          calc_trihns(row["Domaines"]);
-          if(row["Domaines"]["Corps"] === 0){
-            row["Domaines"] = "";
-          }
+
           renderedHTML += Mustache.render(template, row, {
             cercle: cercle_tpl
           });

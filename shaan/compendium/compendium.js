@@ -193,7 +193,11 @@ function modal_getitem(item, event, item_type="pouvoir", sheet="Pouvoirs") {
 function modal_item(item, event, item_type="acquis") {
   event.preventDefault();
   const selectedDatas = liste_origine.filter((o) => o.Nom === item.dataset["name"]);
-  modal_show(selectedDatas, item_type);
+  if (selectedDatas.length === 0) {
+    alert("Impossible de trouver " + item.dataset["name"]);
+  } else {
+    modal_show(selectedDatas, item_type);
+  }
 }
 
 /**
@@ -224,7 +228,7 @@ async function createPNJfromJob(target, event, data) {
   let lvl_min = 4;
   let dom_list = target.dataset["dom_list"];
   let lvl_max = target.dataset["lvl"];
-  console.log(dom_list);
+  // console.log(dom_list);
   CORRESPONDANCES["Domaines"].forEach(domaine => {
     if (dom_list.includes(domaine.toLowerCase())) {
       data["Domaines"][domaine] = lvl_max;
@@ -411,6 +415,13 @@ function correct_initial_data(type, data) {
       break;
     case "Acquis":
       data.forEach(row => {
+        row.Nom = row.Nom.trim();
+
+        if (row["Image"]) {
+          row["Image"] = row["Image"].split("\n");
+        }
+
+
         if (
             row["Catégorie"] && (
               row["Catégorie"] == "Protection" ||
@@ -426,8 +437,10 @@ function correct_initial_data(type, data) {
         }
       });
       break;
+    case "Animaux":
     case "Peuples":
     case "Villes":
+    case "Notables":
       // For group of people and for Cities
       data.forEach(row => {
 
@@ -448,6 +461,12 @@ function correct_initial_data(type, data) {
   return data;
 }
 
+/**
+ * Compute values for all circle domains, for specified item.
+ *
+ * @param {*} item
+ * @returns
+ */
 function getCircleValues(item) {
   let c_values = {};
   CORRESPONDANCES["Domaines"].forEach(domaine => {
@@ -458,8 +477,36 @@ function getCircleValues(item) {
     }
   });
   calc_trihns(c_values);
-  if(c_values["Corps"] === 0){
-    c_values = "";
+  // Cas des nécrosiens
+  if (item["Anti-âme"]) {
+    c_values["Ame"] = item["Anti-âme"];
+  } else if (c_values["Nécrose"] > 10) {
+    c_values["Ame"] = -c_values["Ame"]-(c_values["Nécrose"] - 10);
   }
+  if (c_values["Corps"] + c_values["Ame"] + c_values["Esprit"] === 0) {
+    c_values = null;
+  } else {
+      if (c_values["Esprit"] == 0) {
+        c_values["Esprit"] = "";
+      }
+      if (c_values["Ame"] == 0) {
+        c_values["Ame"] = "";
+      }
+      if (c_values["Corps"] == 0) {
+        c_values["Corps"] = "";
+      }
+  }
+  // Nécrose et Shaan : voir page 232 du manuel d'itinérance
+  /*
+  A partir de 5 en NÉCROSE, chaqueaugmentation du niveau de
+  NÉCROSE fait perdre 1 point de SHAAN (minimum 1).
+  A partir de 5 en SHAAN, chaque augmentation du niveau de SHAAN
+  fait perdre 1 point de NÉCROSE (minimum 1).
+
+  Un personnage devient nécrosien si son niveau de NÉCROSE devient
+  strictement supérieur à 10.
+  Chaque augmentation du niveau de NÉCROSE au-delà de 10 fait progresser
+  son Anti-Âme de 1 point
+  */
   return c_values;
 }

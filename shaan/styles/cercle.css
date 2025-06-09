@@ -81,31 +81,26 @@ table.noir td,
   height: 24px;
 }
 
-#corps {
+.trihn {
   position: absolute;
+  font-size: 24px;
+  text-align: center;
+  min-width: 30px;
+}
+
+#corps {
   top: 297px;
   left: 248px;
-  font-size: 24px;
-  width: 30px;
-  text-align: center;
 }
 
 #ame {
-  position: absolute;
-  top: 202px;
+  top: 200px;
   left: 210px;
-  font-size: 24px;
-  width: 30px;
-  text-align: center;
 }
 
 #esprit {
-  position: absolute;
   top: 271px;
   left: 153px;
-  font-size: 24px;
-  width: 30px;
-  text-align: center;
 }
 
 #corps-actu {
@@ -479,7 +474,7 @@ table.noir td,
 
   .col-md-6 .cercle.sw {
     transform: scale(60%);
-    margin-bottom: -70%;
+    margin-bottom: -64%;
     margin-left: 6%;
   }
 }

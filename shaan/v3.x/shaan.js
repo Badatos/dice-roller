@@ -241,7 +241,7 @@ function calcul_score(action_color, de_bonus = 0) {
 
     if (action_color !== "") {
         let action_val = thrin_values[action_color];
-        console.log(action_val);
+        // console.log(action_val);
         // Echec
         if (action_val === 0 ) {
             limbes.classList.remove("d-none");
