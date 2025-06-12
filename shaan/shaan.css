@@ -57,6 +57,7 @@
   --bs-nav-pills-link-active-bg: var(--shaan-green);
 }
 
+.vert,
 .green {
   color: var(--shaan-green);
 }
@@ -378,6 +379,7 @@ main {
 
 .shaan-title.red {
   background-image: url("https://raw.githubusercontent.com/vdhilly/shaanworld/refs/heads/main/assets/kit/titres/template_shaan_titre_rouge.png");
+  color: var(--shaan-red);
 }
 
 /* Smaal devices */
