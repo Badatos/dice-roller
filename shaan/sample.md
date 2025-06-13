@@ -2,22 +2,25 @@
 
 Le format Markdown permet de taper en *italique* ou en **gras** par exemple.
 
-Mais aussi de faire des titres de différents niveaux :
+Mais aussi de faire des titres de différents niveaux :
 
 ## Titre 2
 
 ### Titre 3
 
-... et bien sûr des puces :
+... et bien sûr des puces :
 
 * premier élément
 * deuxième élément
 
-et des images :
+et des images :
 
 ![Shaan](https://www.shaan-world.com/wp-content/uploads/2024/03/shaan.png)
 
-... et vous pouvez mixer cela avec les couleurs de Shaan (rouge, jaune, bleu, vert et gris) :
+... ainsi que des citations :
+> *Pour certains, nous ne sommes encore qu’une rumeur. C’est une bonne chose. La liberté n’a pas besoin de visage.*
+
+... et vous pouvez mixer cela avec les couleurs de Shaan (rouge, jaune, bleu, vert et gris) :
 
 :::{.rouge}
 

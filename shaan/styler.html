@@ -26,6 +26,18 @@
     .styled h2 {
       font-family: Komikazoom, sans-serif;
     }
+
+    blockquote {
+      background: #fff5e3;
+      padding: 7px;
+      border-radius: 7px;
+      border: 2px solid var(--shaan-green);
+    }
+
+    blockquote p {
+      margin: .5rem;
+    }
+
   </style>
 </head>
 
@@ -113,10 +125,11 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Exemple de formats Markdown</h5>
+          <h2 class="modal-title">Exemple de formats Markdown</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <label for="md-sample" class="form-label bleu">Exemples à copier dans l'éditeur</label>
           <textarea class="form-control"
             rows="20" id="md-sample">Modal body text goes here.</textarea>
         </div>
