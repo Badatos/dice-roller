@@ -19,6 +19,8 @@ et des images :
 
 ... ainsi que des citations :
 > *Pour certains, nous ne sommes encore qu’une rumeur. C’est une bonne chose. La liberté n’a pas besoin de visage.*
+>
+> — **Les Rebelles**, Le feu intérieur (p.72)
 
 ... et vous pouvez mixer cela avec les couleurs de Shaan (rouge, jaune, bleu, vert et gris) :
 
