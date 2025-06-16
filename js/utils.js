@@ -5,7 +5,7 @@
  *   Desc:
  */
 
-'use strict';
+"use strict";
 
 let pending_search = false;
 
@@ -23,7 +23,7 @@ async function search_filter(target="liste-elements", delay=0) {
     pending_search = true;
     let tot = 0;
     bloc_total.innerText = "…";
-    document.querySelectorAll('.item').forEach(function(elem) {
+    document.querySelectorAll(".item").forEach(function(elem) {
       let item = elem.innerText.toLowerCase();
       if (item.includes(string) || string.length == 0) {
         elem.classList.remove("d-none");
@@ -42,19 +42,19 @@ async function search_filter(target="liste-elements", delay=0) {
 }
 
 /**
- * Genere une liste d'éléments au format "carte"
+ * Genere une liste d’éléments au format "carte"
  * @param {*} elem  élément cliqué
  * @param {*} event évenement déclenché
  */
 async function generate(elem, event, item_type="acquis") {
-  //Ne s'active que si l'onglet "cartes" n'est pas déja sélectionné
+  // Ne s’active que si l’onglet "cartes" n’est pas déja sélectionné
   if (!card_tab.classList.contains("active")) {
     loader.classList.remove("d-none");
     table_elements.classList.add("d-none");
     card_tab.classList.add("active");
-    card_tab.setAttribute('aria-current', "page");
+    card_tab.setAttribute("aria-current", "page");
     table_tab.classList.remove("active");
-    table_tab.removeAttribute('aria-current');
+    table_tab.removeAttribute("aria-current");
     card_tab.scrollIntoView();
 
     if (filteredData[0] == "VIDE") {
@@ -63,7 +63,7 @@ async function generate(elem, event, item_type="acquis") {
     }
 
     const selectedItems = [];
-    document.getElementsByName('select_item').forEach(function(chk) {
+    document.getElementsByName("select_item").forEach(function(chk) {
       if (chk.checked) {
         selectedItems.push(chk.value);
       }
@@ -132,7 +132,7 @@ function reset_sort_status() {
   const nodes = tr.cells
   // Reset thead cells
   for (let i = 0; i < nodes.length; i++) {
-    nodes[i].removeAttribute('aria-sort')
+    nodes[i].removeAttribute("aria-sort")
   }
 }
 
@@ -145,4 +145,4 @@ function hasAnySelectedList(selected, itemlist) {
 
 // Remove accents from a JavaScript string
 const removeAccents = str =>
-  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

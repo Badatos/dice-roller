@@ -9,9 +9,9 @@ var roll_count = 10;
 const img_url = "../img/";
 
 // Valeurs de thrines obtenues
-var thrin_values = { 'jaune': 0, 'bleu': 0, 'rouge': 0, 'noir': 0 }
+var thrin_values = { "jaune": 0, "bleu": 0, "rouge": 0, "noir": 0 }
 
-// Boutons d'action
+// Boutons d’action
 const domain_btn = document.getElementById("domain-btn");
 
 // Blocs d’alertes

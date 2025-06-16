@@ -115,7 +115,7 @@
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
 
   <script>
-    const options = { sheetName: 'Peuples', useFormat: false }
+    const options = { sheetName: "Peuples", useFormat: false }
 
     const precode = document.getElementById("code");
 
@@ -126,13 +126,13 @@
       fetch("../../templates/"+modele+".mustache")
       .then((response) => response.text())
       .then((template) => {
-        let renderedHTML = '';
+        let renderedHTML = "";
         data.forEach(row => {
           renderedHTML += Mustache.render(template, row, {
             cercle: cercle_tpl
           });
           loader.classList.add("d-none");
-          // precode.textContent += JSON.stringify(row, null, 2) + '\n';
+          // precode.textContent += JSON.stringify(row, null, 2) + "\n";
         });
         liste_elements.innerHTML = renderedHTML;
       });

@@ -98,7 +98,7 @@ parser.parse().then(data => {
 });
 
 /**
- * Affiche un item d'un objet indiqué dans une modale
+ * Affiche un item d’un objet indiqué dans une modale
  * @param {*} item
  * @param {*} event
  * @param {*} item_type
@@ -120,7 +120,7 @@ function modal_getitem(item, event, item_type = "pouvoir", sheet = "Pouvoirs") {
 }
 
 /**
- * Affiche un item de l'objet courant dans une modale
+ * Affiche un item de l’objet courant dans une modale
  * @param {*} item
  * @param {*} event
  * @param {*} item_type
@@ -177,12 +177,12 @@ function display_items(data, target="liste-elements", modele="spell_row") {
   fetch("../../templates/"+modele+".mustache")
   .then((response) => response.text())
   .then((template) => {
-    let renderedHTML = '';
+    let renderedHTML = "";
     liste_elements.innerHTML = "";
     data.forEach(row => {
       renderedHTML += Mustache.render(template, row);
       loader.classList.add("d-none");
-      //precode.textContent += JSON.stringify(row, null, 2) + '\n';
+      //precode.textContent += JSON.stringify(row, null, 2) + "\n";
     });
     liste_elements.innerHTML = renderedHTML;
     search_filter();

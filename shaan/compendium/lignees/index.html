@@ -93,7 +93,7 @@
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
 
   <script>
-    const options = { sheetName: 'Lignées', useFormat: false }
+    const options = { sheetName: "Lignées", useFormat: false }
 
     const precode = document.getElementById("code");
 
@@ -105,10 +105,10 @@
       fetch("../../templates/lignee.mustache")
       .then((response) => response.text())
       .then((template) => {
-        let renderedHTML = '';
+        let renderedHTML = "";
         data.forEach(row => {
           renderedHTML += Mustache.render(template, row);
-          // precode.textContent += JSON.stringify(row, null, 2) + '\n';
+          // precode.textContent += JSON.stringify(row, null, 2) + "\n";
         });
         liste_elements.innerHTML = renderedHTML;
         loader.classList.add("d-none");

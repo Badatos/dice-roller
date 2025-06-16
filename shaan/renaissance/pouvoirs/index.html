@@ -393,7 +393,7 @@
 
   <script>
 
-    const options = { sheetName: 'Pouvoirs', useFormat: false }
+    const options = { sheetName: "Pouvoirs", useFormat: false }
 
     const precode = document.getElementById("code");
 
@@ -407,12 +407,12 @@
       fetch("../../templates/"+modele+".mustache")
       .then((response) => response.text())
       .then((template) => {
-        let renderedHTML = '';
+        let renderedHTML = "";
         liste_elements.innerHTML = "";
         data.forEach(row => {
           renderedHTML += Mustache.render(template, row);
           loader.classList.add("d-none");
-          //precode.textContent += JSON.stringify(row, null, 2) + '\n';
+          //precode.textContent += JSON.stringify(row, null, 2) + "\n";
         });
         liste_elements.innerHTML = renderedHTML;
         search_filter();

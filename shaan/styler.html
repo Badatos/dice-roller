@@ -159,7 +159,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <label for="md-sample" class="form-label bleu">Exemples à copier dans l'éditeur</label>
+          <label for="md-sample" class="form-label bleu">Exemples à copier dans l’éditeur</label>
           <textarea class="form-control"
             rows="20" id="md-sample">Modal body text goes here.</textarea>
         </div>
@@ -199,7 +199,7 @@
     function refreshPreview(){
       preview.innerHTML = marked.use(createDirectives()).parse(source.value);
     }
-    fetch('sample.md')
+    fetch("sample.md")
     .then(response => response.text())
     .then(content => {
       sampleText = content;

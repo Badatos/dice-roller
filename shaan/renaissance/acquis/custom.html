@@ -63,7 +63,7 @@
                     Novateur
             </option>
             <option value="d’Érudit"
-                    title="L'élite intellectuelle de la population héossienne">
+                    title="L’élite intellectuelle de la population héossienne">
                     Érudit
             </option>
             <option value="de Négociant"
@@ -87,11 +87,11 @@
                     Élémentaliste
             </option>
             <option value="de Voyageur"
-                    title="Ceux chargés de transporter quelque chose ou quelqu'un d'un point à un autre">
+                    title="Ceux chargés de transporter quelque chose ou quelqu’un d’un point à un autre">
                     Voyageur
             </option>
             <option value="de Combattant"
-                    title="Ceux qui ne vivent que par la guerre et le respect de l'ordre">
+                    title="Ceux qui ne vivent que par la guerre et le respect de l’ordre">
                     Combattant
             </option>
             <option value="des Ombres"
@@ -125,7 +125,7 @@
                 Manuscrit
               </option>
               <option value="Manuscrit (Carte)"
-                title="Cartes de régions ou de stèles d'Embiose, etc.">
+                title="Cartes de régions ou de stèles d’Embiose, etc.">
                 Carte / plan
               </option>
             </optgroup>
@@ -135,7 +135,7 @@
               Outil
             </option>
             <option value="Protection"
-              title="Armures ou talismans qui augmentent la Défense des Trihns de Corps, d'Âme et d'Esprit.">
+              title="Armures ou talismans qui augmentent la Défense des Trihns de Corps, d’Âme et d’Esprit.">
               Protection
             </option>
             <option value="Relation"
@@ -143,7 +143,7 @@
               Relation
             </option>
             <option value="Richesse"
-              title="Argent, bijoux, œuvres d'art, etc.">
+              title="Argent, bijoux, œuvres d’art, etc.">
               Richesse
             </option>
             <optgroup label="Technologies"
@@ -168,7 +168,7 @@
         <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
           <label for="classe" class="form-label">Classe</label>
           <input type="number" class="form-control" id="classe" value="1" max="5" min="0" aria-describedby="classe-help">
-          <div id="classe-help" class="form-text">La Classe d'un Acquis définit sa rareté, son prix, sa qualité, etc.</div>
+          <div id="classe-help" class="form-text">La Classe d’un Acquis définit sa rareté, son prix, sa qualité, etc.</div>
         </div>
 
         <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
@@ -589,7 +589,7 @@ Cet acquis est *super*.
       .then((response) => response.text())
       .then((template) => {
         carte_acquis.innerHTML = Mustache.render(template, data);
-        const details = document.getElementById('details')
+        const details = document.getElementById("details")
         details.innerHTML =
           marked.parse(details.innerHTML);
       });
