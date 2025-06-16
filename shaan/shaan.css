@@ -10,13 +10,20 @@
   src: url("./fonts/Komikazoom.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: AmazDoomLeft;
+  src: url("./fonts/AmazDoomLeft.ttf") format("truetype");
+}
+
 :root {
   --shaan-blue: #4766a1;
   --shaan-red: #994e34;
 
   /** #438270 */
   --shaan-green: #45714f;
+  --primary: #45714f;
   --primary-light: hsl(from var(--primary) h s calc(l + 40));
+  --primary-lighter: hsl(from var(--primary) h s calc(l + 57));
   --shaan-font: "Economica", arial, helvetica, sans-serif;
   --bs-primary: var(--shaan-green);
   --bs-primary-rgb: 69, 113, 79;
@@ -33,6 +40,7 @@
 
   --ame-color: #547a9e;
   --ame-color-light: hsl(from var(--ame-color) h s calc(l + 40));
+  --ame-color-lighter: hsl(from var(--ame-color) h s calc(l + 44));
 
   /* --corps-color: #c86e5a; */
 
@@ -199,7 +207,7 @@ body {
   font-variant-caps: small-caps;
 }
 
-h1 {
+h1, h2 {
   font-family: Komikazoom, sans-serif;
 }
 
@@ -331,7 +339,9 @@ main {
   background-color: #fffac2;
   border: 2px solid;
   border-radius: 10px;
-  padding: 0 .5em;
+  font-family: AmazDoomLeft, serif;
+  padding: .4em 0 0;
+  line-height: .7em;
   width: calc(100% - var(--shaan-title-left-pos) - .5rem);
   max-width: 700px;
   left: var(--shaan-title-left-pos);
@@ -386,7 +396,7 @@ main {
 .shaan-title.small h1 {
   --shaan-title-left-pos: 32px;
 
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 5px;
 }
 
@@ -416,7 +426,7 @@ main {
   .shaan-title h1 {
     --shaan-title-left-pos: 65px;
 
-    font-size: 36px;
+    font-size: 40px;
   }
 
   .shaan-title h1::after {
@@ -426,8 +436,8 @@ main {
   }
 
   .shaan-title.small h1::after {
-    right: -4%;
-    top: -25%;
+    right: -3%;
+    top: -35%;
   }
 }
 

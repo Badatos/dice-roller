@@ -18,17 +18,31 @@
   <link rel="stylesheet" type="text/css" href="shaan.css" />
   <title>Shaan Styler</title>
   <style>
+
+    .styled {
+        columns: 1;
+    }
+
+    @media (width > 1200px) {
+      .styled {
+        columns: 2;
+      }
+    }
+
+    @media print {
+      .styled {
+        columns: 3;
+      }
+    }
+
     .styled h1 {
       font-family: GodofWar, serif;
       font-variant-caps: small-caps;
     }
 
-    .styled h2 {
-      font-family: Komikazoom, sans-serif;
-    }
-
     blockquote {
       background: #fff5e3;
+      break-inside: avoid;
       padding: 7px;
       border-radius: 7px;
       border: 2px solid var(--shaan-green);
@@ -60,7 +74,7 @@
 <body>
   <div class="shaan-title blue fixed-top" id="header">
     <h1>
-      <span id="scenar-title">Mon super scénario</span>
+      <span id="scenar-title">Mon super scenario</span>
       <span id="scenar-sep" class="d-print-none"> - </span>
       <span class="d-print-none">Shaan Styler</span>
     </h1>

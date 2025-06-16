@@ -8,27 +8,27 @@ Mais aussi de faire des titres de différents niveaux :
 
 ### Titre 3
 
-... et bien sûr des puces :
+… et bien sûr des puces :
 
 * premier élément
 * deuxième élément
 
-et des images :
+… et des images :
 
 ![Shaan](https://www.shaan-world.com/wp-content/uploads/2024/03/shaan.png)
 
-... ainsi que des citations :
-> *Pour certains, nous ne sommes encore qu’une rumeur. C’est une bonne chose. La liberté n’a pas besoin de visage.*
+… ainsi que des citations :
+> « *Pour certains, nous ne sommes encore qu’une rumeur. C’est une bonne chose. La liberté n’a pas besoin de visage.* »
 >
 > — **Les Rebelles**, Le feu intérieur (p.72)
 
-... et vous pouvez mixer cela avec les couleurs de Shaan (rouge, jaune, bleu, vert et gris) :
+… et vous pouvez mixer cela avec les couleurs de Shaan (rouge, jaune, bleu, vert et gris) :
 
 :::{.rouge}
 
 ## Titre 2 rouge
 
-Cette partie en rouge
+Cette partie en rouge.
 :::
 
 :::{.bleu}
@@ -42,7 +42,7 @@ La mise en couleur commence quand vous tapez 3 double points suivis du code coul
 
 ## Titre 2 vert
 
-... et se termine quand vous retapez 3 double points.
+… et se termine quand vous retapez 3 double points.
 :::
 
 :::{.jaune}

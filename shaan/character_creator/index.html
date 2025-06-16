@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet" crossorigin="anonymous"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
+
+  <!-- W3.org ARIA CheckboxMixed -->
+  <link rel="stylesheet" type="text/css" href="../../css/CheckboxMixed.css" />
+
+  <link rel="stylesheet" type="text/css" href="../shaan.css" />
+  <link rel="stylesheet" type="text/css" href="../compendium/compendium.css" />
+  <title>Créateur de personnage - Shaan World</title>
+  <style>
+    body {
+      background-image: none;
+    }
+
+    .accordion-item,
+    .accordion-header {
+      mask: linear-gradient(45deg, transparent 0 var(--bottom-left, var(--all)), #fff 0) bottom left, linear-gradient(-45deg, transparent 0 var(--bottom-right, var(--all)), #fff 0) bottom right, linear-gradient(135deg, transparent 0 var(--top-left, var(--all)), #fff 0) top left, linear-gradient(-135deg, transparent 0 var(--top-right, var(--all)), #fff 0) top right;
+      mask-size: 50.5% 50.5%;
+      mask-repeat: no-repeat;
+      --all: 9px;
+      background-color: #DFF0D899;
+      /*--bottom-left : 0;
+      --bottom-right : 0;*/
+    }
+    .accordion-header {
+      --bottom-left : 0;
+      --bottom-right : 0;
+    }
+
+
+    .vert {
+      --bs-accordion-btn-color: var(--shaan-green);
+    }
+    .vert .collapsed{
+      background-color: var(--primary-lighter);
+    }
+
+
+    .bleu {
+      --bs-accordion-active-color: var(--ame-color);
+      --bs-accordion-btn-color: var(--ame-color);
+      --bs-accordion-active-bg: var(--ame-color-light);
+    }
+
+    .accordion-item.bleu,
+    .bleu .collapsed {
+      background-color: var(--ame-color-lighter);
+    }
+
+    .collapsed {
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container shaan-title blue fixed-top" id="header">
+    <h1>Character Creator</h1>
+  </div>
+  <main class="container mt-5 pt-5">
+
+    <nav aria-label="Fil d’ariane" class="ms-3 pt-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../">Shaan</a></li>
+        <li class="breadcrumb-item"><a href="../">World</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Créateur de personnage</li>
+      </ol>
+    </nav>
+
+    <form class="row mb-3 d-print-none" id="acq-generator">
+      <div class="row mb-3">
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="name" class="form-label">Nom du personnage</label>
+          <input type="text" class="form-control" id="name" value="Inconnu Anonyme">
+        </div>
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="gender" class="form-label">Genre</label>
+          <select id="gender" class="form-select">
+            <option value="masculin">Masculin</option>
+            <option value="féminin">Féminin</option>
+            <option value="neutre">Neutre</option>
+          </select>
+        </div>
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3">
+          <label for="image" class="form-label">Avatar</label>
+          <input type="text" class="form-control" id="image" aria-describedby="image-help"
+           value="https://www.shaan-rpg.com/class-shaan/img/avatar/avatar_default.jpg">
+          <div id="image-help" class="form-text">URL d’une image d’illustration.</div>
+        </div>
+      </div>
+
+      <div class="accordion" id="characterSteps">
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-lignee"
+              aria-expanded="true" aria-controls="collapse-lignee">
+              01. Lignée
+            </button>
+          </h2>
+          <div id="collapse-lignee" class="accordion-collapse collapse show" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <select id="gender" class="form-select">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-people"
+              aria-expanded="false" aria-controls="collapse-people">
+              02. Peuple
+            </button>
+          </h2>
+          <div id="collapse-people" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <select id="people" class="form-select">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-caste"
+              aria-expanded="false" aria-controls="collapse-caste">
+              03. Archétype
+            </button>
+          </h2>
+          <div id="collapse-caste" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <label for="domain" class="form-label">Archétype</label>
+              <select id="domain" class="form-select" aria-describedby="domain-help">
+                <option value="de Novateur"
+                        title="Le Technicien incarne l'alliance entre expertise, habileté manuelle et maîtrise des matériaux.">
+                        Technicien
+                </option>
+                <option value="d’Érudit"
+                        title="Le Savant incarne la soif insatiable de connaissances, fusionnant mémoire, intellect et analyse.">
+                        Savant
+                </option>
+                <option value="de Négociant"
+                        title="Le Médiateur met en lumière la dimension relationnelle avec les autres individus, mettant en avant l'éloquence, l'art de l'articulation et de la séduction.">
+                        Médiateur
+                </option>
+                <option value="d’Artiste"
+                        title="L'Artiste incarne l'expression de la fibre artistique, de la sensualité et de la créativité. Musiciens, peintres, cuisiniers, danseurs et autres créateurs savent manier les émotions pour en tirer profit.">
+                        Artiste
+                </option>
+                <option value="de Shaaniste"
+                        title="Le Shaaniste incarne la quête d'harmonie avec l'environnement, le magnétisme et la chance brute, définissant ainsi la lutte contre les Limbes pour instaurer le règne de la paix et de l'équilibre.">
+                        Shaaniste
+                </option>
+                <option value="de Magicien"
+                        title="Le Magicien, véritable virtuose des facultés magiques, possède le pouvoir de déceler et contrôler les flux d'énergie.">
+                        Mage
+                </option>
+                <option value="d’Élémentaliste"
+                        title="Le Croyant incarne la foi inébranlable envers les éléments, démontrant la capacité à manipuler leur énergie primale pour s'approprier leurs facultés.">
+                        Croyant
+                </option>
+                <option value="de Voyageur"
+                        title="L'Aventurier incarne l'union harmonieuse des capacités de déplacement, de perception et d'adaptation à un environnement naturel.">
+                        Aventurier
+                </option>
+                <option value="de Combattant"
+                        title="Le Guerrier s'impose dans toute confrontation physique, surtout lorsqu'il s'agit de manier une arme non technologique.">
+                        Guerrier
+                </option>
+                <option value="des Ombres"
+                        title="Le Déviant personnifie le côté obscur, le cheminement du personnage sur la voie des Limbes.">
+                        Déviant
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-vocations"
+              aria-expanded="false" aria-controls="collapse-vocations">
+              04. Vocations (x5)
+            </button>
+          </h2>
+          <div id="collapse-vocations" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <label for="voca1" class="form-label">Vocation d'archétype</label>
+              <select id="voca1" class="form-select" aria-describedby="voca1-help">
+                <option value="">
+                  Choisis d'abord un archétype
+                </option>
+              </select>
+              <label for="voca2" class="form-label">4 autres vocations</label>
+              <select id="voca2" class="form-select"
+               aria-describedby="voca2-help" multiple>
+                <option value="">
+                  Choisis d'abord un archétype
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-pow"
+              aria-expanded="false" aria-controls="collapse-pow">
+              05. Pouvoir
+            </button>
+          </h2>
+          <div id="collapse-pow" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow1" name="pouvoir">
+                <label class="form-check-label" for="pow1">
+                  Eclair de génie
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow2" name="pouvoir">
+                <label class="form-check-label" for="pow2">
+                  Osmose
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow3" name="pouvoir">
+                <label class="form-check-label" for="pow3">
+                  Adaptation
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow4" name="pouvoir">
+                <label class="form-check-label" for="pow4">
+                  Coup de chance
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow5" name="pouvoir">
+                <label class="form-check-label" for="pow5">
+                  Second souffle
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow6" name="pouvoir">
+                <label class="form-check-label" for="pow6">
+                  Clairvoyance
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow7" name="pouvoir">
+                <label class="form-check-label" for="pow7">
+                  Anticipation
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-protect"
+              aria-expanded="false" aria-controls="collapse-protect">
+              06. Protections
+            </button>
+          </h2>
+          <div id="collapse-protect" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow1" name="pouvoir">
+                <label class="form-check-label" for="pow1">
+                  Eclair de génie
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow2" name="pouvoir">
+                <label class="form-check-label" for="pow2">
+                  Osmose
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow3" name="pouvoir">
+                <label class="form-check-label" for="pow3">
+                  Adaptation
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow4" name="pouvoir">
+                <label class="form-check-label" for="pow4">
+                  Coup de chance
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow5" name="pouvoir">
+                <label class="form-check-label" for="pow5">
+                  Second souffle
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow6" name="pouvoir">
+                <label class="form-check-label" for="pow6">
+                  Clairvoyance
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="pow7" name="pouvoir">
+                <label class="form-check-label" for="pow7">
+                  Anticipation
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item vert">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-equip"
+              aria-expanded="false" aria-controls="collapse-equip">
+              07. Equipement
+            </button>
+          </h2>
+          <div id="collapse-equip" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-orig"
+              aria-expanded="false" aria-controls="collapse-orig">
+              08. Origines
+            </button>
+          </h2>
+          <div id="collapse-orig" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-temper"
+              aria-expanded="false" aria-controls="collapse-temper">
+              09. Tempérament
+            </button>
+          </h2>
+          <div id="collapse-temper" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-rupture"
+              aria-expanded="false" aria-controls="collapse-rupture">
+              10. Rupture
+            </button>
+          </h2>
+          <div id="collapse-rupture" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-vecu"
+              aria-expanded="false" aria-controls="collapse-vecu">
+              11. Vécu
+            </button>
+          </h2>
+          <div id="collapse-vecu" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-role"
+              aria-expanded="false" aria-controls="collapse-role">
+              12. Rôle
+            </button>
+          </h2>
+          <div id="collapse-role" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bleu">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapse-quest"
+              aria-expanded="false" aria-controls="collapse-quest">
+              13. Quête
+            </button>
+          </h2>
+          <div id="collapse-quest" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
+            <div class="accordion-body">
+              <p>Choisis d'abord lignée, peuple et case.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-sm-12 col-md-6  col-lg-4 mb-3 d-none">
+          <label for="desc" class="form-label">Description</label>
+          <textarea class="form-control" id="desc" aria-describedby="desc-help" rows="6">
+Cet acquis est *super*.
+
+### Capacités
+
+* **Protection** : Défense de Corps +1
+          </textarea>
+          <div id="desc-help" class="form-text">
+            Décris ton acquis et ses éventuelles capacités
+            (<a href="https://docs.framasoft.org/fr/grav/markdown.html" target="_blank">format Markdown</a>).</div>
+        </div>
+      </div>
+    </form>
+
+    <div id="result" class="row mt-3">
+      <div id="fiche-perso" class="col-xl-6"></div>
+    </div>
+  </main>
+
+  <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan Renaissance</strong>, rendez-vous sur
+      <a
+    href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>.
+    </p>
+  </footer>
+  <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
+  <script src="https://unpkg.com/mustache@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    const acq_generator = document.getElementById("acq-generator");
+    acq_generator.addEventListener("change", calcul_stats);
+
+
+    const lignees = {
+      "Chrysalis": ["Etre-plante", "Ygwan Ephémère", "Androïde Renégat", "Feling Nocturne", "Antéhumain"],
+      "Héossie": ["Humain", "Kelwin", "Ygwan", "Delhion", "Mélodien", "Feling", "Nomoï", "Woon", "Boréal", "Darken"]
+    };
+    const peuples = {
+      "Chrysalis": ["Forêts Primales", "Etendues Nomades", "Monts Fleuris", "Plaines Ardentes", "Marécages"],
+      "Héossie": ["Cités", "Terres Brûlées", "Marais", "Montagnes", "Hautes Herbes", "Grands Arbres", "Glaces", "Forêts Blanches", "Rivages", "Sables"],
+    };
+
+    const vocations = {
+      "Technicien": ["", ""],
+      "Savant": ["", ""],
+      "Médiateur": ["", ""],
+      "Artiste": ["", ""],
+      "Shaaniste": ["", ""],
+      "Mage": ["", ""],
+      "Croyant": ["Disciple du temps", "Disciple de la Lumière", "Druide", "Disciple de l'Air", "Disciple de l'Air"],
+      "Aventurier": ["", ""],
+      "Guerrier": ["", ""],
+      "Déviant": ["", ""],
+    };
+
+
+    const acq_name = document.getElementById("name");
+    const domain = document.getElementById("domain");
+    const image = document.getElementById("image");
+    const desc = document.getElementById("desc");
+    const pow_rank = document.getElementById("pow-rank");
+
+    const ressources = document.getElementById("ressources");
+    const specialisations = document.getElementById("specialisations");
+
+    const calc_value = document.getElementById("acq-value");
+    const calc_prestige = document.getElementById("acq-prestige");
+    const calc_ress = document.getElementById("acq-ress");
+    const calc_diff = document.getElementById("acq-diff");
+
+    const carte_acquis = document.getElementById("fiche-perso");
+
+    function calcul_stats() {
+      let data = {};
+
+      data["Nom"] = acq_name.value;
+      data["Image"] = image.value;
+      data["Domaine"] = domain.value;
+      data["Spécialisation"] = "??";
+      data["Détails"] = desc.value;
+      data["width"] = "m-auto";
+      data["Entretien"] = 0;
+
+      // console.log(domain.options[domain.selectedIndex].text.toUpperCase());
+      switch(domain.options[domain.selectedIndex].text.toUpperCase()) {
+        case "TECHNICIEN":
+          data["dom_type"] = "technique";
+          break;
+        case "SAVANT":
+          data["dom_type"] = "savoir";
+          break;
+        case "MEDIATEUR":
+          data["dom_type"] = "social";
+          break;
+        case "ARTISTE":
+          data["dom_type"] = "arts";
+          break;
+        case "SHAANISTE":
+          data["dom_type"] = "shaan";
+          break;
+        case "MAGE":
+          data["dom_type"] = "magie";
+          break;
+        case "CROYANT":
+          data["dom_type"] = "rituels";
+          break;
+        case "AVENTURIER":
+          data["dom_type"] = "survie";
+          break;
+        case "GUERRIER":
+          data["dom_type"] = "combat";
+          break;
+        case "DEVIANT":
+          data["dom_type"] = "necrose";
+          break;
+        case "SAREN":
+          data["dom_type"] = "saren";
+          break;
+        default:
+          data["dom_type"] = data.Domaine;
+      }
+
+
+      if (data["Spécialisation"] > 0) {
+        if (specialisations.value) {
+          data["Spécialisation"] = data["Spécialisation"] + " : " + specialisations.value;
+        } else {
+          data["Spécialisation"] = data["Spécialisation"] + " bonus à choisir.";
+        }
+      } else {
+        data["Spécialisation"] = "";
+      }
+
+      fetch("../templates/pnj.mustache")
+      .then((response) => response.text())
+      .then((template) => {
+        carte_acquis.innerHTML = Mustache.render(template, data);
+        /*
+        const details = document.getElementById('details');
+        details.innerHTML =
+          marked.parse(details.innerHTML);
+          */
+      });
+    }
+
+    calcul_stats();
+  </script>
+
+  <div class="version small text-bg-light p-1 pt-0">v 0.1</div>
+
+  <!-- Shaan template JS -->
+  <!--script src="../shaan.js"></script-->
+
+</body>
+</html>
