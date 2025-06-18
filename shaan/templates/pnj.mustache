@@ -10,7 +10,9 @@
   <div class="card fiche_pnj {{dom_color}}">
     <div class="card-header {{dom_type}}">
       <h2 class="mt-0 pt-0">
-        <span class="">{{Nom}}</span>, {{Métier}} {{Lignée}}</h2>
+        <span class="">{{Nom}}{{#Peuple}} <em>{{Peuple}}</em>{{/Peuple}}</span>,
+        {{Métier}} {{Lignée}}
+      </h2>
     </div>
     {{#Domaines}}
       {{> cercle}}

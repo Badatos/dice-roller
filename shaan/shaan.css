@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: AmazDoomLeft;
-  src: url("./fonts/AmazDooMLeft.ttf") format("truetype");
+  src: url("./fonts/AmazDoomLeft.ttf") format("truetype");
 }
 
 :root {
@@ -446,3 +446,37 @@ main {
 
 }
 */
+
+/* Shaan Accordions */
+.accordion-item,
+.accordion-header {
+  mask: linear-gradient(45deg, transparent 0 var(--bottom-left, var(--all)), #fff 0) bottom left, linear-gradient(-45deg, transparent 0 var(--bottom-right, var(--all)), #fff 0) bottom right, linear-gradient(135deg, transparent 0 var(--top-left, var(--all)), #fff 0) top left, linear-gradient(-135deg, transparent 0 var(--top-right, var(--all)), #fff 0) top right;
+  mask-size: 50.5% 50.5%;
+  mask-repeat: no-repeat;
+  --all: 9px;
+}
+
+.accordion-item {
+  --bs-accordion-bg: #FBFBFB;
+  --bs-accordion-btn-bg: #F4F4F4;
+}
+
+.accordion-header {
+  --bottom-left : 0;
+  --bottom-right : 0;
+}
+
+.accordion-item.vert {
+  --bs-accordion-btn-color: var(--shaan-green);
+  --bs-accordion-btn-bg: var(--primary-lighter);
+  --bs-accordion-bg: var(--primary-lighter);
+}
+
+.accordion-item.bleu {
+  --bs-accordion-active-color: var(--ame-color);
+  --bs-accordion-btn-color: var(--ame-color);
+  --bs-accordion-active-bg: var(--ame-color-light);
+  --bs-accordion-btn-bg: var(--ame-color-lighter);
+  --bs-accordion-bg: var(--ame-color-lighter);
+}
+
