@@ -450,7 +450,10 @@ main {
 /* Shaan Accordions */
 .accordion-item,
 .accordion-header {
-  mask: linear-gradient(45deg, transparent 0 var(--bottom-left, var(--all)), #fff 0) bottom left, linear-gradient(-45deg, transparent 0 var(--bottom-right, var(--all)), #fff 0) bottom right, linear-gradient(135deg, transparent 0 var(--top-left, var(--all)), #fff 0) top left, linear-gradient(-135deg, transparent 0 var(--top-right, var(--all)), #fff 0) top right;
+  mask: linear-gradient(45deg, transparent 0 var(--bottom-left, var(--all)), #fff 0) bottom left,
+        linear-gradient(-45deg, transparent 0 var(--bottom-right, var(--all)), #fff 0) bottom right,
+        linear-gradient(135deg, transparent 0 var(--top-left, var(--all)), #fff 0) top left,
+        linear-gradient(-135deg, transparent 0 var(--top-right, var(--all)), #fff 0) top right;
   mask-size: 50.5% 50.5%;
   mask-repeat: no-repeat;
   --all: 9px;

@@ -19,6 +19,14 @@
   <link rel="stylesheet" type="text/css" href="../shaan.css" />
   <link rel="stylesheet" type="text/css" href="../compendium/compendium.css" />
   <title>Créateur de personnage - Shaan World</title>
+  <style>
+    .label-icon {
+      background-repeat: no-repeat;
+      background-size: 1.2em;
+      padding-left: 1.3em;
+      background-position-y: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -103,7 +111,7 @@
             <div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
               <div class="accordion-body">
                 <label for="domain" class="form-label">Archétype</label>
-                <select id="domain" name="domain" class="form-select" aria-describedby="domain-help">
+                <select id="domain" name="domain" class="form-select">
                   <option value="">Choisis un archétype</option>
                   <option value="Technicien"
                           title="Le Technicien incarne l'alliance entre expertise, habileté manuelle et maîtrise des matériaux.">
@@ -161,18 +169,24 @@
             <div id="collapse-4" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
               <div class="accordion-body">
                 <label for="voca1" class="form-label">Vocation d'archétype</label>
-                <select id="voca1" name="voca1" class="form-select" aria-describedby="voca1-help">
+                <select id="voca1" name="voca1" class="form-select">
                   <option value="">
                     Choisis d'abord un archétype
                   </option>
                 </select>
-                <label for="voca2" class="form-label">4 autres vocations</label>
+                <!--label for="voca2" class="form-label">4 autres vocations</label>
                 <select id="voca2" name="voca2" class="form-select"
                 aria-describedby="voca2-help" multiple>
                   <option value="">
                     Choisis d'abord un archétype
                   </option>
-                </select>
+                </select-->
+                <fieldset class="mt-3">
+                  <legend>4 autres vocations</legend>
+                  <div id="voca2" class="grid">
+                    <div class="form-text">Choisis d'abord une lignée, un peuple et un archétype</div>
+                  </div>
+                </fieldset>
               </div>
             </div>
           </div>
@@ -244,44 +258,44 @@
             <div id="collapse-6" class="accordion-collapse collapse" data-bs-parent="#characterSteps">
               <div class="accordion-body">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow1" name="pouvoir">
-                  <label class="form-check-label" for="pow1">
+                  <input class="form-check-input" type="radio" id="prot1" name="pouvoir">
+                  <label class="form-check-label" for="prot1">
                     Eclair de génie
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow2" name="pouvoir">
-                  <label class="form-check-label" for="pow2">
+                  <input class="form-check-input" type="radio" id="prot2" name="pouvoir">
+                  <label class="form-check-label" for="prot2">
                     Osmose
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow3" name="pouvoir">
-                  <label class="form-check-label" for="pow3">
+                  <input class="form-check-input" type="radio" id="prot3" name="pouvoir">
+                  <label class="form-check-label" for="prot3">
                     Adaptation
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow4" name="pouvoir">
-                  <label class="form-check-label" for="pow4">
+                  <input class="form-check-input" type="radio" id="prot4" name="pouvoir">
+                  <label class="form-check-label" for="prot4">
                     Coup de chance
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow5" name="pouvoir">
-                  <label class="form-check-label" for="pow5">
+                  <input class="form-check-input" type="radio" id="prot5" name="pouvoir">
+                  <label class="form-check-label" for="prot5">
                     Second souffle
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow6" name="pouvoir">
-                  <label class="form-check-label" for="pow6">
+                  <input class="form-check-input" type="radio" id="prot6" name="pouvoir">
+                  <label class="form-check-label" for="prot6">
                     Clairvoyance
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" id="pow7" name="pouvoir">
-                  <label class="form-check-label" for="pow7">
+                  <input class="form-check-input" type="radio" id="prot7" name="pouvoir">
+                  <label class="form-check-label" for="prot7">
                     Anticipation
                   </label>
                 </div>
@@ -443,17 +457,58 @@ Cet acquis est *super*.
       cercle_tpl = template;
     });
 
+    let form_check;
+    fetch("../../templates/form_check.mustache")
+    .then((response) => response.text())
+    .then((template) => {
+      form_check = template;
+    });
+
     const acq_generator = document.getElementById("acq-generator");
     acq_generator.addEventListener("change", calcul_stats);
 
 
     const lignees = {
-      "Chrysalis": ["Etre-plante", "Ygwan Ephémère", "Androïde Renégat", "Feling Nocturne", "Antéhumain"],
-      "Héossie": ["Humain", "Kelwin", "Ygwan", "Delhion", "Mélodien", "Feling", "Nomoï", "Woon", "Boréal", "Darken"]
+      "Chrysalis": {
+        "Etre-plante": "Shaan",
+        "Ygwan Ephémère": "Rituels",
+        "Androïde Renégat": "Technique",
+        "Feling Nocturne": "Nécrose",
+        "Antéhumain": "Savoir"
+      },
+      "Héossie": {
+        "Humain": "Nécrose",
+        "Kelwin": "Technique",
+        "Ygwan": "Savoir",
+        "Delhion": "Social",
+        "Mélodien": "Arts",
+        "Feling": "Shaan",
+        "Nomoï": "Magie",
+        "Woon": "Rituels",
+        "Boréal": "Survie",
+        "Darken": "Combat"
+      }
     };
     const peuples = {
-      "Chrysalis": ["Forêts Primales", "Etendues Nomades", "Monts Fleuris", "Plaines Ardentes", "Marécages"],
-      "Héossie": ["Cités", "Terres Brûlées", "Marais", "Montagnes", "Hautes Herbes", "Grands Arbres", "Glaces", "Forêts Blanches", "Rivages", "Sables"],
+      "Chrysalis": {
+        "Forêts Primales": "Social",
+        "Etendues Nomades": "Survie",
+        "Monts Fleuris": "Arts",
+        "Plaines Ardentes": "Combat",
+        "Marécages": "Magie"
+      },
+      "Héossie": {
+        "Cités": "Nécrose",
+        "Terres Brûlées": "Technique",
+        "Marais": "Savoir",
+        "Montagnes": "Social",
+        "Hautes Herbes": "Arts",
+        "Grands Arbres": "Shaan",
+        "Glaces": "Magie",
+        "Forêts Blanches": "Rituels",
+        "Rivages": "Survie",
+        "Sables": "Combat"
+      },
     };
 
     const vocations = {
@@ -461,7 +516,7 @@ Cet acquis est *super*.
       "Savant": ["Eminence grise", "Alchimiste", "Naturaliste", "Archéologue", "Archiviste", "Esotériste"],
       "Médiateur": ["Marchand", "Diplomate", "Séducteur", "Psychologue", "Informateur", "Prospecteur"],
       "Artiste": ["Evocateur", "Mélomane", "Comédien", "Cuisinier", "Saltimbanque", "Influenceur"],
-      "Shaaniste": ["Biosophe", "Mentaliste", "Guérisseur", "MArcheur de rêve", "Prescient", "Purificateur"],
+      "Shaaniste": ["Biosophe", "Mentaliste", "Guérisseur", "Marcheur de rêve", "Prescient", "Purificateur"],
       "Mage": ["Mage onirique", "Sève-mage", "Changeforme", "Stellaire", "Solarien", "Sélenith", "Enchanteur", "Illusionniste", "Belliqueux"],
       "Croyant": ["Disciple du temps", "Disciple de la Lumière", "Druide", "Disciple de l'Air", "Disciple de l'Air"],
       "Aventurier": ["Chasseur", "Athlète", "Caravanier", "Espion", "Messager", "Explorateur"],
@@ -469,10 +524,20 @@ Cet acquis est *super*.
       "Déviant": ["Voyou", "Trafiquant", "Mitrailleur", "Nécromant", "Généticien", "Executeur"],
     };
 
+    const CHRYSALIS_CORRESP = {
+      "Chiffres": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "Vocations": ["Déviant", "Technicien", "Savant", "Médiateur", "Artiste", "Shaaniste", "Mage", "Croyant", "Aventurier", "Guerrier"],
+      "Domaines": ["Nécrose", "Technique", "Savoir", "Social", "Arts", "Shaan", "Magie", "Rituels", "Survie", "Combat"],
+    };
+
     const acq_name = document.getElementById("name");
     const image = document.getElementById("image");
     const desc = document.getElementById("desc");
     const pow_rank = document.getElementById("pow-rank");
+
+    const voca1 = document.getElementById("voca1");
+    const voca2_wrapper = document.getElementById("voca2");
+    const voca2_input = document.getElementsByName("voca2");
 
     const ressources = document.getElementById("ressources");
     const specialisations = document.getElementById("specialisations");
@@ -485,42 +550,49 @@ Cet acquis est *super*.
     const carte_acquis = document.getElementById("fiche-perso");
 
     const bsCollapse = [];
-    const inputListName = ["lignee", "people", "domain", "voca1", "voca2"];
+    const inputListName = ["lignee", "people", "domain", "vocations", "pouvoir"];
     const inputList = [];
+    const previous_values = {
+      "lignee": "",
+      "people": "",
+      "domain": "",
+    }
     for (let index = 1; index < 6; index++) {
       bsCollapse[index] = new bootstrap.Collapse("#collapse-"+index, {
         toggle: false
       });
       let name = inputListName[index-1];
       inputList[index] = document.getElementsByName(name)[0];
-      if (index < 13) {
+
+      if (name == "vocations") {
+        voca1.addEventListener("change", voca_changed);
+      } else {
+        // Detect change on last input in tab
         inputList[index].addEventListener("change", function(event) {
           if(event.target.value !== "") {
-            if (![4,5].includes(index)) {
-              bsCollapse[index+1].show();
-            }
 
             if (name == "domain") {
               // Clear existing options
-              for (const option of inputList[4].querySelectorAll('option')) {
+              for (const option of voca1.querySelectorAll('option')) {
                 option.remove();
               }
               let option = document.createElement('option');
               option.text = "Choisis ta vocation d'archétype";
-              inputList[4].add(option, null);
-              for (const option of inputList[5].querySelectorAll('option')) {
-                option.remove();
-              }
+              option.value = "";
+              voca1.add(option, null);
+              voca2_wrapper.innerHTML = "";
 
+              // Vocation d'archétype
               vocations[event.target.value].forEach(element => {
                 option = document.createElement('option');
-                option.text = option.value = element;
-                inputList[4].add(option, null);
-                option = document.createElement('option');
-                option.text = option.value = element;
-                inputList[5].add(option, null);
+                option.text = element + " +2";
+                option.value = element;
+                voca1.add(option, null);
               });
             }
+
+            // Display next tab
+            bsCollapse[index+1].show();
           }
         });
       }
@@ -528,18 +600,62 @@ Cet acquis est *super*.
 
     // Remplit les sélecteurs par défaut
     document.addEventListener("DOMContentLoaded", function() {
-      lignees["Chrysalis"].forEach(element => {
+      Object.keys(lignees.Chrysalis).forEach(element => {
         let option = document.createElement('option');
         option.text = option.value = element;
         lignee.add(option, null);
       });
-      peuples["Chrysalis"].forEach(element => {
+      Object.keys(peuples.Chrysalis).forEach(element => {
         let option = document.createElement('option');
         option.text = option.value = element;
         people.add(option, null);
       });
     });
 
+    function fill_vocations(type) {
+      // On remplit les vocations en fonction de la lignée,
+      // du peuple ou de l'archétype choisis
+      if(type) {
+        vocations[type].forEach(element => {
+          index = CHRYSALIS_CORRESP.Vocations.indexOf(type);
+          let color = "";
+          switch (index) {
+            case 0:
+              color = "grey";
+              break;
+            case 1:
+            case 2:
+            case 3:
+              color = "jaune";
+              break;
+            case 4:
+            case 5:
+            case 6:
+              color = "bleu";
+              break;
+            case 7:
+            case 8:
+            case 9:
+              color = "rouge";
+              break;
+            default:
+              color = "black";
+              break;
+          }
+          let icon = CHRYSALIS_CORRESP.Domaines[index].toLowerCase();
+          data = {
+            "id": element,
+            "value": element,
+            "name": "voca2",
+            "label": element + " +1",
+            "type": "checkbox",
+            "onchange": "voca_changed()",
+            "color": color + " label-icon " + icon,
+          };
+          voca2_wrapper.innerHTML += Mustache.render(form_check, data);
+        });
+      }
+    }
 
     function calcul_stats() {
       let data = {};
@@ -554,6 +670,38 @@ Cet acquis est *super*.
       data["Image"] = image.value;
       data["Détails"] = desc.value;
       data["width"] = "m-auto";
+      const voca_sources = [];
+      //TODO : vider voca2 que si changement dans voca_sources
+      // Garder voca_sources en global et ne lancer fill_vocations que si changement
+      // ou stocker les vocations cochées avant, et les recocher ensuite.
+      if (previous_values.lignee !== lignee.value ||
+        previous_values.people !== people.value ||
+        previous_values.domain !== domain.value
+      ) {
+        voca2_wrapper.innerHTML = "";
+        if (lignee.value) {
+          previous_values.lignee = lignee.value;
+          index = CHRYSALIS_CORRESP.Domaines.indexOf(lignees.Chrysalis[lignee.value]);
+          voca_sources.push(CHRYSALIS_CORRESP.Vocations[index]);
+          fill_vocations(CHRYSALIS_CORRESP.Vocations[index]);
+        }
+        if (people.value) {
+          previous_values.people = people.value;
+          index = CHRYSALIS_CORRESP.Domaines.indexOf(peuples.Chrysalis[people.value]);
+          if (voca_sources.includes(index) === false) {
+            voca_sources.push(CHRYSALIS_CORRESP.Vocations[index]);
+            fill_vocations(CHRYSALIS_CORRESP.Vocations[index]);
+          }
+
+        }
+        if (domain.value) {
+          previous_values.domain = domain.value;
+          if (voca_sources.includes(index) === false) {
+            voca_sources.push(domain.value);
+            fill_vocations(domain.value);
+          }
+        }
+      }
 
       switch(inputList[3].options[inputList[3].selectedIndex].text.toUpperCase()) {
         case "TECHNICIEN":
@@ -593,6 +741,12 @@ Cet acquis est *super*.
           data["dom_type"] = data.Domaine;
       }
 
+      data["voca1"] = acq_generator.elements["voca1"].value;
+      const voca2 = getChecked(acq_generator.elements["voca2"]);
+      // Ignore the primary vocation in vocation 2
+      if (voca2) {
+        data["voca2"] = voca2.filter(item => item !== data["voca1"]);
+      }
 
       if (data["Spécialisation"] > 0) {
         if (specialisations.value) {
@@ -619,7 +773,39 @@ Cet acquis est *super*.
       });
     }
 
-    calcul_stats();
+    // Vérifie que toutes les vocations ont été sélectionnées
+    function voca_changed(event) {
+      const voca1 = acq_generator.elements["voca1"].value;
+      voca2_elem = acq_generator.elements["voca2"];
+      const voca2 = getChecked(voca2_elem);
+      if (voca2.length > 3) {
+        Array.from(voca2_elem).filter(
+          checkbox => !checkbox.checked).forEach(element => {
+          element.disabled = true
+        });
+        if (voca1 !== "") {
+          // Display next tab
+          bsCollapse[5].show();
+        }
+      } else {
+        // Reset disabled status
+        Array.from(voca2_elem).filter(
+          checkbox => !checkbox.checked).forEach(element => {
+          element.disabled = false
+        });
+      }
+    }
+
+    /**
+     * Get checked values of a RadioNodeList
+     */
+    function getChecked(field) {
+      if (field) {
+        return Array.from(field).filter(
+        checkbox => checkbox.checked).map(
+        check => check.value);
+      }
+    }
   </script>
 
   <div class="version small text-bg-light p-1 pt-0">v 0.1</div>
