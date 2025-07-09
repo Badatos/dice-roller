@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" type="text/css" href="../shaan.css" />
+  <title>États et statuts - Shaan Renaissance</title>
+  <style>
+    img {
+      max-width: 100px
+    }
+
+    .bi.bigger::before {
+      font-size: 4rem;
+      vertical-align: top;
+    }
+
+    @media print {
+      p {
+        margin-bottom: 3px;
+      }
+
+      .row {
+        margin-left: 0;
+      }
+
+      .card {
+        break-inside: avoid;
+        /* min-height: 7cm; */
+        min-height: 6.5cm;
+        --bs-card-spacer-y: .5rem;
+        --bs-card-spacer-x: .5rem;
+        --bs-card-cap-padding-y: 4px;
+        --bs-card-cap-padding-x: 6px;
+      }
+      .item {
+        width: 33%;
+        /*max-width: 6.8cm;*/
+        max-width: 5.8cm;
+        --bs-gutter-x: 3px;
+        margin-bottom: 3px !important;
+      }
+      .container {
+        --bs-gutter-x: 2px;
+        --bs-gutter-y: 2px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+      }
+      .container.A4-portrait {
+        max-width: 29cm;
+      }
+    }
+    .card h3 {
+      font-family: Komikazoom, sans-serif;
+      font-size: 13pt;
+      color: #FFF;
+    }
+    .rouge .card-header {
+      background-color: var(--corps-color) !important;
+    }
+    .bleu .card-header {
+      background-color: var(--ame-color) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shaan-title green fixed-top d-print-none" id="header">
+    <h1>Etats et conditions</h1>
+  </div>
+  <main class="container mt-5 pt-5 A4-portrait">
+
+    <nav aria-label="Fil d’ariane" class="ms-5">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../">Shaan</a></li>
+        <li class="breadcrumb-item active" aria-current="page">États et conditions</li>
+      </ol>
+    </nav>
+
+    <div class="intro d-print-none">
+      <p class="mb-0">
+        Voici une liste des différents états
+        <strong class="rouge">préjudiciables</strong> ou
+        <strong class="bleu">avantageux</strong> qui peuvent affecter
+        un personnage dans le jeu de rôle Shaan Renaissance.
+      </p><p class="text-end"><em>
+        Source : Manuel d’itinérance, p. 228.
+      </em></p>
+    </div>
+
+    <h2 class="vert d-print-none">Liste des différents états</h2>
+    <!--h2 class="rouge d-print-none">États préjudiciables</h2-->
+    <div id="card-elements" class="row mt-1 rouge">
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">À terre</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/prone.webp">
+            <p>
+              Vous subissez un <strong>Malus de 2</strong> à la
+              <strong class="rouge">Défense de Corps</strong>.
+            </p><p>
+              Vous devez utiliser <strong>2 Gestes</strong>
+              au Tour prochain pour vous relever.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0" style="font-size:10pt;line-height:16pt">Obscurité, Affaibli, Assourdi, Ébloui</h3>
+          </div>
+          <div class="card-body" style="font-size:12pt">
+            <img class="float-end p-1" alt="" src="../../img/etats/deafened.webp">
+            <p>Vous subissez un <strong>Malus de 2</strong> pour toutes vos Actions liées au Corps
+               (<strong class="rouge">COMBAT, SURVIE et RITUELS</strong>)
+               ainsi qu’à la <strong class="rouge">Défense de Corps</strong>.
+            </p><p>Les Boréals n’ont pas de Malus dans l’Obscurité.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Aveuglé</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/blinded.webp">
+            <p>
+              Vous subissez un <strong>Malus de 4</strong> à pour toutes
+              vos <strong class="rouge">Actions et Défenses liées au Corps</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Muet</h3>
+          </div>
+          <div class="card-body">
+            <div class="float-end">
+              <i class="bi bi-bell-slash bigger" aria-hidden="true"></i>
+            </div>
+            <p>
+              Vous subissez un <strong>Malus de 4</strong> pour toutes vos actions
+              liées au <strong class="jaune">SOCIAL</strong>,
+              à la <strong class="bleu">MAGIE</strong>
+              et aux <strong class="rouge">RITUELS</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Étourdi</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/stunned.webp">
+            <p>
+              Vous subissez un <strong>Malus de 1</strong>
+              à toutes vos <strong>Actions et vos Défenses</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Ralenti</h3>
+          </div>
+          <div class="card-body">
+            <div class="float-end">
+              <i class="bi bi-battery-low bigger" aria-hidden="true"></i>
+            </div>
+            <p>
+              Vos Actions de déplacement sont réduites de moitié
+              (<strong class="rouge">valeur actuelle de Corps / 2</strong>).
+            </p><p>
+              Exemple : Un personnage dans l’eau est considéré comme ralenti.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Dominé</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/flaticon-IconJam-Controlling.webp">
+            <p>
+              Vous ne pouvez réaliser <strong class="jaune">aucune Action liée au Domaine de l’Esprit</strong>.
+              <strong>Perte du dé <span class="jaune">d’Esprit</span></strong>
+              et <strong>Malus de 4 en <span class="jaune">Défense d’Esprit</span></strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Envoûté</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/charmed.webp">
+            <p>
+              Vous ne pouvez réaliser <strong class="bleu">aucune Action liée au Domaine de l’Âme</strong>.
+              <strong>Perte du dé <span class="bleu">d’Âme</span></strong>
+              et <strong>Malus de 4 en <span class="bleu">Défense d’Âme</span></strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Paralysé</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/paralyzed.webp">
+            <p>
+              Vous ne pouvez réaliser <strong class="rouge">aucune Action liée au Domaine du Corps</strong>.
+              <strong>Perte du dé <span class="rouge">de Corps</span></strong>
+              et <strong>Malus de 4 en <span class="rouge">Défense de Corps</span></strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Inconscient</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/unconscious.webp">
+            <p>
+              Vous ne pouvez réaliser <strong>aucune Action</strong>.
+            </p><p>
+              <strong>Toutes les Défenses sont égales à O</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    <!--/div>
+
+    <h2 class="bleu d-print-none">États Avantageux</h2>
+    <div id="card-elements" class="row mt-1 bleu"-->
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2 bleu">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Couvert</h3>
+          </div>
+          <div class="card-body">
+            <div class="float-end">
+              <i class="bi bi-shield-plus bigger" aria-hidden="true"></i>
+            </div>
+            <p>
+              Le Bonus de <strong class="rouge">Protection de Corps</strong> offert par cet Acquis
+              est <strong>doublé</strong> quand il s’agit de se défendre <strong>contre des Armes à projectiles
+              ou des Armes lancées</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2 bleu">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Avantagé</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/advantage.webp">
+            <p>Vous bénéficiez d’un <strong>Bonus de +1 à vos Tests</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2 bleu">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Protégé</h3>
+          </div>
+          <div class="card-body">
+            <div class="float-end">
+              <i class="bi bi-umbrella bigger" aria-hidden="true"></i>
+            </div>
+            <p>
+              Selon la nature de la Protection, vous pouvez
+              <strong class="defense">ajouter de 1 à 5 points à votre Défense</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="item col-sm-12 col-md-6 col-lg-4 mb-2 bleu">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="m-0 pt-0">Invisible</h3>
+          </div>
+          <div class="card-body">
+            <img class="float-end p-1" alt="" src="../../img/etats/invisible.webp">
+            <p>
+              Vos adversaires ont un
+              <strong>Malus de 4 pour vous cibler</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tips d-print-none">
+      <h2>
+        <i class="bi bi-printer-fill" aria-hidden="true"></i>
+        Conseils d'impression
+      </h2>
+      <p>
+        Pour une meilleure impression, je vous
+        conseille de le faire via Firefox ou Chrome (évitez Safari).<br>
+        Consultez bien l'apercu avant impression,
+        et réglez les marges au minimum (5mm par exemple).
+        Éventuellement, enregistrez d'abord la page au format PDF avant de l'imprimer
+        pour mieux visualiser le rendu final.
+      </p>
+    </div>
+    <div class="credits d-print-none">
+      <h2>Crédits images :</h2>
+      <ul>
+        <li><em>Dana Skully, the condition skull!</em>, by Michael Fitzhywel <a href="https://www.artstation.com/artwork/dXmdK">artstation.com/artwork/dXmdK</a></li>
+        <li><em>Bootstrap Icons</em>, <a href="https://icons.getbootstrap.com">icons.getbootstrap.com</a> - MIT licensed</li>
+        <li><em>Empowerment pack</em>, by IconJam <a href="https://www.flaticon.com/free-icon/controlling_12162138">www.flaticon.com</a> - Flaticon License</li>
+    </div>
+  </main>
+
+  <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
+      <a href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
+      et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+    </p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+  <!-- Shaan template JS -->
+  <script src="../shaan.js"></script>
+</body>
+
+</html>
