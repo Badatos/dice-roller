@@ -277,7 +277,7 @@ label {
   border-color: var(--bs-danger);
 }
 
-/** Aides e jeu Shaan **/
+/** Aides de jeu Shaan **/
 
 .source {
   font-style: italic;
@@ -482,4 +482,3 @@ main {
   --bs-accordion-btn-bg: var(--ame-color-lighter);
   --bs-accordion-bg: var(--ame-color-lighter);
 }
-
