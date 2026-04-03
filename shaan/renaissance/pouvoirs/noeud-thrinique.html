@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <!-- W3.org ARIA CheckboxMixed -->
+  <link rel="stylesheet" type="text/css" href="../../../css/CheckboxMixed.css" />
+
+  <link rel="stylesheet" type="text/css" href="../../shaan.css" />
+  <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
+
+  <title>Noeux trihniques - Shaan Renaissance</title>
+  <style>
+    .card h2 {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    @media print {
+      body {
+        font-size: 12pt;
+      }
+
+      p {
+        margin-bottom: .5rem;
+      }
+
+      .shaan-title {
+        background-image: none !important;
+        position: relative;
+        height: 3rem !important;
+      }
+
+      main.container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      /** Mode A4 (3 cartes / ligne) */
+      .item {
+        max-width: 7cm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shaan-title blue fixed-top" id="header">
+    <h1>Noeux trihniques - Shaan Renaissance</h1>
+  </div>
+  <main class="container mt-5 pt-5">
+    <nav aria-label="Fil d’ariane" class="ms-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../../">Shaan Renaissance</a></li>
+        <!--li class="breadcrumb-item"><a href="../">Renaissance</a></li-->
+        <li class="breadcrumb-item active" aria-current="page">Noeux trihniques</li>
+      </ol>
+    </nav>
+
+    <div id="intro">
+      <p>
+        Un nœud trihnique est un point de confluence où de nombreux Trihns en transit
+        convergent avant de retourner vers leurs mondes respectifs.
+        Certains nœuds sont répertoriés et constituent des destinations de pèlerinage
+        car on y a vu des manifestations miraculeuses comme des maladies incurables soignées,
+        voire des morts ressuscités, même si cela reste exceptionnel.
+        De nombreux pèlerins viennent simplement au contact de ces nœuds
+        pour s’y harmoniser et décupler leurs capacités.
+      </p>
+      <h2>Les miracles trihniques</h2>
+      <p>
+        Les effets produits par les nœuds trihniques sont très variables,
+        du simple Bonus pour certains types d’actions tant que l’on reste dans la zone,
+        au gain de points d’Expérience, en passant par l’augmentation
+        permanente d’un niveau de Domaine, voire l’acquisition de Pouvoirs.
+        Il est possible d’imaginer tout un tas d’autres prodiges et les exemples
+        abordés ici n’ont pas vocation à être exhaustifs.
+        La seule règle d’or, c’est que l’effet d’un nœud
+        trihnique ne fonctionne qu’<strong>une fois pour une personne</strong>.
+        Même si vous êtes libres de provoquer les effets que
+        vous souhaitez pour alimenter votre scénario, voici
+        un petit système de création de miracles trihniques
+        que vous pouvez utiliser dans vos parties.
+      </p>
+      <p class="text-end"><em>L’arbre qui cache la forêt (page 34)</em></p>
+    </div>
+
+    <div class="text-center">
+      <a href="javascript:start_roll();" class="btn btn-primary btn-lg" role="button" id="miracle-btn"
+        title="Lançer les dés pour produire un miracle trihnique.">
+        Produire un miracle
+      </a>
+    </div>
+    <div id="des" class="m-4 mb-2">
+      <form name="filtres" data-itemtype="pouvoir" class="d-none">
+        <input type="hidden" id="search">
+        <div id="total"></div>
+        <div id="liste-elements"></div>
+      </form>
+      <div id="de-ame" data-color="bleu">
+        <img src="../../img/d10/d10_bleu_0.png" alt="Dé d’âme" id="de_bleu" class="float-start">
+        <h2 id="miracle-title" class="bleu">&nbsp;</h2>
+        <p id="miracle-desc">&nbsp;</p>
+      </div>
+      <div id="de-esprit" class="" data-color="jaune">
+        <img src="../../img/d10/d10_jaune_0.png" alt="Dé d’esprit" id="de_jaune" class="float-start">
+        <p id="esprit-desc" class="pt-3 pb-2">&nbsp;<br></p>
+      </div>
+      <div id="de-corps" class="" data-color="rouge">
+        <img src="../../img/d10/d10_rouge_0.png" alt="Dé de corps" id="de_rouge" class="float-start">
+        <p id="corps-desc" class="pt-3 pb-2">&nbsp;<br></p>
+      </div>
+      <div id="de-necrose" class="" data-color="noir">
+        <img src="../../img/d10/d10_noir_0.png" alt="Dé de nécrose" id="de_noir" class="float-start">
+        <p id="necrose-desc" class="pt-3 pb-2">&nbsp;<br></p>
+      </div>
+    </div>
+  </main>
+  <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
+      <a href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
+      et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+    </p>
+  </footer>
+
+  <div class="modal" tabindex="-1" id="item-modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aperçu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="items-list">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js "></script>
+
+  <script src="../../../js/utils.js"></script>
+
+  <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
+  <script src="https://unpkg.com/mustache@latest"></script>
+
+  <!--
+  GsheetParser
+  See doc at https://github.com/fureweb-com/public-google-sheets-parser#readme
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
+  <script>const options = { sheetName: "Pouvoirs", useFormat: false };</script>
+  <!-- Shaan Compendium JS -->
+  <script src="../../compendium/compendium.js"></script>
+
+  <!-- Shaan template JS -->
+  <script src="../../shaan.js"></script>
+
+  <script>
+    // Dossier des images
+    const img_url = "../../img/";
+
+    // Nombre d’itérations avant de stopper les dés
+    var roll_count = 10;
+
+    // Dés
+    const de_esprit = document.getElementById("de-esprit");
+    const de_ame = document.getElementById("de-ame");
+    const de_corps = document.getElementById("de-corps");
+    const de_necrose = document.getElementById("de-necrose");
+
+    // Résultats
+    const miracle_title = document.getElementById("miracle-title");
+    const miracle_desc = document.getElementById("miracle-desc");
+    const esprit_desc = document.getElementById("esprit-desc");
+    const corps_desc = document.getElementById("corps-desc");
+    const necrose_desc = document.getElementById("necrose-desc");
+
+    // Valeurs de thrines obtenues
+    var thrin_values = { "jaune": 0, "bleu": 0, "rouge": 0, "noir": 0 }
+
+    miracles = {
+        1: { "title": "Amélioration d’acquis", "desc": "Un Acquis fétiche porté par le personnage, choisi par son joueur, est investi d’un Pouvoir et devient un Artefact." },
+        2: { "title": "Révélation de connaissances", "desc": "Le personnage acquiert les connaissances d’une myriade de Trihns, ce qui lui octroie un Bonus permanent dans une Spécialisation." },
+        3: { "title": "Communication avec l’Au-delà", "desc": "Le personnage peut établir une communication avec un proche (amour, ami ou famille) qui est décédé. Pour les besoins du scénario, le meneur de jeu peut décider de l’identité du revenant, sinon c’est le joueur qui le choisit." },
+        4: { "title": "Possession trihnique", "desc": "Le personnage est possédé par un Trihn qui lui impose une partie de sa personnalité et de ses talents." },
+        5: { "title": "Gain d’expérience", "desc": "Le personnage se nourrit de l’expérience des Trihns avec lesquels il rentre en contact." },
+        6: { "title": "Apparition de pouvoir", "desc": "Le personnage acquiert temporairement un nouveau Pouvoir. Ce Pouvoir s’ajoute aux Pouvoirs débloqués par ses niveaux de Domaines." },
+        7: { "title": "Créature élémentaire", "desc": "Le personnage fait apparaître une créature élémentaire." },
+        8: { "title": "Bonus de zone", "desc": "Le personnage s’harmonise avec le nœud trihnique et bénéficie d’un Bonus de +2 à toutes ses Actions et Défenses lorsqu’il se trouve à proximité du nœud." },
+        9: { "title": "Attaque trihnique", "desc": "Le personnage rentre en confrontation avec un ou plusieurs Trihns. Cette attaque se déroule de la même manière qu’un Rituel d’Embiose. Reportez-vous aux règles du <em>Manuel d’itinérance</em> page 222." },
+        0: { "title": "Absorption de pouvoir", "desc": "Le nœud trihnique absorbe un Pouvoir du personnage. Ce Pouvoir ne peut pas être remplacé par un autre de même rang.<br>Déterminez le Pouvoir absorbé au hasard." }
+    }
+
+    // load_sheet("Pouvoirs");
+    load_sheet("Spécialisations");
+
+    function start_roll() {
+      miracle_title.textContent = "Un personnage s’approche du noeud...";
+      miracle_desc.innerHTML = "&nbsp;";
+      necrose_desc.innerHTML = corps_desc.innerHTML = esprit_desc.innerHTML = "&nbsp;<br>";
+      node_miracle();
+    }
+
+    /**
+     * Effectue $roll_count lancés successifs, espacées de 100ms
+     * (pour donner un effet visuel aux lancement des dés)
+     * Puis affiche les alertes éventuelles.
+     */
+    function node_miracle() {
+
+      roll_domain();
+      roll_count--;
+
+      if (roll_count > 0) window.setTimeout(node_miracle, 100);
+      else {
+        let esprit = thrin_values["jaune"];
+        let ame = thrin_values["bleu"];
+        let corps = thrin_values["rouge"];
+        let necrose = thrin_values["noir"];
+        roll_count = 10;
+        show_results(esprit, ame, corps, necrose);
+      }
+    }
+
+    /**
+     * Génére une combinaison aléatoire des 4 dés de Shaan.
+     */
+    function roll_domain() {
+      roll_dice(de_esprit, "jaune");
+      roll_dice(de_ame, "bleu");
+      roll_dice(de_corps, "rouge");
+      roll_dice(de_necrose, "noir");
+    }
+
+    /**
+     * Lance un dé.
+     */
+    function roll_dice(container, color) {
+        let img = container.querySelector("img");
+        value = Math.floor(Math.random() * 10);
+        img.src = img_url + "d10/d10_" + color + "_" + value + ".png";
+        img.className = "float-start me-2 score-" + value;
+        img.alt = "" + value + " au dé " + color;
+        thrin_values[color] = value;
+        img.title = "" + thrin_values[color] + " au dé " + color;
+        return value;
+    }
+
+    function show_results(esprit, ame, corps, necrose) {
+      // DEBUG
+      ame=2;
+      miracle_title.textContent = miracles[ame]["title"];
+      miracle_desc.innerHTML = miracles[ame]["desc"];
+      let selectedDomain = CORRESPONDANCES["Domaines"][esprit];
+      switch(ame) {
+        case 0:
+          let duree = "";
+          if (esprit == 0) {
+            duree = "Le personnage ne pourra jamais le récupérer (<strong>perte permanente</strong>).";
+          } else if (esprit < 4) {
+            duree = "Le personnage pourra le récupérer <strong>dans un mois</strong>.";
+          } else if (esprit < 7) {
+            duree = "Le personnage récupère son Pouvoir tant qu'il se trouve <strong>à plus de 100 km du nœud</strong>.";
+          } else  {
+            duree = "Le personnage doit effectuer une quête pour récupérer son Pouvoir, liée au nœud trihnique ou à un Trihn qui l’aurait absorbé, au choix du meneur de jeu et en accord avec le joueur.";
+          }
+          esprit_desc.innerHTML = duree;
+          break;
+        case 1:
+          esprit_desc.textContent = "Domaine du pouvoir : "+ selectedDomain;
+          let rang = 0;
+          if (corps < 4) {
+            rang = 1;
+          } else if (corps < 7) {
+            rang = 2;
+          } else if (corps < 9) {
+            rang = 3;
+          } else  {
+            rang = 4;
+          }
+          rang = romanNumber(rang);
+          corps_desc.textContent = "Rang du pouvoir : "+ rang;
+          filteredData = liste_origine.filter(item => {
+            const itemClass = romanNumber(item["Rang"]);
+            let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
+
+            return (
+              itemDomain == selectedDomain.toLowerCase() &&
+              (!isNaN(itemClass) && itemClass == rang)
+            );
+          });
+          pouvoir = filteredData[Math.floor(Math.random() * filteredData.length)];
+          necrose_desc.textContent = "Nouveau pouvoir : ";
+          necrose_desc.innerHTML += `<a href="#${pouvoir["Nom"]}" data-name="${pouvoir["Nom"]}" onclick="modal_item(this, event, 'pouvoir')">${pouvoir["Nom"]}</a>`;
+          break;
+        case 2:
+          esprit_desc.textContent = "Domaine de la spécialisation : "+ selectedDomain;
+          filteredData = gSheetCache["Spécialisations"].filter(item => {
+            let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
+
+            return (
+              itemDomain == selectedDomain.toLowerCase()
+            );
+          });
+          let specialisation = filteredData[corps];
+          // let specialisation = filteredData[Math.floor(Math.random() * filteredData.length)];
+          corps_desc.textContent = "Spécialisation : ";
+          corps_desc.innerHTML += `<a href="#${specialisation["Nom"]}" data-name="${specialisation["Nom"]}" onclick="modal_getitem(this, event, 'specialisation', 'Spécialisations')">${specialisation["Nom"]}</a>`;
+          necrose_desc.textContent = "Bonus : "+ Math.max(1, Math.floor(necrose/2));
+          necrose_desc.innerHTML += "<br><br>Si le personnage possède déjà cette Spécialisation à un niveau supérieur ou égal, il augmente son Bonus de +1.";
+          necrose_desc.innerHTML += " Le Bonus de cette Spécialisation n'est plus limité par le niveau du Domaine correspondant.";
+          break;
+      }
+    }
+
+    function display_items(data, target="liste-elements", modele="pouvoir_row") {
+      console.log(data.length + " pouvoirs chargés.");
+      const liste_elements = document.getElementById(target);
+      // liste_pouvoirs = data;
+      fetch("../../templates/"+modele+".mustache")
+      .then((response) => response.text())
+      .then((template) => {
+        let renderedHTML = "";
+        data.forEach(row => {
+          renderedHTML += Mustache.render(template, row, {
+            cercle: cercle_tpl
+          });
+        });
+        liste_elements.innerHTML = renderedHTML;
+      });
+    }
+
+
+    /* Charge les données de la feuille indiquée en cache. */
+    function load_sheet(sheet){
+      if (!gSheetCache[sheet]) {
+        const tempParser = new PublicGoogleSheetsParser(
+          gSheetId,
+          { sheetName: sheet, useFormat: false }
+        );
+
+        tempParser.parse().then(data => {
+          gSheetCache[sheet] = correct_initial_data(sheet, data);
+          console.log(gSheetCache[sheet].length + " " + sheet +" chargés.");
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

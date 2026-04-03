@@ -1,0 +1,38 @@
+
+<div
+  {{#width}}
+    class="item {{width}}"
+  {{/width}}
+  {{^width}}
+    class="item col-sm-12 col-md-6 col-lg-4 mb-2"
+  {{/width}}
+  >
+  <div class="card fiche-pouvoir {{dom_color}}">
+    <div class="card-header"></div>
+    <div class="card-body {{dom_type}}">
+      <h2>{{Nom}}</h2>
+      <div class="float-end text-right">
+        <span class="source">{{source}}</span>
+      </div>
+      <p class="s-orig">
+        Spécialisation de <span class="uppercase">{{Domaine}}</span>
+      </p>
+      <ul class="h3">
+        {{#Métier}}
+          <li>
+            <strong>Métier :</strong>
+            <span id="s-job">{{Métier}}</span>
+          </li>
+        {{/Métier}}
+        {{#Bâtiment}}
+          <li>
+            <strong>Bâtiment :</strong>
+            <span id="s-building">{{Bâtiment}}</span>
+          </li>
+        {{/Bâtiment}}
+      </ul>
+      <p id="s-desc">{{Description}}</p>
+      <p class="text-end"><em>Source : {{Source}}</em></p>
+    </div>
+  </div>
+</div>

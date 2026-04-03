@@ -84,8 +84,17 @@ document.forms["filtres"].addEventListener("submit", function (event) {
   document.getElementById("liste-elements").classList.add("d-none");
   const form = event.target;
   const selectedDomain = Array.from(form.domain.selectedOptions).map(option => option.value.toLowerCase());
-  const selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
-  const selectedSource = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
+
+  let selectedCat = [];
+  if(form.categorie) {
+    selectedCat = Array.from(form.categorie.selectedOptions).map(option => option.value.toLowerCase());
+  }
+
+  let selectedSource = [];
+  if(form.source) {
+    selectedSource = Array.from(form.source.selectedOptions).map(option => option.value.toLowerCase());
+  }
+
   const minClass = parseInt(form.nivMin.value, 10);
   const maxClass = parseInt(form.nivMax.value, 10);
 
@@ -399,6 +408,7 @@ function correct_initial_data(type, data) {
       });
       break;
     case "Lignées":
+    case "Spécialisations":
       data.forEach(row => {
           if (row["Domaine"]) {
             row["dom_type"] = removeAccents(row["Domaine"].toLowerCase().split("\n")[0]);
