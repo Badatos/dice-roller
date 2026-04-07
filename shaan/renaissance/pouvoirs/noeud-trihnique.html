@@ -22,12 +22,11 @@
   <link rel="stylesheet" type="text/css" href="../../shaan.css" />
   <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
 
-  <title>Noeux trihniques - Shaan Renaissance</title>
+  <title>Nœux trihniques - Shaan Renaissance</title>
   <style>
-    .card h2 {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
+    .dice-block {
+      opacity: 0;
+      transition: opacity .5s ease;
     }
 
     @media print {
@@ -68,7 +67,7 @@
         <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
         <li class="breadcrumb-item"><a href="../../">Shaan Renaissance</a></li>
         <!--li class="breadcrumb-item"><a href="../">Renaissance</a></li-->
-        <li class="breadcrumb-item active" aria-current="page">Noeux trihniques</li>
+        <li class="breadcrumb-item active" aria-current="page">Nœux trihniques</li>
       </ol>
     </nav>
 
@@ -129,7 +128,7 @@
         <img src="../../img/d10/d10_noir_0.png" alt="Dé de nécrose" id="de_noir" class="float-start">
         <p id="necrose-desc" class="pt-3 pb-2">&nbsp;<br></p>
       </div>
-      <div id="de-bonus" class="" data-color="bleu">
+      <div id="de-bonus" class="dice-block" data-color="bleu">
         <img src="../../img/d10/d10_bleu_0.png" alt="Dé bonus" id="de_bonus" class="float-start">
         <p id="bonus-desc" class="pt-3 pb-2">&nbsp;<br></p>
       </div>
@@ -199,9 +198,10 @@
     const esprit_desc = document.getElementById("esprit-desc");
     const corps_desc = document.getElementById("corps-desc");
     const necrose_desc = document.getElementById("necrose-desc");
+    const bonus_desc = document.getElementById("bonus-desc");
 
     // Valeurs de thrines obtenues
-    var thrin_values = { "jaune": 0, "bleu": 0, "rouge": 0, "noir": 0 }
+    var thrin_values = { "jaune": 0, "bleu": 0, "rouge": 0, "noir": 0, "bonus": 0 }
 
     miracles = {
         1: { "title": "Amélioration d’acquis", "desc": "Un Acquis fétiche porté par le personnage, choisi par son joueur, est investi d’un Pouvoir et devient un Artefact." },
@@ -209,8 +209,8 @@
         3: { "title": "Communication avec l’Au-delà", "desc": "Le personnage peut établir une communication avec un proche (amour, ami ou famille) qui est décédé. Pour les besoins du scénario, le meneur de jeu peut décider de l’identité du revenant, sinon c’est le joueur qui le choisit." },
         4: { "title": "Possession trihnique", "desc": "Le personnage est possédé par un Trihn qui lui impose une partie de sa personnalité et de ses talents." },
         5: { "title": "Gain d’expérience", "desc": "Le personnage se nourrit de l’expérience des Trihns avec lesquels il rentre en contact." },
-        6: { "title": "Apparition de pouvoir", "desc": "Le personnage acquiert temporairement un nouveau Pouvoir. Ce Pouvoir s’ajoute aux Pouvoirs débloqués par ses niveaux de Domaines." },
-        7: { "title": "Créature élémentaire", "desc": "Le personnage fait apparaître une créature élémentaire." },
+        6: { "title": "Apparition de pouvoir", "desc": "Le personnage acquiert temporairement un nouveau Pouvoir. Ce dernier s’ajoute aux Pouvoirs débloqués par ses niveaux de Domaines." },
+        7: { "title": "Créature élémentaire", "desc": `Le personnage fait apparaître une créature élémentaire. <p class="text-end"><em>(voir Manuel d’itinérance, page 286)</em>` },
         8: { "title": "Bonus de zone", "desc": "Le personnage s’harmonise avec le nœud trihnique et bénéficie d’un Bonus de +2 à toutes ses Actions et Défenses lorsqu’il se trouve à proximité du nœud." },
         9: { "title": "Attaque trihnique", "desc": "Le personnage rentre en confrontation avec un ou plusieurs Trihns. Cette attaque se déroule de la même manière qu’un Rituel d’Embiose. Reportez-vous aux règles du <em>Manuel d’itinérance</em> page 222." },
         0: { "title": "Absorption de pouvoir", "desc": "Le nœud trihnique absorbe un Pouvoir du personnage. Ce Pouvoir ne peut pas être remplacé par un autre de même rang.<br>Déterminez le Pouvoir absorbé au hasard." }
@@ -221,7 +221,8 @@
     load_sheet("Tempéraments");
 
     function start_roll() {
-      miracle_title.textContent = "Un personnage s’approche du noeud...";
+      de_bonus.style.opacity = 0;
+      miracle_title.textContent = "Un personnage s’approche du nœud...";
       miracle_desc.innerHTML = "&nbsp;";
       necrose_desc.innerHTML = corps_desc.innerHTML = esprit_desc.innerHTML = "&nbsp;<br>";
       node_miracle();
@@ -243,8 +244,9 @@
         let ame = thrin_values["bleu"];
         let corps = thrin_values["rouge"];
         let necrose = thrin_values["noir"];
+        let bonus = thrin_values["bonus"];
         roll_count = 10;
-        show_results(esprit, ame, corps, necrose);
+        show_results(esprit, ame, corps, necrose, bonus);
       }
     }
 
@@ -256,7 +258,7 @@
       roll_dice(de_ame, "bleu");
       roll_dice(de_corps, "rouge");
       roll_dice(de_necrose, "noir");
-      roll_dice(de_bonus, "bleu");
+      thrin_values["bonus"] = roll_dice(de_bonus, "bleu");
     }
 
     /**
@@ -273,9 +275,7 @@
         return value;
     }
 
-    function show_results(esprit, ame, corps, necrose) {
-      // DEBUG
-      ame=6;
+    function show_results(esprit, ame, corps, necrose, bonus) {
       miracle_title.textContent = miracles[ame]["title"];
       miracle_desc.innerHTML = miracles[ame]["desc"];
       let selectedDomain = CORRESPONDANCES["Domaines"][esprit];
@@ -287,7 +287,7 @@
           } else if (esprit < 4) {
             duree = "Le personnage pourra le récupérer <strong>dans un mois</strong>.";
           } else if (esprit < 7) {
-            duree = "Le personnage récupère son Pouvoir tant qu'il se trouve <strong>à plus de 100 km du nœud</strong>.";
+            duree = "Le personnage récupère son Pouvoir tant qu’il se trouve <strong>à plus de 100 km du nœud</strong>.";
           } else  {
             duree = "Le personnage doit effectuer une quête pour récupérer son Pouvoir, liée au nœud trihnique ou à un Trihn qui l’aurait absorbé, au choix du meneur de jeu et en accord avec le joueur.";
           }
@@ -297,7 +297,7 @@
           nouveau_pouvoir(selectedDomain, corps);
           break;
         case 2:
-          esprit_desc.textContent = "Domaine de la spécialisation : "+ selectedDomain;
+          esprit_desc.innerHTML = `Domaine de la spécialisation : <strong>${selectedDomain}</strong>`;
           filteredData = gSheetCache["Spécialisations"].filter(item => {
             let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
 
@@ -311,7 +311,7 @@
           corps_desc.innerHTML += `<a href="#${specialisation["Nom"]}" data-name="${specialisation["Nom"]}" onclick="modal_getitem(this, event, 'specialisation', 'Spécialisations')">${specialisation["Nom"]}</a>`;
           necrose_desc.textContent = "Bonus : "+ Math.max(1, Math.floor(necrose/2));
           necrose_desc.innerHTML += "<br><br>Si le personnage possède déjà cette Spécialisation à un niveau supérieur ou égal, il augmente son Bonus de +1.";
-          necrose_desc.innerHTML += " Le Bonus de cette Spécialisation n'est plus limité par le niveau du Domaine correspondant.";
+          necrose_desc.innerHTML += " Le Bonus de cette Spécialisation n’est plus limité par le niveau du Domaine correspondant.";
           break;
         case 3:
           duree = "Durée du contact : ";
@@ -329,28 +329,103 @@
           esprit_desc.innerHTML = duree;
           break;
         case 4:
-          esprit_desc.innerHTML = "Domaine du trihn : <strong>"+ selectedDomain + "</strong>";
+          esprit_desc.innerHTML = `Domaine du trihn : <strong>${selectedDomain}</strong>`;
           esprit_desc.innerHTML += "<br> Le personnage voit le niveau de ce domaine augmenter de 1";
           let element1 = CORRESPONDANCES["Elements"][esprit];
           let element2 = CORRESPONDANCES["Elements"][corps];
           let temperament = gSheetCache["Tempéraments"][esprit][element2];
           corps_desc.innerHTML = "Le personnage récupère aussi le Tempérament qui va avec : ";
           corps_desc.innerHTML += `<strong>${element1}/${element2} : ${temperament}</strong>`;
-          corps_desc.innerHTML += " <em>(voir Manuel d'itinérance, page 23)</em>.";
-          necrose_desc.textContent = "Selon la compatibilité du fantôme avec son hôte, l'exorcisme pourra donner lieu à une quête à accomplir par le personnage pour se débarrasser de son parasite.";
+          corps_desc.innerHTML += " <em>(voir Manuel d’itinérance, page 23)</em>.";
+          necrose_desc.textContent = "Selon la compatibilité du fantôme avec son hôte, l’exorcisme pourra donner lieu à une quête à accomplir par le personnage pour se débarrasser de son parasite.";
           break;
         case 5:
           esprit_desc.innerHTML = `Domaine : <strong>${selectedDomain}</strong>`;
           corps_desc.innerHTML = `Gain de <strong>${corps}</strong> points d’expérience dans ce domaine.`;
           break;
         case 6:
+          de_bonus.style.opacity = 1;
           nouveau_pouvoir(selectedDomain, corps);
+          bonus_desc.textContent = "Durée pendant laquelle il pourra utiliser ce Pouvoir : ";
+          if (bonus == 0) {
+            duree = "1 jour";
+          } else if (bonus < 4) {
+            duree = "1 semaine";
+          } else if (bonus < 7) {
+            duree = "1 mois";
+          } else if (bonus < 9) {
+            duree = "1 an";
+          } else  {
+            duree = "jusqu’à la fin de ses jours";
+          }
+          bonus_desc.innerHTML += ` <strong>${duree}</strong>`;
+          break;
+        case 7:
+          selectedDomain = CORRESPONDANCES["Elements"][esprit];
+          esprit_desc.innerHTML = `Élément : <strong>${selectedDomain}</strong>`;
+          let puissance = "";
+          if (corps == 0) {
+            puissance = "<strong>Titan</strong>";
+            puissance += `<p class="jaune">Rarement bienveillants, les Titans constituent de `;
+            puissance += "véritables fléaux pour les populations anthéennes ";
+            puissance += "qui doivent livrer batailles contre ces colosses ";
+            puissance += "de plus de vingt mètres de haut qui ruinent les ";
+            puissance += "récoltes, détruisent les villages et ravagent les populations.</p>";
+          } else if (corps < 5) {
+            puissance = "<strong>Sylphe</strong>";
+            puissance += `<p class="jaune">De la taille d’un enfant anthéen, les Sylphes `;
+            puissance += "élémentaires sont généralement joueurs et malicieux envers les Anthéens.";
+            puissance += " Leurs pouvoirs élémentaires sont principalement liés à la préservation de leur environnement.</p>";
+          } else if (corps < 8) {
+            puissance = "<strong>Golem</strong>";
+            puissance += `<p class="jaune">De la taille d’un Anthéen, les Golems élémentaires`;
+            puissance += " vivent généralement seuls, même s’il arrive parfois que plusieurs individus se regroupent en";
+            puissance += " communautés dans des environnements directement liés à leur Élément.";
+            puissance += " Quelques Golems peuvent se faire domestiquer et partagent ainsi la vie d’Héossiens aisés.</p>";
+          } else  {
+            puissance = "Géant";
+            puissance += `<p class="jaune">De quatre à dix mètres de haut, les Géants `;
+            puissance += "élémentaires vivent en horde et ont pour habitude ";
+            puissance += "de mener des raids sur les villes héossiennes afin ";
+            puissance += "de se nourrir d’énergie trihnique fraîche. ";
+            puissance += "Certains géants peuvent former de redoutables armées et ";
+            puissance += "sont souvent envoyés en première ligne pour ravager ";
+            puissance += "et terroriser les rangs ennemis.</p>";
+          }
+          corps_desc.innerHTML = `Puissance : ${puissance}`;
+
+          if (necrose == 0) {
+            duree = "la créature attaque le personnage et ses alliés";
+          } else if (necrose < 4) {
+            duree = "1 jour";
+          } else if (necrose < 7) {
+            duree = "1 semaine";
+          } else if (necrose < 9) {
+            duree = "1 mois";
+          } else  {
+            duree = "1 an";
+          }
+          necrose_desc.innerHTML = `Durée de servilité de la créature : <strong>${duree}</strong>.`;
+
+          break;
+        case 8:
+          let rayon = "";
+          if (esprit == 0) {
+            rayon = "100 mètres";
+          } else if (esprit < 6) {
+            rayon = "1 km";
+          } else if (esprit < 9) {
+            rayon = "10 km";
+          } else  {
+            rayon = "100 km";
+          }
+          esprit_desc.innerHTML = `Rayon d’action : <strong>${rayon}</strong>.`;
           break;
       }
     }
 
     function nouveau_pouvoir(selectedDomain, corps) {
-      esprit_desc.textContent = "Domaine du pouvoir : "+ selectedDomain;
+      esprit_desc.innerHTML = `Domaine du pouvoir : <strong>${selectedDomain}</strong>`;
       let rang = 0;
       if (corps < 4) {
         rang = 1;
@@ -362,7 +437,7 @@
         rang = 4;
       }
       rang = romanNumber(rang);
-      corps_desc.textContent = "Rang du pouvoir : "+ rang;
+      corps_desc.innerHTML = `Rang du pouvoir : <strong>${rang}</strong>`;
       filteredData = liste_origine.filter(item => {
         const itemClass = romanNumber(item["Rang"]);
         let itemDomain = item["Domaine"]?item["Domaine"].toLowerCase():"";
