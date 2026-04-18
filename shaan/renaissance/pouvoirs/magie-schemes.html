@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <!-- W3.org ARIA CheckboxMixed -->
+  <link rel="stylesheet" type="text/css" href="../../../css/CheckboxMixed.css" />
+
+  <link rel="stylesheet" type="text/css" href="../../shaan.css" />
+  <link rel="stylesheet" type="text/css" href="../../compendium/compendium.css" />
+
+  <title>Magie des Shèmes - Shaan Renaissance</title>
+  <style>
+    .dice-block {
+      opacity: 0;
+      transition: opacity .5s ease;
+    }
+
+    .nomoi {
+      font-family: "Caveat", cursive;
+      font-optical-sizing: auto;
+      /* weight: Use a value from 400 to 700*/
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.2em;
+    }
+
+    @media print {
+      body {
+        font-size: 12pt;
+      }
+
+      p {
+        margin-bottom: .5rem;
+      }
+
+      .shaan-title {
+        background-image: none !important;
+        position: relative;
+        height: 3rem !important;
+      }
+
+      main.container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shaan-title red fixed-top" id="header">
+    <h1>Magie des Shemes - Shaan Renaissance</h1>
+  </div>
+  <main class="container mt-5 pt-5">
+    <nav aria-label="Fil d’ariane" class="ms-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../">Aides de Jeu</a></li>
+        <li class="breadcrumb-item"><a href="../../">Shaan Renaissance</a></li>
+        <!--li class="breadcrumb-item"><a href="../">Renaissance</a></li-->
+        <li class="breadcrumb-item active" aria-current="page">Magie des Shèmes</li>
+      </ol>
+    </nav>
+
+    <div id="intro">
+      <p>
+        La magie nomoï utilise l’énergie des Trihns, qu’il faut
+        invoquer puis altérer pour provoquer un changement de réalité.
+        Pour ce faire, on utilise des Schèmes,
+        sortes de représentations symboliques qui traduisent
+        l’essence d’un Élément tel que l’Eau, le Feu, l’Objet,
+        le Végétal, etc.
+        C’est la combinaison de ces Schèmes qui va produire des Sortilèges.
+      </p>
+      <h2>La magie des Schèmes</h2>
+      <p>
+        La magie des Schèmes est un peu complexe à maîtriser,
+        mais permet à tout Magicien de créer ses
+        propres sortilèges en manipulant des Schèmes qu’il a intégrés.
+        C’est une magie de liberté qui consiste à
+        créer des Sorts à la volée en fonction de la situation
+        à laquelle le Magicien fait face.
+        Les limites de ses pouvoirs ne sont alors plus dictées que par le
+        nombre de Schèmes qu’il maîtrise et le carcan de son imagination.
+      </p>
+      <p class="alert alert-warning">
+        Il faut avoir au moins 5 en MAGIE et +1 dans
+        la Spécialisation <em>Maîtrise des Schèmes</em> pour
+        pouvoir pratiquer la magie des Schèmes.</p>
+      <p class="text-end"><em>L’arbre qui cache la forêt (page 44)</em></p>
+    </div>
+
+    <form id="scheme-generator" class="d-print-none">
+      <fieldset class="row mb-3">
+        <legend>Schèmes principaux</legend>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="sujet" class="form-label">
+            Sujet <span class="form-text">(schème élémentaire)</span>
+          </label>
+          <select id="sujet" class="form-select">
+            <option selected value="">Choisis un Schème élémentaire</option>
+          </select>
+          <div id="sujetlHelp" class="form-text">Désigne l’acteur du sort.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="verbe" class="form-label">
+            Verbe <span class="form-text">(schème d’action)</span>
+          </label>
+          <select id="verbe" class="form-select">
+            <option selected value="">Choisis un Schème d’action</option>
+            <option value="contrôle" title="la couleur de l’âme">
+              Contrôle (de)
+            </option>
+            <option value="déplacement" title="la couleur du corps">
+              Déplacement (comme ou sur ou dans)
+            </option>
+            <option value="non-perception" title="la couleur de la nature">
+              Non-perception (de)
+            </option>
+            <option value="mutation" title="la couleur de la nature">
+              Mutation (en)
+            </option>
+            <option value="perception" title="la couleur de la nature">
+              Perception (comme ou de ou en)
+            </option>
+          </select>
+          <div id="verbeHelp" class="form-text">Schème d’action.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="lien" class="form-label">Lien</label>
+          <select id="lien" class="form-select">
+            <option selected value="">Choisis un Schème clé</option>
+            <option value="comme">Comme</option>
+            <option value="dans">Dans</option>
+            <option value="sur">Sur</option>
+            <option value="de">De</option>
+            <option value="en">En</option>
+          </select>
+          <div id="lienHelp" class="form-text">Schème clé.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="median" class="form-label">
+            Médian <span class="form-text">(schème élémentaire)</span>
+          </label>
+          <select id="median" class="form-select">
+            <option selected value="">Choisis un Schème élémentaire</option>
+          </select>
+          <div id="medianHelp" class="form-text">Par quel Élément passe le sort.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="trihn" class="form-label">
+            Trihn de l'élément ciblé
+          </label>
+          <select id="trihn" class="form-select">
+            <option selected value="">Choisis un Trihn</option>
+            <option value="Âme">Âme</option>
+            <option value="Corps">Corps</option>
+            <option value="Esprit">Esprit</option>
+          </select>
+          <div id="medianHelp" class="form-text">Quel Trihn est affecté par le sort.</div>
+        </div>
+      </fieldset>
+      <fieldset class="row mb-3">
+        <legend>
+          Paramètres d’activation
+          <span class="form-text">(Schèmes adjectifs)</span>
+        </legend>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="frequence" class="form-label">
+            <i class="bi bi-calendar4-week" aria-hidden="true"></i>
+            Fréquence
+          </label>
+          <select id="frequence" class="form-select">
+            <option value="0">1 fois par Jour</option>
+            <option value="1">1 fois par Situation</option>
+            <option value="2">1 fois tous les 2 Tours</option>
+            <option value="3">1 fois par Tour</option>
+          </select>
+          <div id="frequenceHelp" class="form-text">À quelle fréquence on
+            peut activer le sortilège.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="portee" class="form-label">
+            <i class="bi bi-align-end" aria-hidden="true"></i>
+            Portée
+          </label>
+          <select id="portee" class="form-select">
+            <option value="0">Contact</option>
+            <option value="1">Interaction</option>
+            <option value="2">Distance</option>
+            <option value="3">Horizon</option>
+          </select>
+          <div id="porteeHelp" class="form-text">Distance à laquelle
+            peut se situer la cible du sortilège.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="cible" class="form-label">
+            <i class="bi bi-bullseye" aria-hidden="true"></i>
+            Nombre de cibles
+          </label>
+          <select id="cible" class="form-select">
+            <option value="0">1 cible</option>
+            <option value="1">2 cibles</option>
+            <option value="2">MAGIE/2 cibles</option>
+            <option value="3">MAGIE cibles</option>
+          </select>
+          <div id="cibleHelp" class="form-text">Nombre de cibles qui peuvent
+            être influencées par l’effet du sortilège.</div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-2">
+          <label for="duree" class="form-label">
+            <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+            Durée
+          </label>
+          <select id="duree" class="form-select">
+            <option value="0">1 Tour</option>
+            <option value="1">MAGIE/3 Tours</option>
+            <option value="2">1 Heure</option>
+            <option value="3">1 Jour</option>
+          </select>
+          <div id="dureeHelp" class="form-text">Laps de temps pendant
+            lequel le Pouvoir reste actif.</div>
+        </div>
+      </fieldset>
+    </form>
+
+    <fieldset>
+      <legend>Résultat</legend>
+      <div class="row alert alert-primary">
+        <div class="col">
+          <div id="res-sujet"></div>
+          <div id="trad-sujet" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div id="res-verbe"></div>
+          <div id="trad-verbe" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div id="res-lien"></div>
+          <div id="trad-lien" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div id="res-median"></div>
+          <div id="trad-median" class="nomoi"></div>
+        </div>
+      </div>
+      <div class="row mb-3 alert alert-secondary">
+        <div class="col">
+          <div>
+            <i class="bi bi-calendar4-week" aria-hidden="true"></i>
+            <strong>Fréquence</strong>
+          </div>
+          <div id="res-frequence"></div>
+          <div id="trad-frequence" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div>
+            <i class="bi bi-align-end" aria-hidden="true"></i>
+            <strong>Portée</strong>
+          </div>
+          <div id="res-portee"></div>
+          <div id="trad-portee" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div>
+            <i class="bi bi-bullseye" aria-hidden="true"></i>
+            <strong>Nb de cibles</strong>
+          </div>
+          <div id="res-cibles"></div>
+          <div id="trad-cibles" class="nomoi"></div>
+        </div>
+        <div class="col">
+          <div>
+            <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+            <strong>Durée</strong>
+          </div>
+          <div id="res-duree"></div>
+          <div id="trad-duree" class="nomoi"></div>
+        </div>
+      </div>
+    </fieldset>
+
+  </main>
+  <footer class="container-fluid text-bg-dark text-center mt-5 pt-2 pb-1">
+    <p>Pour en savoir plus sur le jeu de rôle <strong>Shaan</strong>, rendez-vous sur<br>
+      <a href="https://www.shaan-rpg.com">www.shaan-rpg.com</a>
+      et <a href="https://www.shaan-world.com">www.shaan-world.com</a>
+    </p>
+  </footer>
+
+  <div class="modal" tabindex="-1" id="item-modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Aperçu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="items-list">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js "></script>
+
+  <script src="../../../js/utils.js"></script>
+
+  <!-- mustache.js - Logic-less {{mustache}} templates with JavaScript -->
+  <script src="https://unpkg.com/mustache@latest"></script>
+
+  <!--
+  GsheetParser
+  See doc at https://github.com/fureweb-com/public-google-sheets-parser#readme
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser@latest"></script>
+  <script>const options = { sheetName: "Pouvoirs", useFormat: false };</script>
+  <!-- Shaan Compendium JS --
+  <script src="../../compendium/compendium.js"></script-->
+
+  <!-- Shaan template JS -->
+  <script src="../../shaan.js"></script>
+
+  <script>
+    const schemes_elementaires = {
+      "Moi": { "desc": "Désigne le magicien qui lance le sort" },
+      "Lui": { "desc": "Ne prend en compte que les espèces dites intelligentes (anthéens et créatures élémentaires)" },
+      "Eau": { "desc": "Correspond a tous les types de liquides" },
+      "Terre": { "desc": "Regroupe tout ce qui est terre meuble, sable, pierre, argile ou métal" },
+      "Animal": { "desc": "Inclut insectes, oiseaux, reptiles, poissons, mammifères, mollusques, amibes..." },
+      "Végétal": { "desc": "Prend en compte les plantes, graines, arbres, fleurs, fruits, légumes" },
+      "Air": { "desc": "Représente tous les gaz ou assimilés" },
+      "Feu": { "desc": "Rassemble les brasiers, la lave, les flammes et les éclairs" },
+      "Objet": { "desc": "Tout ce qui est manufacturé tel que les armes, meubles, outils, ordinateurs et véhicules" },
+      "Limbes": { "desc": "Englobe les anti-Âmes et les nécrosiens" }
+    }
+    const actions = {
+      "contrôle": { "cles": ["de"] },
+      "déplacement": { "cles": ["comme", "sur", "dans"] },
+      "non-perception": { "cles": ["de"] },
+      "mutation": { "cles": ["en"] },
+      "perception": { "cles": ["comme", "de", "en"] },
+    }
+    const schemes_adjectifs = {
+      "Fréquence": [
+        "1 fois par Jour",
+        "1 fois par Situation",
+        "1 fois tous les 2 Tours",
+        "1 fois par Tour"
+      ],
+      "Portée": [
+        "Contact",
+        "Interaction",
+        "Distance",
+        "Horizon"
+      ],
+      "Cible": [
+        "1 cible",
+        "2 cibles",
+        "MAGIE/2 cibles",
+        "MAGIE cibles"
+      ],
+      "Durée": [
+        "1 Tour",
+        "MAGIE/3 Tours",
+        "1 Heure",
+        "1 Jour"
+      ]
+    }
+    const traductions = {
+      "Objet": "Gurh",
+      "Végétal": "Goth",
+      "Air": "Gulh",
+      "Lui": "Gath",
+      "Terre": "Golh",
+      "Moi": "Galh",
+      "Animal": "Gorh",
+      "Eau": "Garh",
+      "Feu": "Guth",
+      "Limbes": "Garg",
+      "contrôle": "vankh",
+      "déplacement": "vukh",
+      "non-perception": "vakh",
+      "perception": "vokh",
+      "mutation": "vekh",
+      "dans": "mous",
+      "sur": "mes",
+      "comme": "mas",
+      "de": "mus",
+      "en": "mos",
+      "et": "mons",
+      "1 cible": "nomh",
+      "2 cibles": "namh",
+      "MAGIE/2 cibles": "noumh",
+      "MAGIE cibles": "niamh",
+      "1 fois par Jour": "lokh",
+      "1 fois par Situation": "lakh",
+      "1 fois tous les 2 Tours": "loukh",
+      "1 fois par Tour": "liakh",
+      "Contact": "zonh",
+      "Interaction": "zanh",
+      "Distance": "zoumh",
+      "Horizon": "zianh",
+      "1 Tour": "dorh",
+      "MAGIE/3 Tours": "darh",
+      "1 Heure": "dourh",
+      "1 Jour": "diarh"
+    }
+    const input_sujet = document.getElementById("sujet");
+    fill_select(input_sujet, schemes_elementaires);
+
+    const input_verbe = document.getElementById("verbe");
+    const input_lien = document.getElementById("lien");
+
+    const input_median = document.getElementById("median");
+    fill_select(input_median, schemes_elementaires);
+
+    const res_sujet = document.getElementById("res-sujet");
+    const trad_sujet = document.getElementById("trad-sujet");
+    const res_verbe = document.getElementById("res-verbe");
+    const trad_verbe = document.getElementById("trad-verbe");
+    const res_lien = document.getElementById("res-lien");
+    const trad_lien = document.getElementById("trad-lien");
+    const res_median = document.getElementById("res-median");
+    const trad_median = document.getElementById("trad-median");
+
+    // Adjectifs
+    const input_frequence = document.getElementById("frequence");
+    const res_frequence = document.getElementById("res-frequence");
+    const trad_frequence = document.getElementById("trad-frequence");
+    const input_portee = document.getElementById("portee");
+    const res_portee = document.getElementById("res-portee");
+    const trad_portee = document.getElementById("trad-portee");
+    const input_cibles = document.getElementById("cible");
+    const res_cibles = document.getElementById("res-cibles");
+    const trad_cibles = document.getElementById("trad-cibles");
+    const input_duree = document.getElementById("duree");
+    const res_duree = document.getElementById("res-duree");
+    const trad_duree = document.getElementById("trad-duree");
+
+    function fill_select(input_select, dico) {
+      for (elem in dico) {
+        let opt = document.createElement("option");
+        opt.value = elem;
+        opt.innerHTML = elem;
+        opt.title = elem["desc"];
+        // then append it to the select element
+        input_select.appendChild(opt);
+      }
+    }
+
+    function refresh_select(input_select, liste) {
+      input_select.querySelectorAll("option").forEach(opt => {
+        if (liste.includes(opt.value)) {
+          opt.disabled = false;
+        } else {
+          opt.disabled = true;
+        }
+      });
+      if (!liste.includes(input_select.value)) {
+        input_select.value = liste[0];
+      }
+    }
+
+    document.getElementById("scheme-generator").addEventListener("change", refreshPhrase);
+    function refreshPhrase() {
+      res_verbe.textContent = input_verbe.value;
+      trad_verbe.textContent = traductions[input_verbe.value];
+
+      // Todo : En cas de contrôle, le sujet ne peut être que "Moi"
+      // Et la cible ne peut être que Lui, Animal, Végétal, ou Limbes
+      res_sujet.textContent = input_sujet.value;
+      trad_sujet.textContent = traductions[input_sujet.value];
+
+      refresh_select(input_lien, actions[input_verbe.value]["cles"]);
+
+      res_lien.textContent = input_lien.value;
+      trad_lien.textContent = traductions[input_lien.value];
+      res_median.textContent = input_median.value;
+      trad_median.textContent = traductions[input_median.value];
+
+      // Adjectifs
+      let frequence = schemes_adjectifs["Fréquence"][input_frequence.value];
+      res_frequence.textContent = frequence;
+      trad_frequence.textContent = traductions[frequence];
+      let portee = schemes_adjectifs["Portée"][input_portee.value];
+      res_portee.textContent = portee;
+      trad_portee.textContent = traductions[portee];
+      let cible = schemes_adjectifs["Cible"][input_cibles.value];
+      res_cibles.textContent = cible;
+      trad_cibles.textContent = traductions[cible];
+      let duree = schemes_adjectifs["Durée"][input_duree.value];
+      res_duree.textContent = duree;
+      trad_duree.textContent = traductions[duree];
+    }
+
+
+  </script>
+</body>
+
+</html>
