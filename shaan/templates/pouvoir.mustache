@@ -11,6 +11,9 @@
     <div class="card-header"></div>
     <div class="card-body {{dom_type}}">
       <h2>{{Nom}}</h2>
+      {{#Traduction}}
+        <div class="nomoi rouge mb-2">{{Traduction}}</div>
+      {{/Traduction}}
       <div class="float-end text-right">
         <span class="source">{{source}}</span>
       </div>
@@ -51,9 +54,7 @@
         </li>
       </ul>
       <p>Résumé : <em id="p_summary">{{Résumé}}</em></p>
-      <div class="vert" id="p_desc">
-        {{Effet}}
-      </div>
+      <div class="vert" id="p-desc">{{Effet}}</div>
     </div>
   </div>
 </div>

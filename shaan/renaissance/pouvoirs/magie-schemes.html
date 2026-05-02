@@ -60,6 +60,10 @@
       }
 
     }
+
+    .sheme-img {
+      max-width: 10em;
+    }
   </style>
 </head>
 
@@ -124,7 +128,7 @@
           <select id="verbe" class="form-select">
             <option selected value="">Choisis un Schème d’action</option>
             <option value="contrôle" title="la couleur de l’âme">
-              Contrôle (de)
+              (Moi) Contrôle (de) (Lui, Animal, Végétal, Limbes)
             </option>
             <option value="déplacement" title="la couleur du corps">
               Déplacement (comme ou sur ou dans)
@@ -164,7 +168,7 @@
         </div>
         <div class="col-md-3 col-sm-6 mb-2">
           <label for="trihn" class="form-label">
-            Trihn de l'élément ciblé
+            Trihn de l’élément ciblé
           </label>
           <select id="trihn" class="form-select">
             <option selected value="">Choisis un Trihn</option>
@@ -241,57 +245,72 @@
 
     <fieldset>
       <legend>Résultat</legend>
-      <div class="row alert alert-primary">
-        <div class="col">
-          <div id="res-sujet"></div>
-          <div id="trad-sujet" class="nomoi"></div>
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <div class="alert alert-primary">
+            <div class="row">
+              <div class="col">
+                <div id="res-sujet"></div>
+                <div id="trad-sujet" class="nomoi"></div>
+              </div>
+              <div class="col">
+                <div id="res-verbe"></div>
+                <div id="trad-verbe" class="nomoi"></div>
+              </div>
+              <div class="col">
+                <div id="res-lien"></div>
+                <div id="trad-lien" class="nomoi"></div>
+              </div>
+              <div class="col">
+                <div id="res-median"></div>
+                <div id="trad-median" class="nomoi"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col">
-          <div id="res-verbe"></div>
-          <div id="trad-verbe" class="nomoi"></div>
-        </div>
-        <div class="col">
-          <div id="res-lien"></div>
-          <div id="trad-lien" class="nomoi"></div>
-        </div>
-        <div class="col">
-          <div id="res-median"></div>
-          <div id="trad-median" class="nomoi"></div>
+        <div class="col-lg-6">
+          <div class="row alert alert-secondary">
+            <div class="col">
+              <div>
+                <i class="bi bi-calendar4-week" aria-hidden="true"></i>
+                <strong>Fréquence</strong>
+              </div>
+              <div id="res-frequence"></div>
+              <div id="trad-frequence" class="nomoi"></div>
+            </div>
+            <div class="col">
+              <div>
+                <i class="bi bi-align-end" aria-hidden="true"></i>
+                <strong>Portée</strong>
+              </div>
+              <div id="res-portee"></div>
+              <div id="trad-portee" class="nomoi"></div>
+            </div>
+            <div class="col">
+              <div>
+                <i class="bi bi-bullseye" aria-hidden="true"></i>
+                <strong>Nb de cibles</strong>
+              </div>
+              <div id="res-cibles"></div>
+              <div id="trad-cibles" class="nomoi"></div>
+            </div>
+            <div class="col">
+              <div>
+                <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+                <strong>Durée</strong>
+              </div>
+              <div id="res-duree"></div>
+              <div id="trad-duree" class="nomoi"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row mb-3 alert alert-secondary">
-        <div class="col">
-          <div>
-            <i class="bi bi-calendar4-week" aria-hidden="true"></i>
-            <strong>Fréquence</strong>
-          </div>
-          <div id="res-frequence"></div>
-          <div id="trad-frequence" class="nomoi"></div>
-        </div>
-        <div class="col">
-          <div>
-            <i class="bi bi-align-end" aria-hidden="true"></i>
-            <strong>Portée</strong>
-          </div>
-          <div id="res-portee"></div>
-          <div id="trad-portee" class="nomoi"></div>
-        </div>
-        <div class="col">
-          <div>
-            <i class="bi bi-bullseye" aria-hidden="true"></i>
-            <strong>Nb de cibles</strong>
-          </div>
-          <div id="res-cibles"></div>
-          <div id="trad-cibles" class="nomoi"></div>
-        </div>
-        <div class="col">
-          <div>
-            <i class="bi bi-hourglass-split" aria-hidden="true"></i>
-            <strong>Durée</strong>
-          </div>
-          <div id="res-duree"></div>
-          <div id="trad-duree" class="nomoi"></div>
-        </div>
+      <div id="zone-resultats" class="row">
+        <div id="carte-pouvoir" class="col-sm-12 col-md-6 col-lg-4 mb-2"></div>
+        <fieldset class="col-sm-12 col-md-6 col-lg-8 mb-2">
+          <legend>Schèmes nécessaires</legend>
+          <div id="list-shemes" class="grid"></div>
+        </fieldset>
       </div>
     </fieldset>
 
@@ -340,6 +359,9 @@
   <!-- Shaan template JS -->
   <script src="../../shaan.js"></script>
 
+  <!-- Markdown formatter -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <script>
     const schemes_elementaires = {
       "Moi": { "desc": "Désigne le magicien qui lance le sort" },
@@ -354,11 +376,177 @@
       "Limbes": { "desc": "Englobe les anti-Âmes et les nécrosiens" }
     }
     const actions = {
-      "contrôle": { "cles": ["de"] },
-      "déplacement": { "cles": ["comme", "sur", "dans"] },
-      "non-perception": { "cles": ["de"] },
-      "mutation": { "cles": ["en"] },
-      "perception": { "cles": ["comme", "de", "en"] },
+      "": { "cles": [""] },
+      "contrôle": {
+        "cles": ["de"],
+        "img": "https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/scheme-controle.png",
+        "effet": {"de": `Le Magicien contrôle un autre Élément Cible.
+Il oblige la cible à obéir à un ordre composé de **Score mots**.
+L’ordre doit être formulé à l’impératif.
+
+Le Trihn ciblé détermine le type d’Action que pourra
+faire la cible contrôlée : si le Magicien contrôle le
+**Corps**, son ordre devra impliquer des Actions de
+**RITUELS, SURVIE et COMBAT**, un **Esprit** contrôlé
+fera des Actions de **TECHNIQUE, SAVOIR et SOCIAL**,
+et une **Âme** contrôlée touchera les Domaines
+d’**ARTS, SHAAN, MAGIE** et **NÉCROSE**.
+
+Quelques ordres simples qui facilitent la vie :
+
+- *Fuis-moi* (Corps).
+- *Oublie-nous* (Esprit).
+- *N’attaque pas* (Esprit).
+- *Parle-nous* (Esprit).
+- *Aie peur de nous* (Âme).
+- *Dors* (Âme).
+- *Calme-toi* (Âme).
+- Etc.
+
+Restriction : L’ordre doit correspondre aux aptitudes
+  de L’Élément : un oiseau peut voler, picorer, pondre,
+  dormir, fuir ; mais il ne pourra pas parler ou nager,
+  à moins qu’il soit spécialement dressé pour la
+  circonstance. L’ordre ne doit pas non plus être en
+  contradiction directe avec la morale de sa victime:
+  un marchand ne donnera jamais sa caisse et un
+  shaaniste ne pourra jamais tuer un innocent.`}
+      },
+      "déplacement": {
+        "cles": ["comme", "sur", "dans"],
+        "effet": { "tous": `**Si la Cible est le sujet (avant l’Action)**,
+elle peut ainsi voyager à **Score km/h** sous toutes les formes
+et dans tous les Éléments, à condition d’en préciser
+la nature. Pour se déplacer, on indique les propriétés
+de l’Élément que l’on utilise pour se déplacer ou
+l’Élément du milieu dans lequel on se déplace.
+
+> Exemple : *Moi Déplacement dans Air* permet de
+voler, *sur Eau* permet de marcher sur l’eau, etc.
+
+**Si la Cible est le médian (après l’Action)**, le
+Déplacement peut faire office d’attaque.
+Ces Sorts n’affectent jamais réellement la victime.
+C’est cette dernière qui s’inflige les dommages par suggestion
+du Magicien, jusqu’à la crise cardiaque ou la rupture d’anévrisme.
+Une attaque provoque des blessures si le **Score** est
+supérieur à la Défense de la cible.
+Selon le Schème de **Durée** utilisé, les pertes de Trihns
+liées à l’attaque seront étalées dans le temps.
+
+> Exemple : *Terre Déplacement Dans Lui (Corps,
+Âme ou Esprit)* permet de faire croire à la cible
+qu’elle se fait écraser par un rocher.
+
+Il est aussi possible de créer un Sort qui permet de
+faire voler des engins magiques, avec l’algorithme :
+
+> *Moi et Lui Déplacement dans Objet sur Air*
+
+Il faut obligatoirement définir les cibles du
+Déplacement, car dès l’instant que quelqu’un est
+concerné, il peut être amené à bloquer tous les
+autres s’il résiste au Sort, dans le cas d’un tapis
+volant par exemple.
+`}
+      },
+      "non-perception": {
+        "cles": ["de"],
+        "effet": {"de": `
+La Non-perception est utilisée pour les protections
+et les intrusions. Dès l’instant où l’on ignore un
+Élément, on en est protégé. C’est ainsi que la peau
+ne sera pas brûlée si le Corps ne perçoit pas le Feu.
+Il en va ainsi pour chaque Trihn. En règle générale,
+c’est le Corps qui est sollicité pour se protéger de
+l’asphyxie, des chocs, de la faim et de toutes les
+fonctions internes du Corps.
+Mais l’Esprit et l’Âme peuvent également être protégés
+des attaques mentales et nécrotiques.
+La Protection peut prendre
+la forme d’une armure de **Score/3 à ajouter à la
+Défense du Trihn ainsi protégé**.
+
+Exemples:
+- *Moi (Esprit) Non-perception de Lui* confère un
+Bonus de +Score/3 en Défense d’Esprit si Lui tente
+une attaque d’Esprit sur Moi.
+- *Animal (Corps) Non-perception de Feu* donne
+un Bonus en Défense de Corps à un ou plusieurs
+animaux contre les dégâts de Jeu (incendie, lave).
+On peut aussi se protéger contre le vent (Air) ou
+les armes (Objet).
+
+Pour se rendre invisible, *Lui (Corps) Non-perception de Moi*
+fera que *Lui* aura un Malus de Score/3
+pour me percevoir physiquement (Tests de SURVIE + Vigilance).
+Cibler son Âme lui infligera un
+Malus pour me percevoir magiquement (SHAAN + Intuition ou MAGIE + Voile)
+et cibler l’Esprit donnera un Malus pour me percevoir mentalement
+(SOCIAL+ Psychologie).
+`}
+      },
+      "mutation": {
+        "cles": ["en"],
+        "effet": {"en": `
+La Mutation permet de modifier les capacités de la cible.
+Elle conserve sa forme et ses aptitudes
+pour les autres protagonistes, mais est elle-même
+tellement convaincue de sa transformation que
+ses capacités sont modifiées en fonction de la
+symbolique de l’Élément médian et de la volonté
+du Magicien. La cible peut bénéficier d’un **Bonus
+de Score/3** ou subir un **Malus de Score/3** pour
+certaines actions.
+
+> Exemple : *Lui Mutation en Végétal* pour paralyser la cible et lui donner un malus pour bouger.
+
+Voici quelques indications d’effets en fonction de
+l’Élément médian :
+
+- Objet : bonus en construction ou en combat
+- Végétal : bonus en savoir ou malus en survie
+- Air : bonus en discrétion ou en initiative
+- lui : bonus en psychologie ou en déguisement
+- Terre : bonus en discrétion ou malus en combat
+- Moi : bonus en survie ou déguisement
+- Animal : bonus au combat ou intimidation
+- Eau : bonus en survie ou malus en combat
+- Feu : bonus en initiative ou en combat
+- limbes : malus en social ou en shaan
+`}
+      },
+      "perception": {
+        "cles": ["comme", "de", "en"],
+        "effet": {
+          "comme": `Permet de percevoir à la manière de la cible.`,
+          "de": `
+Permet d’activer les sens de la cible pour
+détecter un Élément particulier.
+
+> Exemple : *Moi Perception de Animal* pour trouver
+une proie à la chasse.
+
+Il est également possible de créer des illusions en
+faisant croire à l’existence d’un rocher (Terre), d’une
+arme (Objet), d’une forêt (Végétal), etc.
+
+> Exemple : *Lui Perception de Végétal et Animal*
+pour le plonger dans une jungle imaginaire.
+
+Ces illusions sont bien réelles pour les cibles et
+peuvent même avoir un caractère utilitaire en
+transformant un Élément en un autre grâce aux clés
+**de** et **en**. Tel est le pouvoir de la suggestion.
+
+Exemple : *Moi et Lui et Animal Perception de Air
+en Végétal* pour faire passer sa roulotte sur un
+pont imaginaire au dessus d’une crevasse.`,
+          "en": `Pour provoquer une gêne, on peut utiliser la clé **en**.
+(Exemple : *Lui Perception en Feu* (ébloui). )`
+        }
+
+      },
     }
     const schemes_adjectifs = {
       "Fréquence": [
@@ -443,6 +631,8 @@
     const res_median = document.getElementById("res-median");
     const trad_median = document.getElementById("trad-median");
 
+    const list_shemes = document.getElementById("list-shemes");
+
     // Adjectifs
     const input_frequence = document.getElementById("frequence");
     const res_frequence = document.getElementById("res-frequence");
@@ -482,35 +672,144 @@
     }
 
     document.getElementById("scheme-generator").addEventListener("change", refreshPhrase);
+
     function refreshPhrase() {
+      let used_schemes = new Set();
+      list_shemes.innerText = "";
+
       res_verbe.textContent = input_verbe.value;
       trad_verbe.textContent = traductions[input_verbe.value];
-
-      // Todo : En cas de contrôle, le sujet ne peut être que "Moi"
+      // Todo : En cas de contrôle, le sujet ne peut être que "Moi"
       // Et la cible ne peut être que Lui, Animal, Végétal, ou Limbes
-      res_sujet.textContent = input_sujet.value;
-      trad_sujet.textContent = traductions[input_sujet.value];
+      // En cas de (Non-)perception et mutation, le sujet est la cible.
+
+      if(input_sujet.value !== "") {
+        used_schemes.add(
+          {
+            "id": `scheme-${removeAccents(input_sujet.value).toLowerCase()}`,
+            "title": input_sujet.value
+          });
+        res_sujet.textContent = input_sujet.value;
+        trad_sujet.textContent = traductions[input_sujet.value];
+      }
+
+      let data = {
+        "Nom": [input_sujet.value, input_verbe.value],
+        "Traduction": [traductions[input_sujet.value], traductions[input_verbe.value]]
+      };
+      used_schemes.add(
+          {
+            "id": `scheme-${removeAccents(input_verbe.value).toLowerCase()}`,
+            "title": input_verbe.value
+          });
 
       refresh_select(input_lien, actions[input_verbe.value]["cles"]);
 
+      used_schemes.add(
+          {
+            "id": `scheme-${removeAccents(input_lien.value).toLowerCase()}`,
+            "title": input_lien.value
+          });
       res_lien.textContent = input_lien.value;
       trad_lien.textContent = traductions[input_lien.value];
+      data["Nom"].push(input_lien.value);
+      data["Traduction"].push(traductions[input_lien.value]);
+
+      if(input_median.value !== "") {
+        used_schemes.add(
+          {
+            "id": `scheme-${removeAccents(input_median.value).toLowerCase()}`,
+            "title": input_median.value
+          });
+      }
       res_median.textContent = input_median.value;
       trad_median.textContent = traductions[input_median.value];
+      data["Nom"].push(input_median.value);
+      data["Traduction"].push(traductions[input_median.value]);
+
+      // Propriétés
+      data["Nom"] = data["Nom"].join(" ");
+      data["Traduction"] = data["Traduction"].join(" ");
+
+      data["dom_color"] = "red";
+      data["dom_type"] = "type";
+      data["Source"] = "L’arbre qui cache la forêt (page 44)";
+      data["Domaine"] = "Sortilège";
+      data["Rang"] = "";
+      data["Score"] = "";
+      data["Résumé"] = "Sortilège personnalisé.";
+      data["Type"] = "Magie des schèmes";
 
       // Adjectifs
-      let frequence = schemes_adjectifs["Fréquence"][input_frequence.value];
-      res_frequence.textContent = frequence;
-      trad_frequence.textContent = traductions[frequence];
+      data["Fréquence"] = schemes_adjectifs["Fréquence"][input_frequence.value];
+      used_schemes.add(
+        {
+          "id": `frequence${Number(input_frequence.value)+1}`,
+          "title": data["Fréquence"]
+        });
+      res_frequence.textContent = data["Fréquence"];
+      trad_frequence.textContent = traductions[data["Fréquence"]];
       let portee = schemes_adjectifs["Portée"][input_portee.value];
       res_portee.textContent = portee;
       trad_portee.textContent = traductions[portee];
-      let cible = schemes_adjectifs["Cible"][input_cibles.value];
-      res_cibles.textContent = cible;
-      trad_cibles.textContent = traductions[cible];
-      let duree = schemes_adjectifs["Durée"][input_duree.value];
-      res_duree.textContent = duree;
-      trad_duree.textContent = traductions[duree];
+      used_schemes.add(
+        {
+          "id": `${removeAccents(portee).toLowerCase()}`,
+          "title": portee
+        });
+
+      data["Nombre de cibles"] = schemes_adjectifs["Cible"][input_cibles.value];
+      used_schemes.add(
+        {
+          "id": `cibles${Number(input_cibles.value)+1}`,
+          "title": data["Nombre de cibles"]
+        });
+      res_cibles.textContent = data["Nombre de cibles"];
+      trad_cibles.textContent = traductions[data["Nombre de cibles"]];
+      data["Durée"] = schemes_adjectifs["Durée"][input_duree.value];
+      used_schemes.add(
+        {
+          "id": `duree${Number(input_duree.value)+1}`,
+          "title": data["Durée"]
+        });
+      res_duree.textContent = data["Durée"];
+      trad_duree.textContent = traductions[data["Durée"]];
+      let sub_effect = input_lien.value;
+      if (input_verbe.value == "déplacement") {
+        sub_effect = "tous";
+      }
+      data["Effet"] = actions[input_verbe.value]["effet"][sub_effect];
+      fill_card(data);
+
+      used_schemes.forEach((scheme) => {
+        let sheme_item = document.createElement("span");
+        sheme_item.className = "";
+        let sheme_img = document.createElement("img");
+        sheme_img.alt = scheme["title"];
+        sheme_img.className = "sheme-img";
+        sheme_img.src = `https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/${scheme["id"]}.png`;
+        sheme_item.appendChild(sheme_img);
+        list_shemes.appendChild(sheme_item);
+      });
+    }
+    document.addEventListener("DOMContentLoaded",refreshPhrase);
+
+    function fill_card(data) {
+      fetch("../../templates/pouvoir.mustache")
+        .then((response) => response.text())
+        .then((template) => {
+          const carte_pouvoir = document.getElementById("carte-pouvoir");
+          const temp = document.createElement("template");
+          temp.innerHTML = Mustache.render(template, data).trim();
+          const new_card = temp.content.firstChild;
+          new_card.id="carte-pouvoir";
+
+          // Change this to div.childNodes to support multiple top-level nodes.
+          carte_pouvoir.replaceWith(new_card);
+          const p_desc = document.getElementById("p-desc");
+          p_desc.innerHTML =
+            marked.parse(p_desc.innerHTML);
+        });
     }
 
 
