@@ -621,10 +621,13 @@ pont imaginaire au dessus d’une crevasse.`,
 
       refresh_select(input_lien, actions[input_verbe]["cles"]);
 
-      used_schemes_id.add(`scheme-${removeAccents(input_lien.value).toLowerCase()}`);
-      used_schemes_title.add(input_lien.value);
-      data["Nom"].push(input_lien.value);
-      data["Traduction"].push(traductions[input_lien.value]);
+      if(input_lien.value != ""){
+        used_schemes_id.add(`scheme-${removeAccents(input_lien.value).toLowerCase()}`);
+        used_schemes_title.add(input_lien.value);
+        data["Nom"].push(input_lien.value);
+        data["Traduction"].push(traductions[input_lien.value]);
+      }
+
       data["Activation"] = "1 Action";
       data["Score"] = "MAGIE + Puissance du Trihn consumé - Malus d'évocation s'il y a lieu.";
 
@@ -632,9 +635,9 @@ pont imaginaire au dessus d’une crevasse.`,
       if(input_median !== "") {
         used_schemes_id.add(`scheme-${removeAccents(input_median).toLowerCase()}`);
         used_schemes_title.add(input_median);
+        data["Nom"].push(input_median);
+        data["Traduction"].push(traductions[input_median]);
       }
-      data["Nom"].push(input_median);
-      data["Traduction"].push(traductions[input_median]);
 
       // Propriétés
       data["dom_color"] = "red";
@@ -679,17 +682,19 @@ pont imaginaire au dessus d’une crevasse.`,
       used_schemes_id.add(`duree${input_duree+1}`);
       used_schemes_title.add(data["Durée"]);
 
-      let sub_effect = input_lien.value;
-      if (input_verbe == "déplacement") {
-        sub_effect = "tous";
-      }
-      data["Effet"] = actions[input_verbe]["effet"][sub_effect];
-      if(actions[input_verbe]["effet"]["median"] && input_median){
-        data["Effet"] += `\nIndication d’effets en fonction de l’élément **${input_median}** :\n`;
-        data["Effet"] += `\n**${actions[input_verbe]["effet"]["median"][input_median]}**\n`;
+      if(input_verbe !== "") {
+        let sub_effect = input_lien.value;
+        if (input_verbe == "déplacement") {
+          sub_effect = "tous";
+        }
+        data["Effet"] = actions[input_verbe]["effet"][sub_effect];
+        if(actions[input_verbe]["effet"]["median"] && input_median){
+          data["Effet"] += `\nIndication d’effets en fonction de l’élément **${input_median}** :\n`;
+          data["Effet"] += `\n**${actions[input_verbe]["effet"]["median"][input_median]}**\n`;
+        }
       }
 
-let total_cost = 1;
+      let total_cost = 1;
       if (nb_majeurs > 3) {
         total_cost += 6;
       } else if (nb_majeurs == 3) {
@@ -714,24 +719,27 @@ let total_cost = 1;
       data["Coût"] = `<strong>${total_cost}</strong> point(s) de Trihn d’âme,
         ainsi que 1 Trihn <strong>${trihn_cible}</strong> préalablement invoqué.`;
 
-      data["Nom"] = data["Nom"].join(" ");
-      data["Traduction"] = data["Traduction"].join(" ");
+      if(data["Nom"].length > 2) {
 
-      fill_card(data);
+        data["Nom"] = data["Nom"].join(" ");
+        data["Traduction"] = data["Traduction"].join(" ");
 
-      used_schemes_title = [...used_schemes_title];
-      let index = 0;
-      used_schemes_id.forEach((schemeid) => {
-        let sheme_item = document.createElement("span");
-        sheme_item.className = "";
-        let sheme_img = document.createElement("img");
-        sheme_img.alt = used_schemes_title[index];
-        sheme_img.className = "sheme-img";
-        sheme_img.src = `https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/${schemeid}.png`;
-        sheme_item.appendChild(sheme_img);
-        list_shemes.appendChild(sheme_item);
-        index++;
-      });
+        fill_card(data);
+
+        used_schemes_title = [...used_schemes_title];
+        let index = 0;
+        used_schemes_id.forEach((schemeid) => {
+          let sheme_item = document.createElement("span");
+          sheme_item.className = "";
+          let sheme_img = document.createElement("img");
+          sheme_img.alt = used_schemes_title[index];
+          sheme_img.className = "sheme-img";
+          sheme_img.src = `https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/${schemeid}.png`;
+          sheme_item.appendChild(sheme_img);
+          list_shemes.appendChild(sheme_item);
+          index++;
+        });
+      }
 
     }
     document.addEventListener("DOMContentLoaded",refreshPhrase);
