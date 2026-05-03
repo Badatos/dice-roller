@@ -81,7 +81,7 @@
       </ol>
     </nav>
 
-    <div id="intro">
+    <div id="intro" class="d-print-none">
       <p>
         La magie nomoï utilise l’énergie des Trihns, qu’il faut
         invoquer puis altérer pour provoquer un changement de réalité.
@@ -116,7 +116,7 @@
           <label for="sujet" class="form-label">
             Sujet <span class="form-text">(schème élémentaire)</span>
           </label>
-          <select id="sujet" class="form-select">
+          <select id="sujet" name="sujet" class="form-select">
             <option selected value="">Choisis un Schème élémentaire</option>
           </select>
           <div id="sujetlHelp" class="form-text">Désigne l’acteur du sort.</div>
@@ -125,7 +125,7 @@
           <label for="verbe" class="form-label">
             Verbe <span class="form-text">(schème d’action)</span>
           </label>
-          <select id="verbe" class="form-select">
+          <select id="verbe" name="verbe" class="form-select">
             <option selected value="">Choisis un Schème d’action</option>
             <option value="contrôle" title="la couleur de l’âme">
               (Moi) Contrôle (de) (Lui, Animal, Végétal, Limbes)
@@ -147,7 +147,7 @@
         </div>
         <div class="col-md-3 col-sm-6 mb-2">
           <label for="lien" class="form-label">Lien</label>
-          <select id="lien" class="form-select">
+          <select id="lien" name="lien" class="form-select">
             <option selected value="">Choisis un Schème clé</option>
             <option value="comme">Comme</option>
             <option value="dans">Dans</option>
@@ -161,7 +161,7 @@
           <label for="median" class="form-label">
             Médian <span class="form-text">(schème élémentaire)</span>
           </label>
-          <select id="median" class="form-select">
+          <select id="median" name="median" class="form-select">
             <option selected value="">Choisis un Schème élémentaire</option>
           </select>
           <div id="medianHelp" class="form-text">Par quel Élément passe le sort.</div>
@@ -170,13 +170,13 @@
           <label for="trihn" class="form-label">
             Trihn de l’élément ciblé
           </label>
-          <select id="trihn" class="form-select">
+          <select id="trihn" name="trihn" class="form-select">
             <option selected value="">Choisis un Trihn</option>
             <option value="Âme">Âme</option>
             <option value="Corps">Corps</option>
             <option value="Esprit">Esprit</option>
           </select>
-          <div id="medianHelp" class="form-text">Quel Trihn est affecté par le sort.</div>
+          <div id="trihnHelp" class="form-text">Quel Trihn est affecté par le sort.</div>
         </div>
       </fieldset>
       <fieldset class="row mb-3">
@@ -189,7 +189,7 @@
             <i class="bi bi-calendar4-week" aria-hidden="true"></i>
             Fréquence
           </label>
-          <select id="frequence" class="form-select">
+          <select id="frequence" name="frequence" class="form-select">
             <option value="0">1 fois par Jour</option>
             <option value="1">1 fois par Situation</option>
             <option value="2">1 fois tous les 2 Tours</option>
@@ -203,7 +203,7 @@
             <i class="bi bi-align-end" aria-hidden="true"></i>
             Portée
           </label>
-          <select id="portee" class="form-select">
+          <select id="portee" name="portee" class="form-select">
             <option value="0">Contact</option>
             <option value="1">Interaction</option>
             <option value="2">Distance</option>
@@ -217,7 +217,7 @@
             <i class="bi bi-bullseye" aria-hidden="true"></i>
             Nombre de cibles
           </label>
-          <select id="cible" class="form-select">
+          <select id="cible" name="cible" class="form-select">
             <option value="0">1 cible</option>
             <option value="1">2 cibles</option>
             <option value="2">MAGIE/2 cibles</option>
@@ -231,7 +231,7 @@
             <i class="bi bi-hourglass-split" aria-hidden="true"></i>
             Durée
           </label>
-          <select id="duree" class="form-select">
+          <select id="duree" name="duree" class="form-select">
             <option value="0">1 Tour</option>
             <option value="1">MAGIE/3 Tours</option>
             <option value="2">1 Heure</option>
@@ -245,66 +245,6 @@
 
     <fieldset>
       <legend>Résultat</legend>
-      <div class="row mb-3">
-        <div class="col-lg-6">
-          <div class="alert alert-primary">
-            <div class="row">
-              <div class="col">
-                <div id="res-sujet"></div>
-                <div id="trad-sujet" class="nomoi"></div>
-              </div>
-              <div class="col">
-                <div id="res-verbe"></div>
-                <div id="trad-verbe" class="nomoi"></div>
-              </div>
-              <div class="col">
-                <div id="res-lien"></div>
-                <div id="trad-lien" class="nomoi"></div>
-              </div>
-              <div class="col">
-                <div id="res-median"></div>
-                <div id="trad-median" class="nomoi"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="row alert alert-secondary">
-            <div class="col">
-              <div>
-                <i class="bi bi-calendar4-week" aria-hidden="true"></i>
-                <strong>Fréquence</strong>
-              </div>
-              <div id="res-frequence"></div>
-              <div id="trad-frequence" class="nomoi"></div>
-            </div>
-            <div class="col">
-              <div>
-                <i class="bi bi-align-end" aria-hidden="true"></i>
-                <strong>Portée</strong>
-              </div>
-              <div id="res-portee"></div>
-              <div id="trad-portee" class="nomoi"></div>
-            </div>
-            <div class="col">
-              <div>
-                <i class="bi bi-bullseye" aria-hidden="true"></i>
-                <strong>Nb de cibles</strong>
-              </div>
-              <div id="res-cibles"></div>
-              <div id="trad-cibles" class="nomoi"></div>
-            </div>
-            <div class="col">
-              <div>
-                <i class="bi bi-hourglass-split" aria-hidden="true"></i>
-                <strong>Durée</strong>
-              </div>
-              <div id="res-duree"></div>
-              <div id="trad-duree" class="nomoi"></div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div id="zone-resultats" class="row">
         <div id="carte-pouvoir" class="col-sm-12 col-md-6 col-lg-4 mb-2"></div>
         <fieldset class="col-sm-12 col-md-6 col-lg-8 mb-2">
@@ -410,7 +350,14 @@ Restriction : L’ordre doit correspondre aux aptitudes
   circonstance. L’ordre ne doit pas non plus être en
   contradiction directe avec la morale de sa victime:
   un marchand ne donnera jamais sa caisse et un
-  shaaniste ne pourra jamais tuer un innocent.`}
+  shaaniste ne pourra jamais tuer un innocent.
+
+> On remarque très facilement quelqu’un
+de « contrôlé » à son visage pâle,
+son corps froid, son regard vide et sa démarche d’automate.
+Une cible contrôlée ne puisera jamais dans ses Trihns pour
+réussir une Action, sauf si sa vie en dépend.
+`}
       },
       "déplacement": {
         "cles": ["comme", "sur", "dans"],
@@ -488,7 +435,8 @@ et cibler l’Esprit donnera un Malus pour me percevoir mentalement
       },
       "mutation": {
         "cles": ["en"],
-        "effet": {"en": `
+        "effet": {
+          "en": `
 La Mutation permet de modifier les capacités de la cible.
 Elle conserve sa forme et ses aptitudes
 pour les autres protagonistes, mais est elle-même
@@ -500,21 +448,20 @@ de Score/3** ou subir un **Malus de Score/3** pour
 certaines actions.
 
 > Exemple : *Lui Mutation en Végétal* pour paralyser la cible et lui donner un malus pour bouger.
-
-Voici quelques indications d’effets en fonction de
-l’Élément médian :
-
-- Objet : bonus en construction ou en combat
-- Végétal : bonus en savoir ou malus en survie
-- Air : bonus en discrétion ou en initiative
-- lui : bonus en psychologie ou en déguisement
-- Terre : bonus en discrétion ou malus en combat
-- Moi : bonus en survie ou déguisement
-- Animal : bonus au combat ou intimidation
-- Eau : bonus en survie ou malus en combat
-- Feu : bonus en initiative ou en combat
-- limbes : malus en social ou en shaan
-`}
+`,
+          "median":{
+            "Objet": "Bonus en construction ou en combat",
+            "Végétal": "Bonus en savoir ou Malus en survie",
+            "Air": "Bonus en discrétion ou en initiative",
+            "Lui": "Bonus en psychologie ou en déguisement",
+            "Terre": "Bonus en discrétion ou Malus en combat",
+            "Moi": "Bonus en survie ou déguisement",
+            "Animal": "Bonus au combat ou intimidation",
+            "Eau": "Bonus en survie ou Malus en combat",
+            "Feu": "Bonus en initiative ou en combat",
+            "Limbes": "Malus en social ou en shaan",
+          }
+        }
       },
       "perception": {
         "cles": ["comme", "de", "en"],
@@ -613,39 +560,13 @@ pont imaginaire au dessus d’une crevasse.`,
       "1 Heure": "dourh",
       "1 Jour": "diarh"
     }
-    const input_sujet = document.getElementById("sujet");
-    fill_select(input_sujet, schemes_elementaires);
 
-    const input_verbe = document.getElementById("verbe");
+    fill_select(document.getElementById("sujet"), schemes_elementaires);
     const input_lien = document.getElementById("lien");
-
-    const input_median = document.getElementById("median");
-    fill_select(input_median, schemes_elementaires);
-
-    const res_sujet = document.getElementById("res-sujet");
-    const trad_sujet = document.getElementById("trad-sujet");
-    const res_verbe = document.getElementById("res-verbe");
-    const trad_verbe = document.getElementById("trad-verbe");
-    const res_lien = document.getElementById("res-lien");
-    const trad_lien = document.getElementById("trad-lien");
-    const res_median = document.getElementById("res-median");
-    const trad_median = document.getElementById("trad-median");
-
+    fill_select(document.getElementById("median"), schemes_elementaires);
     const list_shemes = document.getElementById("list-shemes");
 
     // Adjectifs
-    const input_frequence = document.getElementById("frequence");
-    const res_frequence = document.getElementById("res-frequence");
-    const trad_frequence = document.getElementById("trad-frequence");
-    const input_portee = document.getElementById("portee");
-    const res_portee = document.getElementById("res-portee");
-    const trad_portee = document.getElementById("trad-portee");
-    const input_cibles = document.getElementById("cible");
-    const res_cibles = document.getElementById("res-cibles");
-    const trad_cibles = document.getElementById("trad-cibles");
-    const input_duree = document.getElementById("duree");
-    const res_duree = document.getElementById("res-duree");
-    const trad_duree = document.getElementById("trad-duree");
 
     function fill_select(input_select, dico) {
       for (elem in dico) {
@@ -671,126 +592,147 @@ pont imaginaire au dessus d’une crevasse.`,
       }
     }
 
-    document.getElementById("scheme-generator").addEventListener("change", refreshPhrase);
+    const scheme_generator = document.getElementById("scheme-generator");
+    scheme_generator.addEventListener("change", refreshPhrase);
 
     function refreshPhrase() {
-      let used_schemes = new Set();
+      let formData = new FormData(scheme_generator);
+      let used_schemes_id = new Set();
+      let used_schemes_title = new Set();
       list_shemes.innerText = "";
 
-      res_verbe.textContent = input_verbe.value;
-      trad_verbe.textContent = traductions[input_verbe.value];
+      let input_verbe = formData.get("verbe");
       // Todo : En cas de contrôle, le sujet ne peut être que "Moi"
       // Et la cible ne peut être que Lui, Animal, Végétal, ou Limbes
       // En cas de (Non-)perception et mutation, le sujet est la cible.
 
-      if(input_sujet.value !== "") {
-        used_schemes.add(
-          {
-            "id": `scheme-${removeAccents(input_sujet.value).toLowerCase()}`,
-            "title": input_sujet.value
-          });
-        res_sujet.textContent = input_sujet.value;
-        trad_sujet.textContent = traductions[input_sujet.value];
+      let input_sujet = formData.get("sujet");
+      if(input_sujet !== "") {
+        used_schemes_id.add(`scheme-${removeAccents(input_sujet).toLowerCase()}`);
+        used_schemes_title.add(input_sujet);
       }
 
       let data = {
-        "Nom": [input_sujet.value, input_verbe.value],
-        "Traduction": [traductions[input_sujet.value], traductions[input_verbe.value]]
+        "Nom": [input_sujet, input_verbe],
+        "Traduction": [traductions[input_sujet], traductions[input_verbe]]
       };
-      used_schemes.add(
-          {
-            "id": `scheme-${removeAccents(input_verbe.value).toLowerCase()}`,
-            "title": input_verbe.value
-          });
+      used_schemes_id.add(`scheme-${removeAccents(input_verbe).toLowerCase()}`);
+      used_schemes_title.add(input_verbe);
 
-      refresh_select(input_lien, actions[input_verbe.value]["cles"]);
+      refresh_select(input_lien, actions[input_verbe]["cles"]);
 
-      used_schemes.add(
-          {
-            "id": `scheme-${removeAccents(input_lien.value).toLowerCase()}`,
-            "title": input_lien.value
-          });
-      res_lien.textContent = input_lien.value;
-      trad_lien.textContent = traductions[input_lien.value];
+      used_schemes_id.add(`scheme-${removeAccents(input_lien.value).toLowerCase()}`);
+      used_schemes_title.add(input_lien.value);
       data["Nom"].push(input_lien.value);
       data["Traduction"].push(traductions[input_lien.value]);
+      data["Activation"] = "1 Action";
+      data["Score"] = "MAGIE + Puissance du Trihn consumé - Malus d'évocation s'il y a lieu.";
 
-      if(input_median.value !== "") {
-        used_schemes.add(
-          {
-            "id": `scheme-${removeAccents(input_median.value).toLowerCase()}`,
-            "title": input_median.value
-          });
+      let input_median = formData.get("median");
+      if(input_median !== "") {
+        used_schemes_id.add(`scheme-${removeAccents(input_median).toLowerCase()}`);
+        used_schemes_title.add(input_median);
       }
-      res_median.textContent = input_median.value;
-      trad_median.textContent = traductions[input_median.value];
-      data["Nom"].push(input_median.value);
-      data["Traduction"].push(traductions[input_median.value]);
+      data["Nom"].push(input_median);
+      data["Traduction"].push(traductions[input_median]);
 
       // Propriétés
-      data["Nom"] = data["Nom"].join(" ");
-      data["Traduction"] = data["Traduction"].join(" ");
-
       data["dom_color"] = "red";
       data["dom_type"] = "type";
       data["Source"] = "L’arbre qui cache la forêt (page 44)";
       data["Domaine"] = "Sortilège";
       data["Rang"] = "";
-      data["Score"] = "";
       data["Résumé"] = "Sortilège personnalisé.";
       data["Type"] = "Magie des schèmes";
 
       // Adjectifs
-      data["Fréquence"] = schemes_adjectifs["Fréquence"][input_frequence.value];
-      used_schemes.add(
-        {
-          "id": `frequence${Number(input_frequence.value)+1}`,
-          "title": data["Fréquence"]
-        });
-      res_frequence.textContent = data["Fréquence"];
-      trad_frequence.textContent = traductions[data["Fréquence"]];
-      let portee = schemes_adjectifs["Portée"][input_portee.value];
-      res_portee.textContent = portee;
-      trad_portee.textContent = traductions[portee];
-      used_schemes.add(
-        {
-          "id": `${removeAccents(portee).toLowerCase()}`,
-          "title": portee
-        });
+      let nb_majeurs = 0;
+      let input_frequence = Number(formData.get("frequence"));
+      if (input_frequence > 1) {
+        nb_majeurs++;
+      }
+      data["Fréquence"] = schemes_adjectifs["Fréquence"][input_frequence];
+      used_schemes_id.add(`frequence${input_frequence+1}`);
+      used_schemes_title.add(data["Fréquence"]);
 
-      data["Nombre de cibles"] = schemes_adjectifs["Cible"][input_cibles.value];
-      used_schemes.add(
-        {
-          "id": `cibles${Number(input_cibles.value)+1}`,
-          "title": data["Nombre de cibles"]
-        });
-      res_cibles.textContent = data["Nombre de cibles"];
-      trad_cibles.textContent = traductions[data["Nombre de cibles"]];
-      data["Durée"] = schemes_adjectifs["Durée"][input_duree.value];
-      used_schemes.add(
-        {
-          "id": `duree${Number(input_duree.value)+1}`,
-          "title": data["Durée"]
-        });
-      res_duree.textContent = data["Durée"];
-      trad_duree.textContent = traductions[data["Durée"]];
+      let input_portee = Number(formData.get("portee"));
+      if (input_portee > 1) {
+        nb_majeurs++;
+      }
+      data["Portée"] = schemes_adjectifs["Portée"][input_portee];
+      used_schemes_id.add(`${removeAccents(data["Portée"]).toLowerCase()}`);
+      used_schemes_title.add(data["Portée"]);
+
+      let input_cibles = Number(formData.get("cible"));
+      if (input_cibles > 1) {
+        nb_majeurs++;
+      }
+      data["Nombre de cibles"] = schemes_adjectifs["Cible"][input_cibles];
+      used_schemes_id.add(`cibles${input_cibles+1}`);
+      used_schemes_title.add(data["Nombre de cibles"]);
+
+      let input_duree = Number(formData.get("duree"));
+      if (input_duree > 1) {
+        nb_majeurs++;
+      }
+      data["Durée"] = schemes_adjectifs["Durée"][input_duree];
+      used_schemes_id.add(`duree${input_duree+1}`);
+      used_schemes_title.add(data["Durée"]);
+
       let sub_effect = input_lien.value;
-      if (input_verbe.value == "déplacement") {
+      if (input_verbe == "déplacement") {
         sub_effect = "tous";
       }
-      data["Effet"] = actions[input_verbe.value]["effet"][sub_effect];
+      data["Effet"] = actions[input_verbe]["effet"][sub_effect];
+      if(actions[input_verbe]["effet"]["median"] && input_median){
+        data["Effet"] += `\nIndication d’effets en fonction de l’élément **${input_median}** :\n`;
+        data["Effet"] += `\n**${actions[input_verbe]["effet"]["median"][input_median]}**\n`;
+      }
+
+let total_cost = 1;
+      if (nb_majeurs > 3) {
+        total_cost += 6;
+      } else if (nb_majeurs == 3) {
+        total_cost += 4;
+      } else if (nb_majeurs == 2) {
+        total_cost += 2;
+      }
+
+      let trihn = formData.get("trihn");
+      let trihn_cible = "";
+      if (trihn === ""){
+        trihn_cible = "";
+      } else {
+        data["Nom"].push(`(${trihn})`);
+        if (trihn === "Corps"){
+          trihn_cible = `de ${trihn}`;
+        } else {
+          trihn_cible = `d’${trihn}`;
+        }
+      }
+
+      data["Coût"] = `<strong>${total_cost}</strong> point(s) de Trihn d’âme,
+        ainsi que 1 Trihn <strong>${trihn_cible}</strong> préalablement invoqué.`;
+
+      data["Nom"] = data["Nom"].join(" ");
+      data["Traduction"] = data["Traduction"].join(" ");
+
       fill_card(data);
 
-      used_schemes.forEach((scheme) => {
+      used_schemes_title = [...used_schemes_title];
+      let index = 0;
+      used_schemes_id.forEach((schemeid) => {
         let sheme_item = document.createElement("span");
         sheme_item.className = "";
         let sheme_img = document.createElement("img");
-        sheme_img.alt = scheme["title"];
+        sheme_img.alt = used_schemes_title[index];
         sheme_img.className = "sheme-img";
-        sheme_img.src = `https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/${scheme["id"]}.png`;
+        sheme_img.src = `https://raw.githubusercontent.com/vdhilly/shaanrenaissance/refs/heads/main/icons/schemes/${schemeid}.png`;
         sheme_item.appendChild(sheme_img);
         list_shemes.appendChild(sheme_item);
+        index++;
       });
+
     }
     document.addEventListener("DOMContentLoaded",refreshPhrase);
 

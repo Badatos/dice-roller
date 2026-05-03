@@ -19,7 +19,9 @@
       </div>
       <p class="p-orig">
         <span class="uppercase">{{Domaine}}</span>
+        {{#Rang}}
         de <strong>Rang <span id="p_rank">{{Rang}}</span></strong>
+        {{/Rang}}
       </p>
       <ul class="h3">
         <li><strong>Type :</strong> <span id="p_type">{{Type}}</span></li>
@@ -52,6 +54,12 @@
           <strong>Durée :</strong>
           <span id="p_dura">{{Durée}}</span>
         </li>
+        {{#Coût}}
+          <li>
+            <strong>Coût :</strong>
+            <span id="p_cost">{{{Coût}}}</span>
+          </li>
+        {{/Coût}}
       </ul>
       <p>Résumé : <em id="p_summary">{{Résumé}}</em></p>
       <div class="vert" id="p-desc">{{Effet}}</div>
