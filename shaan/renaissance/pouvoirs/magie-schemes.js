@@ -342,7 +342,10 @@ function refreshPhrase(data) {
     used_schemes_title.add(data["verbe"]);
     data["Nom"].push(data["verbe"]);
     data["Traduction"].push(traductions[data["verbe"]]);
-    refresh_select(input_lien, actions[data["verbe"]]["cles"], data["lien"].toLowerCase());
+    if(data["lien"] instanceof String) {
+      data["lien"] = data["lien"].toLowerCase();
+    }
+    refresh_select(input_lien, actions[data["verbe"]]["cles"], data["lien"]);
   }
 
   if (input_lien.value != "") {
@@ -448,7 +451,8 @@ function refreshPhrase(data) {
   if (data["Nom"].length > 2) {
     data["Nom"] = data["Nom"].join(" ");
     data["Traduction"] = data["Traduction"].join(" ");
-
+    data["Fréquence"] = data["frequence"];
+    data["Durée"] = data["duree"];
     fill_card(data);
 
     used_schemes_title = [...used_schemes_title];
