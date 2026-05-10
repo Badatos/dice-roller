@@ -12,7 +12,7 @@ let pending_search = false;
 /**
  * Masque les éléments qui ne correspondent pas à la recherche.
  */
-async function search_filter(target="liste-elements", delay=0) {
+async function search_filter(target = "liste-elements", delay = 0) {
   const search_input = document.getElementById("search");
   const string = search_input.value.toLowerCase();
   if (!pending_search && (string.length > 2 || string.length == 0)) {
@@ -23,7 +23,7 @@ async function search_filter(target="liste-elements", delay=0) {
     pending_search = true;
     let tot = 0;
     bloc_total.innerText = "…";
-    document.querySelectorAll(".item").forEach(function(elem) {
+    document.querySelectorAll(".item").forEach(function (elem) {
       let item = elem.innerText.toLowerCase();
       if (item.includes(string) || string.length == 0) {
         elem.classList.remove("d-none");
@@ -46,7 +46,7 @@ async function search_filter(target="liste-elements", delay=0) {
  * @param {*} elem  élément cliqué
  * @param {*} event évenement déclenché
  */
-async function generate(elem, event, item_type="acquis") {
+async function generate(elem, event, item_type = "acquis") {
   // Ne s’active que si l’onglet "cartes" n’est pas déja sélectionné
   if (!card_tab.classList.contains("active")) {
     loader.classList.remove("d-none");
@@ -63,7 +63,7 @@ async function generate(elem, event, item_type="acquis") {
     }
 
     const selectedItems = [];
-    document.getElementsByName("select_item").forEach(function(chk) {
+    document.getElementsByName("select_item").forEach(function (chk) {
       if (chk.checked) {
         selectedItems.push(chk.value);
       }
@@ -146,3 +146,60 @@ function hasAnySelectedList(selected, itemlist) {
 // Remove accents from a JavaScript string
 const removeAccents = str =>
   str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+// Groupe les objets d'un dictionnaire par type.
+function groupBy(array, key) {
+  // Vérifier que l'entrée est un tableau
+  if (!Array.isArray(array)) {
+    console.error("L'entrée n'est pas un tableau :", array);
+    return {}; // Retourne un objet vide par défaut
+  }
+  return array.reduce((acc, obj) => {
+    const value = obj[key];
+    if (!acc[value]) acc[value] = [];
+    acc[value].push(obj);
+    return acc;
+  }, {});
+}
+
+// Covertit un domStringMap en Dict
+// (utile pour retravailler les données d'un dataset)
+function domStringMapToDict(domStringMap) {
+  const dict = {};
+  for (const key in domStringMap) {
+    if (domStringMap.hasOwnProperty(key)) {
+      dict[key] = domStringMap[key];
+    }
+  }
+  return dict;
+}
+
+// Fonction pour remplir un selecteur avec le dictionnaire fourni
+function fill_select(input_select, dico) {
+  for (let elem in dico) {
+    let opt = document.createElement("option");
+    opt.value = elem;
+    opt.innerHTML = elem;
+    opt.title = elem["desc"];
+    // then append it to the select element
+    input_select.appendChild(opt);
+  }
+}
+
+// Filtre les éléments d’un selecteur pour n’activer que ceux fournis.
+function refresh_select(input_select, liste, value) {
+  input_select.querySelectorAll("option").forEach(opt => {
+    if (liste.includes(opt.value)) {
+      opt.disabled = false;
+    } else {
+      opt.disabled = true;
+    }
+  });
+  if (value !== undefined) {
+    input_select.value = value;
+  } else {
+    if (!liste.includes(input_select.value)) {
+      input_select.value = liste[0];
+    }
+  }
+}

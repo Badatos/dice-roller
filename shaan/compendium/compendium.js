@@ -467,6 +467,21 @@ function correct_initial_data(type, data) {
         }
       });
       break;
+    case "Sortilèges de Schèmes":
+      data.forEach(row => {
+        row["Algo"] = row["Sujets"];
+        if (row["Cible"] == "Sujet") {
+          row["Algo"] += ` (${row["Trihn"]})`;
+        }
+        row["Algo"] += ` ${row["Action"]} ${row["Lien"]} ${row["Médian"]}`;
+        if (row["Cible"] == "Médian") {
+          row["Algo"] += ` (${row["Trihn"]})`;
+        }
+        if (row["Complément"]) {
+          row["Algo"] += ` ${row["Complément"]}`;
+        }
+      });
+      break;
   }
   return data;
 }
