@@ -305,7 +305,7 @@ function formToData() {
   data["sujet"] = formData.get("sujet");
   data["median"] = formData.get("median");
   data["frequence"] = Number(formData.get("frequence"));
-  data["portée"] = Number(formData.get("portee"));
+  data["portee"] = Number(formData.get("portee"));
   data["cibles"] = Number(formData.get("cible"));
   data["duree"] = Number(formData.get("duree"));
   data["trihn"] = formData.get("trihn");
@@ -326,7 +326,7 @@ function refreshPhrase(data) {
   // Et la cible ne peut être que Lui, Animal, Végétal, ou Limbes
   // En cas de (Non-)perception et mutation, le sujet est la cible.
 
-  if (data["sujet"] !== undefined && data["sujet"] !== "") {
+  if (typeof data["sujet"] == "string" && data["sujet"] !== "") {
     used_schemes_id.add(`scheme-${removeAccents(data["sujet"]).toLowerCase()}`);
     used_schemes_title.add(data["sujet"]);
     data["Nom"].push(data["sujet"]);
@@ -337,12 +337,12 @@ function refreshPhrase(data) {
     data["Nom"].push(`(${data["trihn"]})`);
   }
 
-  if (data["verbe"] !== undefined && data["verbe"] !== "") {
+  if (typeof data["verbe"] == "string" && data["verbe"] !== "") {
     used_schemes_id.add(`scheme-${removeAccents(data["verbe"]).toLowerCase()}`);
     used_schemes_title.add(data["verbe"]);
     data["Nom"].push(data["verbe"]);
     data["Traduction"].push(traductions[data["verbe"]]);
-    if(data["lien"] instanceof String) {
+    if (typeof data["lien"] == "string") {
       data["lien"] = data["lien"].toLowerCase();
     }
     refresh_select(input_lien, actions[data["verbe"]]["cles"], data["lien"]);
@@ -358,7 +358,7 @@ function refreshPhrase(data) {
   data["Activation"] = "1 Action";
   data["Score"] = "MAGIE + Puissance du Trihn consumé - Malus d’évocation s’il y a lieu.";
 
-  if (data["median"] !== undefined && data["median"] !== "") {
+  if (typeof data["median"] == "string" && data["median"] !== "") {
     used_schemes_id.add(`scheme-${removeAccents(data["median"]).toLowerCase()}`);
     used_schemes_title.add(data["median"]);
     data["Nom"].push(data["median"]);
@@ -383,13 +383,13 @@ function refreshPhrase(data) {
   used_schemes_title.add(data["frequence"]);
   data["frequence"] = schemes_adjectifs["Fréquence"][data["frequence"]];
 
-  if (data["portée"] !== "") {
-    if (data["portée"] > 1) {
+  if (data["portee"] !== "") {
+    if (data["portee"] > 1) {
       nb_majeurs++;
     }
-    data["portée"] = schemes_adjectifs["Portée"][data["portée"]];
-    used_schemes_id.add(`${removeAccents(data["portée"]).toLowerCase()}`);
-    used_schemes_title.add(data["portée"]);
+    data["portee"] = schemes_adjectifs["Portée"][data["portee"]];
+    used_schemes_id.add(`${removeAccents(data["portee"]).toLowerCase()}`);
+    used_schemes_title.add(data["portee"]);
   }
 
   if (data["cibles"] > 1) {
@@ -406,7 +406,7 @@ function refreshPhrase(data) {
   used_schemes_title.add(data["duree"]);
   data["duree"] = schemes_adjectifs["Durée"][data["duree"]];
 
-  if (data["verbe"] !== undefined && data["verbe"] !== "") {
+  if (typeof data["verbe"] == "string" && data["verbe"] !== "") {
     let sub_effect = input_lien.value;
     if (data["verbe"] == "déplacement") {
       sub_effect = "tous";
@@ -474,9 +474,11 @@ function refreshPhrase(data) {
 // Transforme la préselection en données à afficher.
 function change_preselect() {
   data = domStringMapToDict(this.selectedOptions[0].dataset);
-  if (data["portée"] === undefined) {
-    data["portée"] = 1;
-  }
+  ["frequence", "portee", "cible", "duree"].forEach(adjectif => {
+    if (data[adjectif] === undefined || data[adjectif] === "") {
+      data[adjectif] = 0;
+    }
+  });
   data["sujet"] = data["sujets"];
   data["verbe"] = data["action"].toLowerCase();
   reset_fields(data);
