@@ -203,3 +203,41 @@ function refresh_select(input_select, liste, value) {
     }
   }
 }
+
+// Ajoute un élément entre chaque item d'un tableau
+function interleave(arr, thing) {
+  return [].concat(...arr.map(n => [n, thing])).slice(0, -1)
+}
+
+// Réinitialise les valeurs de tous les champs indiqués
+// Data fournit éventuellement des valeurs par défaut.
+function reset_fields(fields, data) {
+  fields.forEach((field) => {
+    const element = document.getElementById(field);
+
+    if (!element) return; // Si l'élément n'existe pas, on passe
+
+    if (data !== undefined && data[field] !== undefined) {
+      if (element.tagName === "SELECT" && element.multiple) {
+        // Cas d'un <select multiple>
+        const values = Array.isArray(data[field]) ? data[field] : [data[field]];
+
+        // Désélectionne toutes les options
+        Array.from(element.options).forEach(option => {
+          option.selected = false;
+        });
+
+        // Sélectionne les options correspondantes
+        values.forEach(value => {
+          const option = element.querySelector(`option[value="${value}"]`);
+          if (option) option.selected = true;
+        });
+      } else {
+        // Cas standard (input, textarea, select simple)
+        element.value = data[field];
+      }
+    } else {
+        element.value = "";
+    }
+  });
+}

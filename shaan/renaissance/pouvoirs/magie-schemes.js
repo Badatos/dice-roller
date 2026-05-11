@@ -275,8 +275,8 @@ const input_lien = document.getElementById("lien");
 
 document.addEventListener("DOMContentLoaded", function () {
   // On commence par remplir les selcteurs avec les schemes nécessaires
-  fill_select(document.getElementById("sujet"), schemes_elementaires);
-  fill_select(document.getElementById("median"), schemes_elementaires);
+  fill_select(document.getElementById("sujets"), schemes_elementaires);
+  fill_select(document.getElementById("medians"), schemes_elementaires);
 
   const scheme_generator = document.getElementById("scheme-generator");
   scheme_generator.addEventListener("change", formToData);
@@ -284,17 +284,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("preselect").addEventListener("change", change_preselect);
 });
 
-// Réinisialise les valeurs de tous les champs personalisés
-function reset_fields(data) {
+// Réinitialise les valeurs de tous les champs personalisés
+function reset_schemes_fields(data) {
   input_lien.value = "";
-  let fields = ["sujet", "verbe", "median", "frequence", "portee", "cible", "duree", "trihn"];
-  fields.forEach((field) => {
-    if (data !== undefined && data[field] !== undefined) {
-      document.getElementById(field).value = data[field];
-    } else {
-      document.getElementById(field).value = "";
-    }
-  });
+  reset_fields(
+    ["sujets", "verbe", "medians", "frequence", "portee", "cible", "duree", "trihn"],
+    data);
 }
 
 // Place tous les élements du formulaire dans un dictionaire pour en faire un rendu
@@ -302,8 +297,8 @@ function formToData() {
   let formData = new FormData(this);
   let data = {};
   data["verbe"] = formData.get("verbe");
-  data["sujet"] = formData.get("sujet");
-  data["median"] = formData.get("median");
+  data["sujets"] = interleave(formData.getAll("sujets"), "et");
+  data["medians"] = interleave(formData.getAll("medians"), "et");
   data["frequence"] = Number(formData.get("frequence"));
   data["portee"] = Number(formData.get("portee"));
   data["cibles"] = Number(formData.get("cible"));
@@ -316,6 +311,7 @@ function formToData() {
 // Met à jour la phrase contruite à partir des schèmes selectionnés.
 function refreshPhrase(data) {
 
+  let total_cost = 1;
   let used_schemes_id = new Set();
   let used_schemes_title = new Set();
   list_shemes.innerText = "";
@@ -325,12 +321,16 @@ function refreshPhrase(data) {
   // Todo : En cas de contrôle, le sujet ne peut être que "Moi"
   // Et la cible ne peut être que Lui, Animal, Végétal, ou Limbes
   // En cas de (Non-)perception et mutation, le sujet est la cible.
-
-  if (typeof data["sujet"] == "string" && data["sujet"] !== "") {
-    used_schemes_id.add(`scheme-${removeAccents(data["sujet"]).toLowerCase()}`);
-    used_schemes_title.add(data["sujet"]);
-    data["Nom"].push(data["sujet"]);
-    data["Traduction"].push(traductions[data["sujet"]]);
+  if (data["sujets"] != undefined && data["sujets"].length > 0) {
+    data["sujets"].forEach((sujet) => {
+      used_schemes_id.add(`scheme-${removeAccents(sujet).toLowerCase()}`);
+      used_schemes_title.add(sujet);
+      data["Nom"].push(sujet);
+      data["Traduction"].push(traductions[sujet]);
+      if (sujet.toLowerCase() == "et") {
+        total_cost++;
+      }
+    });
   }
 
   if (data["cible"] === "Sujet" && data["trihn"] !== "") {
@@ -358,11 +358,16 @@ function refreshPhrase(data) {
   data["Activation"] = "1 Action";
   data["Score"] = "MAGIE + Puissance du Trihn consumé - Malus d’évocation s’il y a lieu.";
 
-  if (typeof data["median"] == "string" && data["median"] !== "") {
-    used_schemes_id.add(`scheme-${removeAccents(data["median"]).toLowerCase()}`);
-    used_schemes_title.add(data["median"]);
-    data["Nom"].push(data["median"]);
-    data["Traduction"].push(traductions[data["median"]]);
+  if (data["medians"] != undefined && data["medians"].length > 0) {
+    data["medians"].forEach((median) => {
+      used_schemes_id.add(`scheme-${removeAccents(median).toLowerCase()}`);
+      used_schemes_title.add(median);
+      data["Nom"].push(median);
+      data["Traduction"].push(traductions[median]);
+      if (median.toLowerCase() == "et") {
+        total_cost++;
+      }
+    });
   }
 
   // Propriétés
@@ -413,16 +418,16 @@ function refreshPhrase(data) {
     }
     if (data["effet"] == "") {
       data["Effet"] = actions[data["verbe"]]["effet"][sub_effect];
-      if (actions[data["verbe"]]["effet"]["median"] && data["median"]) {
-        data["Effet"] += `\nIndication d’effets en fonction de l’élément **${data["median"]}** :\n`;
-        data["Effet"] += `\n**${actions[data["verbe"]]["effet"]["median"][data["median"]]}**\n`;
+      if (actions[data["verbe"]]["effet"]["median"] && data["medians"]) {
+        data["Effet"] += `\nIndication d’effets en fonction de l’élément **${data["medians"]}** :\n`;
+        data["Effet"] += `\n**${actions[data["verbe"]]["effet"]["median"][data["medians"]]}**\n`;
       }
     } else {
       data["Effet"] = data["effet"];
     }
   }
 
-  let total_cost = 1;
+
   if (nb_majeurs > 3) {
     total_cost += 6;
   } else if (nb_majeurs == 3) {
@@ -445,7 +450,7 @@ function refreshPhrase(data) {
     }
   }
 
-  data["Coût"] = `<strong>${total_cost}</strong> point(s) de Trihn d’âme,
+  data["Coût"] = `<strong>${total_cost}</strong> point(s) de Trihn d’Âme,
         ainsi que 1 Trihn <strong>${trihn_cible}</strong> préalablement invoqué.`;
 
   if (data["Nom"].length > 2) {
@@ -479,9 +484,10 @@ function change_preselect() {
       data[adjectif] = 0;
     }
   });
-  data["sujet"] = data["sujets"];
+  data["sujets"] = data["sujets"].split(" ");
+  data["medians"] = data["median"].split(" ");
   data["verbe"] = data["action"].toLowerCase();
-  reset_fields(data);
+  reset_schemes_fields(data);
   refreshPhrase(data);
 }
 

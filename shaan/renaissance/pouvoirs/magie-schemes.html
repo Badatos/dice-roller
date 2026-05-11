@@ -129,7 +129,7 @@
             <div class="accordion-body">
               <form id="scheme-selector" class="row">
                 <div class="col">
-                  <label for="sujet" class="form-label">
+                  <label for="preselect" class="form-label">
                     Sortilège prédéfini (<span id="total"></span>)
                   </label>
                   <select id="preselect" name="preselect" class="form-select">
@@ -154,13 +154,11 @@
             <div id="custom-fields" class="accordion-collapse collapse">
               <div class="accordion-body row">
                 <div class="col-md-3 col-sm-6 mb-2">
-                  <label for="sujet" class="form-label">
-                    Sujet <span class="form-text">(schème élémentaire)</span>
+                  <label for="sujets" class="form-label">
+                    Sujet(s) <span class="form-text">(schèmes élémentaires)</span>
                   </label>
-                  <select id="sujet" name="sujet" class="form-select">
-                    <option selected value="">Choisis un Schème élémentaire</option>
-                  </select>
-                  <div id="sujetHelp" class="form-text">Désigne l’acteur du sort.</div>
+                  <select id="sujets" name="sujets" class="form-select" multiple></select>
+                  <div id="sujetHelp" class="form-text">Désigne l(es) acteur(s) du sort.</div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-2">
                   <label for="verbe" class="form-label">
@@ -199,13 +197,11 @@
                   <div id="lienHelp" class="form-text">Schème clé.</div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-2">
-                  <label for="median" class="form-label">
-                    Médian <span class="form-text">(schème élémentaire)</span>
+                  <label for="medians" class="form-label">
+                    Médian <span class="form-text">(schèmes élémentaires)</span>
                   </label>
-                  <select id="median" name="median" class="form-select">
-                    <option selected value="">Choisis un Schème élémentaire</option>
-                  </select>
-                  <div id="medianHelp" class="form-text">Par quel Élément passe le sort.</div>
+                  <select id="medians" name="medians" class="form-select" multiple></select>
+                  <div id="medianHelp" class="form-text">Par quel(s) Élément(s) passe le sort.</div>
                 </div>
                 <div class="col-md-3 col-sm-6 mb-2">
                   <label for="trihn" class="form-label">

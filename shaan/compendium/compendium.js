@@ -470,15 +470,15 @@ function correct_initial_data(type, data) {
     case "Sortilèges de Schèmes":
       data.forEach(row => {
         row["Algo"] = row["Sujets"];
-        if (row["Cible"] == "Sujet") {
+        if (row["Cible"] == "Sujet" && row["Trihn"] != undefined) {
           row["Algo"] += ` (${row["Trihn"]})`;
         }
         row["Algo"] += ` ${row["Action"]} ${row["Lien"]} ${row["Médian"]}`;
-        if (row["Cible"] == "Médian") {
+        if (row["Cible"] == "Médian" && row["Trihn"] != undefined) {
           row["Algo"] += ` (${row["Trihn"]})`;
         }
-        if (row["Complément"]) {
-          row["Algo"] += ` ${row["Complément"]}`;
+        if (row["Compléments"]) {
+          row["Algo"] += ` ${row["Compléments"]}`;
         }
       });
       break;
