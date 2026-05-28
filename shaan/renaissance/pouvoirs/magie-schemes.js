@@ -104,11 +104,9 @@ volant par exemple.
   "non-perception": {
     "cles": ["de"],
     "effet": {
-      "de": `
-La Non-perception est utilisée pour les protections
-et les intrusions. Dès l’instant où l’on ignore un
-Élément, on en est protégé. C’est ainsi que la peau
-ne sera pas brûlée si le Corps ne perçoit pas le Feu.
+      "de": `La Non-perception est utilisée pour les protections
+et les intrusions. Dès l’instant où l’on ignore un Élément, on en est protégé.
+C’est ainsi que la peau ne sera pas brûlée si le Corps ne perçoit pas le Feu.
 Il en va ainsi pour chaque Trihn. En règle générale,
 c’est le Corps qui est sollicité pour se protéger de
 l’asphyxie, des chocs, de la faim et de toutes les
@@ -141,8 +139,7 @@ et cibler l’Esprit donnera un Malus pour me percevoir mentalement
   "mutation": {
     "cles": ["en"],
     "effet": {
-      "en": `
-La Mutation permet de modifier les capacités de la cible.
+      "en": `La Mutation permet de modifier les capacités de la cible.
 Elle conserve sa forme et ses aptitudes
 pour les autres protagonistes, mais est elle-même
 tellement convaincue de sa transformation que
@@ -172,8 +169,7 @@ certaines actions.
     "cles": ["comme", "de", "en"],
     "effet": {
       "comme": `Permet de percevoir à la manière de la cible.`,
-      "de": `
-Permet d’activer les sens de la cible pour
+      "de": `Permet d’activer les sens de la cible pour
 détecter un Élément particulier.
 
 > Exemple : *Moi Perception de Animal* pour trouver
@@ -272,6 +268,8 @@ const traductions = {
 
 const list_shemes = document.getElementById("list-shemes");
 const input_lien = document.getElementById("lien");
+const input_effet = document.getElementById("effet");
+const custom_effect = document.getElementById("custom-effect");
 
 document.addEventListener("DOMContentLoaded", function () {
   // On commence par remplir les selcteurs avec les schemes nécessaires
@@ -280,6 +278,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const scheme_generator = document.getElementById("scheme-generator");
   scheme_generator.addEventListener("change", formToData);
+  custom_effect.addEventListener("change", function () {
+    input_effet.disabled = !custom_effect.checked;
+  });
 
   document.getElementById("preselect").addEventListener("change", change_preselect);
 });
@@ -288,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function reset_schemes_fields(data) {
   input_lien.value = "";
   reset_fields(
-    ["sujets", "verbe", "medians", "frequence", "portee", "cible", "duree", "trihn"],
+    ["sujets", "verbe", "medians", "frequence", "portee", "cible", "duree", "trihn", "effet"],
     data);
 }
 
@@ -304,8 +305,27 @@ function formToData() {
   data["cibles"] = Number(formData.get("cible"));
   data["duree"] = Number(formData.get("duree"));
   data["trihn"] = formData.get("trihn");
+  data["effet"] = formData.get("effet");
 
   refreshPhrase(data);
+}
+
+// Retourne l’effet par défaut pour les schemes selectionnés.
+function getDefaultEffect(data) {
+  let sub_effect = input_lien.value;
+  if (data["verbe"] == "déplacement") {
+    sub_effect = "tous";
+  }
+  ret = "";
+  effet = actions[data["verbe"]]["effet"];
+  if(effet != undefined) {
+    ret = effet[sub_effect];
+    if (effet["median"] && data["medians"]) {
+      ret += `\nIndication d’effets en fonction de l’élément **${data["medians"]}** :\n`;
+      ret += `\n**${actions[data["verbe"]]["effet"]["median"][data["medians"]]}**\n`;
+    }
+  }
+  return ret;
 }
 
 // Met à jour la phrase contruite à partir des schèmes selectionnés.
@@ -411,21 +431,16 @@ function refreshPhrase(data) {
   used_schemes_title.add(data["duree"]);
   data["duree"] = schemes_adjectifs["Durée"][data["duree"]];
 
-  if (typeof data["verbe"] == "string" && data["verbe"] !== "") {
-    let sub_effect = input_lien.value;
-    if (data["verbe"] == "déplacement") {
-      sub_effect = "tous";
-    }
-    if (data["effet"] == "") {
-      data["Effet"] = actions[data["verbe"]]["effet"][sub_effect];
-      if (actions[data["verbe"]]["effet"]["median"] && data["medians"]) {
-        data["Effet"] += `\nIndication d’effets en fonction de l’élément **${data["medians"]}** :\n`;
-        data["Effet"] += `\n**${actions[data["verbe"]]["effet"]["median"][data["medians"]]}**\n`;
-      }
+  // Si l’effet n'est pas personnalisé
+  if (!custom_effect.checked) {
+    if (typeof data["verbe"] == "string" && data["verbe"] !== "") {
+      data["effet"] = getDefaultEffect(data);
     } else {
-      data["Effet"] = data["effet"];
+      data["effet"] = "";
     }
   }
+  data["Effet"] = data["effet"]
+  input_effet.value = data["Effet"];
 
 
   if (nb_majeurs > 3) {
@@ -478,6 +493,8 @@ function refreshPhrase(data) {
 
 // Transforme la préselection en données à afficher.
 function change_preselect() {
+  custom_effect.checked = true;
+  input_effet.disabled = false;
   data = domStringMapToDict(this.selectedOptions[0].dataset);
   ["frequence", "portee", "cible", "duree"].forEach(adjectif => {
     if (data[adjectif] === undefined || data[adjectif] === "") {
@@ -531,5 +548,3 @@ function display_items(sheet_data, target = "preselect", modele = "pouvoir_optio
       liste_elements.innerHTML = renderedHTML;
     });
 }
-
-
