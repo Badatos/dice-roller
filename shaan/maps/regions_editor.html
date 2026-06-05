@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Regions Editor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <style>
+    #stage-parent{border:1px solid #ccc; display:inline-block}
+    .toolbar{margin-bottom:0.5rem}
+    .controls > *{margin-right:0.5rem}
+  </style>
+</head>
+<body class="p-3">
+  <h3>Éditeur de régions (Konva)</h3>
+  <div class="toolbar controls mb-2">
+    <input id="img-input" type="file" accept="image/*" class="form-control-sm" />
+    <button id="draw-btn" class="btn btn-sm btn-primary">Dessiner polygone</button>
+    <button id="close-btn" class="btn btn-sm btn-secondary" disabled>Fermer polygone</button>
+    <button id="export-btn" class="btn btn-sm btn-success">Exporter JSON</button>
+    <input id="import-input" type="file" accept="application/json" class="form-control-sm" />
+  </div>
+  <div>
+    <div id="stage-parent"></div>
+  </div>
+  <p class="mt-2"><small>Astuce : double-cliquez sur un polygone pour le supprimer.</small></p>
+
+  <script src="https://unpkg.com/konva@8/konva.min.js"></script>
+  <script src="regions_editor.js"></script>
+</body>
+</html>
