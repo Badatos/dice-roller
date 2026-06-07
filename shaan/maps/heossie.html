@@ -60,19 +60,45 @@
     }
 
     .subtitle {
-      color:#666;
+      color: #666;
       font-style: italic;
     }
 
-    .albaman{background-color: #4AA2E2}
-    .azoule{background-color: #6AAD49}
-    .garald{background-color: #204F97}
-    .grentzen{background-color: #F0BC41}
-    .ikanez{background-color: #CF2E26}
-    .mactadjik{background-color: #7A4C91}
-    .oshkin{background-color: #E18EB4}
-    .lignee8{background-color: #4E5C45}
-    .new-order{background-color: #38EAF6}
+    .albaman {
+      background-color: #4AA2E2
+    }
+
+    .azoule {
+      background-color: #6AAD49
+    }
+
+    .garald {
+      background-color: #204F97
+    }
+
+    .grentzen {
+      background-color: #F0BC41
+    }
+
+    .ikanez {
+      background-color: #CF2E26
+    }
+
+    .mactadjik {
+      background-color: #7A4C91
+    }
+
+    .oshkin {
+      background-color: #E18EB4
+    }
+
+    .lignee8 {
+      background-color: #4E5C45
+    }
+
+    .new-order {
+      background-color: #38EAF6
+    }
   </style>
 </head>
 
@@ -92,36 +118,65 @@
     </nav>
 
     <h2 class="rouge mb-0">Zones d’influences humaines</h3>
-    <div class="subtitle mb-2">Grandes familles et Nouvel ordre</div>
-    <div class="row">
-      <div class="col-md-10">
-        <div class="map-viewport">
-          <div class="map-container">
-            <img id="map-bg" src="Carte_Heossie_Legendee.webp" alt="Fond de carte" />
-            <canvas id="map-canvas"></canvas>
+      <div class="subtitle mb-2">Grandes familles et Nouvel ordre</div>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="map-viewport">
+            <div class="map-container">
+              <img id="map-bg" src="Carte_Heossie_Legendee.webp" alt="Fond de carte" />
+              <canvas id="map-canvas"></canvas>
+            </div>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-secondary btn-sm" onclick="zoomIn()">+</button>
+            <button class="btn btn-secondary btn-sm" onclick="zoomReset()">0</button>
+            <button class="btn btn-secondary btn-sm" onclick="zoomOut()">-</button>
           </div>
         </div>
-        <div class="text-end">
-          <button class="btn btn-secondary btn-sm" onclick="zoomIn()">+</button>
-          <button class="btn btn-secondary btn-sm" onclick="zoomReset()">0</button>
-          <button class="btn btn-secondary btn-sm" onclick="zoomOut()">-</button>
+        <div class="col-md-2">
+          <h3 class="h5 ms-0">Légende</h3>
+          <ul class="ps-4">
+            <li>
+              <!--a class="highlight-btn" href="#map-bg" data-regions="5,13"-->
+                <span class="legend-box albaman">&nbsp;</span>
+                Albaman
+              <!--/a-->
+            </li>
+            <li>
+              <span class="legend-box azoule">&nbsp;</span>
+              Azoulé
+            </li>
+            <li>
+              <span class="legend-box garald">&nbsp;</span>
+              Garald
+            </li>
+            <li>
+              <span class="legend-box grentzen">&nbsp;</span>
+              Grentzen
+            </li>
+            <li>
+              <span class="legend-box ikanez">&nbsp;</span>
+              Ikanez
+            </li>
+            <li>
+              <span class="legend-box mactadjik">&nbsp;</span>
+              Mactadjik
+            </li>
+            <li>
+              <span class="legend-box oshkin">&nbsp;</span>
+              Oshkin
+            </li>
+            <li>
+              <span class="legend-box lignee8">&nbsp;</span>
+              La 8e lignée
+            </li>
+            <li>
+              <span class="legend-box new-order">&nbsp;</span>
+              Nouvel ordre
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="col-md-2">
-        <h3 class="h5 ms-0">Légende</h3>
-        <ul class="ps-1">
-          <li>Albaman <span class="legend-box albaman">&nbsp;</span></li>
-          <li>Azoulé <span class="legend-box azoule">&nbsp;</span></li>
-          <li>Garald <span class="legend-box garald">&nbsp;</span></li>
-          <li>Grentzen <span class="legend-box grentzen">&nbsp;</span></li>
-          <li>Ikanez <span class="legend-box ikanez">&nbsp;</span></li>
-          <li>Mactadjik <span class="legend-box mactadjik">&nbsp;</span></li>
-          <li>Oshkin <span class="legend-box oshkin">&nbsp;</span></li>
-          <li>La 8e lignée <span class="legend-box lignee8">&nbsp;</span></li>
-          <li>Nouvel ordre <span class="legend-box new-order">&nbsp;</span></li>
-        </ul>
-      </div>
-    </div>
 
 
   </main>
@@ -138,7 +193,7 @@
   <script src="../shaan.js"></script>
   <script>
     const regions_file = './regions_heossie.json';
-    /** Couleurs des Grandes familles (cf L’erreur est humaines pp. 42-49)
+    /** Couleurs des Grandes familles (cf L’erreur est humaine pp. 42-49)
       * Albaman #4AA2E2 - rgb(74,162,226)
       * Azoulé #6AAD49 - rgb(106,173,73)
       * Garald #204F97 - rgb(32,79,151)
@@ -175,14 +230,14 @@
         families['Oshkin'],
         families['La 8e lignée'],
         families['Nouvel ordre']
-        ], // Wooneï
+      ], // Wooneï
       'region6': '', // Iles d’Ayala
       'region7': '', // Nömia
       'region8': [families['Ikanez'], families['Mactadjik']], // Delheï
-      'region9': [families['Grentzen'],families['Nouvel ordre']], // Shaaken
+      'region9': [families['Grentzen'], families['Nouvel ordre']], // Shaaken
       'region10': [families['Ikanez'], families['Mactadjik']], // Ygwanie
       'region11': families['Mactadjik'], // Odeï
-      'region12': [families['Grentzen'],families['Nouvel ordre']], //Kelwinie
+      'region12': [families['Grentzen'], families['Nouvel ordre']], //Kelwinie
       'region13': families['Albaman'], // Monga
       'region14': families['Oshkin'], // Duneï
       'region15': families['Azoulé'], // Nem-Röd
@@ -190,7 +245,30 @@
       'region17': '', // Iles de Krëll
       'region18': '', // Heodarei
       'region19': families['Grentzen'], // Borélie
-      'region20': families['Mactadjik'], // 
+      'region20': families['Mactadjik'], // Zahen
+    };
+
+    const regionLabels = {
+      region1: 'Gaëshen',
+      region2: 'Kamsha',
+      region3: 'Kenock',
+      region4: 'Archipel d’Hengos',
+      region5: 'Wooneï',
+      region6: 'Iles d’Ayala',
+      region7: 'Nömia',
+      region8: 'Delheï',
+      region9: 'Shaaken',
+      region10: 'Ygwanie',
+      region11: 'Odeï',
+      region12: 'Kelwinie',
+      region13: 'Monga',
+      region14: 'Duneï',
+      region15: 'Nem-Röd',
+      region16: 'Akeneï',
+      region17: 'Iles de Krëll',
+      region18: 'Heodarei',
+      region19: 'Borélie',
+      region20: 'Zahen'
     };
 
   </script>
