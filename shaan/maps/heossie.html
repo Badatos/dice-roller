@@ -64,6 +64,11 @@
       font-style: italic;
     }
 
+    .icon{
+      height: 1em;
+      vertical-align: text-top;
+    }
+
     .albaman {
       background-color: #4AA2E2
     }
@@ -123,11 +128,11 @@
         <div class="col-md-9">
           <div class="map-viewport">
             <div class="map-container">
-              <img id="map-bg" src="Carte_Heossie_Legendee.webp" alt="Fond de carte" />
+              <img id="map-bg" src="CarteHeossie_Legendes_HD.webp" alt="Fond de carte" />
               <canvas id="map-canvas"></canvas>
             </div>
           </div>
-          <div class="text-end">
+          <div class="text-end zoom-control">
             <button class="btn btn-secondary btn-sm" onclick="zoomIn()">+</button>
             <button class="btn btn-secondary btn-sm" onclick="zoomReset()">0</button>
             <button class="btn btn-secondary btn-sm" onclick="zoomOut()">-</button>
@@ -140,39 +145,48 @@
               <!--a class="highlight-btn" href="#map-bg" data-regions="5,13"-->
                 <span class="legend-box albaman">&nbsp;</span>
                 Albaman
+                <img src="../img/humains/familles/Albaman.webp" class="icon" alt="">
               <!--/a-->
             </li>
             <li>
               <span class="legend-box azoule">&nbsp;</span>
               Azoulé
+              <img src="../img/humains/familles/Azoulé.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box garald">&nbsp;</span>
               Garald
+              <img src="../img/humains/familles/Garald.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box grentzen">&nbsp;</span>
               Grentzen
+              <img src="../img/humains/familles/Grentzen.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box ikanez">&nbsp;</span>
               Ikanez
+              <img src="../img/humains/familles/Ikanez.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box mactadjik">&nbsp;</span>
               Mactadjik
+              <img src="../img/humains/familles/Mactadjik.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box oshkin">&nbsp;</span>
               Oshkin
+              <img src="../img/humains/familles/Oshkin.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box lignee8">&nbsp;</span>
               La 8e lignée
+              <img src="../img/humains/familles/lignee_8.webp" class="icon" alt="">
             </li>
             <li>
               <span class="legend-box new-order">&nbsp;</span>
               Nouvel ordre
+              <img src="../img/humains/etoileNO.webp" class="icon" alt="">
             </li>
           </ul>
         </div>
@@ -188,9 +202,10 @@
     </p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-
+  <script src="https://unpkg.com/konva@10/konva.min.js"></script>
   <!-- Shaan template JS -->
   <script src="../shaan.js"></script>
+  <script src="./canva_zoom.js"></script>
   <script>
     const regions_file = './regions_heossie.json';
     /** Couleurs des Grandes familles (cf L’erreur est humaine pp. 42-49)
@@ -205,15 +220,15 @@
       * Nouvel ordre #38EAF6 - rgb(56 234 246)
     **/
     const families = {
-      'Albaman': 'rgba(74,162,226,0.65)',
-      'Azoulé': 'rgba(106,173,73,0.35)',
-      'Garald': 'rgba(32,79,151,0.35)',
-      'Grentzen': 'rgba(240,188,65,0.35)',
-      'Ikanez': 'rgba(207,46,38,0.35)',
-      'Mactadjik': 'rgba(122,76,145,0.35)',
-      'Oshkin': 'rgba(225,142,180,0.35)',
-      'La 8e lignée': 'rgba(78,92,69,0.65)',
-      'Nouvel ordre': 'rgba(56, 234, 246,0.45)'
+      'Albaman': 'rgba(74,162,226,0.8)',
+      'Azoulé': 'rgba(106,173,73,0.8)',
+      'Garald': 'rgba(32,79,151,0.8)',
+      'Grentzen': 'rgba(240,188,65,0.8)',
+      'Ikanez': 'rgba(207,46,38,0.8)',
+      'Mactadjik': 'rgba(122,76,145,0.8)',
+      'Oshkin': 'rgba(225,142,180,0.8)',
+      'La 8e lignée': 'rgba(78,92,69,0.8)',
+      'Nouvel ordre': 'rgba(56, 234, 246,0.9)'
     };
     let defaultColors = {
       'region1': '', // Gaëshen

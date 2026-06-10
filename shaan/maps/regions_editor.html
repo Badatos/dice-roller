@@ -9,23 +9,36 @@
     #stage-parent{border:1px solid #ccc; display:inline-block}
     .toolbar{margin-bottom:0.5rem}
     .controls > *{margin-right:0.5rem}
+    .map-viewport {
+      overflow: scroll;
+      max-width: 100%;
+      position: relative;
+      max-height: 600px
+    }
   </style>
 </head>
 <body class="p-3">
   <h3>Éditeur de régions (Konva)</h3>
-  <div class="toolbar controls mb-2">
-    <input id="img-input" type="file" accept="image/*" class="form-control-sm" />
-    <button id="draw-btn" class="btn btn-sm btn-primary">Dessiner polygone</button>
-    <button id="close-btn" class="btn btn-sm btn-secondary" disabled>Fermer polygone</button>
-    <button id="export-btn" class="btn btn-sm btn-success">Exporter JSON</button>
-    <input id="import-input" type="file" accept="application/json" class="form-control-sm" />
-  </div>
-  <div>
-    <div id="stage-parent"></div>
-  </div>
-  <p class="mt-2"><small>Astuce : double-cliquez sur un polygone pour le supprimer.</small></p>
+  <main class="container mt-5 pt-5">
+    <div class="toolbar controls mb-2">
+      <input id="img-input" type="file" accept="image/*" class="form-control-sm" />
+      <button id="draw-btn" class="btn btn-sm btn-primary">Dessiner polygone</button>
+      <button id="close-btn" class="btn btn-sm btn-secondary" disabled>Fermer polygone</button>
+      <button id="export-btn" class="btn btn-sm btn-success">Exporter JSON</button>
+      <input id="import-input" type="file" accept="application/json" class="form-control-sm" />
+    </div>
+    <div class="map-viewport">
+      <div><div id="stage-parent"></div></div>
+    </div>
+    <div class="text-end zoom-control">
+      <button class="btn btn-secondary btn-sm" onclick="zoomIn()">+</button>
+      <button class="btn btn-secondary btn-sm" onclick="zoomReset()">0</button>
+      <button class="btn btn-secondary btn-sm" onclick="zoomOut()">-</button>
+    </div>
+    <p class="mt-2"><small>Astuce : double-cliquez sur un polygone pour le supprimer.</small></p>
+  </main>
 
-  <script src="https://unpkg.com/konva@8/konva.min.js"></script>
+  <script src="https://unpkg.com/konva@10/konva.min.js"></script>
   <script src="regions_editor.js"></script>
 </body>
 </html>

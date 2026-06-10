@@ -1,4 +1,35 @@
- (function () {
+
+let zoomLevel = 1;
+const minScale = 0.12;
+const maxScale = 4;
+let stage;
+
+function setZoom(newZoom, panX, panY){
+  zoomLevel = newZoom;
+  stage.scale({ x: newZoom, y: newZoom });
+  stage.batchDraw();
+  const newPos = {
+      x: panX,
+      y: panY,
+  };
+  stage.position(newPos);
+}
+
+function zoomIn(){
+  const newZoom = Math.max(minScale, Math.min(maxScale, zoomLevel *1.1));
+  setZoom(newZoom, 0, 0);
+}
+
+function zoomOut(){
+  const newZoom = Math.max(minScale, Math.min(maxScale, zoomLevel *0.9));
+  setZoom(newZoom, 0, 0);
+}
+
+function zoomReset(){
+  setZoom(0.2, 0, 0);
+}
+
+(function () {
   const imgInput = document.getElementById('img-input');
   const drawBtn = document.getElementById('draw-btn');
   const closeBtn = document.getElementById('close-btn');
@@ -6,7 +37,7 @@
   const importInput = document.getElementById('import-input');
   const containerId = 'stage-parent';
 
-  let stage, layer, bgImageNode, drawing = false, previewLine = null;
+  let layer, bgImageNode, drawing = false, previewLine = null;
   let currentPoints = [];
   // polygons: array of { shape: Konva.Line, anchors: [Konva.Circle] }
   let polygons = [];
@@ -43,7 +74,7 @@
   }
 
   // default load
-   loadImageFromSource('Carte_Heossie_Legendee.webp');
+  loadImageFromSource('CarteHeossie_Legendes_HD.webp');
 
   // Change background image
   imgInput.addEventListener('change', (e) => {
@@ -73,6 +104,7 @@
     closeBtn.disabled = currentPoints.length < 6; // need at least 3 points
   }
 
+  /* Zoom In/Out on Mouse Wheel */
   function onWheel(e) {
     e.evt.preventDefault();
     const oldScale = stage.scaleX();
@@ -80,19 +112,17 @@
     if (!pointer) return;
     const scaleBy = 1.05;
     const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
-    const minScale = 0.25;
-    const maxScale = 4;
     const scale = Math.max(minScale, Math.min(maxScale, newScale));
     const mousePointTo = {
       x: (pointer.x - stage.x()) / oldScale,
       y: (pointer.y - stage.y()) / oldScale,
     };
-    stage.scale({ x: scale, y: scale });
     const newPos = {
       x: pointer.x - mousePointTo.x * scale,
       y: pointer.y - mousePointTo.y * scale,
     };
     stage.position(newPos);
+    stage.scale({ x: scale, y: scale });
     stage.batchDraw();
   }
 
@@ -168,11 +198,11 @@
 
     // when polygon is double-clicked delete whole polygon
     poly.on('dblclick dbltap', function () { polyObj.anchors.forEach(a => a.destroy()); poly.destroy(); polygons = polygons.filter(x => x !== polyObj); layer.draw(); });
-    
+
     // Change cursor on mouseover
     poly.on('mouseover', function () { document.body.style.cursor = 'move'; });
     poly.on('mouseout', function () { document.body.style.cursor = 'default'; });
-    
+
     // synchronize anchors when polygon is dragged: recalc anchors from polygon points + offset
     poly.on('dragmove', function () {
       const pts = poly.points();
