@@ -431,7 +431,6 @@ function correct_initial_data(type, data) {
           row["Image"] = row["Image"].split("\n");
         }
 
-
         if (
             row["Catégorie"] && (
               row["Catégorie"] == "Protection" ||

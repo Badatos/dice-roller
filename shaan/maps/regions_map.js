@@ -197,7 +197,7 @@
           showTooltip(regionId, clientX, clientY);
         });
         s.on('mouseenter', () => {
-          document.body.style.cursor = 'pointer';
+          document.body.style.cursor = 'help';
           //s.fill('rgba(255,255,255,0.25)');
           s.opacity(0.75);
           s.stroke('rgba(36, 90, 54, 0.85)');
